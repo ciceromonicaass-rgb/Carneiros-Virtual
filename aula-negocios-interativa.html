@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negócios em Informática - Aula Interativa | carneirosvirtual.com</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--bg4:#e2e8f0;--accent:#0891b2;--accent2:#7c3aed;--gold:#d97706;--green:#059669;--red:#dc2626;--pink:#db2777;--text:#1a1a2e;--muted:#64748b}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f4f8;color:#1a1a2e;overflow:hidden;height:100vh;width:100vw}
+#header{position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(135deg,#ffffff,#f0f9ff);border-bottom:3px solid #0891b2;box-shadow:0 2px 10px rgba(0,0,0,0.08);padding:10px 24px;display:flex;align-items:center;justify-content:space-between}
+#header .logo{font-size:22px;font-weight:800;color:#0891b2;font-weight:800}
+#header .student-info{display:flex;align-items:center;gap:16px;font-size:16px}
+#header .xp-badge{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;padding:4px 14px;border-radius:20px;font-weight:800;font-size:16px}
+#header .level-badge{background:#7c3aed;color:#fff;padding:4px 14px;border-radius:20px;font-weight:700;font-size:14px}
+#progress-bar{position:fixed;top:56px;left:0;right:0;height:4px;background:#e2e8f0;z-index:199}
+#progress-fill{height:100%;background:linear-gradient(90deg,#0891b2,#7c3aed,#d97706);transition:width 0.5s ease-out;border-radius:2px}
+#app{position:relative;width:100vw;height:100vh;padding-top:64px}
+.screen{position:absolute;top:64px;left:0;width:100%;height:calc(100vh - 120px);display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;overflow-y:auto;animation:fadeIn 0.4s}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.98)}to{opacity:1;transform:scale(1)}}
+.welcome-box{background:#ffffff;border-radius:24px;padding:40px;max-width:600px;text-align:center;border:3px solid #0891b2;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+.welcome-title{font-size:42px;font-weight:800;color:#0891b2;font-weight:800;margin-bottom:12px}
+.welcome-sub{font-size:20px;color:#64748b;margin-bottom:24px;line-height:1.5}
+.welcome-input{width:100%;background:#f8fafc;border:3px solid #cbd5e1;border-radius:12px;padding:16px;font-size:20px;color:#1a1a2e;font-family:inherit;margin-bottom:16px}
+.welcome-input:focus{outline:none;border-color:#0891b2;box-shadow:0 0 0 3px rgba(8,145,178,0.15)}
+.welcome-features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;text-align:left}
+.welcome-feature{background:#f1f5f9;border-radius:12px;padding:12px 16px;font-size:16px;display:flex;align-items:center;gap:10px;color:#1a1a2e;border:1px solid #e2e8f0}
+.welcome-feature .icon{font-size:28px}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1100px;width:100%;margin:0 auto}
+.module-card{background:#ffffff;border-radius:20px;padding:24px;cursor:pointer;transition:all 0.3s;position:relative;border:3px solid;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+.module-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.15)}
+.module-card.locked{opacity:0.5;cursor:not-allowed;filter:grayscale(0.5)}
+.module-card.completed{border-color:#059669!important}
+.module-card .module-icon{font-size:48px;margin-bottom:12px}
+.module-card .module-num{position:absolute;top:12px;right:16px;font-size:48px;font-weight:900;opacity:0.06;color:#1a1a2e}
+.module-card .module-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.module-card .module-desc{font-size:15px;color:#64748b;line-height:1.4}
+.module-card .module-progress{display:flex;gap:6px;margin-top:12px}
+.module-progress-dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}
+.module-progress-dot.done{background:#059669}
+.module-progress-dot.current{background:#d97706;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.module-card .lock-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:40px;opacity:0.6}
+.module-card .badge{position:absolute;top:-2px;right:-2px;background:#059669;color:#fff;font-size:12px;font-weight:800;padding:4px 12px;border-radius:0 18px 0 12px}
+.module-card .xp-reward{position:absolute;bottom:12px;right:16px;font-size:13px;font-weight:700;color:#d97706}
+.module-view{max-width:900px;width:100%;margin:0 auto}
+.module-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.module-header .icon{font-size:40px}
+.module-header h2{font-size:28px;font-weight:800}
+.module-header .back-btn{background:#f1f5f9;border:1px solid #e2e8f0;color:#1a1a2e;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:16px;font-weight:600}
+.module-header .back-btn:hover{background:#e2e8f0}
+.slide-container{background:#ffffff;border-radius:20px;padding:40px;min-height:400px;position:relative;border:2px solid #e2e8f0;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.slide-content{display:none;animation:slideIn 0.4s}
+.slide-content.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.slide-title{font-size:32px;font-weight:800;margin-bottom:16px;color:#0891b2}
+.slide-text{font-size:22px;line-height:1.7;color:#1a1a2e}
+.slide-text .hl{color:#d97706;font-weight:700}
+.slide-text .cy{color:#0891b2;font-weight:700}
+.slide-text .gr{color:#059669;font-weight:700}
+.slide-text .pk{color:#db2777;font-weight:700}
+.slide-text .rd{color:#dc2626;font-weight:700}
+.slide-example{background:#ecfeff;border:2px solid #67e8f9;border-radius:16px;padding:20px;margin:16px 0;font-size:20px;line-height:1.6;color:#1a1a2e}
+.slide-list{text-align:left;max-width:700px;margin:0 auto;font-size:20px;line-height:2;list-style:none}
+.slide-list li{padding-left:28px;position:relative;margin-bottom:8px}
+.slide-list li:before{content:"\25B8";position:absolute;left:0;color:#0891b2;font-size:22px}
+.slide-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.slide-dots{display:flex;gap:8px}
+.slide-dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1;cursor:pointer;transition:all 0.2s}
+.slide-dot.active{background:#0891b2;transform:scale(1.3)}
+.slide-btn{padding:12px 28px;border-radius:12px;border:none;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.2s}
+.slide-btn-next{background:#0891b2;color:#fff}
+.slide-btn-next:hover{background:#0e7490;transform:translateY(-2px)}
+.slide-btn-prev{background:#f1f5f9;color:#1a1a2e;border:1px solid #e2e8f0}
+.slide-btn-prev:hover{background:#e2e8f0}
+.slide-btn:disabled{opacity:0.3;cursor:not-allowed}
+.quiz-container{background:#ffffff;border-radius:20px;padding:40px;max-width:800px;border:2px solid #ddd6fe;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.quiz-question{font-size:24px;font-weight:700;line-height:1.5;margin-bottom:24px;color:#1a1a2e}
+.quiz-options{display:flex;flex-direction:column;gap:12px}
+.quiz-opt{background:#f8fafc;border:3px solid #e2e8f0;border-radius:14px;padding:18px 24px;font-size:20px;font-weight:600;color:#1a1a2e;text-align:left;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px}
+.quiz-opt:hover{border-color:#7c3aed;background:#f5f3ff}
+.quiz-opt .opt-letter{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#e2e8f0;font-weight:800;flex-shrink:0;color:#1a1a2e}
+.quiz-opt.correct{border-color:#059669;background:#d1fae5}
+.quiz-opt.correct .opt-letter{background:#059669;color:#fff}
+.quiz-opt.wrong{border-color:#dc2626;background:#fee2e2}
+.quiz-opt.wrong .opt-letter{background:#dc2626;color:#fff}
+.quiz-opt.reveal{border-color:#059669;background:#d1fae5}
+.quiz-opt.reveal .opt-letter{background:#059669;color:#fff}
+.quiz-opt.disabled{pointer-events:none;opacity:0.5}
+.quiz-feedback{margin-top:16px;padding:16px;border-radius:12px;font-size:18px;line-height:1.5;display:none}
+.quiz-feedback.show{display:block;animation:popIn 0.4s}
+.quiz-feedback.correct{background:#d1fae5;color:#059669}
+.quiz-feedback.wrong{background:#fee2e2;color:#dc2626}
+@keyframes popIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.quiz-progress{display:flex;gap:6px;margin-bottom:20px}
+.quiz-prog-dot{width:30px;height:6px;border-radius:3px;background:#cbd5e1;transition:all 0.3s}
+.quiz-prog-dot.done{background:#059669}
+.quiz-prog-dot.wrong{background:#dc2626}
+.quiz-prog-dot.current{background:#7c3aed}
+.game-container{background:#ffffff;border-radius:20px;padding:30px;max-width:800px;text-align:center;border:2px solid #fde68a;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.game-title{font-size:28px;font-weight:800;color:#d97706;margin-bottom:16px}
+.game-desc{font-size:18px;color:#64748b;margin-bottom:24px}
+.game-instruction{background:#fffbeb;border:2px solid #fde68a;border-radius:12px;padding:16px;font-size:18px;margin-bottom:20px;color:#1a1a2e}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:600px;margin:0 auto}
+.memory-card{aspect-ratio:1;background:#f1f5f9;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;font-weight:700;text-align:center;padding:8px;transition:all 0.3s;border:3px solid transparent;user-select:none;color:#1a1a2e}
+.memory-card.flipped{background:#0891b2;color:#fff}
+.memory-card.matched{background:#059669;color:#fff;border-color:#059669}
+.memory-card:hover:not(.flipped):not(.matched){background:#e2e8f0}
+.scramble-word{font-size:48px;font-weight:800;color:#d97706;letter-spacing:8px;margin:20px 0;text-align:center}
+.scramble-input{width:100%;max-width:400px;background:#f8fafc;border:3px solid #cbd5e1;border-radius:12px;padding:14px;font-size:22px;color:#1a1a2e;font-family:inherit;text-align:center;text-transform:uppercase;margin-bottom:12px}
+.scramble-input:focus{outline:none;border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,0.15)}
+.scramble-feedback{font-size:24px;font-weight:800;margin-top:12px}
+.tf-game{text-align:center}
+.tf-question{font-size:26px;font-weight:700;margin:20px 0;line-height:1.5}
+.tf-buttons{display:flex;gap:20px;justify-content:center;margin:24px 0}
+.tf-btn{padding:20px 48px;border-radius:16px;border:none;font-size:28px;font-weight:800;cursor:pointer;transition:all 0.2s}
+.tf-btn:hover{transform:translateY(-3px)}
+.tf-btn.true{background:#059669;color:#fff}
+.tf-btn.false{background:#dc2626;color:#fff}
+.tf-btn:disabled{opacity:0.5}
+.tf-result{font-size:24px;font-weight:800;margin:16px 0}
+.module-complete{background:#ffffff;border-radius:20px;padding:40px;text-align:center;max-width:600px;border:3px solid #059669;box-shadow:0 8px 30px rgba(0,0,0,0.1)}
+.module-complete .badge-icon{font-size:80px;animation:bounce 1s ease-out}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.module-complete h2{font-size:28px;font-weight:800;color:#059669;margin:16px 0}
+.module-complete .xp-gained{font-size:24px;font-weight:700;color:#d97706;margin:12px 0}
+.module-complete .stars{font-size:40px;margin:12px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:12px;cursor:pointer;border:none;font-size:20px;font-weight:700;transition:all 0.2s}
+.btn-primary{background:#0891b2;color:#fff}
+.btn-primary:hover{background:#0e7490;transform:translateY(-2px)}
+.btn-gold{background:#f59e0b;color:#000}
+.btn-gold:hover{background:#d97706;transform:translateY(-2px)}
+.btn-purple{background:#7c3aed;color:#fff}
+.btn-purple:hover{background:#6d28d9;transform:translateY(-2px)}
+.btn-green{background:#059669;color:#fff}
+.btn-green:hover{background:#047857;transform:translateY(-2px)}
+.btn-secondary{background:#f1f5f9;color:#1a1a2e;border:1px solid #e2e8f0}
+.btn-secondary:hover{background:#e2e8f0}
+.btn-row{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+#nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:8px 20px;background:#ffffff;backdrop-filter:blur(8px);z-index:100;border-top:1px solid #e2e8f0;box-shadow:0 -2px 10px rgba(0,0,0,0.05)}
+.nav-btn{padding:8px 18px;border-radius:10px;border:none;cursor:pointer;background:#f1f5f9;color:#1a1a2e;font-size:16px;font-weight:600;transition:all 0.2s;border:1px solid #e2e8f0}
+.nav-btn:hover{background:#0891b2;color:#fff}
+#nav-info{font-size:14px;color:#64748b}
+footer{text-align:center;padding:4px;color:#64748b;font-size:13px;position:fixed;bottom:44px;left:0;right:0;z-index:99;background:transparent}
+footer a{color:#0891b2;text-decoration:none;font-weight:600}
+.xp-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:#d97706;text-shadow:0 0 30px rgba(217,119,6,0.5);z-index:300;pointer-events:none;animation:xpPop 1.5s ease-out forwards}
+@keyframes xpPop{0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-80%) scale(0.8)}}
+.final-arena{background:#ffffff;border-radius:24px;padding:40px;max-width:800px;text-align:center;border:3px solid #f59e0b;box-shadow:0 8px 30px rgba(0,0,0,0.1)}
+.final-title{font-size:42px;font-weight:800;color:#d97706;margin-bottom:16px}
+.final-timer{font-size:36px;font-weight:800;color:#d97706;font-family:'Courier New',monospace}
+.final-question{font-size:26px;font-weight:700;margin:20px 0;line-height:1.4;color:#1a1a2e}
+.final-score{font-size:32px;font-weight:800;color:#0891b2;margin:16px 0}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:900px;width:100%;margin:0 auto 24px}
+.dash-stat{background:#ffffff;border-radius:16px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
+.dash-stat .stat-num{font-size:40px;font-weight:800}
+.dash-stat .stat-label{font-size:16px;color:#64748b;margin-top:4px}
+
+/* TOOLTIPS */
+.tooltip-term{position:relative;cursor:help;text-decoration:underline dotted rgba(6,182,212,0.6);text-underline-offset:3px}
+.tooltip-term:hover::after{content:attr(data-tip);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:400;line-height:1.5;white-space:normal;width:max-content;max-width:320px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.3);border:1px solid #0891b2;text-decoration:none;pointer-events:none;animation:tipFade 0.2s
+.tooltip-term:hover::before{content:"";position:absolute;bottom:130%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1e293b;z-index:500;pointer-events:none}
+@keyframes tipFade{from{opacity:0;transform:translateX(-50%) translateY(4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+/* QUIZ TOOLTIP ON QUESTION */
+.quiz-tooltip{position:relative;cursor:help}
+.quiz-tooltip:hover .quiz-tip{display:block;animation:tipFade 0.2s}
+.quiz-tip{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#1e293b;color:#f8fafc;padding:12px 18px;border-radius:12px;font-size:15px;font-weight:400;line-height:1.5;white-space:normal;width:max-content;max-width:500px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.5);border:1px solid rgba(139,92,246,0.4);margin-top:8px}
+.quiz-tip::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-bottom-color:#1e293b}
+/* OPTION TOOLTIP */
+.quiz-opt-tip{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#1e293b;color:#f8fafc;padding:8px 14px;border-radius:10px;font-size:13px;font-weight:400;line-height:1.4;white-space:normal;width:max-content;max-width:300px;z-index:500;box-shadow:0 4px 15px rgba(0,0,0,0.4);border:1px solid rgba(6,182,212,0.3);margin-bottom:6px}
+.quiz-opt-tip::before{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1e293b}
+.quiz-opt-wrapper{position:relative}
+.quiz-opt-wrapper:hover .quiz-opt-tip{display:block;animation:tipFade 0.2s}
+/* GAME TERM TOOLTIP */
+.game-term{position:relative;cursor:help}
+.game-term:hover .game-tip{display:block}
+.game-tip{display:none;position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#1e293b;color:#f8fafc;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:400;line-height:1.4;white-space:normal;width:max-content;max-width:250px;z-index:500;box-shadow:0 4px 15px rgba(0,0,0,0.4);border:1px solid rgba(245,158,11,0.3);margin-bottom:4px}
+.game-tip::before{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#1e293b}
+
+/* GLOSSARY */
+.glossary{background:#f0f9ff;border:2px solid #bae6fd;border-radius:16px;padding:20px;margin-top:20px;max-width:800px}
+.glossary-title{font-size:18px;font-weight:800;color:#0891b2;margin-bottom:12px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.glossary-title:hover{color:#d97706}
+.glossary-toggle{font-size:14px;color:#64748b;margin-left:auto}
+.glossary-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease;padding-top:0}
+.glossary-list.open{max-height:800px;overflow-y:auto;padding-top:12px}
+.glossary-item{background:#ffffff;border-radius:10px;padding:10px 14px;font-size:15px;line-height:1.4;border:1px solid #e2e8f0}
+.glossary-item .g-term{font-weight:800;color:#d97706}
+.glossary-item .g-def{color:#475569;font-size:14px}
+</style>
+</head>
+<body>
+<div id="header">
+<div class="logo">💼 Negócios em Informática</div>
+<div class="student-info">
+<span id="studentName" style="color:#64748b">Visitante</span>
+<span class="level-badge" id="levelBadge">Nível 1</span>
+<span class="xp-badge" id="xpBadge">0 XP</span>
+</div>
+</div>
+<div id="progress-bar"><div id="progress-fill" style="width:0%"></div></div>
+<div id="app">
+<div class="screen active" id="screen-welcome">
+<div class="welcome-box">
+<div class="welcome-title">💼 Negócios em Informática</div>
+<div class="welcome-sub">Aula Interativa Gamificada — 2h+ de conteúdo<br>Para 1º Ano do Curso Técnico Integrado</div>
+<input type="text" class="welcome-input" id="nameInput" placeholder="Digite seu nome..." onkeypress="if(event.key==='Enter')startCourse()">
+<div class="welcome-features">
+<div class="welcome-feature"><span class="icon">📊</span> 8 Módulos Progressivos</div>
+<div class="welcome-feature"><span class="icon">🎯</span> Quizzes Interativos</div>
+<div class="welcome-feature"><span class="icon">🎮</span> Jogos Educativos</div>
+<div class="welcome-feature"><span class="icon">🏆</span> Sistema de Conquistas</div>
+<div class="welcome-feature"><span class="icon">📈</span> Pontos XP e Níveis</div>
+<div class="welcome-feature"><span class="icon">🔒</span> Desbloqueio Passo a Passo</div>
+</div>
+<button class="btn btn-primary" onclick="startCourse()">🚀 Começar Aula</button>
+</div>
+</div>
+<div class="screen" id="screen-modules">
+<div style="max-width:1100px;width:100%">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+<h2 style="font-size:28px;font-weight:800">🗺️ Trilha de Aprendizagem</h2>
+<button class="btn btn-gold" onclick="startFinalChallenge()" id="finalBtn" style="display:none">🏆 Desafio Final</button>
+</div>
+<div class="dash-stats" id="dashStats"></div>
+<div class="modules-grid" id="modulesGrid"></div>
+</div>
+</div>
+<div class="screen" id="screen-module"><div class="module-view" id="moduleContent"></div></div>
+<div class="screen" id="screen-final"><div id="finalContent"></div></div>
+</div>
+<div id="nav">
+<button class="nav-btn" onclick="goModules()">🏠 Módulos</button>
+<span id="nav-info">Negócios em Informática</span>
+<button class="nav-btn" onclick="goModules()">📊 Progresso</button>
+</div>
+<footer>carneirosvirtual.com · Negócios em Informática — Aula Interativa</footer>
+<script>
+// ===== STUDENT STATE =====
+var student = {
+  name: '', xp: 0, level: 1,
+  moduleProgress: {}, badges: [], currentModule: 0, quizScores: {}
+};
+
+// ===== MODULE DEFINITIONS =====
+var MODULES = [
+  {id:1, icon:'🌐', color:'#06b6d4', title:'O Mundo dos Negócios em TI',
+   desc:'O que é Negócio em Informática e áreas de atuação', xpReward:100, game:'memory',
+   slides:[
+    {title:'O que é Negócio em Informática?', content:'<p class="slide-text">Você já parou pra pensar que <span class="hl">quase tudo que fazemos no celular</span> envolve um negócio?</p><p class="slide-text" style="margin-top:16px">Quando você pede comida no <span class="cy">iFood</span>, assiste <span class="cy">Netflix</span>, compra no <span class="cy">Mercado Livre</span> ou usa o <span class="cy">PIX</span>... Tudo isso são <span class="hl">negócios em informática</span>!</p><div class="slide-example">💡 <b>Negócio em Informática</b> é usar a tecnologia (computadores, internet, software) para criar, vender ou gerenciar produtos e serviços que geram dinheiro.</div>'},
+    {title:'Produto vs Serviço em TI', content:'<p class="slide-text">Em TI existem dois tipos principais de negócio:</p><ul class="slide-list"><li><span class="hl">Produto</span>: Algo que você cria e vende (ex: um aplicativo, um jogo, um software)</li><li><span class="cy">Serviço</span>: Algo que você faz para alguém (ex: consertar computador, criar um site, dar suporte técnico)</li></ul><div class="slide-example">📦 <b>Exemplo de produto</b>: O jogo Minecraft (criado e vendido)<br>🔧 <b>Exemplo de serviço</b>: Uma assistência técnica que formata seu PC</div>'},
+    {title:'Áreas de Atuação', content:'<p class="slide-text">Existem muitas áreas onde a informática cria negócios:</p><ul class="slide-list"><li>🛒 <span class="hl">E-commerce</span> — vender pela internet</li><li>📱 <span class="cy">Marketing Digital</span> — divulgar nas redes</li><li>🚀 <span class="gr">Startups</span> — empresas inovadoras</li><li>💼 <span class="pk">Consultoria</span> — ajudar outras empresas</li><li>💳 <span class="rd">Fintechs</span> — pagamentos e finanças</li><li>🎮 <span class="hl">Games</span> — criar e vender jogos</li></ul><p class="slide-text" style="margin-top:16px;text-align:center">E muito mais! O mundo da TI é <span class="hl">gigante</span> 🌍</p>'},
+    {title:'Por que estudar Negócios em TI?', content:'<p class="slide-text">Porque <span class="hl">entender como os negócios funcionam</span> te dá uma vantagem enorme!</p><ul class="slide-list"><li>💡 Você pode criar <span class="hl">sua própria empresa</span> ou app</li><li>💰 Entende como empresas <span class="cy">ganham dinheiro</span></li><li>🤝 Sabe conversar com <span class="gr">clientes e parceiros</span></li><li>🚀 Pode trabalhar como <span class="pk">freelancer</span> ou empreendedor</li></ul><div class="slide-example">🎯 <b>Objetivo de hoje</b>: Ao final dessa aula você vai entender os principais tipos de negócios em TI e como eles funcionam!</div>'}
+   ]},
+  {id:2, icon:'🛒', color:'#10b981', title:'E-commerce',
+   desc:'Comércio eletrônico: vender pela internet', xpReward:100, game:'scramble',
+   slides:[
+    {title:'O que é E-commerce?', content:'<p class="slide-text"><span class="hl">E-commerce</span> (comércio eletrônico) é comprar e vender produtos pela <span class="cy">internet</span>.</p><div class="slide-example">📦 Você já comprou algo online? Mercado Livre, Amazon, Shopee, Shein... Todos são e-commerce!</div><p class="slide-text" style="margin-top:16px">Em vez de ir até a loja física, você <span class="hl">escolhe, paga e recebe em casa</span>. Tudo pelo computador ou celular!</p>'},
+    {title:'Tipos de E-commerce', content:'<p class="slide-text">Existem vários tipos de e-commerce:</p><ul class="slide-list"><li><span class="hl">B2C</span> (Business to Consumer): Empresa vende para pessoa — ex: <span class="cy">Amazon</span></li><li><span class="hl">B2B</span> (Business to Business): Empresa vende para empresa — ex: <span class="cy">loja de atacado</span></li><li><span class="hl">C2C</span> (Consumer to Consumer): Pessoa vende para pessoa — ex: <span class="cy">OLX</span></li><li><span class="hl">Marketplace</span>: Vários vendedores num só lugar — ex: <span class="cy">Mercado Livre</span></li></ul>'},
+    {title:'Como funciona uma loja virtual?', content:'<p class="slide-text">Uma loja virtual precisa de:</p><ul class="slide-list"><li>🛍️ <span class="hl">Catálogo de produtos</span> com fotos e preços</li><li>🛒 <span class="cy">Carrinho de compras</span> pra juntar os itens</li><li>💳 <span class="gr">Meio de pagamento</span> (cartão, PIX, boleto)</li><li>📦 <span class="pk">Sistema de entrega</span> (logística)</li><li>⭐ <span class="hl">Avaliações</span> dos clientes</li></ul><div class="slide-example">💡 O iFood é um e-commerce de comida! Você escolhe o prato (catálogo), adiciona (carrinho), paga (PIX/cartão) e recebe (entrega).</div>'},
+    {title:'Vantagens do E-commerce', content:'<p class="slide-text">Por que as pessoas compram online?</p><ul class="slide-list"><li>🕐 <span class="hl">Comodidade</span> — compra de casa, 24h por dia</li><li>💰 <span class="cy">Preços menores</span> — sem custo de loja física</li><li>🔍 <span class="gr">Comparar preços</span> fácil</li><li>📦 <span class="pk">Entrega em casa</span></li></ul><p class="slide-text" style="margin-top:16px;text-align:center">No Brasil, o e-commerce movimenta <span class="hl">bilhões de reais</span> por ano! 💸</p>'}
+   ]},
+  {id:3, icon:'📱', color:'#8b5cf6', title:'Marketing Digital',
+   desc:'Divulgar e vender usando a internet', xpReward:100, game:'truefalse',
+   slides:[
+    {title:'O que é Marketing Digital?', content:'<p class="slide-text"><span class="hl">Marketing Digital</span> é usar a internet para <span class="cy">divulgar produtos</span> e <span class="cy">atrair clientes</span>.</p><div class="slide-example">📱 Quando você vê um anúncio no Instagram ou YouTube... isso é marketing digital!</div><p class="slide-text" style="margin-top:16px">É como a versão moderna do cartaz na rua ou do comercial de TV — mas na internet e muito mais <span class="hl">eficiente</span>!</p>'},
+    {title:'Redes Sociais para Negócios', content:'<p class="slide-text">Cada rede social tem um objetivo:</p><ul class="slide-list"><li>📸 <span class="hl">Instagram</span> — fotos e produtos visuais</li><li>🎬 <span class="cy">YouTube</span> — vídeos e tutoriais</li><li>💼 <span class="gr">LinkedIn</span> — networking profissional</li><li>🎵 <span class="pk">TikTok</span> — vídeos curtos e virais</li><li>💬 <span class="hl">WhatsApp Business</span> — atendimento direto</li></ul><div class="slide-example">💡 Uma loja de roupas usa o Instagram pra mostrar produtos e o WhatsApp pra finalizar a venda!</div>'},
+    {title:'SEO e Conteúdo', content:'<p class="slide-text"><span class="hl">SEO</span> (Search Engine Optimization) é fazer seu site <span class="cy">aparecer no Google</span> quando alguém busca algo.</p><div class="slide-example">🔍 Se você busca "pizzaria perto de mim", as primeiras que aparecem usaram bem o SEO!</div><p class="slide-text" style="margin-top:16px"><span class="gr">Marketing de conteúdo</span> é criar textos, vídeos e posts úteis para atrair pessoas.</p>'},
+    {title:'Influenciadores e Anúncios', content:'<p class="slide-text">Duas estratégias muito usadas:</p><ul class="slide-list"><li>⭐ <span class="hl">Influenciadores</span> — pessoas famosas que divulgam produtos</li><li>📢 <span class="cy">Anúncios pagos</span> — pagar para seu anúncio aparecer (Google Ads, Meta Ads)</li></ul><div class="slide-example">💰 Uma empresa paga R$ 1.000 em anúncios e ganha R$ 5.000 em vendas. Isso é <b>investimento</b>, não gasto!</div>'}
+   ]},
+  {id:4, icon:'🚀', color:'#f59e0b', title:'Startups e Empreendedorismo',
+   desc:'Empresas inovadoras e como criar algo do zero', xpReward:100, game:'memory',
+   slides:[
+    {title:'O que é uma Startup?', content:'<p class="slide-text"><span class="hl">Startup</span> é uma empresa <span class="cy">jovem e inovadora</span> que usa tecnologia para resolver um problema de forma nova.</p><div class="slide-example">🚀 Exemplos: Uber (mudou o transporte), Airbnb (mudou a hospedagem), iFood (mudou a entrega de comida)</div><p class="slide-text" style="margin-top:16px">A diferença entre uma empresa normal e uma startup: a startup <span class="hl">cresce rápido</span> e usa tecnologia como base.</p>'},
+    {title:'O que é um Pitch?', content:'<p class="slide-text"><span class="hl">Pitch</span> é uma <span class="cy">apresentação rápida</span> (2-5 minutos) onde você explica sua ideia para <span class="gr">convencer investidores</span>.</p><div class="slide-example">🎤 É como um elevator pitch: "Tenho 30 segundos no elevador com um investidor. O que eu falo?"</div><p class="slide-text" style="margin-top:16px">Um bom pitch responde: <span class="pk">Qual problema eu resolvo? Para quem? Como ganho dinheiro?</span></p>'},
+    {title:'Investidores e Incubadoras', content:'<p class="slide-text">Startups precisam de <span class="hl">dinheiro para crescer</span>. Quem ajuda?</p><ul class="slide-list"><li>👨‍💼 <span class="hl">Anjo</span> — investe dinheiro próprio em troca de parte da empresa</li><li>🏠 <span class="cy">Incubadora</span> — dá espaço, mentoria e apoio</li><li>🚀 <span class="gr">Aceleradora</span> — investe dinheiro + mentoria intensa por 3-6 meses</li><li>💰 <span class="pk">VC (Venture Capital)</span> — fundos que investem em startups promissoras</li></ul>'},
+    {title:'Você pode ser um empreendedor!', content:'<p class="slide-text">Para empreender você não precisa de muito dinheiro no início:</p><ul class="slide-list"><li>💡 <span class="hl">Comece com um problema</span> que você vive</li><li>🤔 <span class="cy">Pense numa solução simples</span></li><li>📱 <span class="gr">Use a tecnologia</span> que já existe</li><li>🧪 <span class="pk">Teste com amigos</span> e melhore</li><li>🚀 <span class="hl">Comece pequeno</span> e cresça!</li></ul><div class="slide-example">🎯 Mark Zuckerberg criou o Facebook na faculdade. Começou pequeno e virou gigante!</div>'}
+   ]},
+  {id:5, icon:'💼', color:'#ec4899', title:'Modelos de Negócio em TI',
+   desc:'Como empresas de tecnologia ganham dinheiro', xpReward:100, game:'scramble',
+   slides:[
+    {title:'O que é um Modelo de Negócio?', content:'<p class="slide-text"><span class="hl">Modelo de Negócio</span> é a forma como uma empresa <span class="cy">ganha dinheiro</span>.</p><div class="slide-example">💡 A Netflix cobra mensalidade. O Google é gratuito mas ganha com anúncios. O Mercado Livre ganha com comissão.</div>'},
+    {title:'SaaS e Assinatura', content:'<p class="slide-text"><span class="hl">SaaS</span> (Software as a Service) — você paga uma <span class="cy">mensalidade</span> para usar um software pela internet.</p><ul class="slide-list"><li>🎬 Netflix — paga mensalidade pra assistir</li><li>🎵 Spotify — paga pra ouvir música sem anúncios</li><li>📦 Office 365, Adobe...</li></ul><div class="slide-example">💰 A Netflix tem 260 milhões de assinantes pagando R$ 40/mês = <b>bilhões por mês</b>!</div>'},
+    {title:'Freemium e Publicidade', content:'<p class="slide-text"><span class="hl">Freemium</span> — o serviço é <span class="cy">gratuito</span>, mas você paga por recursos extras.</p><ul class="slide-list"><li>🎵 Spotify gratuito com anúncios / Premium sem anúncios</li><li>🎮 Jogos grátis com compras dentro do app</li><li>🤳 Instagram gratuito, empresas pagam pra anunciar</li></ul><div class="slide-example">📈 O Instagram é grátis para você, mas o <b>Meta ganha bilhões</b> vendendo anúncios!</div>'},
+    {title:'Marketplace e Comissão', content:'<p class="slide-text"><span class="hl">Marketplace</span> — a plataforma conecta vendedores e compradores e <span class="cy">ganha comissão</span>.</p><ul class="slide-list"><li>🛒 Mercado Livre — cobra comissão</li><li>🚗 Uber — cobra porcentagem de cada corrida</li><li>🍔 iFood — cobra comissão do restaurante</li><li>🏠 Airbnb — cobra taxa do hospede e hóspede</li></ul><div class="slide-example">🤔 A Uber não tem carros! Ela só conecta motoristas e passageiros. Genial, né?</div>'}
+   ]},
+  {id:6, icon:'💳', color:'#06b6d4', title:'Meios de Pagamento Digital',
+   desc:'PIX, cartões, carteiras digitais e mais', xpReward:100, game:'truefalse',
+   slides:[
+    {title:'Evolução dos Pagamentos', content:'<p class="slide-text">Como pagamos as coisas evoluiu muito:</p><ul class="slide-list"><li>🐂 <span class="hl">Troca</span> — trocava um produto por outro</li><li>🪙 <span class="cy">Moedas</span> — dinheiro de metal</li><li>💵 <span class="gr">Cédulas</span> — papel-moeda</li><li>💳 <span class="pk">Cartão</span> — crédito e débito</li><li>📱 <span class="hl">PIX</span> — pagamento instantâneo</li></ul><div class="slide-example">📊 Hoje, mais de 40% das transações no Brasil são via PIX!</div>'},
+    {title:'PIX: A Revolução', content:'<p class="slide-text"><span class="hl">PIX</span> é o sistema de pagamento <span class="cy">instantâneo</span> do Brasil, lançado em 2020.</p><ul class="slide-list"><li>⚡ Funciona 24h, 7 dias por semana</li><li>💸 Transferência <span class="hl">gratuita</span> para pessoas físicas</li><li>📱 Precisa só de uma chave (CPF, email, telefone)</li><li>🔄 Dinheiro entra na hora!</li></ul><div class="slide-example">🎮 Antes do PIX, transferências bancárias demoravam até 1 dia útil. Agora é instantâneo!</div>'},
+    {title:'Carteiras Digitais', content:'<p class="slide-text"><span class="hl">Carteiras Digitais</span> guardam seu dinheiro de forma virtual:</p><ul class="slide-list"><li>💚 <span class="gr">PicPay</span> — carteira digital popular</li><li>🟢 <span class="pk">Mercado Pago</span> — do Mercado Livre</li><li>🍎 <span class="hl">Apple Pay / Google Pay</span> — pagamento por aproximação</li></ul><div class="slide-example">💳 Funciona como uma carteira virtual: você coloca dinheiro e usa pra pagar tudo sem dinheiro físico!</div>'},
+    {title:'Gateways de Pagamento', content:'<p class="slide-text"><span class="hl">Gateway de pagamento</span> é o sistema que <span class="cy">processa o pagamento</span> em uma loja virtual.</p><div class="slide-example">🔄 Você digita o cartão → o gateway verifica → aprova ou recusa → loja é avisada → produto é enviado</div><p class="slide-text" style="margin-top:16px">Exemplos: <span class="gr">PagSeguro, Mercado Pago, Stripe, Pagar.me</span></p>'}
+   ]},
+  {id:7, icon:'🔒', color:'#ef4444', title:'Ética e LGPD',
+   desc:'Proteção de dados e privacidade', xpReward:100, game:'memory',
+   slides:[
+    {title:'O que é a LGPD?', content:'<p class="slide-text"><span class="hl">LGPD</span> (Lei Geral de Proteção de Dados) é a lei que <span class="cy">protege seus dados pessoais</span> no Brasil.</p><div class="slide-example">🔒 Entrou em vigor em 2020. Faz com que empresas peçam permissão antes de usar seus dados!</div><p class="slide-text" style="margin-top:16px">Antes da LGPD, empresas podiam usar seus dados sem perguntar. Agora elas <span class="hl">precisam da sua autorização</span>!</p>'},
+    {title:'O que são Dados Pessoais?', content:'<p class="slide-text">Dados pessoais são <span class="hl">informações que identificam você</span>:</p><ul class="slide-list"><li>👤 Nome, CPF, RG</li><li>📧 Email, telefone</li><li>📍 Endereço</li><li>📷 Fotos</li><li>💳 Dados bancários</li><li>🍪 Cookies (rastreiam o que você faz online)</li></ul><div class="slide-example">⚠️ Sua localização do GPS é um dado pessoal! Apps não podem compartilhar sem permissão!</div>'},
+    {title:'Seus Direitos', content:'<p class="slide-text">Com a LGPD, você tem <span class="hl">direitos</span> sobre seus dados:</p><ul class="slide-list"><li>✅ <span class="cy">Saber</span> quais dados uma empresa tem sobre você</li><li>✏️ <span class="gr">Corrigir</span> dados errados</li><li>🗑️ <span class="pk">Excluir</span> seus dados</li><li>🚫 <span class="hl">Negar</span> o uso dos seus dados</li><li>📋 <span class="cy">Portabilidade</span> — levar seus dados para outra empresa</li></ul><div class="slide-example">💡 Quando um app pergunta "Aceita os termos?" — isso é a LGPD em ação!</div>'},
+    {title:'Ética em TI', content:'<p class="slide-text"><span class="hl">Ética em TI</span> é fazer a coisa certa, mesmo quando ninguém está olhando.</p><ul class="slide-list"><li>🤝 Não compartilhar dados de clientes</li><li>🔒 Manter senhas seguras</li><li>✅ Ser honesto sobre prazos e custos</li><li>🚫 Não copiar código sem permissão</li><li>💡 Respeitar a privacidade alheia</li></ul><div class="slide-example">🎯 Um programador que vê a senha de um cliente e não conta pra ninguém — isso é ética!</div>'}
+   ]},
+  {id:8, icon:'🛡️', color:'#10b981', title:'Segurança da Informação',
+   desc:'Como se proteger no mundo digital', xpReward:100, game:'scramble',
+   slides:[
+    {title:'Por que a Segurança Importa?', content:'<p class="slide-text">Na internet, você precisa se <span class="hl">proteger</span> assim como trava a porta de casa.</p><div class="slide-example">🔒 Hackers roubam dados, senhas e dinheiro todos os dias. Em 2023, mais de <b>10 bilhões</b> de dados vazaram no mundo!</div><p class="slide-text" style="margin-top:16px">A segurança da informação protege dados de 3 formas: <span class="hl">Confidencialidade, Integridade e Disponibilidade</span>.</p>'},
+    {title:'Senhas: Sua Primeira Defesa', content:'<p class="slide-text">Uma boa senha é a base da segurança:</p><ul class="slide-list"><li>❌ <span class="rd">RUIM</span>: 123456, senha123, seu nome, data de nascimento</li><li>✅ <span class="gr">BOA</span>: Maiúsculas, minúsculas, números e símbolos</li><li>🔑 <span class="cy">Dica</span>: Use uma frase! Ex: <b>MeuGato@2026</b></li><li>🚫 <span class="rd">Nunca</span> use a mesma senha em tudo</li></ul><div class="slide-example">🔐 A senha "123456" pode ser descoberta em menos de 1 segundo!</div>'},
+    {title:'Phishing: O Golpe Digital', content:'<p class="slide-text"><span class="hl">Phishing</span> é quando alguém finge ser uma empresa de verdade para <span class="cy">roubar seus dados</span>.</p><div class="slide-example">📧 Você recebe um email: "Sua conta do banco foi bloqueada! Clique aqui para desbloquear." — Mas é falso!</div><p class="slide-text" style="margin-top:16px"><span class="gr">Como se proteger</span>: sempre verifique o endereço do site, não clique em links suspeitos e desconfie de urgência.</p>'},
+    {title:'Backup e Antivírus', content:'<p class="slide-text">Duas proteções essenciais:</p><ul class="slide-list"><li>💾 <span class="hl">Backup</span> — cópia de segurança dos seus arquivos</li><li>🛡️ <span class="cy">Antivírus</span> — programa que detecta e remove vírus</li><li>🔥 <span class="gr">Firewall</span> — bloqueia acessos não autorizados</li><li>🔄 <span class="pk">Atualize</span> tudo! Atualizações corrigem falhas</li></ul><div class="slide-example">🎯 Regra de ouro do backup: <b>3-2-1</b> — 3 cópias, 2 tipos diferentes, 1 fora do computador!</div>'}
+   ]}
+];
+
+// ===== QUIZ QUESTIONS =====
+var QUIZ_QUESTIONS = [{"module": 1, "q": "O que caracteriza a área de Negócios em TI (Tecnologia da Informação)?", "opts": ["Apenas o conserto físico de computadores e monitores quebrados em oficinas de bairro", "A venda exclusiva de cabos de rede e peças de informática usadas em feiras livres", "A criação de jogos digitais caseiros sem nenhum objetivo comercial ou financeiro", "O uso da tecnologia para criar soluções, resolver problemas de empresas e gerar valor"], "correct": 3, "explanation": "Negócios em TI usam a tecnologia para resolver problemas reais de pessoas e empresas, gerando valor e oportunidades de mercado."}, {"module": 1, "q": "Quando uma empresa vende um software de caixa de supermercado instalado no computador em uma caixa fechada, ela está oferecendo TI principalmente como:", "opts": ["Um produto tecnológico", "Um serviço social comunitário sem fins lucrativos", "Uma doação governamental para pequenos comerciantes", "Um meio de pagamento físico de papel"], "correct": 0, "explanation": "A TI como produto consiste na entrega de um item pronto, como um programa ou equipamento fechado que o cliente adquire para usar."}, {"module": 1, "q": "Um técnico é contratado para prestar suporte contínuo e manter os computadores de uma escola funcionando todo mês. Esse tipo de trabalho é um exemplo de:", "opts": ["Venda de produto físico de TI", "Infraestrutura de e-commerce C2C", "TI prestada como serviço", "Campanha de marketing de influenciadores"], "correct": 2, "explanation": "A TI como serviço envolve o trabalho contínuo de manutenção, suporte, consultoria ou hospedagem, sem se limitar à venda de uma peça única."}, {"module": 1, "q": "Por que supermercados, farmácias e padarias usam sistemas de TI no seu dia a dia?", "opts": ["Para impedir que os clientes usem telefones celulares dentro da loja", "Para substituir todos os funcionários por robôs em menos de uma semana", "Para obrigar os clientes a pagar compras somente pela internet", "Para controlar o estoque de produtos, registrar vendas e atender clientes mais rápido"], "correct": 3, "explanation": "Sistemas de TI organizam dados de vendas e estoque, tornando os processos mais rápidos, eficientes e seguros para qualquer comércio."}, {"module": 1, "q": "Qual das alternativas representa uma das principais áreas de atuação de um profissional de Negócios em TI?", "opts": ["Análise de processos e desenvolvimento de sistemas para empresas", "Montagem artesanal de móveis de madeira para escritórios", "Entrega presencial de cartas e encomendas de papel pelos correios", "Manutenção de motores a combustão de carros e motocicletas"], "correct": 0, "explanation": "Profissionais de Negócios em TI atuam analisando necessidades de empresas e criando ou adaptando sistemas de informação."}, {"module": 2, "q": "O que é E-commerce (Comércio Eletrônico)?", "opts": ["A troca de produtos usados exclusivamente por meio de cartas de correio", "A compra e venda de produtos ou serviços realizada através da internet", "Uma feira livre de frutas que aceita apenas pagamento em moedas", "O aluguel de salas comerciais físicas no centro da cidade"], "correct": 1, "explanation": "E-commerce é todo tipo de transação comercial (compras, vendas, contratação de serviços) realizada por canais digitais na internet."}, {"module": 2, "q": "Quando você entra em um aplicativo de loja (como o da Magazine Luiza) e compra um fone de ouvido para uso próprio, que tipo de relação comercial ocorreu?", "opts": ["B2B (Business to Business - Empresa para Empresa)", "C2C (Consumer to Consumer - Consumidor para Consumidor)", "B2C (Business to Consumer - Empresa para Consumidor)", "G2G (Government to Government - Governo para Governo)"], "correct": 2, "explanation": "No modelo B2C, uma empresa (Business) vende diretamente para o cliente ou consumidor final (Consumer)."}, {"module": 2, "q": "Se um estudante anuncia sua bicicleta usada em um aplicativo como a OLX e vende para outro morador da sua cidade, temos um exemplo de comércio:", "opts": ["B2B", "B2G", "SaaS", "C2C"], "correct": 3, "explanation": "O modelo C2C ocorre quando uma pessoa física (Consumidor) vende produtos ou serviços diretamente para outra pessoa física."}, {"module": 2, "q": "O Mercado Livre funciona como um grande 'shopping virtual' onde várias lojas e pessoas anunciam seus produtos em uma única plataforma. Esse modelo é chamado de:", "opts": ["Marketplace", "Antivírus corporativo", "Firewall pessoal", "Servidor offline"], "correct": 0, "explanation": "Marketplace é um site ou aplicativo que reúne diversos vendedores e lojas em um só lugar, facilitando a busca e a compra do cliente."}, {"module": 2, "q": "Para que serve a ferramenta de 'Carrinho de Compras' em um site de vendas na internet?", "opts": ["Para fazer a entrega do produto até a casa do cliente de forma automática", "Para guardar temporariamente os itens escolhidos antes de calcular o frete e pagar", "Para emitir uma nota fiscal impressa na impressora da casa do cliente", "Para bloquear o acesso de outros usuários ao site da loja"], "correct": 1, "explanation": "O carrinho de compras permite que o usuário selecione vários produtos, altere quantidades e revise os itens antes de fechar o pedido."}, {"module": 3, "q": "O que é Marketing Digital?", "opts": ["Panfletagem de papéis impressos nas esquinas e sinais de trânsito", "A criação de embalagens de papelão para envio de mercadorias", "O conjunto de estratégias e ações de divulgação feitas na internet para atrair clientes", "A instalação de placas de outdoor de madeira nas estradas"], "correct": 2, "explanation": "Marketing Digital engloba todas as formas de promover marcas, produtos ou serviços usando canais digitais como redes sociais e buscadores."}, {"module": 3, "q": "De que forma redes sociais como Instagram e TikTok auxiliam uma pequena lanchonete de bairro?", "opts": ["Formatando automaticamente os computadores da cozinha da lanchonete", "Imprimindo cupons de papel na caixa registradora do estabelecimento", "Fazendo entregas físicas de comida sem precisar de entregadores", "Mostrando fotos dos lanches, divulgando promoções e conversando direto com os clientes"], "correct": 3, "explanation": "Redes sociais ajudam pequenos negócios a divulgarem seus produtos visualmente e a manterem um contato próximo com os clientes."}, {"module": 3, "q": "O que significa a sigla SEO (Search Engine Optimization) na internet?", "opts": ["Técnicas para deixar um site bem posicionado no Google sem precisar pagar por anúncios", "Um software para apagar vírus do celular do cliente automaticamente", "Um sistema de pagamento por aproximação usando o cartão bancário", "Um contrato assinado em cartório entre duas empresas parceiras"], "correct": 0, "explanation": "SEO é a otimização de sites para que eles apareçam nas primeiras posições de buscadores como o Google de forma orgânica (gratuita)."}, {"module": 3, "q": "Qual é o papel principal de um 'Influenciador Digital' ao promover uma marca de roupas?", "opts": ["Entregar pessoalmente as caixas com as roupas na casa de cada comprador", "Recomendar os produtos para seu público de seguidores, gerando confiança e interesse", "Programar o código-fonte do site de vendas da marca de roupas", "Fabricar os tecidos e costurar as peças de roupa na fábrica"], "correct": 1, "explanation": "Influenciadores usam sua credibilidade e audiência para indicar marcas e produtos que seus seguidores confiam e acompanham."}, {"module": 3, "q": "O que caracteriza os 'Anúncios Pagos' (Patrocinados) no Instagram ou Google?", "opts": ["São postagens gratuitas que aparecem apenas para os amigos próximos do dono da conta", "São mensagens privadas enviadas por carta para o endereço residencial das pessoas", "São publicidades pagas pelas empresas para serem exibidas a um público específico de usuários", "São vírus que travam o aplicativo e exigem pagamento para liberar a tela"], "correct": 2, "explanation": "Anúncios pagos permitem que uma empresa invista dinheiro para que sua publicação seja vista por milhares de pessoas com o perfil desejado."}, {"module": 4, "q": "O que é uma Startup?", "opts": ["Uma grande fábrica tradicional com mais de cinquenta anos no mercado de calçados", "Uma loja de bairro que vende apenas produtos importados em prateleiras de madeira", "Uma padaria familiar mantida pela mesma comunidade há três gerações", "Uma empresa nova e inovadora, desenvolvida para crescer rápido e atender muitos clientes"], "correct": 3, "explanation": "Startup é uma empresa jovem com proposta inovadora e potencial de escalar (crescer muito rapidamente) usando tecnologia."}, {"module": 4, "q": "O que é um 'Pitch' no ambiente de startups e empreendedorismo?", "opts": ["Uma apresentação curta e objetiva para explicar uma ideia de negócio a investidores", "Um programa de computador usado para testar a velocidade da memória RAM", "Um tipo de cabo de rede de alta velocidade usado em servidores", "A foto de perfil utilizada no aplicativo de mensagens da empresa"], "correct": 0, "explanation": "O pitch é uma fala rápida (de 3 a 5 minutos) onde o empreendedor resume sua ideia, mercado e diferencial para convencer parceiros e investidores."}, {"module": 4, "q": "Quem é o chamado 'Investidor Anjo' de uma startup?", "opts": ["Um cliente que compra produtos e ganha pontos em um cartão de fidelidade", "Uma pessoa física que aplica seu próprio dinheiro em empresas iniciantes promissoras", "Um funcionário público contratado para fiscalizar a emissão de notas fiscais", "Um hacker que ajuda a testar a senha de segurança dos computadores"], "correct": 1, "explanation": "Investidores anjo são empresários ou profissionais experientes que aplicam capital e conhecimento em startups na fase inicial."}, {"module": 4, "q": "Para que serve uma Incubadora de Empresas em uma universidade ou centro tecnológico?", "opts": ["Para fabricar chips de computador e vender em lojas de rua", "Para armazenar servidores antigos que não funcionam mais", "Para oferecer apoio, espaço de trabalho e orientação técnica a novos projetos de negócios", "Para substituir os professores durante as aulas teóricas de informática"], "correct": 2, "explanation": "Incubadoras ajudam novas empresas a nascerem de forma estruturada, oferecendo mentoria, espaço físico e consultoria no início."}, {"module": 4, "q": "Qual é o papel principal de uma Aceleradora de Startups?", "opts": ["Cobrar impostos municipais sobre serviços de internet", "Vender computadores usados com desconto para estudantes", "Ajudar empresas iniciantes a crescerem rapidamente com investimento financeiro e mentorias", "Garantir a conexão Wi-Fi de alta velocidade em feiras de tecnologia"], "correct": 2, "explanation": "Aceleradoras selecionam startups promissoras para passar por programas intensivos de crescimento, conexões e investimento."}, {"module": 5, "q": "O que significa o modelo de negócio SaaS (Software as a Service / Software como Serviço)?", "opts": ["A compra de um CD-ROM contendo um jogo para instalar no computador uma única vez", "A fabricação de peças físicas de computadores em linhas de montagem industriais", "A contratação de técnicos para limpar a poeira dos gabinetes dos computadores", "O uso de programas de computador diretamente pela internet mediante assinatura, sem necessidade de instalação local"], "correct": 3, "explanation": "No modelo SaaS (como o Google Workspace e o Canva), o cliente acessa o software pela nuvem e paga uma mensalidade pelo uso."}, {"module": 5, "q": "Como funciona o modelo de negócio 'Freemium' em aplicativos como o Spotify ou Jogos de Celular?", "opts": ["O aplicativo é pago desde o primeiro minuto de download e não possui testes", "O usuário recebe dinheiro na sua conta bancária toda vez que abre o aplicativo", "O aplicativo só pode ser utilizado se o usuário comprar um celular de última geração", "O serviço oferece uso gratuito com recursos básicos e cobra por funções extras ou para remover anúncios"], "correct": 3, "explanation": "Freemium combina 'Free' (grátis) e 'Premium' (pago): o usuário usa o plano básico sem pagar e escolhe assinar se quiser recursos avançados."}, {"module": 5, "q": "Serviços como a Netflix realizam cobrança recorrente todo mês no cartão do cliente em troca de acesso ilimitado ao catálogo de vídeos. Esse modelo é conhecido como:", "opts": ["Leilão presencial", "Venda por consignação", "Assinatura (Subscription)", "Troca direta de mercadorias"], "correct": 2, "explanation": "O modelo de assinatura cobra um valor fixo periódico (mensal ou anual) para dar acesso contínuo a um produto ou serviço."}, {"module": 5, "q": "Como redes sociais gratuitas como o Facebook ou o YouTube obtêm lucro para manter seus serviços no ar?", "opts": ["Exibindo anúncios e publicidades pagas por marcas para seus milhões de usuários", "Cobrando uma taxa em dinheiro toda vez que um usuário envia uma mensagem privada", "Vendendo os computadores de seus escritórios para os usuários ao fim do ano", "Exigindo o pagamento de mensalidade obrigatória para quem criar uma conta"], "correct": 0, "explanation": "Essas plataformas usam o modelo publicitário: a plataforma é grátis para as pessoas e fatura cobrando de anunciantes que divulgam marcas nelas."}, {"module": 5, "q": "Qual é a principal característica do modelo de negócio do iFood no setor de entregas de comida?", "opts": ["Fabricar as refeições em uma única cozinha central da empresa e distribuir pela cidade", "Conectar restaurantes, entregadores e clientes cobrando uma comissão sobre as vendas realizadas no app", "Vender telefones celulares com desconto para que os clientes façam pedidos por ligação", "Cobrar uma taxa dos clientes apenas quando eles visitam os restaurantes presencialmente"], "correct": 1, "explanation": "Plataformas de intermediação conectam quem oferta o produto (restaurante) com quem compra (cliente) e intermediadores de entrega, ganhando por taxa de transação."}, {"module": 6, "q": "Qual é a principal vantagem do PIX em relação aos métodos tradicionais de transferência bancária no Brasil?", "opts": ["Exigir a ida presencial do cliente à agência bancária para autorizar a transferência", "Transferir dinheiro de forma instantânea em qualquer dia e horário, sem custo para pessoas físicas", "Permitir pagamentos apenas em notas de papel entregues ao caixa eletrônico", "Cobrar taxas elevadas de transferência para qualquer tipo de valor enviado"], "correct": 1, "explanation": "O PIX permite pagamentos e transferências em tempo real, 24 horas por dia, 7 dias por semana, com facilidade de uso."}, {"module": 6, "q": "O que é uma 'Carteira Digital' (como Carteira do Google ou Apple Pay) no smartphone?", "opts": ["Um porta-cartões de couro grudado na capinha traseira do celular", "Um envelope físico onde o usuário guarda notas de dinheiro dentro do celular", "Um aplicativo que armazena dados de cartões para realizar pagamentos por aproximação ou pela internet", "Um cofre de metal embutido no aparelho móvel para guardar moedas"], "correct": 2, "explanation": "Carteiras digitais armazenam de forma segura os dados bancários e de cartões do usuário no celular, permitindo pagar via aproximação (NFC) ou código."}, {"module": 6, "q": "O que é um Boleto Bancário, muito utilizado nas compras online no Brasil?", "opts": ["Uma moeda virtual criptografada usada apenas em jogos eletrônicos", "Um documento impresso ou digital com código de barras usado para realizar pagamentos", "Um recibo que comprova que o produto já foi entregue na casa do cliente", "Uma senha de acesso ao aplicativo do banco do cliente"], "correct": 1, "explanation": "O boleto bancário é um título de cobrança com código de barras que pode ser pago em bancos, lotéricas ou aplicativos bancários."}, {"module": 6, "q": "Qual é o papel do 'Gateway de Pagamento' em um e-commerce?", "opts": ["Carregar a caixa do produto do estoque até o caminhão de entrega", "Tirar foto dos produtos para colocar na vitrine da loja virtual", "Conectar a loja virtual aos bancos e operadoras para processar pagamentos com segurança", "Atender o telefone quando o cliente quer tirar dúvidas sobre a cor do produto"], "correct": 2, "explanation": "O Gateway de Pagamento é o sistema intermediário que valida dados de cartão e autoriza a cobrança em compras online."}, {"module": 6, "q": "Qual é a diferença básica entre pagar uma compra com Cartão de Débito e com Cartão de Crédito?", "opts": ["No débito o valor sai na hora da conta bancária; no crédito a cobrança vem na fatura mensal para pagar depois", "O cartão de débito é feito de papelão e o cartão de crédito é feito de metal", "O cartão de crédito só funciona se o cliente pagar com dinheiro vivo no caixa", "O cartão de débito acumula pontos para viajar e o cartão de crédito não pode ser usado na internet"], "correct": 0, "explanation": "No débito o dinheiro é deduzido imediatamente do saldo da conta; no crédito a compra é lançada na fatura com data de vencimento posterior."}, {"module": 7, "q": "O que significa a sigla LGPD no Brasil?", "opts": ["Lista Geral de Produtos Disponíveis no comércio", "Lei Geral de Proteção de Dados Pessoais", "Linha de Garantia para Defeitos de Programas", "Liga Global de Pesquisadores Digitais"], "correct": 1, "explanation": "A LGPD (Lei Geral de Proteção de Dados - Lei nº 13.709/2018) regulamenta o tratamento de dados pessoais no Brasil."}, {"module": 7, "q": "Segundo as normas de privacidade, qual das opções abaixo é considerada um 'Dado Pessoal'?", "opts": ["A cor da parede do quarto de uma escola pública", "O número do modelo do processador de um computador da loja", "A quantidade de cadeiras presentes em uma sala de aula", "O número do CPF e o nome completo de um estudante"], "correct": 3, "explanation": "Dado pessoal é qualquer informação que permita identificar, direta ou indiretamente, uma pessoa viva (ex: CPF, RG, nome, foto)."}, {"module": 7, "q": "O que é o 'Consentimento' do usuário no contexto do tratamento de dados pessoais?", "opts": ["A autorização livre, informada e clara dada pelo usuário para que a empresa use seus dados para fins específicos", "A obrigação do usuário de enviar uma foto do documento de identidade para qualquer site que visitar", "A permissão dada pelo governo para que empresas vendam telefones dos cidadãos sem avisar", "A instalação automática de jogos no celular do cliente sem que ele saiba"], "correct": 0, "explanation": "Consentimento é uma das hipóteses legais da LGPD: o titular concorda expressamente com a coleta e uso de suas informações."}, {"module": 7, "q": "Qual é um dos direitos assegurados aos cidadãos (titulares dos dados) pela LGPD?", "opts": ["Exigir a troca do computador da empresa caso ele esteja lento", "Navegar na internet sem precisar pagar a conta de energia elétrica", "Pedir o cancelamento da internet de vizinhos que fazem muito barulho", "Solicitar o acesso, a correção ou a exclusão de seus dados pessoais do cadastro de uma empresa"], "correct": 3, "explanation": "A LGPD garante que o cidadão possa saber quais dados a empresa possui sobre ele, podendo pedir correções ou eliminação."}, {"module": 7, "q": "Por que a conduta ética no tratamento de dados e no uso da tecnologia é essencial para as empresas?", "opts": ["Porque transmite confiança aos clientes e evita penalidades ou vazamentos prejudiciais", "Porque permite que a empresa envie mensagens de propaganda de madrugada para os clientes", "Porque torna desnecessário o uso de senhas ou sistemas de segurança em computadores", "Porque garante que o site da empresa nunca fique sem conexão com a internet"], "correct": 0, "explanation": "Práticas éticas garantem a confiança do consumidor, evitam escândalos de vazamento de dados e cumprem as exigências da lei."}, {"module": 8, "q": "Qual das alternativas apresenta uma boa prática para a criação de uma senha segura?", "opts": ["Usar a data do próprio aniversário ou a sequência simples '123456'", "Combinar letras maiúsculas, minúsculas, números e caracteres especiais, evitando informações pessoais", "Utilizar o próprio primeiro nome repetido três vezes", "Anotar a senha em um papel adesivo e colar no monitor do computador da escola"], "correct": 1, "explanation": "Senhas fortes contêm combinações variadas de caracteres e evitam dados fáceis de adivinhar como datas de nascimento e nomes."}, {"module": 8, "q": "O que é o ataque conhecido como 'Phishing' na internet?", "opts": ["Uma técnica de limpeza física do teclado e do mouse com pano seco", "Um tipo de computador superveloz utilizado para prever o tempo", "Um golpe em que criminosos usam e-mails ou mensagens falsas se passando por empresas conhecidas para roubar dados", "Um programa de edição de imagens gratuito muito popular entre designers"], "correct": 2, "explanation": "Phishing é uma fraude digital em que golpistas 'fisgam' dados da vítima usando mensagens ou páginas falsas que imitam instituições confiáveis."}, {"module": 8, "q": "Para que serve a realização do Backup de arquivos e dados em um sistema?", "opts": ["Para aumentar a velocidade da memória de vídeo do computador enquanto roda um jogo", "Para mudar a cor da área de trabalho do sistema operacional", "Para apagar permanentemente todas as fotos antigas salvas no celular", "Para guardar uma cópia de segurança dos dados em local separado e evitar perda em caso de imprevistos"], "correct": 3, "explanation": "O backup garante a recuperação de fotos, documentos e bancos de dados caso o equipamento estrague, seja roubado ou infectado por vírus."}, {"module": 8, "q": "Qual é a função principal de um software Antivírus instalado em um computador?", "opts": ["Identificar, bloquear e eliminar programas maliciosos (malware) que tentem infectar o sistema", "Melhorar a qualidade do som e dos alto-falantes do computador", "Aumentar o tamanho da tela do monitor automaticamente", "Digitar os trabalhos escolares no lugar do estudante"], "correct": 0, "explanation": "O antivírus varre arquivos e memória em busca de ameaças conhecidas, prevenindo danos e roubo de informações no aparelho."}, {"module": 8, "q": "O que faz um Firewall básico em uma rede de computadores?", "opts": ["Aumenta a velocidade de impressão de documentos em papel", "Funciona como uma barreira de segurança que monitora e filtra o tráfego de dados autorizados e não autorizados", "Resfria o processador do computador jogando ar frio", "Limpa o histórico de navegação da internet a cada cinco minutos"], "correct": 1, "explanation": "O Firewall analisa o tráfego de dados na rede e bloqueia acessos suspeitos ou não autorizados ao computador ou sistema."}];
+
+
+// ===== GAME DATA =====
+var MEMORY_DATA = {
+  1: [{term:'E-commerce', match:'Vender pela internet'},{term:'Startup', match:'Empresa jovem e inovadora'},{term:'Freelancer', match:'Trabalha por conta propria'},{term:'SaaS', match:'Software por assinatura'},{term:'Marketing', match:'Atrair e conquistar clientes'},{term:'Produto', match:'Algo que voce cria e vende'}],
+  4: [{term:'Startup', match:'Empresa jovem e inovadora'},{term:'Pitch', match:'Apresentacao rapida da ideia'},{term:'Investidor', match:'Quem aporta dinheiro'},{term:'Incubadora', match:'Apoia empresas iniciantes'},{term:'Aceleradora', match:'Mentoria intensa e investimento'},{term:'VC', match:'Fundo de capital de risco'}],
+  7: [{term:'LGPD', match:'Lei de protecao de dados'},{term:'Dados pessoais', match:'Informacoes que te identificam'},{term:'Consentimento', match:'Permissao para usar dados'},{term:'Privacidade', match:'Direito de nao ser vigiado'},{term:'Cookies', match:'Rastreiam sua navegacao'},{term:'Etica', match:'Fazer a coisa certa'}]
+};
+var SCRAMBLE_DATA = {
+  2: [{word:'COMMERCE', hint:'Comercio pela internet'},{word:'MARKETPLACE', hint:'Varios vendedores num so site'},{word:'CARRINHO', hint:'Onde voce junta os produtos'},{word:'LOGISTICA', hint:'Sistema de entrega'}],
+  5: [{word:'FREEMIUM', hint:'Gratis com recursos pagos'},{word:'ASSINATURA', hint:'Pagamento mensal recorrente'},{word:'COMISSAO', hint:'Porcentagem por venda'},{word:'MARKETPLACE', hint:'Conecta vendedores e compradores'}],
+  8: [{word:'SENHA', hint:'Sua primeira defesa digital'},{word:'BACKUP', hint:'Copia de seguranca'},{word:'PHISHING', hint:'Golpe por email falso'},{word:'ANTIVIRUS', hint:'Protege contra virus'}]
+};
+var TF_DATA = {
+  3: [{q:'Marketing digital e usar a internet para divulgar produtos.', a:true},{q:'SEO significa "Sistema de Email Online".', a:false, explanation:'SEO = Search Engine Optimization'},{q:'O Instagram e uma rede social usada por empresas para mostrar produtos.', a:true},{q:'Anuncios pagos sao um desperdicio de dinheiro.', a:false, explanation:'Anuncios pagos podem trazer mais vendas que o investimento!'},{q:'Influenciadores digitais nao podem ajudar empresas a vender mais.', a:false, explanation:'Influenciadores tem publico e podem divulgar produtos!'},{q:'Marketing de conteudo e criar materiais uteis para atrair pessoas.', a:true},{q:'O WhatsApp Business nao serve para atender clientes.', a:false, explanation:'O WhatsApp Business e muito usado para atendimento e vendas!'}],
+  6: [{q:'O PIX funciona apenas em horario comercial.', a:false, explanation:'O PIX funciona 24h, 7 dias por semana!'},{q:'Carteiras digitais funcionam como uma carteira virtual.', a:true},{q:'O PIX e gratuito para pessoas fisicas.', a:true},{q:'Um gateway de pagamento processa pagamentos em lojas virtuais.', a:true},{q:'Para usar o PIX voce precisa de uma chave PIX.', a:true},{q:'O cartao de credito foi inventado depois do PIX.', a:false, explanation:'Cartoes de credito existem ha muito mais tempo!'},{q:'O Mercado Pago e um exemplo de carteira digital.', a:true}]
+};
+
+// ===== LEVELS & BADGES =====
+var LEVELS = [{name:'Novato', minXp:0},{name:'Aprendiz', minXp:200},{name:'Estudante', minXp:400},{name:'Conhecedor', minXp:600},{name:'Especialista', minXp:800},{name:'Mestre dos Negocios', minXp:1000}];
+var BADGES = [{id:'m1',name:'Primeiro Passo',icon:'🌐'},{id:'m2',name:'Comerciante Digital',icon:'🛒'},{id:'m3',name:'Marqueteiro',icon:'📱'},{id:'m4',name:'Empreendedor',icon:'🚀'},{id:'m5',name:'Estrategista',icon:'💼'},{id:'m6',name:'Financeiro',icon:'💳'},{id:'m7',name:'Guardiao',icon:'🔒'},{id:'m8',name:'Protetor',icon:'🛡️'},{id:'final',name:'Mestre dos Negocios',icon:'🏆'}];
+
+// ===== CORE =====
+function startCourse(){var n=document.getElementById('nameInput').value.trim();if(!n){alert('Digite seu nome!');return;}student.name=n;initModules();saveState();goModules();}
+function initModules(){MODULES.forEach(function(m){if(!student.moduleProgress[m.id])student.moduleProgress[m.id]={slides:0,quiz:0,game:false,completed:false};});}
+function getLevel(){var lv=LEVELS[0];for(var i=0;i<LEVELS.length;i++)if(student.xp>=LEVELS[i].minXp)lv=LEVELS[i];student.level=LEVELS.indexOf(lv)+1;return lv;}
+function updateHeader(){document.getElementById('studentName').textContent=student.name||'Visitante';document.getElementById('xpBadge').textContent=student.xp+' XP';document.getElementById('levelBadge').textContent='Nv '+student.level+' - '+getLevel().name;var total=MODULES.length;var done=MODULES.filter(function(m){return student.moduleProgress[m.id]&&student.moduleProgress[m.id].completed;}).length;document.getElementById('progress-fill').style.width=(done/total*100)+'%';if(done===total)document.getElementById('finalBtn').style.display='inline-flex';}
+function goModules(){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});document.getElementById('screen-modules').classList.add('active');renderModules();updateHeader();saveState();}
+
+function renderModules(){var grid=document.getElementById('modulesGrid');grid.innerHTML='';var done=0;MODULES.forEach(function(m,idx){var p=student.moduleProgress[m.id]||{slides:0,quiz:0,game:false,completed:false};var prevOk=idx===0||(student.moduleProgress[MODULES[idx-1].id]&&student.moduleProgress[MODULES[idx-1].id].completed);var locked=false;if(p.completed)done++;var c=document.createElement('div');c.className='module-card'+(locked?' locked':'')+(p.completed?' completed':'');c.style.borderColor=locked?'#334155':m.color;var dots='';['slides','quiz','game'].forEach(function(s){if(s==='slides')dots+='<div class="module-progress-dot '+(p.slides>=m.slides.length?'done':(p.slides>0?'current':''))+'"></div>';else if(s==='quiz')dots+='<div class="module-progress-dot '+(p.quiz>=5?'done':(p.quiz>0?'current':''))+'"></div>';else dots+='<div class="module-progress-dot '+(p.game?'done':'')+'"></div>';});c.innerHTML='<div class="module-num">'+(idx+1)+'</div><div class="module-icon">'+(locked?'🔒':m.icon)+'</div><div class="module-title">'+m.title+'</div><div class="module-desc">'+m.desc+'</div><div class="module-progress">'+dots+'</div><div class="xp-reward">+'+m.xpReward+' XP</div>'+(p.completed?'<div class="badge">Concluido</div>':'')+(locked?'<div class="lock-overlay">🔒</div>':'');if(!locked)c.onclick=function(){openModule(m.id);};grid.appendChild(c);});document.getElementById('dashStats').innerHTML='<div class="dash-stat"><div class="stat-num" style="color:#0891b2">'+done+'/'+MODULES.length+'</div><div class="stat-label">Modulos Concluidos</div></div><div class="dash-stat"><div class="stat-num" style="color:#d97706">'+student.xp+'</div><div class="stat-label">XP Total</div></div><div class="dash-stat"><div class="stat-num" style="color:#7c3aed">'+getLevel().name+'</div><div class="stat-label">Nivel Atual</div></div><div class="dash-stat"><div class="stat-num" style="color:#059669">'+student.badges.length+'</div><div class="stat-label">Conquistas</div></div>';}
+
+var currentSlideIdx=0, quizCurrentIdx=0, quizCorrectCount=0;
+function openModule(id){student.currentModule=id;var mod=MODULES[id-1];var p=student.moduleProgress[id];document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});document.getElementById('screen-module').classList.add('active');if(p.slides<mod.slides.length){renderSlides(mod);appendGlossary(mod.id);}else if(p.quiz<5){renderQuiz(mod);appendGlossary(mod.id);}else if(!p.game){renderGame(mod);appendGlossary(mod.id);}else renderModuleComplete(mod);updateHeader();saveState();}
+
+function renderSlides(mod){currentSlideIdx=student.moduleProgress[mod.id].slides;var c=document.getElementById('moduleContent');c.innerHTML='<div class="module-header"><button class="back-btn" onclick="goModules()">Voltar</button><div class="icon">'+mod.icon+'</div><h2>'+mod.title+'</h2></div><div class="slide-container"><div id="slidesWrapper"></div><div class="slide-nav"><button class="slide-btn slide-btn-prev" id="prevBtn" onclick="prevSlide('+mod.id+')">Anterior</button><div class="slide-dots" id="slideDots"></div><button class="slide-btn slide-btn-next" id="nextBtn" onclick="nextSlide('+mod.id+')">Proximo</button></div></div>';var w=document.getElementById('slidesWrapper');mod.slides.forEach(function(s,i){var d=document.createElement('div');d.className='slide-content'+(i===currentSlideIdx?' active':'');d.id='slide'+i;d.innerHTML='<div class="slide-title">'+s.title+'</div>'+s.content;w.appendChild(d);});var dots=document.getElementById('slideDots');mod.slides.forEach(function(s,i){var d=document.createElement('div');d.className='slide-dot'+(i===currentSlideIdx?' active':'');d.onclick=function(){goToSlide(mod.id,i);};dots.appendChild(d);});updateSlideNav(mod);autoAddTooltips();}
+function updateSlideNav(mod){var p=document.getElementById('prevBtn'),n=document.getElementById('nextBtn');if(!p||!n)return;p.disabled=currentSlideIdx===0;if(currentSlideIdx===mod.slides.length-1)n.textContent='Finalizar Slides';else n.textContent='Proximo';}
+function goToSlide(id,idx){var mod=MODULES[id-1];currentSlideIdx=idx;document.querySelectorAll('.slide-content').forEach(function(s){s.classList.remove('active')});document.getElementById('slide'+idx).classList.add('active');document.querySelectorAll('.slide-dot').forEach(function(d,i){d.classList.toggle('active',i===idx)});updateSlideNav(mod);}
+function nextSlide(id){var mod=MODULES[id-1];if(currentSlideIdx<mod.slides.length-1){currentSlideIdx++;goToSlide(id,currentSlideIdx);if(currentSlideIdx>student.moduleProgress[id].slides){student.moduleProgress[id].slides=currentSlideIdx;saveState();}}else{student.moduleProgress[id].slides=mod.slides.length;showXpPopup(20,'Slides concluidos!');saveState();openModule(id);}}
+function prevSlide(id){var mod=MODULES[id-1];if(currentSlideIdx>0){currentSlideIdx--;goToSlide(id,currentSlideIdx);}}
+
+function renderQuiz(mod){quizCurrentIdx=0;quizCorrectCount=0;document.getElementById('moduleContent').innerHTML='<div class="module-header"><button class="back-btn" onclick="goModules()">Voltar</button><div class="icon">'+mod.icon+'</div><h2>'+mod.title+' - Quiz</h2></div><div class="quiz-container"><div id="quizContent"></div></div>';renderQuizQuestion(mod);setTimeout(autoAddTooltips,50);}
+function getQuizQuestions(mid){if(!QUIZ_QUESTIONS)return[];return QUIZ_QUESTIONS.filter(function(q){return q.module===mid;});}
+function renderQuizQuestion(mod){var qs=getQuizQuestions(mod.id);if(qs.length===0){student.moduleProgress[mod.id].quiz=5;saveState();openModule(mod.id);return;}var q=qs[quizCurrentIdx];var total=Math.min(5,qs.length);var c=document.getElementById('quizContent');var dots='';for(var i=0;i<total;i++)dots+='<div class="quiz-prog-dot '+(i<quizCurrentIdx?(student.quizScores[mod.id+'-'+i]?'done':'wrong'):'')+(i===quizCurrentIdx?'current':'')+'"></div>';var opts='';var L=['A','B','C','D'];q.opts.forEach(function(o,i){opts+='<div class="quiz-opt" onclick="answerQuiz('+mod.id+','+i+')"><span class="opt-letter">'+L[i]+'</span>'+o+'</div>';});c.innerHTML='<div class="quiz-progress">'+dots+'</div><div class="quiz-question">Pergunta '+(quizCurrentIdx+1)+' de '+total+':<br>'+q.q+'</div><div class="quiz-options">'+opts+'</div><div class="quiz-feedback" id="quizFeedback"></div><div class="btn-row" id="quizNextBtn" style="display:none"></div>';}
+function answerQuiz(mid,idx){var mod=MODULES[mid-1];var qs=getQuizQuestions(mid);var q=qs[quizCurrentIdx];var total=Math.min(5,qs.length);document.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.add('disabled')});var fb=document.getElementById('quizFeedback');var nb=document.getElementById('quizNextBtn');if(idx===q.correct){document.querySelectorAll('.quiz-opt')[idx].classList.add('correct');quizCorrectCount++;student.quizScores[mid+'-'+quizCurrentIdx]=true;fb.className='quiz-feedback show correct';fb.innerHTML='Parabens! +20 XP<br>'+(q.explanation||'');addXp(20);playSound(true);}else{document.querySelectorAll('.quiz-opt')[idx].classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.correct].classList.add('reveal');student.quizScores[mid+'-'+quizCurrentIdx]=false;fb.className='quiz-feedback show wrong';fb.innerHTML='Errou! A resposta certa e '+(q.explanation||['A','B','C','D'][q.correct]);playSound(false);}var last=quizCurrentIdx>=total-1;nb.innerHTML='<button class="btn '+(last?'btn-green':'btn-primary')+'" onclick="nextQuiz('+mid+')">'+(last?'Finalizar Quiz':'Proxima Pergunta')+'</button>';nb.style.display='flex';student.moduleProgress[mid].quiz=quizCurrentIdx+1;saveState();}
+function nextQuiz(mid){var mod=MODULES[mid-1];var qs=getQuizQuestions(mid);var total=Math.min(5,qs.length);if(quizCurrentIdx<total-1){quizCurrentIdx++;renderQuizQuestion(mod);}else{student.moduleProgress[mid].quiz=5;showXpPopup(quizCorrectCount*20,'Quiz concluido!');saveState();openModule(mid);}}
+
+// ===== GAMES =====
+function renderGame(mod){document.getElementById('moduleContent').innerHTML='<div class="module-header"><button class="back-btn" onclick="goModules()">Voltar</button><div class="icon">'+mod.icon+'</div><h2>'+mod.title+' - Jogo</h2></div><div id="gameArea"></div>';if(mod.game==='memory')renderMemoryGame(mod);else if(mod.game==='scramble')renderScrambleGame(mod);else if(mod.game==='truefalse')renderTrueFalseGame(mod);}
+
+// MEMORY GAME
+var memoryCards=[],memoryFlipped=[],memoryMatched=0;
+function renderMemoryGame(mod){var data=MEMORY_DATA[mod.id]||MEMORY_DATA[1];memoryMatched=0;var cards=[];data.forEach(function(p){cards.push({text:p.term,pair:p.match,matched:false});cards.push({text:p.match,pair:p.term,matched:false});});cards.sort(function(){return Math.random()-0.5});memoryCards=cards;memoryFlipped=[];document.getElementById('gameArea').innerHTML='<div class="game-container"><div class="game-title">Jogo da Memoria</div><div class="game-desc">Conecte cada termo com sua definicao!</div><div class="game-instruction">Encontre todos os '+data.length+' pares!</div><div class="memory-grid" id="memoryGrid"></div><div style="margin-top:20px;font-size:24px;font-weight:700;color:#d97706" id="memoryScore">Pares: 0/'+data.length+'</div></div>';renderMemoryCards();setTimeout(autoAddTooltips,50);}
+function renderMemoryCards(){var g=document.getElementById('memoryGrid');g.innerHTML='';memoryCards.forEach(function(c,i){var d=document.createElement('div');d.className='memory-card'+(c.matched?' matched':'')+(memoryFlipped.indexOf(i)!==-1?' flipped':'');d.textContent=(c.matched||memoryFlipped.indexOf(i)!==-1)?c.text:'?';if(!c.matched&&memoryFlipped.indexOf(i)===-1)d.onclick=function(){flipMemory(i);};g.appendChild(d);});}
+function flipMemory(i){if(memoryFlipped.length>=2)return;if(memoryFlipped.indexOf(i)!==-1)return;if(memoryCards[i].matched)return;memoryFlipped.push(i);renderMemoryCards();if(memoryFlipped.length===2)setTimeout(checkMemory,600);}
+function checkMemory(){var c1=memoryCards[memoryFlipped[0]],c2=memoryCards[memoryFlipped[1]];if(c1.pair===c2.text&&c1.text===c2.pair){memoryCards[memoryFlipped[0]].matched=true;memoryCards[memoryFlipped[1]].matched=true;memoryMatched++;addXp(10);playSound(true);document.getElementById('memoryScore').textContent='Pares: '+memoryMatched+'/'+(memoryCards.length/2);if(memoryMatched===memoryCards.length/2)setTimeout(function(){completeGame(student.currentModule);},800);}else{playSound(false);}memoryFlipped=[];renderMemoryCards();}
+
+// SCRAMBLE GAME
+var scrambleIdx=0,scrambleSolved=0;
+function renderScrambleGame(mod){var data=SCRAMBLE_DATA[mod.id]||SCRAMBLE_DATA[2];scrambleIdx=0;scrambleSolved=0;renderScrambleQ(mod,data);setTimeout(autoAddTooltips,50);}
+function renderScrambleQ(mod,data){var total=data.length;if(scrambleIdx>=total){completeGame(mod.id);return;}var item=data[scrambleIdx];var scr=item.word.split('').sort(function(){return Math.random()-0.5}).join('');if(scr===item.word)scr=item.word.split('').reverse().join('');document.getElementById('gameArea').innerHTML='<div class="game-container"><div class="game-title">Descubra a Palavra</div><div class="game-desc">Palavra '+(scrambleIdx+1)+' de '+total+'</div><div class="game-instruction">'+item.hint+'</div><div class="scramble-word">'+scr+'</div><input type="text" class="scramble-input" id="scrambleInput" placeholder="Digite a resposta..." onkeypress="if(event.key===\'Enter\')checkScramble('+mod.id+')"><div class="scramble-feedback" id="scrambleFeedback"></div><div class="btn-row"><button class="btn btn-gold" onclick="checkScramble('+mod.id+')">Responder</button></div><div style="margin-top:16px;font-size:18px;font-weight:700;color:#d97706">Resolvidas: '+scrambleSolved+'/'+total+'</div></div>';document.getElementById('scrambleInput').focus();}
+function checkScramble(mid){var mod=MODULES[mid-1];var data=SCRAMBLE_DATA[mid]||SCRAMBLE_DATA[2];var inp=document.getElementById('scrambleInput').value.trim().toUpperCase();var ans=data[scrambleIdx].word.toUpperCase();var fb=document.getElementById('scrambleFeedback');if(inp===ans){fb.style.color='#059669';fb.textContent='Parabens! +10 XP';scrambleSolved++;addXp(10);playSound(true);scrambleIdx++;setTimeout(function(){renderScrambleQ(mod,data);},1000);}else{fb.style.color='#dc2626';fb.textContent='Errou! Tente novamente.';playSound(false);}}
+
+// TRUE/FALSE GAME
+var tfIdx=0,tfCorrect=0;
+function renderTrueFalseGame(mod){var data=TF_DATA[mod.id]||TF_DATA[3];tfIdx=0;tfCorrect=0;renderTFQ(mod,data);setTimeout(autoAddTooltips,50);}
+function renderTFQ(mod,data){var total=data.length;if(tfIdx>=total){completeGame(mod.id);return;}var item=data[tfIdx];document.getElementById('gameArea').innerHTML='<div class="game-container"><div class="game-title">Verdadeiro ou Falso</div><div class="game-desc">Pergunta '+(tfIdx+1)+' de '+total+'</div><div class="tf-game"><div class="tf-question">'+item.q+'</div><div class="tf-buttons"><button class="tf-btn true" onclick="answerTF('+mod.id+',true)">Verdadeiro</button><button class="tf-btn false" onclick="answerTF('+mod.id+',false)">Falso</button></div><div class="tf-result" id="tfResult"></div></div><div style="margin-top:16px;font-size:18px;font-weight:700;color:#d97706">Acertos: '+tfCorrect+'/'+total+'</div></div>';}
+function answerTF(mid,ans){var mod=MODULES[mid-1];var data=TF_DATA[mid]||TF_DATA[3];var item=data[tfIdx];var r=document.getElementById('tfResult');if(ans===item.a){r.style.color='#059669';r.textContent='Correto! '+(item.explanation||'');tfCorrect++;addXp(10);playSound(true);}else{r.style.color='#dc2626';r.textContent='Errou! '+(item.explanation||'A resposta era '+(item.a?'Verdadeiro':'Falso'));playSound(false);}document.querySelectorAll('.tf-btn').forEach(function(b){b.disabled=true;b.style.opacity='0.5';});tfIdx++;setTimeout(function(){renderTFQ(mod,data);},1500);}
+
+function completeGame(id){var mod=MODULES[id-1];student.moduleProgress[id].game=true;student.moduleProgress[id].completed=true;var bid='m'+id;if(student.badges.indexOf(bid)===-1)student.badges.push(bid);addXp(50);showXpPopup(50,'Modulo concluido!');saveState();renderModuleComplete(mod);updateHeader();}
+function renderModuleComplete(mod){document.getElementById('moduleContent').innerHTML='<div class="module-complete" style="border-color:'+mod.color+'"><div class="badge-icon">'+mod.icon+'</div><h2>Modulo Concluido!</h2><div style="font-size:22px;font-weight:700;color:'+mod.color+';margin:8px 0">'+mod.title+'</div><div class="stars">⭐⭐⭐</div><div class="xp-gained">+'+mod.xpReward+' XP ganhos!</div><div style="font-size:18px;color:#64748b;margin:12px 0">Conquista: <b>'+mod.icon+' '+BADGES[mod.id-1].name+'</b></div><div class="btn-row">'+(mod.id<MODULES.length?'<button class="btn btn-green" onclick="openModule('+(mod.id+1)+')">Proximo Modulo: '+MODULES[mod.id].icon+' '+MODULES[mod.id].title+'</button>':'<button class="btn btn-gold" onclick="startFinalChallenge()">Desafio Final</button>')+'<button class="btn btn-secondary" onclick="goModules()">Ver Trilha</button></div></div>';}
+
+// FINAL CHALLENGE
+var finalIdx=0,finalCorrect=0,finalTime=0,finalTimer=null,finalQuestions=[];
+function startFinalChallenge(){if(!QUIZ_QUESTIONS)return;finalIdx=0;finalCorrect=0;finalTime=0;document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});document.getElementById('screen-final').classList.add('active');document.getElementById('finalContent').innerHTML='<div class="final-arena"><div class="final-title">Arena de Negocios</div><div style="font-size:22px;color:#64748b;margin:12px 0">Desafio Final - 10 perguntas relampago!</div><div style="font-size:18px;color:#64748b">Cada acerto vale 30 XP!</div><div class="btn-row"><button class="btn btn-gold" onclick="startFinalQ()">Comecar Desafio</button><button class="btn btn-secondary" onclick="goModules()">Voltar</button></div></div>' + renderFullGlossary();}
+function startFinalQ(){finalQuestions=QUIZ_QUESTIONS.slice().sort(function(){return Math.random()-0.5}).slice(0,10);finalIdx=0;finalCorrect=0;finalTime=60;renderFinalQ();setTimeout(autoAddTooltips,50);}
+function renderFinalQ(){if(finalIdx>=finalQuestions.length||finalTime<=0){finishFinal();return;}var q=finalQuestions[finalIdx];var L=['A','B','C','D'];var opts='';q.opts.forEach(function(o,i){opts+='<div class="quiz-opt" onclick="answerFinal('+i+','+q.correct+')"><span class="opt-letter">'+L[i]+'</span>'+o+'</div>';});document.getElementById('finalContent').innerHTML='<div class="final-arena"><div class="final-title">Arena de Negocios</div><div class="final-timer" id="finalTimer">'+finalTime+'s</div><div class="final-score">Pergunta '+(finalIdx+1)+'/'+finalQuestions.length+' | Acertos: '+finalCorrect+'</div><div class="final-question">'+q.q+'</div><div class="quiz-options">'+opts+'</div><div class="quiz-feedback" id="finalFeedback"></div></div>';if(finalTimer)clearInterval(finalTimer);finalTimer=setInterval(function(){finalTime--;var t=document.getElementById('finalTimer');if(t)t.textContent=finalTime+'s';if(finalTime<=0){clearInterval(finalTimer);renderFinalQ();}},1000);}
+function answerFinal(idx,correct){clearInterval(finalTimer);document.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.add('disabled')});var fb=document.getElementById('finalFeedback');if(idx===correct){document.querySelectorAll('.quiz-opt')[idx].classList.add('correct');finalCorrect++;addXp(30);fb.className='quiz-feedback show correct';fb.innerHTML='+30 XP!';playSound(true);}else{document.querySelectorAll('.quiz-opt')[idx].classList.add('wrong');document.querySelectorAll('.quiz-opt')[correct].classList.add('reveal');fb.className='quiz-feedback show wrong';fb.innerHTML='A resposta era '+['A','B','C','D'][correct];playSound(false);}finalIdx++;setTimeout(renderFinalQ,1500);}
+function finishFinal(){clearInterval(finalTimer);var xp=finalCorrect*30;var newBadge=student.badges.indexOf('final')===-1;if(newBadge)student.badges.push('final');var stars=finalCorrect>=8?'⭐⭐⭐':(finalCorrect>=5?'⭐⭐':'⭐');var msg=finalCorrect>=8?'Mandou bem! Voce e um Mestre dos Negocios!':(finalCorrect>=5?'Muito bom! Voce aprendeu bastante!':'Continue estudando!');document.getElementById('finalContent').innerHTML='<div class="final-arena"><div class="final-title">Desafio Concluido!</div><div style="font-size:60px;margin:20px 0">'+stars+'</div><div class="final-score">Voce acertou '+finalCorrect+' de '+finalQuestions.length+'!</div><div style="font-size:24px;font-weight:700;color:#d97706;margin:12px 0">+'+xp+' XP!</div><div style="font-size:20px;color:#64748b;margin:16px 0">'+msg+'</div>'+(newBadge?'<div style="color:#059669;margin:12px 0">Nova conquista: Mestre dos Negocios</div>':'')+'<div style="font-size:22px;font-weight:700;margin:20px 0">XP Total: '+student.xp+' | '+getLevel().name+'</div><div class="btn-row"><button class="btn btn-primary" onclick="goModules()">Ver Trilha</button><button class="btn btn-gold" onclick="startFinalChallenge()">Jogar Novamente</button></div></div>';saveState();updateHeader();}
+
+// XP, SOUND, SAVE
+function addXp(n){student.xp+=n;getLevel();updateHeader();}
+function showXpPopup(n,t){var p=document.createElement('div');p.className='xp-popup';p.textContent='+'+n+' XP - '+t;document.body.appendChild(p);setTimeout(function(){p.remove();},1500);}
+var audioCtx;function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+function playSound(ok){try{var ctx=getCtx();if(ok){[523.25,659.25,783.99].forEach(function(f,i){var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=f;o.type='sine';var t=ctx.currentTime+i*0.12;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.25,t+0.02);g.gain.linearRampToValueAtTime(0,t+0.25);o.start(t);o.stop(t+0.25);});}else{var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=200;o.type='sawtooth';g.gain.setValueAtTime(0.2,ctx.currentTime);g.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);o.start();o.stop(ctx.currentTime+0.3);}}catch(e){}}
+function saveState(){try{localStorage.setItem('aula_negocios',JSON.stringify(student));}catch(e){}}
+function loadState(){try{var s=JSON.parse(localStorage.getItem('aula_negocios'));if(s&&s.name){student=s;initModules();return true;}}catch(e){}return false;}
+
+// KEYBOARD
+document.addEventListener('keydown',function(e){if(document.getElementById('screen-module').classList.contains('active')){if(e.key==='ArrowRight'){var n=document.getElementById('nextBtn');if(n&&!n.disabled)n.click();}else if(e.key==='ArrowLeft'){var p=document.getElementById('prevBtn');if(p&&!p.disabled)p.click();}}});
+
+
+var TERM_DEFS = {
+  "E-commerce": "Comércio eletrônico: comprar e vender produtos pela internet",
+  "B2C": "Business to Consumer: empresa vendendo para o consumidor final",
+  "B2B": "Business to Business: empresa vendendo para outra empresa",
+  "C2C": "Consumer to Consumer: pessoa vendendo diretamente para outra pessoa",
+  "Marketplace": "Plataforma que reúne vários vendedores num só site, como o Mercado Livre",
+  "SEO": "Search Engine Optimization: técnicas para aparecer nos primeiros resultados do Google",
+  "SaaS": "Software as a Service: software oferecido por assinatura mensal via internet",
+  "Freemium": "Modelo onde o básico é grátis e recursos avançados são pagos",
+  "Startup": "Empresa jovem que usa tecnologia para resolver um problema de forma inovadora",
+  "Pitch": "Apresentação curta (2-5 min) para convencer investidores a apostar na sua ideia",
+  "VC": "Venture Capital: fundos que investem dinheiro em startups com alto potencial",
+  "LGPD": "Lei Geral de Proteção de Dados: lei brasileira que protege seus dados pessoais",
+  "Phishing": "Golpe digital onde alguém finge ser uma empresa real para roubar seus dados",
+  "Firewall": "Sistema que bloqueia acessos não autorizados ao computador ou rede",
+  "Backup": "Cópia de segurança dos seus arquivos para não perder em caso de problema",
+  "Cookies": "Pequenos arquivos que rastreiam o que você faz nos sites",
+  "PIX": "Sistema de pagamento instantâneo do Banco Central, funciona 24h",
+  "Gateway de pagamento": "Sistema que processa pagamentos em lojas virtuais (ex: PagSeguro)",
+  "Carteiras Digitais": "Apps que guardam seu dinheiro virtualmente (ex: PicPay, Mercado Pago)",
+  "Incubadora": "Organização que dá espaço, mentoria e apoio para empresas iniciantes",
+  "Aceleradora": "Programa que investe dinheiro e mentoria intensa em startups por 3-6 meses",
+  "Investidor anjo": "Pessoa que investe dinheiro próprio em uma startup em troca de parte dela",
+  "Logística": "Sistema de organizar a entrega de produtos do vendedor até o comprador",
+  "Marketing Digital": "Conjunto de estratégias para divulgar produtos e atrair clientes pela internet",
+  "Influenciador": "Pessoa com muitos seguidores nas redes que divulga produtos para sua audiência",
+  "Anúncios pagos": "Pagar para seu anúncio aparecer para potenciais clientes (Google Ads, Meta Ads)",
+  "Marketing de conteúdo": "Criar textos, vídeos e posts úteis para atrair pessoas naturalmente",
+  "Confidencialidade": "Garantir que só pessoas autorizadas vejam os dados",
+  "Integridade": "Garantir que os dados não foram alterados ou corrompidos",
+  "Disponibilidade": "Garantir que os dados estão acessíveis quando precisar",
+  "Portabilidade": "Direito de levar seus dados de uma empresa para outra",
+  "Consentimento": "Permissão que você dá para uma empresa usar seus dados",
+  "Dados pessoais": "Informações que te identificam: nome, CPF, email, endereço, foto",
+  "Ética em TI": "Fazer a coisa certa na área de tecnologia, mesmo quando ninguém está olhando",
+  "Antivírus": "Programa que detecta e remove vírus do computador",
+  "Carrinho de compras": "Função da loja virtual onde você junta os produtos antes de pagar",
+  "Catálogo": "Lista de produtos com fotos, preços e descrições na loja virtual",
+  "Comissão": "Porcentagem que a plataforma cobra por cada venda realizada",
+  "Assinatura": "Pagamento mensal recorrente para usar um serviço (ex: Netflix)",
+  "Publicidade": "Vender espaço de anúncio para empresas (ex: Meta ganha com anúncios)",
+  "Produto": "Algo que é criado e vendido (ex: um app, um jogo, um software)",
+  "Serviço": "Algo que você faz para alguém (ex: formatar PC, criar site)",
+  "Freelancer": "Profissional que trabalha por conta própria, sem vínculo empregatício",
+  "Consultoria": "Serviço de dar conselhos e soluções para outras empresas"
+};
+
+// DOM walker: safely wrap difficult terms with tooltips in text nodes only
+function walkAndTooltips(node, terms){
+  if(node.nodeType === 3){ // TEXT_NODE
+    var text = node.textContent;
+    var found = false;
+    terms.forEach(function(term){
+      if(text.toLowerCase().indexOf(term.toLowerCase()) !== -1){
+        found = true;
+      }
+    });
+    if(!found) return;
+    // Build new HTML with tooltips
+    var html = '';
+    var remaining = text;
+    var used = [];
+    while(remaining.length > 0){
+      var bestIdx = -1, bestTerm = '', bestPos = -1;
+      terms.forEach(function(term){
+        if(used.indexOf(term) !== -1 && remaining.toLowerCase().indexOf(term.toLowerCase()) > remaining.length/2) return;
+        var pos = remaining.toLowerCase().indexOf(term.toLowerCase());
+        if(pos !== -1 && (bestPos === -1 || pos < bestPos)){
+          bestPos = pos;
+          bestTerm = term;
+          bestIdx = pos;
+        }
+      });
+      if(bestIdx === -1){
+        html += remaining;
+        break;
+      }
+      // Check if this term is already inside a tooltip span (parent check)
+      if(node.parentElement && node.parentElement.classList && node.parentElement.classList.contains('tooltip-term')){
+        html += remaining;
+        break;
+      }
+      html += remaining.substring(0, bestIdx);
+      var tip = TERM_DEFS[bestTerm].replace(/"/g, '&quot;');
+      var actualTerm = remaining.substr(bestIdx, bestTerm.length);
+      html += '<span class="tooltip-term" data-tip="' + tip + '">' + actualTerm + '</span>';
+      remaining = remaining.substring(bestIdx + bestTerm.length);
+      used.push(bestTerm);
+      if(used.length > 50) { html += remaining; break; } // safety limit
+    }
+    if(html !== text){
+      var span = document.createElement('span');
+      span.innerHTML = html;
+      node.parentNode.replaceChild(span, node);
+    }
+  } else if(node.nodeType === 1 && !node.classList.contains('tooltip-term') && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE'){
+    // ELEMENT_NODE - recurse but skip tooltip spans and scripts
+    var children = Array.prototype.slice.call(node.childNodes);
+    children.forEach(function(child){ walkAndTooltips(child, terms); });
+  }
+}
+
+function autoAddTooltips(){
+  var terms = Object.keys(TERM_DEFS).sort(function(a,b){return b.length - a.length;});
+  var targets = document.querySelectorAll('.slide-text, .slide-example, .slide-list li, .slide-title, .quiz-question, .quiz-opt span:not(.opt-letter), .tf-question, .game-desc, .game-instruction, .final-question, .scramble-word, .final-score, .tf-result, .quiz-feedback, .scramble-feedback, #memoryScore');
+  targets.forEach(function(el){
+    if(el.dataset.tipDone) return;
+    el.dataset.tipDone = '1';
+    walkAndTooltips(el, terms);
+  });
+}
+
+
+var GLOSSARY = {"1": [{"t": "Negocio em Informatica", "d": "Usar tecnologia para criar, vender ou gerenciar produtos e servicos"}, {"t": "Produto", "d": "Algo que voce cria e vende (ex: app, jogo, software)"}, {"t": "Servico", "d": "Algo que voce faz para alguem (ex: formatar PC, criar site)"}, {"t": "Freelancer", "d": "Profissional que trabalha por conta propria, sem patrao"}, {"t": "Consultoria", "d": "Servico de dar conselhos e solucoes para empresas"}, {"t": "Fintech", "d": "Empresa de tecnologia financeira (ex: Nubank, PicPay)"}, {"t": "TI", "d": "Tecnologia da Informacao - area da computacao"}], "2": [{"t": "E-commerce", "d": "Comercio eletronico: comprar e vender pela internet"}, {"t": "B2C", "d": "Business to Consumer: empresa vende para pessoa"}, {"t": "B2B", "d": "Business to Business: empresa vende para empresa"}, {"t": "C2C", "d": "Consumer to Consumer: pessoa vende para pessoa"}, {"t": "Marketplace", "d": "Plataforma com varios vendedores (ex: Mercado Livre)"}, {"t": "Carrinho de compras", "d": "Onde voce junta os produtos antes de pagar"}, {"t": "Catalogo", "d": "Lista de produtos com fotos e precos"}, {"t": "Logistica", "d": "Sistema de organizar a entrega dos produtos"}, {"t": "Avaliacoes", "d": "Comentarios e notas dos clientes sobre o produto"}], "3": [{"t": "Marketing Digital", "d": "Usar a internet para divulgar produtos e atrair clientes"}, {"t": "SEO", "d": "Search Engine Optimization: tecnicas para aparecer no Google"}, {"t": "Anuncios pagos", "d": "Pagar para seu anuncio aparecer (Google Ads, Meta Ads)"}, {"t": "Influenciador", "d": "Pessoa famosa nas redes que divulga produtos"}, {"t": "Marketing de conteudo", "d": "Criar posts uteis para atrair pessoas naturalmente"}, {"t": "Networking", "d": "Fazer contatos profissionais e construir relacoes"}, {"t": "Engajamento", "d": "Nivel de interacao das pessoas com seu conteudo"}, {"t": "Reach (Alcance)", "d": "Quantas pessoas viram seu conteudo"}], "4": [{"t": "Startup", "d": "Empresa jovem e inovadora que usa tecnologia"}, {"t": "Pitch", "d": "Apresentacao curta (2-5 min) para convencer investidores"}, {"t": "Investidor anjo", "d": "Pessoa que investe dinheiro proprio na startup"}, {"t": "Incubadora", "d": "Organizacao que da espaco e mentoria para iniciantes"}, {"t": "Aceleradora", "d": "Programa que investe e acelera startups em 3-6 meses"}, {"t": "VC (Venture Capital)", "d": "Fundo que investe em startups com alto potencial"}, {"t": "Elevator Pitch", "d": "Apresentacao em 30 segundos (como num elevador)"}, {"t": "Escalabilidade", "d": "Capacidade de crescer sem perder qualidade"}], "5": [{"t": "Modelo de Negocio", "d": "Forma como a empresa ganha dinheiro"}, {"t": "SaaS", "d": "Software as a Service: software por assinatura mensal"}, {"t": "Freemium", "d": "Basico gratis, recursos avancados pagos"}, {"t": "Marketplace", "d": "Conecta vendedores e compradores, cobra comissao"}, {"t": "Assinatura", "d": "Pagamento mensal recorrente (ex: Netflix)"}, {"t": "Comissao", "d": "Porcentagem cobrada por cada venda"}, {"t": "Publicidade", "d": "Vender espaco de anuncio (ex: Meta, Google)"}, {"t": "Receita recorrente", "d": "Dinheiro que entra todo mes de forma previsivel"}], "6": [{"t": "PIX", "d": "Pagamento instantaneo do Banco Central, 24h"}, {"t": "Carteira Digital", "d": "App que guarda dinheiro virtualmente (ex: PicPay)"}, {"t": "Gateway de Pagamento", "d": "Sistema que processa pagamentos online"}, {"t": "QR Code", "d": "Codigo de barras 2D usado para pagamentos"}, {"t": "Boleto", "d": "Documento de pagamento que vence em alguns dias"}, {"t": "Cartao de credito", "d": "Pague agora, quite depois (com juros)"}, {"t": "Cartao de debito", "d": "Desconta direto da sua conta na hora"}, {"t": "Tokenizacao", "d": "Substituir dados do cartao por um codigo de seguranca"}], "7": [{"t": "LGPD", "d": "Lei Geral de Protecao de Dados (Lei 13.709/2018)"}, {"t": "Dados pessoais", "d": "Informacoes que identificam voce (nome, CPF, email)"}, {"t": "Consentimento", "d": "Permissao que voce da para usar seus dados"}, {"t": "Cookies", "d": "Arquivos que rastreiam o que voce faz nos sites"}, {"t": "Privacidade", "d": "Direito de nao ter seus dados compartilhados"}, {"t": "Portabilidade", "d": "Direito de levar seus dados para outra empresa"}, {"t": "Titular dos dados", "d": "Voce! O dono dos dados pessoais"}, {"t": "Controlador", "d": "Empresa que decide como seus dados sao usados"}, {"t": "Etica", "d": "Fazer a coisa certa, mesmo sem ninguem olhando"}], "8": [{"t": "Seguranca da Informacao", "d": "Proteger dados contra roubo, perda e alteracao"}, {"t": "Confidencialidade", "d": "So pessoas autorizadas veem os dados"}, {"t": "Integridade", "d": "Dados nao podem ser alterados sem permissao"}, {"t": "Disponibilidade", "d": "Dados sempre acessiveis quando precisar"}, {"t": "Phishing", "d": "Golpe por email ou site falso para roubar dados"}, {"t": "Backup", "d": "Copia de seguranca dos seus arquivos"}, {"t": "Firewall", "d": "Sistema que bloqueia acessos nao autorizados"}, {"t": "Antivirus", "d": "Programa que detecta e remove virus"}, {"t": "Hacker", "d": "Pessoa que invade sistemas (pode ser bom ou mau)"}, {"t": "Criptografia", "d": "Embaralhar dados para que so quem tem a chave leia"}]};
+
+function renderGlossary(moduleId){
+  var terms = GLOSSARY[moduleId] || [];
+  if(terms.length === 0) return '';
+  var items = terms.map(function(item){
+    return '<div class="glossary-item"><span class="g-term">' + item.t + '</span>: <span class="g-def">' + item.d + '</span></div>';
+  }).join('');
+  return '<div class="glossary"><div class="glossary-title" onclick="toggleGlossary(this)">📖 Glossário deste módulo <span class="glossary-toggle">(clique para abrir/fechar)</span></div><div class="glossary-list">' + items + '</div></div>';
+}
+
+function toggleGlossary(el){
+  var list = el.nextElementSibling;
+  list.classList.toggle('open');
+  var toggle = el.querySelector('.glossary-toggle');
+  toggle.textContent = list.classList.contains('open') ? '(clique para fechar)' : '(clique para abrir/fechar)';
+}
+
+function appendGlossary(moduleId){
+  var g = renderGlossary(moduleId);
+  var container = document.getElementById('moduleContent');
+  if(!container) return;
+  var old = container.querySelector('.glossary');
+  if(old) old.remove();
+  var div = document.createElement('div');
+  div.innerHTML = g;
+  container.appendChild(div.firstChild);
+}
+
+
+function renderFullGlossary(){
+  var allItems = '';
+  Object.keys(GLOSSARY).forEach(function(key){
+    GLOSSARY[key].forEach(function(item){
+      allItems += '<div class="glossary-item"><span class="g-term">' + item.t + '</span>: <span class="g-def">' + item.d + '</span></div>';
+    });
+  });
+  return '<div class="glossary" style="max-width:800px;margin-top:20px"><div class="glossary-title" onclick="toggleGlossary(this)">📖 Glossário Completo (' + Object.keys(GLOSSARY).reduce(function(a,k){return a+GLOSSARY[k].length;},0) + ' termos) <span class="glossary-toggle">(clique para abrir/fechar)</span></div><div class="glossary-list">' + allItems + '</div></div>';
+}
+
+// INIT
+if(loadState()){document.getElementById('nameInput').value=student.name;updateHeader();}
+</script>
+</body>
+</html>
