@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>História Completa de Carneiros - AL (Livro Didático em A5)</title>
+  <style>
+    :root {
+      --primary: #1a4d2e; --primary-light: #f0fdf4;
+      --secondary: #0284c7; --accent: #d97706;
+      --dark: #1f2937; --light-border: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 18px; line-height: 1.6; color: var(--dark);
+      background-color: #f8fafc;
+    }
+
+    /* ===== PRINT MODE - each .page = exactly one A5 sheet ===== */
+    @media print {
+      @page { size: A5; margin: 0; }
+      .no-print { display: none !important; }
+      body { background: white !important; margin: 0; padding: 0; }
+
+      .page {
+        page-break-after: always;
+        break-after: page;
+        width: 148mm;
+        height: 210mm;
+        padding: 14mm 14mm 14mm 14mm;
+        box-sizing: border-box;
+        margin: 0;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+
+      .page-header {
+        font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.5px; color: #64748b;
+        border-bottom: 1px solid #cbd5e1;
+        padding-bottom: 4px; margin-bottom: 8px;
+        display: flex; justify-content: space-between;
+        font-weight: 600; flex-shrink: 0;
+      }
+
+      .page-content {
+        flex: 1; overflow: hidden;
+        padding-bottom: 4mm;
+      }
+
+      .page-footer {
+        margin-top: auto;
+        border-top: 1px solid #cbd5e1;
+        padding-top: 4px;
+        display: flex; justify-content: space-between;
+        align-items: center;
+        font-size: 10px; color: #64748b;
+        font-weight: 600; flex-shrink: 0;
+      }
+
+      /* Cover page */
+      .cover-page {
+        height: 210mm; overflow: hidden; padding: 8mm;
+        justify-content: center; align-items: center;
+      }
+      .cover-page .page-header { display: none !important; }
+      .cover-page .page-content {
+        flex: 0 1 auto; overflow: hidden;
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center; width: 100%;
+      }
+      .cover-page .page-footer {
+        margin-top: 0; position: absolute;
+        bottom: 6mm; left: 14mm; right: 14mm;
+      }
+
+      /* Compact cover */
+      .cover-border { padding: 10px; border-width: 2px; }
+      .cover-badge { font-size: 10px; padding: 4px 12px; margin-bottom: 8px; }
+      .cover-title { font-size: 26px; margin-bottom: 4px; }
+      .cover-subtitle { font-size: 15px; margin-bottom: 8px; }
+      .cover-divider { font-size: 16px; margin: 5px 0; }
+      .cover-svg { max-width: 140px; margin: 5px 0; }
+      .cover-meta { font-size: 12px; margin-top: 5px; }
+      .cover-meta p { font-size: 12px; margin-bottom: 3px; }
+      .cover-footer-info { font-size: 11px; margin-top: 8px; }
+
+      /* Compact fonts for print to fit A5 */
+      h1 { font-size: 26px !important; margin-bottom: 8px !important; }
+      h2 { font-size: 21px !important; margin-top: 6px !important; margin-bottom: 6px !important; padding-bottom: 3px !important; }
+      h3 { font-size: 18px !important; margin-top: 6px !important; margin-bottom: 4px !important; }
+      p { font-size: 15px !important; margin-bottom: 6px !important; line-height: 1.45 !important; }
+      ul, ol { font-size: 15px !important; margin-top: 2px !important; margin-bottom: 6px !important; padding-left: 20px !important; }
+      li { margin-bottom: 2px !important; }
+      .box-callout, .box-quiz, .box-curiosity { padding: 6px 10px !important; margin: 6px 0 !important; font-size: 14px !important; }
+      .box-title { font-size: 15px !important; margin-bottom: 2px !important; }
+      .info-table { font-size: 14px !important; margin: 6px 0 !important; }
+      .info-table th, .info-table td { padding: 4px 6px !important; }
+      .toc-item { font-size: 14px !important; padding: 3px 0 !important; }
+    }
+
+    /* ===== SCREEN MODE ===== */
+    @media screen {
+      .page {
+        max-width: 148mm; min-height: 210mm;
+        margin: 15px auto; background: white;
+        padding: 14mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        border-radius: 4px; position: relative;
+        display: flex; flex-direction: column;
+        border: 1px solid #e2e8f0;
+      }
+      .cover-page { justify-content: center; align-items: center; text-align: center; }
+      .cover-page .page-header { display: none; }
+      .page-content { flex: 1; }
+      .page-footer {
+        margin-top: auto;
+        border-top: 1.5px solid #e2e8f0; padding-top: 6px;
+        display: flex; justify-content: space-between;
+        align-items: center; font-size: 13px;
+        color: #64748b; font-weight: 600; flex-shrink: 0;
+      }
+      .page-header {
+        font-size: 13px; text-transform: uppercase;
+        letter-spacing: 0.5px; color: #64748b;
+        border-bottom: 1.5px solid #e2e8f0;
+        padding-bottom: 6px; margin-bottom: 14px;
+        display: flex; justify-content: space-between;
+        font-weight: 600; flex-shrink: 0;
+      }
+    }
+
+    /* Top Bar */
+    .top-bar { position: sticky; top: 0; z-index: 9999; background: #0f172a; color: #f8fafc; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .top-bar-title { font-weight: 700; font-size: 16px; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+    .top-bar-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .btn-action { background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; }
+    .btn-action:hover { background: #0369a1; }
+    .btn-print { background: #16a34a; }
+    .btn-print:hover { background: #15803d; }
+    select.nav-select { background: #1e293b; color: white; border: 1px solid #475569; padding: 8px 12px; border-radius: 6px; font-size: 14px; outline: none; }
+
+    /* Typography (screen defaults) */
+    h1 { font-size: 30px; color: var(--primary); line-height: 1.25; margin-top: 0; margin-bottom: 10px; }
+    h2 { font-size: 24px; color: #166534; line-height: 1.3; margin-top: 10px; margin-bottom: 10px; border-bottom: 2px solid #bbf7d0; padding-bottom: 4px; }
+    h3 { font-size: 20px; color: #1e3a8a; margin-top: 10px; margin-bottom: 6px; }
+    p { font-size: 17px; margin-bottom: 10px; text-align: justify; text-justify: inter-word; }
+    ul, ol { font-size: 17px; margin-top: 4px; margin-bottom: 10px; padding-left: 22px; }
+    li { margin-bottom: 4px; }
+
+    /* Callout Boxes */
+    .box-callout { background: #f0fdf4; border-left: 5px solid #16a34a; padding: 8px 12px; margin: 10px 0; border-radius: 0 6px 6px 0; font-size: 16px; }
+    .box-quiz { background: #eff6ff; border-left: 5px solid #2563eb; padding: 8px 12px; margin: 10px 0; border-radius: 0 6px 6px 0; font-size: 16px; }
+    .box-curiosity { background: #fffbeb; border-left: 5px solid #d97706; padding: 8px 12px; margin: 10px 0; border-radius: 0 6px 6px 0; font-size: 16px; }
+    .box-title { font-weight: 700; font-size: 17px; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+
+    /* Cover */
+    .cover-border { border: 3px double #1a4d2e; padding: 15px; border-radius: 8px; background: #ffffff; }
+    .cover-inner { display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; }
+    .cover-badge { background: #1a4d2e; color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; }
+    .cover-title { font-size: 32px; color: #1a4d2e; font-weight: 800; margin-bottom: 8px; line-height: 1.15; }
+    .cover-subtitle { font-size: 18px; color: #0369a1; font-weight: 600; margin-bottom: 12px; }
+    .cover-divider { color: #d97706; font-size: 18px; margin: 8px 0; }
+    .cover-svg { width: 100%; max-width: 200px; margin: 8px 0; }
+    .cover-meta { font-size: 15px; color: #334155; margin-top: 8px; }
+    .cover-footer-info { font-size: 13px; font-weight: 700; color: #1a4d2e; margin-top: 12px; }
+
+    /* Back Cover */
+    .back-cover-page { background: #f1f5f9; }
+    .back-inner { padding: 10px; }
+    .back-header { text-align: center; border-bottom: 2px solid #1a4d2e; padding-bottom: 10px; margin-bottom: 15px; }
+    .back-tagline { font-style: italic; color: #0369a1; font-size: 17px; }
+    .catalog-card { border: 1px solid #94a3b8; padding: 12px; background: #f8fafc; font-size: 15px; margin-top: 15px; border-radius: 4px; }
+    .catalog-card h4 { margin-top: 0; font-size: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; color: #1e293b; }
+    .back-credits { text-align: center; margin-top: 20px; font-size: 15px; color: #475569; }
+
+    /* Table */
+    .info-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 16px; }
+    .info-table th, .info-table td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; }
+    .info-table th { background: #f1f5f9; color: #0f172a; font-weight: 700; }
+
+    /* TOC */
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #cbd5e1; font-size: 16px; }
+    .toc-item a { color: #0369a1; text-decoration: none; font-weight: 600; }
+    .toc-page { font-weight: 700; color: #1a4d2e; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar for Screen User -->
+  <div class="top-bar no-print">
+    <div class="top-bar-title">
+      <span>📖 HISTÓRIA DE CARNEIROS - AL (LIVRO DIDÁTICO A5)</span>
+    </div>
+    <div class="top-bar-controls">
+      <label for="tocSelect" style="font-size: 14px; font-weight: 600;">Ir para:</label>
+      <select id="tocSelect" class="nav-select" onchange="jumpToPage(this.value)">
+        <option value="1">Capa (Pág. 1)</option>
+        <option value="2">Apresentação (Pág. 2)</option>
+        <option value="3">Sumário I (Pág. 3)</option>
+        <option value="4">Sumário II (Pág. 4)</option>
+        <option value="5">Cap. 1 - Origem I (Pág. 5)</option>
+        <option value="6">Cap. 1 - Origem II (Pág. 6)</option>
+        <option value="7">Cap. 2 - Lampião (Pág. 7)</option>
+        <option value="8">Cap. 3 - Pioneiros I (Pág. 8)</option>
+        <option value="9">Cap. 3 - Pioneiros II (Pág. 9)</option>
+        <option value="10">Cap. 4 - Missa e Feira I (Pág. 10)</option>
+        <option value="11">Cap. 4 - Missa e Feira II (Pág. 11)</option>
+        <option value="12">Cap. 5 - O Distrito (Pág. 12)</option>
+        <option value="13">Cap. 6 - Emancipação I (Pág. 13)</option>
+        <option value="14">Cap. 6 - Emancipação II (Pág. 14)</option>
+        <option value="15">Cap. 7 - Heróis I (Pág. 15)</option>
+        <option value="16">Cap. 7 - Heróis II (Pág. 16)</option>
+        <option value="17">Cap. 8 - 1º Prefeito I (Pág. 17)</option>
+        <option value="18">Cap. 8 - 1º Prefeito II (Pág. 18)</option>
+        <option value="19">Cap. 9 - 1ª Eleição I (Pág. 19)</option>
+        <option value="20">Cap. 9 - 1ª Eleição II (Pág. 20)</option>
+        <option value="21">Cap. 10 - Prefeitos I (Pág. 21)</option>
+        <option value="22">Cap. 10 - Prefeitos II (Pág. 22)</option>
+        <option value="23">Cap. 10 - Prefeitos III (Pág. 23)</option>
+        <option value="24">Cap. 11 - 1ª Prefeita I (Pág. 24)</option>
+        <option value="25">Cap. 11 - 1ª Prefeita II (Pág. 25)</option>
+        <option value="26">Cap. 12 - A Câmara I (Pág. 26)</option>
+        <option value="27">Cap. 12 - A Câmara II (Pág. 27)</option>
+        <option value="28">Cap. 13 - Senador Rui Palmeira I (Pág. 28)</option>
+        <option value="29">Cap. 13 - Senador Rui Palmeira II (Pág. 29)</option>
+        <option value="30">Cap. 14 - Vizinhos I (Pág. 30)</option>
+        <option value="31">Cap. 14 - Vizinhos II (Pág. 31)</option>
+        <option value="32">Cap. 15 - Geografia I (Pág. 32)</option>
+        <option value="33">Cap. 15 - Geografia II (Pág. 33)</option>
+        <option value="34">Cap. 16 - Clima e Caatinga I (Pág. 34)</option>
+        <option value="35">Cap. 16 - Clima e Caatinga II (Pág. 35)</option>
+        <option value="36">Cap. 17 - População I (Pág. 36)</option>
+        <option value="37">Cap. 17 - População II (Pág. 37)</option>
+        <option value="38">Cap. 18 - Economia I (Pág. 38)</option>
+        <option value="39">Cap. 18 - Economia II (Pág. 39)</option>
+        <option value="40">Cap. 19 - Feira Livre I (Pág. 40)</option>
+        <option value="41">Cap. 19 - Feira Livre II (Pág. 41)</option>
+        <option value="42">Cap. 20 - Educação I (Pág. 42)</option>
+        <option value="43">Cap. 20 - Educação II (Pág. 43)</option>
+        <option value="44">Cap. 21 - Padroeira I (Pág. 44)</option>
+        <option value="45">Cap. 21 - Padroeira II (Pág. 45)</option>
+        <option value="46">Cap. 22 - Festa do Trabalhador I (Pág. 46)</option>
+        <option value="47">Cap. 22 - Festa do Trabalhador II (Pág. 47)</option>
+        <option value="48">Cap. 23 - São João e Tradições (Pág. 48)</option>
+        <option value="49">Cap. 23 - Historiosos da Terra (Pág. 49)</option>
+        <option value="50">Cap. 24 - O Futuro I (Pág. 50)</option>
+        <option value="51">Cap. 24 - O Futuro II (Pág. 51)</option>
+        <option value="52">Contracapa (Pág. 52)</option>
+      </select>
+      <button class="btn-action btn-print" onclick="triggerPrint()">🖨️ Imprimir / Gerar PDF</button>
+    </div>
+  </div>
+
+  <div id="book-container">
+
+    <div class="page cover-page" id="page-1">
+      <div class="cover-border">
+        <div class="cover-inner">
+          <div class="cover-badge">LIVRO DIDÁTICO E HISTÓRICO • FORMATO A5</div>
+          <h1 class="cover-title">HISTÓRIA COMPLETA DE CARNEIROS</h1>
+          <div class="cover-subtitle">Sertão de Alagoas • Do Sítio Cacimba do Carneiro aos Dias Atuais</div>
+          <div class="cover-divider">✦ ✦ ✦</div>
+          <div class="cover-svg">
+            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="180" height="100" rx="8" fill="#f0fdf4" stroke="#1a4d2e" stroke-width="2"/>
+              <path d="M 30 85 Q 70 35 100 70 T 170 55" fill="none" stroke="#16a34a" stroke-width="3"/>
+              <circle cx="100" cy="40" r="16" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+              <text x="100" y="100" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" fill="#1a4d2e" text-anchor="middle">RECURSO EDUCATIVO MUNICIPAL</text>
+            </svg>
+          </div>
+          <div class="cover-meta">
+            <p><strong>Edição Ampliada para Estudantes e Educadores</strong></p>
+            <p>24 Capítulos • 52 Páginas • Fontes Grandes e Leitura Acessível</p>
+            <p>Conforme as Diretrizes da Educação Municipal (Decreto 011/2026)</p>
+          </div>
+          <div class="cover-footer-info">
+            <span>Carneiros - Alagoas • 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 1</span>
+      </div>
+    </div>
+    <div class="page" id="page-2">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Apresentação e Guia do Leitor</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Bem-vindo à História da Sua Terra!</h2>
+  <p>Caro estudante carneirense, este livro foi feito especialmente para você! Aqui você vai realizar uma verdadeira viagem pelo tempo, descobrindo como o antigo Sítio Carneiros transformou-se em um município forte, acolhedor e cheio de orgulho no coração do Sertão Alagoano.</p>
+  <p>Conhecer a história da nossa cidade nos ajuda a compreender quem somos, a valorizar o trabalho dos nossos antepassados e a cuidar com carinho do lugar onde vivemos e estudamos.</p>
+  <div class="box-callout">
+    <div class="box-title">💡 Como Usar Este Livro</div>
+    <p>O livro está organizado em 24 capítulos bem detalhados. Ao longo da leitura, você encontrará caixas especiais:</p>
+    <ul>
+      <li><strong>Curiosidade Histórica:</strong> Fatos interessantes sobre pessoas e eventos.</li>
+      <li><strong>Atividade do Estudante:</strong> Perguntas e desafios para sala de aula.</li>
+      <li><strong>Para Refletir:</strong> Reflexões sobre cidadania, meio ambiente e futuro.</li>
+    </ul>
+  </div>
+  <p>Desejamos a todos os estudantes e professores de Carneiros uma excelente jornada de aprendizado e redescoberta!</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 2</span>
+      </div>
+    </div>
+    <div class="page" id="page-3">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Sumário Geral (Parte I)</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Sumário de Capítulos (1 a 12)</h2>
+  <ul class="toc-list">
+    <li class="toc-item"><a href="#page-5">Capítulo 1: A Origem de Carneiros (1923, João Francisco)</a> <span class="toc-page">Pág. 5</span></li>
+    <li class="toc-item"><a href="#page-7">Capítulo 2: A Passagem de Lampião pelo Sertão (1930)</a> <span class="toc-page">Pág. 7</span></li>
+    <li class="toc-item"><a href="#page-8">Capítulo 3: Os Primeiros Pioneiros e Comerciantes</a> <span class="toc-page">Pág. 8</span></li>
+    <li class="toc-item"><a href="#page-10">Capítulo 4: A Primeira Missa e a Feira Livre (1945)</a> <span class="toc-page">Pág. 10</span></li>
+    <li class="toc-item"><a href="#page-12">Capítulo 5: A Criação do Distrito de Carneiros (1958)</a> <span class="toc-page">Pág. 12</span></li>
+    <li class="toc-item"><a href="#page-13">Capítulo 6: A Grande Emancipação Política (1962)</a> <span class="toc-page">Pág. 13</span></li>
+    <li class="toc-item"><a href="#page-15">Capítulo 7: Os Heróis da Emancipação Política</a> <span class="toc-page">Pág. 15</span></li>
+    <li class="toc-item"><a href="#page-17">Capítulo 8: O Primeiro Prefeito (Cícero Vieira de Melo)</a> <span class="toc-page">Pág. 17</span></li>
+    <li class="toc-item"><a href="#page-19">Capítulo 9: A Primeira Eleição Direta e Agenor Rodrigues</a> <span class="toc-page">Pág. 19</span></li>
+    <li class="toc-item"><a href="#page-21">Capítulo 10: A Galeria e História dos Prefeitos</a> <span class="toc-page">Pág. 21</span></li>
+    <li class="toc-item"><a href="#page-24">Capítulo 11: A Primeira Mulher Prefeita (Ubiratânia Santana)</a> <span class="toc-page">Pág. 24</span></li>
+    <li class="toc-item"><a href="#page-26">Capítulo 12: A Câmara Municipal e os 9 Vereadores</a> <span class="toc-page">Pág. 26</span></li>
+  </ul>
+  <div class="box-quiz">
+    <div class="box-title">📌 Dica de Leitura</div>
+    <p>Você pode navegar clicando nos links do sumário quando estiver na tela, ou folhear página por página no livro impresso A5!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 3</span>
+      </div>
+    </div>
+    <div class="page" id="page-4">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Sumário Geral (Parte II)</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Sumário de Capítulos (13 a 24)</h2>
+  <ul class="toc-list">
+    <li class="toc-item"><a href="#page-28">Capítulo 13: O Município Vizinho: Senador Rui Palmeira</a> <span class="toc-page">Pág. 28</span></li>
+    <li class="toc-item"><a href="#page-30">Capítulo 14: Nossos Vizinhos e Limites Territoriais</a> <span class="toc-page">Pág. 30</span></li>
+    <li class="toc-item"><a href="#page-32">Capítulo 15: A Geografia e Localização de Carneiros</a> <span class="toc-page">Pág. 32</span></li>
+    <li class="toc-item"><a href="#page-34">Capítulo 16: O Clima Semiárido e o Bioma Caatinga</a> <span class="toc-page">Pág. 34</span></li>
+    <li class="toc-item"><a href="#page-36">Capítulo 17: A População e os Indicadores Sociais</a> <span class="toc-page">Pág. 36</span></li>
+    <li class="toc-item"><a href="#page-38">Capítulo 18: A Economia e a Agricultura Familiar</a> <span class="toc-page">Pág. 38</span></li>
+    <li class="toc-item"><a href="#page-40">Capítulo 19: A Tradicional Feira Livre Dominical</a> <span class="toc-page">Pág. 40</span></li>
+    <li class="toc-item"><a href="#page-42">Capítulo 20: A Educação, Escola do Coração e CMEI</a> <span class="toc-page">Pág. 42</span></li>
+    <li class="toc-item"><a href="#page-44">Capítulo 21: Nossa Senhora da Conceição (Padroeira)</a> <span class="toc-page">Pág. 44</span></li>
+    <li class="toc-item"><a href="#page-46">Capítulo 22: A Festa do Trabalhador e Suas 34 Edições</a> <span class="toc-page">Pág. 46</span></li>
+    <li class="toc-item"><a href="#page-48">Capítulo 23: O São João e os Guardiões da Memória</a> <span class="toc-page">Pág. 48</span></li>
+    <li class="toc-item"><a href="#page-50">Capítulo 24: O Futuro de Carneiros e Novas Gerações</a> <span class="toc-page">Pág. 50</span></li>
+    <li class="toc-item"><a href="#page-51b">Referências Bibliográficas</a> <span class="toc-page">Pág. 52-53</span></li>
+    <li class="toc-item"><a href="#page-52">Contracapa e Ficha Catalográfica</a> <span class="toc-page">Pág. 54</span></li>
+  </ul>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 4</span>
+      </div>
+    </div>
+    <div class="page" id="page-5">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 1: A Origem de Carneiros</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 1: A Origem de Carneiros</h2>
+  <h3>O Primeiro Povoado e o Sítio Carneiros (~1923)</h3>
+  <p>A história do nosso querido município começa por volta do ano de <strong>1923</strong>. Naquela época, a região era coberta pela vegetação típica da Caatinga e quase desabitada. As famílias viviam espalhadas em grandes propriedades rurais do Sertão Alagoano.</p>
+  <p>O primeiro registro de moradia fixa no local onde hoje fica o centro da cidade foi uma única casa de taipa, pertencente ao agricultor e sertanejo <strong>João Francisco</strong>. Seu imóvel deu início ao histórico <strong>Sítio Carneiros</strong>.</p>
+  <div class="box-curiosity">
+    <div class="box-title">🐐 A Lenda da Cacimba do Carneiro</div>
+    <p>Você sabe de onde vem o nome da nossa cidade? A tradição oral conta que um carneiro (ou carneiro/carneira da criação local) começou a escavar o solo com os cascos em busca de umidade. Ao perceber o gesto do animal, o proprietário João Francisco escavou o local e descobriu uma valiosa nascente de água cristalina, abrindo uma <strong>cacimba</strong>!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 5</span>
+      </div>
+    </div>
+    <div class="page" id="page-6">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 1: A Origem de Carneiros</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Da Cacimba do Carneiro ao Nome "Carneiros"</h3>
+  <p>No Sertão, onde a água é o bem mais precioso para a sobrevivência das pessoas e dos animais, a descoberta dessa cacimba mudou o destino de toda a região. Tropeiros, viajantes e agricultores das proximidades passaram a fazer parada obrigatória naquele ponto de apoio.</p>
+  <p>O local ficou popularmente conhecido como <strong>Cacimba do Carneiro</strong>. Com o passar dos anos e o crescimento do número de casas ao redor da fonte de água, o nome foi carinhosamente reduzido para apenas <strong>Carneiros</strong>.</p>
+  <div class="box-quiz">
+    <div class="box-title">❓ Atividade do Estudante</div>
+    <p>1. Em que ano surgiram os primeiros registros do Sítio Carneiros?<br>
+    2. Quem foi o proprietário da primeira casa de morada?<br>
+    3. Qual a importância da cacimba para as primeiras famílias sertanejas?</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 6</span>
+      </div>
+    </div>
+    <div class="page" id="page-7">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 2: Lampião no Sertão</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 2: A Passagem de Lampião</h2>
+  <h3>O Cangaço no Sertão de Alagoas (02/12/1930)</h3>
+  <p>No dia <strong>2 de dezembro de 1930</strong>, o Sertão Alagoano vivenciou um episódio que ficou gravado na memória popular: a passagem do famoso bando do cangaceiro Virgulino Ferreira da Silva, o popular <strong>Lampião</strong>, pelas terras do então povoado de Carneiros.</p>
+  <p>Nessa época, Lampião e seus homens percorriam diversas localidades do interior nordestino, cruzando Alagoas, Sergipe, Pernambuco e Bahia. A passagem pelo povoado foi rápida e surpreendente.</p>
+  <div class="box-callout">
+    <div class="box-title">📜 Relato dos Moradores</div>
+    <p>Ao contrário de outras cidades do Nordeste onde o cangaço causou graves conflitos, a passagem por Carneiros não trouxe grandes transtornos ou violência para a comunidade local. Os moradores da época observaram a travessia dos cabras com curiosidade e cautela, tornando o evento uma marcante história contada de geração em geração.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 7</span>
+      </div>
+    </div>
+    <div class="page" id="page-8">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 3: Os Primeiros Pioneiros</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 3: Os Primeiros Pioneiros</h2>
+  <h3>Os Comerciantes Adão Vieira e José Lino (~1930-1940)</h3>
+  <p>Entre os anos de <strong>1930 e 1940</strong>, Carneiros começou a deixar de ser apenas um pequeno sítio para se transformar em um promissor centro comercial e de moradia. Esse avanço deve-se ao empenho dos primeiros pioneiros e comerciantes.</p>
+  <p>Destacam-se como fundadores do comércio local o cidadão <strong>Adão Vieira de Melo</strong> e seu cunhado <strong>José Lino</strong>. Eles abriram as primeiras vendas (bolandeiras e mercearias) no povoado, comercializando querosene, sal, quatros de tecido, ferramentas e cereais.</p>
+  <p>Esses estabelecimentos comerciais abasteciam as famílias sertanejas que antes precisavam caminhar quilômetros até Santana do Ipanema para comprar mantimentos básicos.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 8</span>
+      </div>
+    </div>
+    <div class="page" id="page-9">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 3: Os Primeiros Pioneiros</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Alfredo Labareda e Euclides Alves Feitosa</h3>
+  <p>Outros dois grandes nomes marcaram a fundação do povoado: <strong>Alfredo Rodrigues de Melo</strong> (conhecido popularmente como <i>Alfredo Labareda</i>) e <strong>Euclides Alves Feitosa</strong>.</p>
+  <p>Com visão empreendedora, Alfredo Labareda e Euclides Alves divulgaram a fertilidade das terras de Carneiros em toda a região do Médio Sertão. A abundância de solos adequados para o cultivo do algodão, milho e feijão atraiu dezenas de famílias de agricultores.</p>
+  <div class="box-curiosity">
+    <div class="box-title">🌟 Curiosidade: Por que "Labareda"?</div>
+    <p>O apelido de Alfredo Rodrigues de Melo vinha do seu temperamento vibrante, dinâmico e entusiasmado. Como uma "labareda de fogo", ele liderava com energia as reuniões comunitárias e lutava pelo crescimento do lugar!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 9</span>
+      </div>
+    </div>
+    <div class="page" id="page-10">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 4: Missa e Feira (1945)</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 4: A Primeira Missa e a Feira</h2>
+  <h3>A Inesquecível Noite de Natal de 1945</h3>
+  <p>O ano de <strong>1945</strong> é considerado um divisor de águas na história de Carneiros. No dia <strong>25 de dezembro de 1945</strong> (Dia de Natal), a comunidade reuniu-se com imensa fé para a celebração da <strong>Primeira Missa Solene</strong> do povoado.</p>
+  <p>Celebrada ao ar livre e sob a bênção da comunidade sertaneja, a missa fortaleceu os laços espirituais dos moradores e oficializou o compromisso de construir uma capela dedicada à padroeira Nossa Senhora da Conceição.</p>
+  <p>A missa de Natal atraiu moradores de diversos sítios vizinhos, enchendo as ruas de alegria, oração e confraternização.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 10</span>
+      </div>
+    </div>
+    <div class="page" id="page-11">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 4: A Primeira Feira Livre</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>O Nascimento da Feira Livre Dominical</h3>
+  <p>Aproveitando a grande reunião de famílias no dia <strong>25 de dezembro de 1945</strong>, os pioneiros organizaram também a <strong>Primeira Feira Livre</strong> de Carneiros.</p>
+  <p>Agricultores trouxeram milho, feijão, galinhas, queijo coalho e rapadura para trocar e vender. O sucesso foi tão extraordinário que a feira passou a ser realizada semanalmente, todos os domingos.</p>
+  <div class="box-callout">
+    <div class="box-title">🛒 Tradição de Oito Décadas</div>
+    <p>Desde 1945 até os dias atuais, a feira de domingo é o grande motor da economia popular carneirense, reunindo feirantes, produtores rurais e compradores de toda a região do Sertão Alagoano!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 11</span>
+      </div>
+    </div>
+    <div class="page" id="page-12">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 5: A Criação do Distrito</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 5: O Distrito de Carneiros</h2>
+  <h3>A Lei Estadual nº 2.054 (20/08/1958)</h3>
+  <p>Com o crescimento acelerado da população, do comércio e da feira livre, Carneiros alcançou os requisitos legais para elevar sua categoria administrativa no Estado de Alagoas.</p>
+  <p>No dia <strong>20 de agosto de 1958</strong>, foi promulgada a <strong>Lei Estadual nº 2.054</strong>, que criou oficialmente o <strong>Distrito de Carneiros</strong>, subordinado ao município de Santana do Ipanema.</p>
+  <p>A criação do distrito permitiu a instalação de um Cartório de Registro Civil, posto policial e representação política formal. Esse foi o passo decisivo para a conquista da emancipação política total quatro anos depois!</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 12</span>
+      </div>
+    </div>
+    <div class="page" id="page-13">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 6: A Grande Emancipação</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 6: A Emancipação Política</h2>
+  <h3>A Lei Estadual nº 2.454 (11/07/1962)</h3>
+  <p>O maior sonho dos moradores do povoado era transformar Carneiros em um município independente, capaz de gerir seus próprios recursos e investir em escolas, estradas e saúde.</p>
+  <p>Após anos de intensa mobilização popular e reuniões políticas em Maceió, a Assembleia Legislativa de Alagoas aprovou a <strong>Lei Estadual nº 2.454</strong> em <strong>11 de julho de 1962</strong>, decretando a libertação e emancipação de Carneiros em relação a Santana do Ipanema!</p>
+  <p>A partir dessa data histórica, Carneiros passou a ser reconhecido como um município soberano no Estado de Alagoas.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 13</span>
+      </div>
+    </div>
+    <div class="page" id="page-14">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 6: A Festa da Emancipação</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Celebração do 26 de Julho</h3>
+  <p>Embora a lei de emancipação tenha sido assinada no dia 11 de julho, a solenidade oficial de instalação do município e posse das autoridades foi comemorada festivamente em <strong>26 de julho de 1962</strong>.</p>
+  <p>Por essa razão, o aniversário de emancipação política de Carneiros é comemorado todos os anos no dia <strong>26 de julho</strong>, com hasteamento de bandeiras, missa em ação de graças, desfiles cívicos de escolas e grandes shows musicais em praça pública.</p>
+  <div class="box-quiz">
+    <div class="box-title">🎉 Orgulho Carneirense</div>
+    <p>Em 2026, o município de Carneiros completa com grande orgulho <strong>64 anos de história e emancipação política</strong>!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 14</span>
+      </div>
+    </div>
+    <div class="page" id="page-15">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 7: Heróis da Emancipação</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 7: Heróis da Emancipação</h2>
+  <h3>Líderes que Mudaram a História da Cidade</h3>
+  <p>A conquista da independência política não aconteceu por acaso. Foi fruto do trabalho árduo e da união de seis grandes líderes comunitários que entraram para a história como os <strong>Heróis da Emancipação de Carneiros</strong>.</p>
+  <ul>
+    <li><strong>1. Alfredo Rodrigues de Melo (Alfredo Labareda):</strong> Líder comunitário visionário e incansável articulador.</li>
+    <li><strong>2. Agenor Rodrigues dos Anjos:</strong> Comerciante respeitado, influente e homem de diálogo, que viria a ser o primeiro prefeito eleito pelo povo.</li>
+  </ul>
+  <p>Esses homens viajaram até a capital Maceió diversas vezes para defender o projeto perante os deputados estaduais.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 15</span>
+      </div>
+    </div>
+    <div class="page" id="page-16">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 7: Os Outros Heróis</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Oton Gaspar, José Bulhões, Ormindo e Eronildes</h3>
+  <p>A comissão emancipadora contava também com a dedicação fundamental de mais quatro ilustres cidadãos carneirenses:</p>
+  <ul>
+    <li><strong>3. Oton Gaspar de Farias:</strong> Homem de sabedoria e grande prestígio moral entre as famílias rurais.</li>
+    <li><strong>4. José Alves Bulhões:</strong> Agropecuarista e incentivador das obras públicas no povoado.</li>
+    <li><strong>5. Ormindo Joaquim de Santana:</strong> Defensor da educação e do progresso social.</li>
+    <li><strong>6. Eronildes Soares Ribeiro:</strong> Articulador político de destaque e liderança popular.</li>
+  </ul>
+  <div class="box-callout">
+    <div class="box-title">🏛️ Homenagem Permanente</div>
+    <p>Graças ao empenho desses seis homens visionários, Carneiros conquistou sua autonomia administrativa. Seus nomes estão gravados na memória e nas praças da cidade!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 16</span>
+      </div>
+    </div>
+    <div class="page" id="page-17">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 8: O Primeiro Prefeito</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 8: O Primeiro Prefeito</h2>
+  <h3>Cícero Vieira de Melo (Julho de 1962)</h3>
+  <p>Após a promulgação da lei de emancipação em julho de 1962, o governador de Alagoas na época, <strong>Luís Cavalcante</strong>, precisava nomear um prefeito interino para organizar a estrutura do novo município até a realização das primeiras eleições diretas.</p>
+  <p>O escolhido para essa nobre missão foi o jovem <strong>Cícero Vieira de Melo</strong>. Com apenas <strong>21 anos de idade</strong>, Cícero tornou-se um dos prefeitos mais jovens da história do Brasil!</p>
+  <p>Apesar da pouca idade, Cícero encarou o desafio com grande responsabilidade e elevado sentido de serviço público.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 17</span>
+      </div>
+    </div>
+    <div class="page" id="page-18">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 8: A Gestão Provisória</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Organização da Cidade Recém-Nascida</h3>
+  <p>Durante seu mandato provisório entre julho e outubro de 1962, o jovem prefeito Cícero Vieira de Melo teve a tarefa de fundar a sede da prefeitura, organizar os serviços de limpeza urbana, criar o quadro de funcionários municipais e preparar o município para a primeira eleição democrática.</p>
+  <div class="box-curiosity">
+    <div class="box-title">💡 Exemplo de Juventude e Coragem</div>
+    <p>A nomeação de um jovem de 21 anos demonstrou a confiança da comunidade na juventude de Carneiros. Cícero Vieira de Melo cumpriu seu papel com maestria, entregando o município pronto para a democracia!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 18</span>
+      </div>
+    </div>
+    <div class="page" id="page-19">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 9: A Primeira Eleição</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 9: A Primeira Eleição Direta</h2>
+  <h3>O Povo Escolhe Seu Destino (Outubro de 1962)</h3>
+  <p>Em <strong>outubro de 1962</strong>, o município de Carneiros vivenciou um dia histórico: a realização da sua <strong>primeira eleição direta pela via democrática</strong>.</p>
+  <p>Pela primeira vez na história, os homens e mulheres do município puderam ir às urnas exercer o direito sagrado do voto para escolher democraticamente seu Prefeito e os membros da Câmara Municipal de Vereadores.</p>
+  <p>A disputa foi marcada pelo clima de entusiasmo cívico e esperança no futuro da terra carneirense.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 19</span>
+      </div>
+    </div>
+    <div class="page" id="page-20">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 9: Prefeito Agenor Rodrigues</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Vitória de Agenor Rodrigues dos Anjos</h3>
+  <p>Contadas as urnas de votação, o grande vencedor da disputa foi o emancipador <strong>Agenor Rodrigues dos Anjos</strong>, consagrado pelo povo como o <strong>primeiro prefeito eleito de Carneiros</strong>.</p>
+  <p>Sua gestão foi marcada pela implantação das primeiras escolas rurais, abertura de estradas vicinais conectando o centro aos sítios, organização da saúde pública e fortalecimento da feira livre dominical.</p>
+  <div class="box-quiz">
+    <div class="box-title">🗳️ Atividade de Cidadania</div>
+    <p>Qual a diferença entre um prefeito nomeado (interino) e um prefeito eleito pelo povo? Converse com seus colegas sobre a importância da democracia e do voto consciente!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 20</span>
+      </div>
+    </div>
+    <div class="page" id="page-21">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 10: História dos Prefeitos</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 10: História dos Prefeitos</h2>
+  <h3>A Galeria de Gestores (1962 a 1988)</h3>
+  <p>Desde a emancipação política em 1962, o município de Carneiros foi administrado por homens e mulheres dedicados ao desenvolvimento local. Conheça a sequência de gestores:</p>
+  <ul>
+    <li><strong>1º Prefeito Interino (1962):</strong> Cícero Vieira de Melo.</li>
+    <li><strong>2º Prefeito Eleito (1963-1968):</strong> Agenor Rodrigues dos Anjos.</li>
+    <li><strong>3º e 4º Gestores (décadas de 70):</strong> Lideranças comunitárias da fase de consolidação.</li>
+    <li><strong>5º Prefeito (1983-1988):</strong> Cícero Maciel, responsável por importantes obras de infraestrutura urbana e prédios públicos.</li>
+  </ul>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 21</span>
+      </div>
+    </div>
+    <div class="page" id="page-22">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 10: Geraldo Novais Agra</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Geraldo Novais Agra e o Início dos Anos 90</h3>
+  <p>Na sequência administrativa, assumiu como <strong>6º Prefeito (1989-1992)</strong> o gestor <strong>Geraldo Novais Agra</strong>, que havia exercido o cargo de vice-prefeito durante a gestão de Cícero Maciel.</p>
+  <p>Em sua gestão, por volta do ano de <strong>1992</strong>, foi instituída oficialmente a tradicional <strong>Festa do Trabalhador</strong> de Carneiros, que se tornou um dos maiores eventos festivos do Sertão Alagoano!</p>
+  <div class="box-callout">
+    <div class="box-title">🎖️ Comenda de Honra Municipal</div>
+    <p>Em homenagem ao seu legado, a Câmara Municipal de Carneiros criou a respeitada <strong>Comenda Prefeito Geraldo Novais Agra</strong>, concedida a personalidades com relevantes serviços prestados ao município.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 22</span>
+      </div>
+    </div>
+    <div class="page" id="page-23">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 10: A Era Geraldo Filho</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Trajetória de Geraldo Filho (2001-2024)</h3>
+  <p>Geraldo Filho iniciou sua carreira pública como vereador (2001-2004). Em 2004, foi eleito Prefeito, exercendo seu 1º e 2º mandatos entre 2005 e 2012 pelo PMDB/MDB.</p>
+  <p>Em 2016, foi consagrado no 3º mandato com <strong>72,65% dos votos (3.605 votos)</strong>. Em 2020, alcançou o 4º mandato com expressivos <strong>77,57% (3.649 votos)</strong>, obtendo uma histórica aprovação popular de <strong>93,5% em 2023</strong>!</p>
+  <p>Sua gestão trouxe grandes obras como a moderna Escola do Coração, pavimentação asfáltica e informatização da saúde pública.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 23</span>
+      </div>
+    </div>
+    <div class="page" id="page-24">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 11: A Primeira Prefeita</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 11: A Primeira Prefeita</h2>
+  <h3>Ubiratânia Santana Faz História (Outubro de 2024)</h3>
+  <p>Nas eleições municipais de <strong>outubro de 2024</strong>, Carneiros escreveu uma das páginas mais bonitas e inspiradoras de sua história política.</p>
+  <p>A candidata <strong>Ubiratânia Santana (MDB)</strong> foi eleita a <strong>PRIMEIRA MULHER PREFEITA</strong> do município de Carneiros, conquistando uma expressiva vitória com <strong>67,29% dos votos válidos</strong>!</p>
+  <p>Sua chapa contou também com a eleição da vice-prefeita <strong>Janaine Soares Machado</strong>, forming uma gestão majoritariamente feminina no comando do Poder Executivo municipal.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 24</span>
+      </div>
+    </div>
+    <div class="page" id="page-25">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 11: Educadora no Comando</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Da Sala de Aula para a Gestão do Município</h3>
+  <p>Ubiratânia Santana é professora de carreira e exerceu com destaque o cargo de Secretária Municipal de Educação, liderando avanços históricos no ensino municipal.</p>
+  <p>Assumindo a gestão para o mandato <strong>2025-2028</strong>, a prefeita prioriza a educação, a saúde familiar, o fortalecimento da mulher sertaneja e a inclusão social, assinando importantes medidas como o Decreto 011/2026 de equidade étnico-racial.</p>
+  <div class="box-callout">
+    <div class="box-title">🌸 Protagonismo Feminino no Sertão</div>
+    <p>A eleição de Ubiratânia Santana inspira meninas e jovens estudantes de Carneiros, provando que as mulheres podem ocupar os mais altos cargos de liderança!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 25</span>
+      </div>
+    </div>
+    <div class="page" id="page-26">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 12: A Câmara Municipal</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 12: A Câmara Municipal</h2>
+  <h3>O Poder Legislativo e os 9 Vereadores</h3>
+  <p>A Câmara Municipal de Carneiros representa a casa do povo. Ela é composta por <strong>9 vereadores e vereadoras</strong>, eleitos a cada quatro anos pelo voto direto da população.</p>
+  <p>Os vereadores exercem papéis fundamentais na democracia:</p>
+  <ol>
+    <li><strong>Criar e Votar Leis:</strong> Elaborar projetos que melhorem a educação, saúde, transporte e meio ambiente.</li>
+    <li><strong>Fiscalizar o Executivo:</strong> Acompanhar a aplicação dos recursos públicos municipais.</li>
+    <li><strong>Representar a Comunidade:</strong> Levar as reivindicações dos bairros e sítios ao governo.</li>
+  </ol>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 26</span>
+      </div>
+    </div>
+    <div class="page" id="page-27">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 12: Exercício da Cidadania</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Cidadania e Participação Jovem</h3>
+  <p>As reuniões e sessões ordinárias da Câmara Municipal são públicas! Estudantes, professores e moradores podem assistir aos debates no plenário do Poder Legislativo.</p>
+  <div class="box-quiz">
+    <div class="box-title">📝 Atividade Prática: Câmara Mirim</div>
+    <p>Imagine que você e seus colegas foram eleitos vereadores mirins de Carneiros! Reúnam-se em grupos e elaborem um Projeto de Lei para criar uma horta comunitária ou um clube de leitura na sua escola.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 27</span>
+      </div>
+    </div>
+    <div class="page" id="page-28">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 13: Senador Rui Palmeira</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 13: Senador Rui Palmeira</h2>
+  <h3>O Município Vizinho da Fronteira Oeste</h3>
+  <p>Na fronteira oeste do município de Carneiros fica o querido município irmão de <strong>Senador Rui Palmeira</strong>. A história de ambos está profundamente interligada no Sertão Alagoano.</p>
+  <p>Originalmente, o povoado era chamado de <strong>Riacho Grande</strong> por causa do expressivo curso de água que banha a região.</p>
+  <p>Por volta de <strong>1940</strong>, o pioneiro <strong>Antônio Afonso de Melo</strong> veio de Palmeira dos Índios e instalou no local uma importante fábrica de beneficiamento e cordas de <strong>caroá</strong>. Em 1942, o estabelecimento recebeu o título oficial de <strong>Usina</strong>.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 28</span>
+      </div>
+    </div>
+    <div class="page" id="page-29">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 13: Senador Rui Palmeira</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Missa, Emancipação em 1982 e Homenagem</h3>
+  <p>A primeira missa solene de Riacho Grande foi celebrada em <strong>30/10/1943</strong> pelo influente Cônigo José Bulhões.</p>
+  <p>O município conquistou sua emancipação política pela <strong>Lei Estadual nº 4.346 em 13/05/1982</strong>, desmembrando-se de Santana do Ipanema. Seu primeiro prefeito foi <strong>José Vieira de Souza</strong> e possui área de <strong>360 km²</strong>.</p>
+  <div class="box-curiosity">
+    <div class="box-title">🏛️ Homenagem ao Senador</div>
+    <p>O nome do município homenageia o ilustre jurista e político alagoano <strong>Rui Soares Palmeira</strong> (nascido em 02/03/1910, deputado federal entre 1946-1950 e senador), pai do ex-governador Guilherme Palmeira.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 29</span>
+      </div>
+    </div>
+    <div class="page" id="page-30">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 14: Nossos Vizinhos</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 14: Nossos Vizinhos</h2>
+  <h3>Os Limites Territoriais de Carneiros</h3>
+  <p>O município de Carneiros está localizado no Médio Sertão Alagoano e faz divisa com quatro importantes municípios vizinhos:</p>
+  <table class="info-table">
+    <tr>
+      <th>Posição</th>
+      <th>Município Vizinho</th>
+      <th>Relação e Integração</th>
+    </tr>
+    <tr>
+      <td><strong>Norte</strong></td>
+      <td>Santana do Ipanema</td>
+      <td>Cidade-mãe, centro comercial, educacional e de serviços de saúde da microrregião.</td>
+    </tr>
+    <tr>
+      <td><strong>Sul</strong></td>
+      <td>São José da Tapera</td>
+      <td>Parceria na agricultura familiar, transporte e rotas rurais sertanejas.</td>
+    </tr>
+  </table>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 30</span>
+      </div>
+    </div>
+    <div class="page" id="page-31">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 14: Nossos Vizinhos</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Olho d'Água das Flores e Senador Rui Palmeira</h3>
+  <p>Completando os limites geográficos do município:</p>
+  <table class="info-table">
+    <tr>
+      <th>Posição</th>
+      <th>Município Vizinho</th>
+      <th>Relação e Integração</th>
+    </tr>
+    <tr>
+      <td><strong>Leste</strong></td>
+      <td>Olho d'Água das Flores</td>
+      <td>Conexão rodoviária e integração de feiras livres e festejos da região.</td>
+    </tr>
+    <tr>
+      <td><strong>Oeste</strong></td>
+      <td>Senador Rui Palmeira</td>
+      <td>Laços históricos, culturais e cooperação em projetos do Sertão.</td>
+    </tr>
+  </table>
+  <div class="box-callout">
+    <div class="box-title">🗺️ Cooperação Regional</div>
+    <p>A união entre Carneiros e seus vizinhos fortalece o desenvolvimento econômico, a bacia leiteira e a educação no Sertão Alagoano!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 31</span>
+      </div>
+    </div>
+    <div class="page" id="page-32">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 15: A Geografia</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 15: A Geografia</h2>
+  <h3>Território, Posição e Altitude</h3>
+  <p>Carneiros é um município encantador localizado na Microrregião de Santana do Ipanema, no coração do <strong>Sertão Alagoano</strong>.</p>
+  <p>Possui uma área territorial de <strong>113,1 km²</strong>, sendo geograficamente um dos menores municípios em extensão territorial do Estado de Alagoas, porém um dos mais densamente povoados e dinâmicos do Sertão!</p>
+  <p>A sede municipal encontra-se a uma altitude média de <strong>300 metros</strong> acima do nível do mar, o que proporciona noites agradáveis mesmo durante o período de verão.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 32</span>
+      </div>
+    </div>
+    <div class="page" id="page-33">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 15: A Geografia</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Distâncias, Contatos e Endereços Oficiais</h3>
+  <p>Confira a ficha geográfica e administrativa do nosso município:</p>
+  <ul>
+    <li><strong>Distância até o IFAL (Campus Santana do Ipanema):</strong> 38 km.</li>
+    <li><strong>Distância até a capital Maceió:</strong> cerca de 230 km.</li>
+    <li><strong>Gentílico:</strong> carneirense.</li>
+    <li><strong>Código de Endereçamento Postal (CEP):</strong> 57535-000.</li>
+    <li><strong>DDD Telefônico:</strong> (82).</li>
+    <li><strong>Endereço da Prefeitura:</strong> Praça Cônego José Bulhões - Centro.</li>
+    <li><strong>Portal Oficial:</strong> www.carneiros.al.gov.br.</li>
+  </ul>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 33</span>
+      </div>
+    </div>
+    <div class="page" id="page-34">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 16: Clima e Caatinga</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 16: Clima e Caatinga</h2>
+  <h3>O Clima Semiárido Sertanejo</h3>
+  <p>O município de Carneiros possui o clima <strong>tropical semiárido</strong>. As temperaturas variam em média com máxima de <strong>32°C</strong> nos dias mais quentes do verão e mínima de <strong>20°C</strong> nas madrugadas mais amenas.</p>
+  <p>As chuvas são irregulares e concentram-se principalmente entre os meses de outono e inverno (de abril a julho). O povo sertanejo desenvolveu sabedoria milenar para conviver com os períodos de estiagem, armazenando água em cisternas e açudes.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 34</span>
+      </div>
+    </div>
+    <div class="page" id="page-35">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 16: O Bioma Caatinga</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Caatinga: 100% de Nossa Biodiversidade</h3>
+  <p>O bioma <strong>Caatinga</strong> cobre <strong>100% do território</strong> de Carneiros. É o único bioma exclusivamente brasileiro!</p>
+  <p>Sua flora é composta por plantas xerófitas resistentes à seca, como o <strong>umbuzeiro, juazeiro, mandacaru, xique-xique e angico</strong>. Sua fauna abriga o preá, tatu, mocó, asa-branca e diversas espécies de pássaros e répteis.</p>
+  <div class="box-callout">
+    <div class="box-title">🌵 Preservação Ambiental</div>
+    <p>A Caatinga é cheia de vida e riqueza! Cuidar das nossas fontes de água e preservar a vegetação nativa é missão de todos nós.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 35</span>
+      </div>
+    </div>
+    <div class="page" id="page-36">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 17: A População</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 17: A População e Dados</h2>
+  <h3>Evolução Demográfica nos Censos do IBGE</h3>
+  <p>Acompanhar os números do município nos ajuda a planejar escolas, postos de saúde e moradia. Acompanhe os dados oficiais do IBGE:</p>
+  <ul>
+    <li><strong>Censo IBGE 2010:</strong> População de 9.159 habitantes, IDH de 0,526 e Produto Interno Bruto (PIB) de R$ 57.284.788,00.</li>
+    <li><strong>Censo IBGE 2022:</strong> População de 8.999 habitantes, com uma densidade demográfica de 88,35 hab/km².</li>
+    <li><strong>Estimativa 2024:</strong> População em torno de 9.200 habitantes.</li>
+    <li><strong>Eleitorado Cadastrado:</strong> 7.662 eleitores aptos a votar.</li>
+  </ul>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 36</span>
+      </div>
+    </div>
+    <div class="page" id="page-37">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 17: Indicadores Sociais</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Compreendendo os Indicadores do Município</h3>
+  <p>O Índice de Desenvolvimento Humano (IDH 0,526) reflete os desafios enfrentados no Sertão. Nas últimas décadas, fortes investimentos em educação municipal, saneamento básico e saúde digital vêm elevando a qualidade de vida das famílias carneirenses.</p>
+  <div class="box-quiz">
+    <div class="box-title">📊 Aprendendo Matemática Social</div>
+    <p>Dividindo o PIB de R$ 57,3 milhões pela população, vemos o esforço econômico da cidade. Calcule na sala de aula a densidade demográfica dividindo os habitantes pela área de 113,1 km²!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 37</span>
+      </div>
+    </div>
+    <div class="page" id="page-38">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 18: A Economia</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 18: A Economia Local</h2>
+  <h3>Agricultura, Pecuária e Produção Sertaneja</h3>
+  <p>A economia de Carneiros movimenta aproximadamente <strong>R$ 57,3 milhões por ano (PIB)</strong>, sendo impulsionada pela força do trabalho rural e do comércio urbano.</p>
+  <p>Na agricultura, destaca-se o cultivo do milho, feijão, mandioca, palma forrageira e hortaliças. Na pecuária, a bacia leiteira com criação de gado bovino, aliada à criação de ovinos (carneiros!) e caprinos, garante renda para centenas de famílias rurais.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 38</span>
+      </div>
+    </div>
+    <div class="page" id="page-39">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 18: Agricultura Familiar</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>A Força da Agricultura Familiar</h3>
+  <p>A agricultura familiar é a grande responsável por abastecer as mesas das nossas escolas e feiras. Programas como o PNAE (Programa Nacional de Alimentação Escolar) compram alimentos diretamente dos agricultores locais.</p>
+  <div class="box-callout">
+    <div class="box-title">🌽 Do Campo para a Escola</div>
+    <p>O milho, a mandioca e o leite produzidos pelos pais e avós dos alunos em Carneiros chegam fresquinhos à merenda escolar da Escola do Coração e creches do município!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 39</span>
+      </div>
+    </div>
+    <div class="page" id="page-40">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 19: A Feira Livre</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 19: A Feira Livre Dominical</h2>
+  <h3>O Coração Econômico e Cultural aos Domingos</h3>
+  <p>Fundada em <strong>25 de dezembro de 1945</strong>, a Feira Livre Dominical de Carneiros é uma das tradições mais vivas, coloridas e apaixonantes do nosso município.</p>
+  <p>Nas primeiras horas da manhã de domingo, as ruas do centro ganham vida com as barracas de feirantes montadas com carinho. Encontra-se de tudo: queijo coalho artesanal, rapadura, feijão de corda, galinha de capoeira, frutas, roupas, calçados e artesanato regional.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 40</span>
+      </div>
+    </div>
+    <div class="page" id="page-41">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 19: A Feira Livre</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Ponto de Encontro da Família Sertaneja</h3>
+  <p>Mais do que um centro de compras, a feira de domingo é o momento em que os moradores dos sítios e da cidade se reencontram, conversam sobre as novidades da semana, tomam o tradicional café com tapioca e mantêm viva a cultura do Sertão.</p>
+  <div class="box-curiosity">
+    <div class="box-title">☕ Tradição Popular</div>
+    <p>Visitar a feira de domingo e cumprimentar os amigos é um costume passado de pai para filho em Carneiros há mais de 80 anos!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 41</span>
+      </div>
+    </div>
+    <div class="page" id="page-42">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 20: A Educação</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 20: A Educação em Carneiros</h2>
+  <h3>A Revolução na Rede Municipal de Ensino</h3>
+  <p>A educação em Carneiros vive um momento de histórico orgulho e transformação. Um dos maiores marcos foi a entrega da moderna <strong>Escola do Coração</strong> (a 22ª unidade entregue no programa), atendendo mais de <strong>1.200 estudantes</strong>!</p>
+  <p>A escola conta com salas totalmente climatizadas, laboratórios de informática e ciências, biblioteca moderna e ginásio poliesportivo coberto. O município conta ainda com o CMEI para a educação infantil.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 42</span>
+      </div>
+    </div>
+    <div class="page" id="page-43">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 20: Equidade e Tecnologia</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Decreto 011/2026 e a Equidade Étnico-Racial</h3>
+  <p>Demonstrando vanguarda na educação, a gestão municipal promulgou o <strong>Decreto 011/2026</strong>, instituindo a Política Municipal de Educação para Equidade Étnico-Racial, promovendo o respeito à diversidade e valorizando as raízes afro-brasileiras e indígenas.</p>
+  <p>A rede é constantemente monitorada pelas plataformas QEDU e INEP, garantindo avanços na aprendizagem de nossas crianças. Além disso, o IFAL destacou a cidade na série de TV <i>"Dois Dedos de Histórias"</i> em 2017.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 43</span>
+      </div>
+    </div>
+    <div class="page" id="page-44">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 21: A Padroeira</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 21: Nossa Senhora da Conceição</h2>
+  <h3>A Fé e a Padroeira de Carneiros (8 de Dezembro)</h3>
+  <p>A religiosidade e a fé evangélica e católica acompanham a formação do povo carneirense desde os tempos das primeiras cacimbas. A padroeira do município é <strong>Nossa Senhora da Conceição</strong>.</p>
+  <p>Todos os anos, no dia <strong>8 de dezembro</strong>, o município celebra a festa da sua padroeira com grande fervor religioso, novenários, missas solenes e manifestações de fé da comunidade católica.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 44</span>
+      </div>
+    </div>
+    <div class="page" id="page-45">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 21: A Festa Religiosa</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Procissão e Reencontro das Famílias</h3>
+  <p>O ponto alto da festa de dezembro é a emocionante procissão pelas ruas da cidade, reunindo milhares de fiéis que acompanham o andar ornamentado com flores. O evento atrai também carneirenses que moram em outros estados e retornam para rever a família.</p>
+  <div class="box-callout">
+    <div class="box-title">🕯️ Tradição e Paz</div>
+    <p>A festa da padroeira é um momento de união, fé e celebração do respeito entre todas as famílias e crenças da cidade.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 45</span>
+      </div>
+    </div>
+    <div class="page" id="page-46">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 22: Festa do Trabalhador</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 22: A Festa do Trabalhador</h2>
+  <h3>34 Anos da Maior Festa do Sertão (1992-2026)</h3>
+  <p>Criada no início dos anos 90 durante a gestão do prefeito Geraldo Novais Agra, a <strong>Festa do Trabalhador de Carneiros</strong> tornou-se o maior e mais aguardado evento festivo de todo o Sertão Alagoano!</p>
+  <p>Em <strong>2026</strong>, o evento chega com brilho à sua emblemática <strong>34ª Edição</strong>, realizada entre os dias <strong>23 e 24 de julho</strong>, antecedendo as celebrações dos 64 anos de emancipação política.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 46</span>
+      </div>
+    </div>
+    <div class="page" id="page-47">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 22: A Festa de 2026</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Grandes Atrações e Movimentação Econômica</h3>
+  <p>A 34ª Festa do Trabalhador em 2026 conta com grandes atrações musicais de sucesso como <strong>Sandro Bessa e Dílson Ramos</strong>, atraindo milhares de visitantes de toda Alagoas, Sergipe e Pernambuco.</p>
+  <p>O evento lota restaurantes, pousadas, lanchonetes e comércio, gerando renda e empregos para os trabalhadores do nosso município!</p>
+  <div class="box-quiz">
+    <div class="box-title">🎸 Orgulho Cultural</div>
+    <p>A Festa do Trabalhador valoriza a cultura sertaneja e homenageia os agricultores, feirantes, professores e operários de Carneiros!</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 47</span>
+      </div>
+    </div>
+    <div class="page" id="page-48">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 23: São João e Tradições</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 23: São João e Tradições</h2>
+  <h3>O São João das Escolas e a Cultura Junina</h3>
+  <p>O mês de junho traz para as ruas e escolas de Carneiros a poética tradição dos festejos juninos. O tradicional <strong>São João das Escolas</strong> mobiliza alunos, professores e pais na montagem de quadrilhas estilizadas e barracas de comidas típicas.</p>
+  <p>Pamonha, canjica, milho assado, bolo de massa puba e quentão esquentam as noites ao som do legítimo forró pé-de-serra, xote e baião!</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 48</span>
+      </div>
+    </div>
+    <div class="page" id="page-49">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 23: Guardiões da Memória</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Abdon Rodrigues e os Historiadores da Terra</h3>
+  <p>A preservação da história de Carneiros deve muito ao empenho de cidadãos apaixonados pela memória local, com especial destaque para o memorista e historiador <strong>Abdon Rodrigues</strong>.</p>
+  <p>Através de pesquisas, resgate de fotos antigas e depoimentos de pioneiros, Abdon Rodrigues garantiu que as futuras gerações pudessem conhecer a verdade sobre as origens do nosso município.</p>
+  <div class="box-callout">
+    <div class="box-title">📚 Valorizando a Memória</div>
+    <p>A história vive quando nós a contamos! Ouça os idosos do seu bairro e ajude a registrar as memórias de Carneiros.</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 49</span>
+      </div>
+    </div>
+    <div class="page" id="page-50">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 24: O Futuro de Carneiros</span>
+      </div>
+      <div class="page-content">
+        
+  <h2>Capítulo 24: O Futuro de Carneiros</h2>
+  <h3>Modernização, Obras e Saúde Digital</h3>
+  <p>Carneiros avança com passos firmes rumo ao futuro! O município conta recentemente com mais de <strong>2 km de pavimentação asfáltica</strong> no centro urbano, iluminação pública em LED e a moderna <strong>Sala de Saúde Digital</strong>.</p>
+  <p>Com tecnologia de ponta, a saúde digital conecta moradores a consultas médicas especializadas via telemedicina, encurtando distâncias e salvando vidas no Sertão!</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 50</span>
+      </div>
+    </div>
+    <div class="page" id="page-51">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Capítulo 24: Carta aos Estudantes</span>
+      </div>
+      <div class="page-content">
+        
+  <h3>Carta às Futuras Gerações de Carneirenses</h3>
+  <p>Querido estudante, você é a maior riqueza do município de Carneiros! O futuro desta terra abençoada está em suas mãos. Através do estudo, da dedicação, da honestidade e do amor à sua comunidade, você continuará a construir uma cidade cada vez mais forte, justa e fraterna.</p>
+  <div class="box-quiz">
+    <div class="box-title">🌟 Compromisso com Carneiros</div>
+    <p><em>"Prometo estudar com dedicação, respeitar minha história, valorizar minha gente e cuidar do futuro do município de Carneiros!"</em></p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Página 51</span>
+      </div>
+    </div>
+    <div class="page" id="page-51b">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Referências Bibliográficas</span>
+      </div>
+      <div class="page-content">
+
+  <h2>Referências Bibliográficas</h2>
+
+  <h3>Fontes Documentais e Oficiais</h3>
+  <p><strong>1.</strong> ALAGOAS. Lei Estadual nº 2.067, de 10 de agosto de 1962. Cria o município de Carneiros, no Estado de Alagoas. Diário Oficial do Estado de Alagoas, Maceió, 1962.</p>
+  <p><strong>2.</strong> ALAGOAS. Lei Estadual nº 1.893, de 3 de junho de 1958. Cria o distrito de Carneiros, no município de Palmeira dos Índios. Diário Oficial do Estado de Alagoas, Maceió, 1958.</p>
+  <p><strong>3.</strong> BRASIL. Decreto-Lei nº 5.844, de 16 de setembro de 1943. Código Eleitoral. Diário Oficial da União, Rio de Janeiro, 1943.</p>
+  <p><strong>4.</strong> ALAGOAS. Decreto nº 011/2026. Diretrizes da Educação Municipal de Carneiros. Prefeitura Municipal de Carneiros, 2026.</p>
+
+  <h3>Fontes Históricas e Orais</h3>
+  <p><strong>5.</strong> RODRIGUES, Abdon. <em>Memórias de Carneiros: resgate histórico do povoado à emancipação</em>. Acervo oral e fotográfico do município de Carneiros-AL, 1990-2024.</p>
+  <p><strong>6.</strong> Depoimentos de pioneiros e moradores antigos do Sítio Carneiros e da Cacimba do Carneiro. Coletados pela comunidade local, Carneiros-AL, período: 1923-1962.</p>
+  <p><strong>7.</strong> Prefeitura Municipal de Carneiros. <em>Arquivo histórico-administrativo: primeiros prefeitos, atas de posse e registros de emancipação</em>. Carneiros-AL, 1962-2024.</p>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Pág. 52</span>
+      </div>
+    </div>
+    <div class="page" id="page-51c">
+      <div class="page-header">
+        <span class="header-book-title">HISTÓRIA DE CARNEIROS - AL</span>
+        <span class="header-chapter-title">Referências Bibliográficas</span>
+      </div>
+      <div class="page-content">
+
+  <h3>Fontes Estatísticas e Geográficas</h3>
+  <p><strong>8.</strong> IBGE - Instituto Brasileiro de Geografia e Estatística. <em>Censo Demográfico 2022: Carneiros-AL</em>. Rio de Janeiro: IBGE, 2023. Disponível em: www.ibge.gov.br.</p>
+  <p><strong>9.</strong> IBGE. <em>Perfil dos Municípios Brasileiros: Carneiros/AL</em>. Rio de Janeiro: IBGE, 2024. Disponível em: cidades.ibge.gov.br.</p>
+  <p><strong>10.</strong> MMA - Ministério do Meio Ambiente. <em>Caatinga: bioma exclusivamente brasileiro</em>. Brasília: MMA, 2023. Disponível em: www.gov.br/mma.</p>
+  <p><strong>11.</strong> SUDENE. <em>Delimitação do Semiárido Brasileiro: municípios de Alagoas</em>. Recife: SUDENE, 2024.</p>
+
+  <h3>Fontes Digitais e Educacionais</h3>
+  <p><strong>12.</strong> Portal carneirosvirtual.com. <em>História, cultura e memória do município de Carneiros-AL</em>. Carneiros, 2024-2026.</p>
+  <p><strong>13.</strong> Prefeitura Municipal de Carneiros. <em>Site oficial</em>. Disponível em: www.carneiros.al.gov.br. Acesso em: 2026.</p>
+  <p><strong>14.</strong> Tribunal Regional Eleitoral de Alagoas (TRE-AL). <em>Resultados históricos de eleições municipais: Carneiros-AL (1962-2024)</em>. Maceió: TRE-AL, 2024.</p>
+  <p><strong>15.</strong> Secretária Municipal de Educação de Carneiros (SEMED). <em>Diretrizes pedagógicas e materiais didáticos locais</em>. Carneiros-AL, 2026.</p>
+
+  <div class="box-callout">
+    <div class="box-title">📚 Nota sobre as Fontes</div>
+    <p>Esta obra reúne documentos oficiais, depoimentos orais de pioneiros, dados estatísticos do IBGE e registros administrativos da Prefeitura Municipal de Carneiros. A tradição oral foi fundamental para o resgate das origens do município (1923-1962).</p>
+  </div>
+
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Pág. 53</span>
+      </div>
+    </div>
+        <div class="page back-cover-page" id="page-52">
+      <div class="back-inner">
+        <div class="back-header">
+          <h2>HISTÓRIA COMPLETA DE CARNEIROS - ALAGOAS</h2>
+          <p class="back-tagline">Preservando o Passado, Educando o Presente, Construindo o Futuro</p>
+        </div>
+        <div class="back-body">
+          <div class="box-callout">
+            <div class="box-title">📖 SOBRE ESTA OBRA DIDÁTICA</div>
+            <p>Este livro é um documento histórico e educacional dedicado às novas gerações de carneirenses. Com texto claro, tipografia legível (mínimo de 18px) e regras de impressão para livreto A5, esta obra reúne a memória de pioneiros, líderes políticos, geografia da Caatinga, educação e manifestações culturais do município.</p>
+          </div>
+          <div class="catalog-card">
+            <h4>FICHA CATALOGRÁFICA / DADOS DE PUBLICAÇÃO</h4>
+            <p><strong>Título:</strong> História Completa de Carneiros - Alagoas (Livro do Estudante)</p>
+            <p><strong>Local de Publicação:</strong> Carneiros / AL - Sertão Alagoano</p>
+            <p><strong>Assuntos:</strong> História Municipal; Caatinga; Emancipação Política de 1962; Educação; Senador Rui Palmeira e Vizinhos.</p>
+            <p><strong>Portal Oficial de Memória:</strong> carneirosvirtual.com</p>
+            <p><strong>Edição Comemorativa:</strong> 2026 • 34ª Festa do Trabalhador • 64 Anos de Emancipação</p>
+          </div>
+          <div class="back-credits">
+            <p><strong>CEP:</strong> 57535-000 | <strong>DDD:</strong> (82) | <strong>Site:</strong> www.carneiros.al.gov.br</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span class="footer-domain">carneirosvirtual.com</span>
+        <span class="footer-page">Pág. 54</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function triggerPrint() {
+      window.print();
+    }
+
+    function jumpToPage(pageNum) {
+      var targetElement = document.getElementById("page-" + pageNum);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+
+</body>
+</html>
