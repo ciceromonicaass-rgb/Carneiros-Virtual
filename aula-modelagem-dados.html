@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelagem de Dados — 4 Aulas | Carneiros Virtual</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#fff;color:#1a1a1a;overflow-x:hidden}
+#nav{position:fixed;top:0;left:0;right:0;background:#f0f0f0;border-bottom:2px solid #0066cc;padding:8px 20px;display:flex;align-items:center;gap:12px;z-index:1000;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+#nav h1{font-size:.95rem;color:#0066cc;flex:1;min-width:200px}
+#nav button{padding:6px 14px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#1a1a1a;font-size:.85rem;cursor:pointer;transition:.2s}
+#nav button:hover{background:#e8e8e8;border-color:#0066cc}
+#aula-nav{position:fixed;top:42px;left:0;right:0;display:flex;gap:8px;padding:6px 15px;background:#e8e8e8;border-bottom:1px solid #ccc;flex-wrap:wrap;z-index:999}
+#aula-nav button{padding:6px 16px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#1a1a1a;font-size:.85rem;cursor:pointer;transition:.2s;font-weight:bold}
+#aula-nav button:hover{background:#e0e0e0;border-color:#0066cc}
+#aula-nav button.active{background:#0066cc;color:#fff;border-color:#0066cc}
+.aula-content{display:none;padding:70px 20px 40px;max-width:1000px;margin:0 auto}
+.aula-content.active{display:block}
+.mode-tabs{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}
+.mode-tabs button{padding:6px 16px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#1a1a1a;font-size:.85rem;cursor:pointer;transition:.2s}
+.mode-tabs button:hover{background:#e8e8e8}
+.mode-tabs button.active{background:#0066cc;color:#fff;border-color:#0066cc}
+.sub-mode{display:none}
+.sub-mode.active{display:block}
+.slide{display:none;background:#fff;border:1px solid #ddd;border-radius:16px;padding:40px 50px;min-height:480px;position:relative}
+.slide.active{display:block}
+.slide-num{position:absolute;bottom:15px;right:25px;color:#999;font-size:.8rem}
+.slide-title{font-size:1.8rem;color:#0066cc;margin-bottom:20px;text-align:center;font-weight:700}
+.slide-subtitle{font-size:1.1rem;color:#0066cc;text-align:center;margin-bottom:25px;font-style:italic}
+.slide-content{font-size:1.1rem;line-height:1.8;color:#1a1a1a}
+.slide-content p{margin:12px 0}
+.slide-content strong{color:#0066cc}
+.slide-content em{color:#cc6600}
+.slide-content ul{margin:12px 0 12px 30px}
+.slide-content li{margin:8px 0}
+.slide-content code{background:#f0f0f0;padding:2px 8px;border-radius:4px;color:#0066cc;font-family:Consolas,monospace;font-size:.95rem}
+.analogy-box{background:#fff8f0;border:2px solid #cc6600;border-radius:12px;padding:20px;margin:20px 0}
+.analogy-box .label{display:inline-block;background:#cc6600;color:#fff;padding:3px 12px;border-radius:20px;font-size:.8rem;font-weight:bold;margin-bottom:10px}
+.analogy-box p{font-size:1.05rem;color:#1a1a1a;margin:6px 0}
+.teacher-note{background:#f0fff0;border-left:4px solid #2a9d2a;border-radius:0 8px 8px 0;padding:15px 20px;margin:15px 0}
+.teacher-note .label{display:inline-block;background:#2a9d2a;color:#fff;padding:2px 10px;border-radius:20px;font-size:.8rem;font-weight:bold;margin-bottom:8px}
+.teacher-note p{font-size:.95rem;color:#1a6b1a;margin:4px 0}
+.code-box{background:#f5f5f5;border:1px solid #ccc;border-radius:8px;padding:18px;margin:15px 0;font-family:Consolas,monospace;font-size:.95rem;overflow-x:auto;white-space:pre}
+.code-box .kw{color:#d73a49}
+.code-box .str{color:#032f62}
+.code-box .num{color:#005cc5}
+.code-box .com{color:#6a737d;font-style:italic}
+.code-box .fn{color:#6f42c1}
+.code-box .var{color:#e36209}
+.er-box{background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:20px;margin:20px 0;font-family:Consolas,monospace;font-size:.9rem}
+.er-box .ent{color:#0066cc;font-weight:bold;border:2px solid #0066cc;border-radius:8px;padding:4px 12px;display:inline-block;margin:4px}
+.er-box .rel{color:#cc6600;font-weight:bold}
+.er-box .pk{color:#d73a49;font-weight:bold;text-decoration:underline}
+.er-box .fk{color:#6f42c1;font-weight:bold;font-style:italic}
+.slide-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding:0 10px}
+.slide-nav button{padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;color:#1a1a1a;font-size:.9rem;cursor:pointer;transition:.2s}
+.slide-nav button:hover{background:#e8e8e8;border-color:#0066cc}
+.slide-nav .counter{color:#666;font-size:.85rem}
+.quiz-header{text-align:center;margin-bottom:25px}
+.quiz-header h2{font-size:1.6rem;color:#0066cc;margin-bottom:5px}
+.quiz-header p{color:#666;font-size:.95rem}
+.quiz-question{background:#f8f8f8;border:1px solid #ddd;border-radius:12px;padding:25px;margin:15px 0}
+.quiz-question h3{font-size:1.1rem;color:#1a1a1a;margin-bottom:15px}
+.quiz-option{display:block;background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 18px;margin:8px 0;cursor:pointer;transition:.2s;color:#1a1a1a;font-size:.95rem}
+.quiz-option:hover{background:#f0f0f0;border-color:#0066cc}
+.quiz-option.correct{border-color:#2a9d2a;background:#e6ffe6;color:#1a6b1a}
+.quiz-option.wrong{border-color:#cc0000;background:#ffe6e6;color:#cc0000}
+.quiz-feedback{display:none;margin-top:12px;padding:15px;border-radius:8px;font-size:.9rem;line-height:1.6}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:#e6ffe6;border:1px solid #2a9d2a;color:#1a6b1a}
+.quiz-feedback.wrong{background:#ffe6e6;border:1px solid #cc0000;color:#cc0000}
+.quiz-score{background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:25px;text-align:center;margin:20px 0;display:none}
+.quiz-score.show{display:block}
+.quiz-score h3{font-size:1.5rem;color:#0066cc}
+.quiz-score p{color:#666;margin:8px 0}
+.desafio-card{background:#f8f8f8;border:1px solid #ddd;border-radius:12px;padding:25px;margin:20px 0}
+.desafio-card h2{color:#0066cc;font-size:1.3rem;margin-bottom:12px}
+.desafio-card h3{color:#0066cc;font-size:1.1rem;margin:15px 0 8px}
+.desafio-card p{color:#1a1a1a;font-size:1rem;line-height:1.7;margin:8px 0}
+.desafio-card ul{margin:10px 0 10px 25px}
+.desafio-card li{margin:6px 0;color:#1a1a1a}
+.desafio-card code{background:#f0f0f0;padding:2px 6px;border-radius:4px;color:#0066cc;font-size:.85rem}
+.desafio-input{background:#fff;border:1px solid #ccc;color:#1a1a1a;padding:6px 10px;border-radius:4px;font-family:Consolas,monospace;font-size:.9rem}
+.desafio-input:focus{outline:none;border-color:#0066cc}
+.desafio-check{padding:12px 25px;border:1px solid #2a9d2a;border-radius:8px;background:#e6ffe6;color:#1a6b1a;font-size:1rem;cursor:pointer;margin:15px 0}
+.desafio-check:hover{background:#d6f5d6}
+.desafio-result{font-size:1.1rem;font-weight:bold;margin:10px 0;padding:15px;border-radius:8px;display:none}
+.desafio-result.show{display:block}
+.legend{position:fixed;bottom:0;left:0;right:0;background:#f0f0f0;border-top:1px solid #ddd;padding:8px 20px;display:flex;justify-content:center;gap:20px;font-size:.8rem;flex-wrap:wrap;z-index:999}
+.legend-item{display:flex;align-items:center;gap:6px;color:#666}
+.legend-dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+.dot-yellow{background:#cc6600}
+.dot-purple{background:#6f42c1}
+.dot-green{background:#2a9d2a}
+footer{text-align:center;padding:15px;color:#999;font-size:.8rem}
+@media print{@page{size:A5;margin:0}#nav,#aula-nav,.legend{display:none}.aula-content{padding:10px}.slide{page-break-after:always;border:none}}
+</style>
+</head>
+<body>
+
+<div id="nav">
+  <h1>🗄️ Modelagem de Dados — 4 Aulas</h1>
+  <button onclick="window.print()">🖨️ Imprimir</button>
+</div>
+
+<div id="aula-nav">
+  <button id="aula1-btn" class="active" onclick="showAula(1)">🏛️ Aula 1: Fundamentos</button>
+  <button id="aula2-btn" onclick="showAula(2)">🔗 Aula 2: Entidades e Relacionamentos</button>
+  <button id="aula3-btn" onclick="showAula(3)">📐 Aula 3: Normalização</button>
+  <button id="aula4-btn" onclick="showAula(4)">💾 Aula 4: SQL e Modelo Físico</button>
+</div>
+
+<!-- AULA 1 -->
+<div id="aula1" class="aula-content active">
+  <div class="mode-tabs">
+    <button class="active" onclick="showSub(1,\"slides\")">📺 Slides</button>
+    <button onclick="showSub(1,\"quiz\")">🎮 Quiz</button>
+    <button onclick="showSub(1,\"desafio\")">🧩 Desafio</button>
+  </div>
+  <div id="aula1-slides" class="sub-mode active">
+    <div id="aula1-slides-container"></div>
+    <div class="slide-nav">
+      <button onclick="prevSlide(1)">⬅️ Anterior</button>
+      <span class="counter" id="aula1-counter">Slide 1 de 15</span>
+      <button onclick="nextSlide(1)">Próximo ➡️</button>
+    </div>
+  </div>
+  <div id="aula1-quiz" class="sub-mode">
+    <div class="quiz-header"><h2>🎮 Quiz Aula 1</h2><p>5 perguntas sobre fundamentos de modelagem</p></div>
+    <div id="aula1-quiz-questions"></div>
+    <div class="quiz-score" id="aula1-quiz-score">
+      <h3 id="aula1-score-title">🎉 Parabéns!</h3>
+      <p id="aula1-score-text">Você acertou 0 de 5!</p>
+      <p id="aula1-score-msg" style="color:#cc6600"></p>
+      <button onclick="resetQuiz(1)" style="margin-top:15px;padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer">🔄 Tentar novamente</button>
+    </div>
+  </div>
+  <div id="aula1-desafio" class="sub-mode">
+    <div class="desafio-card">
+      <h2>🧩 Desafio 1: Identificando Entidades</h2>
+      <p>Complete a modelagem de uma escola. Identifique as entidades, atributos e chaves.</p>
+      <div class="er-box" style="line-height:2.4">
+        <strong>Entidade:</strong> <input type="text" class="desafio-input" id="a1d1" style="width:120px" placeholder="nome da entidade" onkeyup="checkD1()"> (ex: ALUNO)<br>
+        <strong>Atributos:</strong> id, nome, <input type="text" class="desafio-input" id="a1d2" style="width:100px" placeholder="?" onkeyup="checkD1()"> , telefone<br>
+        <strong>Chave primária:</strong> <input type="text" class="desafio-input" id="a1d3" style="width:60px" placeholder="PK?" onkeyup="checkD1()"> (qual campo?)<br>
+        <strong>Outra entidade:</strong> <input type="text" class="desafio-input" id="a1d4" style="width:100px" placeholder="outra entidade" onkeyup="checkD1()"> (ex: TURMA)<br>
+        <strong>Relacionamento:</strong> ALUNO <input type="text" class="desafio-input" id="a1d5" style="width:50px" placeholder="1:N?" onkeyup="checkD1()"> TURMA
+      </div>
+      <button class="desafio-check" onclick="checkD1(true)">✅ Verificar</button>
+      <div class="desafio-result" id="a1d-result"></div>
+      <h3>💡 Dicas</h3>
+      <ul>
+        <li>Entidades são substantivos: ALUNO, TURMA, PROFESSOR</li>
+        <li>Falta um atributo importante do aluno (matrícula?)</li>
+        <li>A chave primária identifica cada registro (geralmente é o <code>id</code>)</li>
+        <li>Uma turma tem muitos alunos, mas um aluno está em uma turma: <code>1:N</code></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- AULA 2 -->
+<div id="aula2" class="aula-content">
+  <div class="mode-tabs">
+    <button class="active" onclick="showSub(2,\"slides\")">📺 Slides</button>
+    <button onclick="showSub(2,\"quiz\")">🎮 Quiz</button>
+    <button onclick="showSub(2,\"desafio\")">🧩 Desafio</button>
+  </div>
+  <div id="aula2-slides" class="sub-mode active">
+    <div id="aula2-slides-container"></div>
+    <div class="slide-nav">
+      <button onclick="prevSlide(2)">⬅️ Anterior</button>
+      <span class="counter" id="aula2-counter">Slide 1 de 15</span>
+      <button onclick="nextSlide(2)">Próximo ➡️</button>
+    </div>
+  </div>
+  <div id="aula2-quiz" class="sub-mode">
+    <div class="quiz-header"><h2>🎮 Quiz Aula 2</h2><p>5 perguntas sobre entidades e relacionamentos</p></div>
+    <div id="aula2-quiz-questions"></div>
+    <div class="quiz-score" id="aula2-quiz-score">
+      <h3 id="aula2-score-title">🎉 Parabéns!</h3>
+      <p id="aula2-score-text">Você acertou 0 de 5!</p>
+      <p id="aula2-score-msg" style="color:#cc6600"></p>
+      <button onclick="resetQuiz(2)" style="margin-top:15px;padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer">🔄 Tentar novamente</button>
+    </div>
+  </div>
+  <div id="aula2-desafio" class="sub-mode">
+    <div class="desafio-card">
+      <h2>🧩 Desafio 2: Diagrama ER de Biblioteca</h2>
+      <p>Complete o diagrama entidade-relacionamento de uma biblioteca.</p>
+      <div class="er-box" style="line-height:2.4">
+        <strong>LIVRO</strong> (id, titulo, autor, ano)<br>
+        <strong>LEITOR</strong> (id, <input type="text" class="desafio-input" id="a2d1" style="width:100px" placeholder="atributo faltante" onkeyup="checkD2()"> , email)<br>
+        <strong>EMPRÉSTIMO</strong> (id, livro_id, <input type="text" class="desafio-input" id="a2d2" style="width:100px" placeholder="FK do leitor" onkeyup="checkD2()"> , data)<br><br>
+        <strong>Cardinalidade:</strong><br>
+        LIVRO <input type="text" class="desafio-input" id="a2d3" style="width:50px" placeholder="1:N?" onkeyup="checkD2()"> EMPRÉSTIMO<br>
+        LEITOR <input type="text" class="desafio-input" id="a2d4" style="width:50px" placeholder="1:N?" onkeyup="checkD2()"> EMPRÉSTIMO
+      </div>
+      <button class="desafio-check" onclick="checkD2(true)">✅ Verificar</button>
+      <div class="desafio-result" id="a2d-result"></div>
+      <h3>💡 Dicas</h3>
+      <ul>
+        <li>Leitor precisa de um campo de identificação além do id (nome?)</li>
+        <li>A FK do leitor na tabela EMPRÉSTIMO segue o padrão: <code>nome_tabela_id</code></li>
+        <li>Um livro pode ter muitos empréstimos (1:N)</li>
+        <li>Um leitor pode ter muitos empréstimos (1:N)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- AULA 3 -->
+<div id="aula3" class="aula-content">
+  <div class="mode-tabs">
+    <button class="active" onclick="showSub(3,\"slides\")">📺 Slides</button>
+    <button onclick="showSub(3,\"quiz\")">🎮 Quiz</button>
+    <button onclick="showSub(3,\"desafio\")">🧩 Desafio</button>
+  </div>
+  <div id="aula3-slides" class="sub-mode active">
+    <div id="aula3-slides-container"></div>
+    <div class="slide-nav">
+      <button onclick="prevSlide(3)">⬅️ Anterior</button>
+      <span class="counter" id="aula3-counter">Slide 1 de 15</span>
+      <button onclick="nextSlide(3)">Próximo ➡️</button>
+    </div>
+  </div>
+  <div id="aula3-quiz" class="sub-mode">
+    <div class="quiz-header"><h2>🎮 Quiz Aula 3</h2><p>5 perguntas sobre normalização</p></div>
+    <div id="aula3-quiz-questions"></div>
+    <div class="quiz-score" id="aula3-quiz-score">
+      <h3 id="aula3-score-title">🎉 Parabéns!</h3>
+      <p id="aula3-score-text">Você acertou 0 de 5!</p>
+      <p id="aula3-score-msg" style="color:#cc6600"></p>
+      <button onclick="resetQuiz(3)" style="margin-top:15px;padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer">🔄 Tentar novamente</button>
+    </div>
+  </div>
+  <div id="aula3-desafio" class="sub-mode">
+    <div class="desafio-card">
+      <h2>🧩 Desafio 3: Normalize a Tabela</h2>
+      <p>A tabela abaixo tem problemas. Normalize-a até a 3FN identificando as formas normais.</p>
+      <div class="code-box" style="font-size:.85rem">
+PEDIDOS (id, cliente_nome, cliente_cidade, cliente_cep, produto_nome, produto_preco, qtd, data)
+      </div>
+      <p>Preencha o nome de cada Forma Normal:</p>
+      <div class="er-box" style="line-height:2.4">
+        <strong>1FN:</strong> Garantir que cada campo tenha valor <input type="text" class="desafio-input" id="a3d1" style="width:120px" placeholder="palavra-chave" onkeyup="checkD3()"> (não listas)<br>
+        <strong>2FN:</strong> Eliminar dependência <input type="text" class="desafio-input" id="a3d2" style="width:120px" placeholder="tipo de dependência" onkeyup="checkD3()"> (separar produtos)<br>
+        <strong>3FN:</strong> Eliminar dependência <input type="text" class="desafio-input" id="a3d3" style="width:120px" placeholder="tipo de dependência" onkeyup="checkD3()"> (separar cliente/cidade/cep)<br>
+        <strong>Resultado:</strong> <input type="text" class="desafio-input" id="a3d4" style="width:60px" placeholder="número" onkeyup="checkD3()"> tabelas normalizadas
+      </div>
+      <button class="desafio-check" onclick="checkD3(true)">✅ Verificar</button>
+      <div class="desafio-result" id="a3d-result"></div>
+      <h3>💡 Dicas</h3>
+      <ul>
+        <li>1FN: cada célula deve ter um valor <strong>atômico</strong> (unico)</li>
+        <li>2FN: eliminar dependência <strong>parcial</strong> (atributos que dependem de parte da chave)</li>
+        <li>3FN: eliminar dependência <strong>transitiva</strong> (cidade depende de cep, não de id)</li>
+        <li>Resultado: CLIENTE, PRODUTO, PEDIDO, ITEM_PEDIDO = 4 tabelas</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- AULA 4 -->
+<div id="aula4" class="aula-content">
+  <div class="mode-tabs">
+    <button class="active" onclick="showSub(4,\"slides\")">📺 Slides</button>
+    <button onclick="showSub(4,\"quiz\")">🎮 Quiz</button>
+    <button onclick="showSub(4,\"desafio\")">🧩 Desafio</button>
+  </div>
+  <div id="aula4-slides" class="sub-mode active">
+    <div id="aula4-slides-container"></div>
+    <div class="slide-nav">
+      <button onclick="prevSlide(4)">⬅️ Anterior</button>
+      <span class="counter" id="aula4-counter">Slide 1 de 15</span>
+      <button onclick="nextSlide(4)">Próximo ➡️</button>
+    </div>
+  </div>
+  <div id="aula4-quiz" class="sub-mode">
+    <div class="quiz-header"><h2>🎮 Quiz Aula 4</h2><p>5 perguntas sobre SQL e modelo físico</p></div>
+    <div id="aula4-quiz-questions"></div>
+    <div class="quiz-score" id="aula4-quiz-score">
+      <h3 id="aula4-score-title">🎉 Parabéns!</h3>
+      <p id="aula4-score-text">Você acertou 0 de 5!</p>
+      <p id="aula4-score-msg" style="color:#cc6600"></p>
+      <button onclick="resetQuiz(4)" style="margin-top:15px;padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer">🔄 Tentar novamente</button>
+    </div>
+  </div>
+  <div id="aula4-desafio" class="sub-mode">
+    <div class="desafio-card">
+      <h2>🧩 Desafio 4: CREATE TABLE em SQL</h2>
+      <p>Complete o comando SQL para criar a tabela de alunos com chave primária e constraints.</p>
+      <div class="code-box" style="line-height:2.2">
+<span class="kw">CREATE TABLE</span> <input type="text" class="desafio-input" id="a4d1" style="width:100px" placeholder="nome tabela" onkeyup="checkD4()"> (<br>
+&nbsp;&nbsp;id <span class="fn">INT</span> <input type="text" class="desafio-input" id="a4d2" style="width:80px" placeholder="chave primaria" onkeyup="checkD4()"> <span class="kw">KEY</span>,<br>
+&nbsp;&nbsp;nome <span class="fn">VARCHAR</span>(100) <input type="text" class="desafio-input" id="a4d3" style="width:80px" placeholder="nao nulo" onkeyup="checkD4()"> ,<br>
+&nbsp;&nbsp;email <span class="fn">VARCHAR</span>(100) <input type="text" class="desafio-input" id="a4d4" style="width:80px" placeholder="unico" onkeyup="checkD4()"> ,<br>
+&nbsp;&nbsp;turma_id <span class="fn">INT</span>,<br>
+&nbsp;&nbsp;<span class="kw">FOREIGN KEY</span> (turma_id) <span class="kw">REFERENCES</span> <input type="text" class="desafio-input" id="a4d5" style="width:100px" placeholder="tabela referenciada" onkeyup="checkD4()"> (id)<br>
+);
+      </div>
+      <button class="desafio-check" onclick="checkD4(true)">✅ Verificar</button>
+      <div class="desafio-result" id="a4d-result"></div>
+      <h3>💡 Dicas</h3>
+      <ul>
+        <li>Nome da tabela: <code>alunos</code> (plural, minuscula)</li>
+        <li>Chave primária: <code>PRIMARY</code></li>
+        <li>Não nulo: <code>NOT NULL</code></li>
+        <li>Único: <code>UNIQUE</code></li>
+        <li>Tabela referenciada pela FK: <code>turmas</code></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot dot-yellow"></span> Amarelo: substituição</div>
+  <div class="legend-item"><span class="legend-dot dot-purple"></span> Roxo: comandos</div>
+  <div class="legend-item"><span class="legend-dot dot-green"></span> Verde: textos</div>
+</div>
+
+<footer>www.carneirosvirtual.online - Profº. Antônio</footer>
+
+<script>
+function showAula(n){
+  document.querySelectorAll(".aula-content").forEach(a=>a.classList.remove("active"));
+  document.querySelectorAll("#aula-nav button").forEach(b=>b.classList.remove("active"));
+  document.getElementById("aula"+n).classList.add("active");
+  document.getElementById("aula"+n+"-btn").classList.add("active");
+  window.scrollTo(0,0);
+}
+function showSub(aula,mode){
+  var prefix="aula"+aula;
+  document.getElementById(prefix+"-slides").classList.remove("active");
+  document.getElementById(prefix+"-quiz").classList.remove("active");
+  document.getElementById(prefix+"-desafio").classList.remove("active");
+  document.getElementById(prefix+"-"+mode).classList.add("active");
+  var btns=document.querySelectorAll("#aula"+aula+" .mode-tabs button");
+  btns.forEach(function(b){b.classList.remove("active")});
+  for(var i=0;i<btns.length;i++){
+    if(btns[i].getAttribute("onclick")&&btns[i].getAttribute("onclick").indexOf(mode)>-1){
+      btns[i].classList.add("active");break;
+    }
+  }
+}
+var slideState={1:1,2:1,3:1,4:1};
+var slideTotals={};
+function initSlides(aula){
+  var container=document.getElementById("aula"+aula+"-slides-container");
+  if(!container||container.children.length>0)return;
+  var slides=allSlides[aula];
+  slideTotals[aula]=slides.length;
+  slides.forEach(function(html,i){
+    var div=document.createElement("div");
+    div.className="slide"+(i===0?" active":"");
+    div.innerHTML=html;
+    container.appendChild(div);
+  });
+  updateCounter(aula);
+}
+function showSlide(aula,n){
+  var slides=document.querySelectorAll("#aula"+aula+"-slides-container .slide");
+  slides.forEach(function(s){s.classList.remove("active")});
+  if(slides[n-1])slides[n-1].classList.add("active");
+  slideState[aula]=n;
+  updateCounter(aula);
+}
+function nextSlide(aula){if(slideState[aula]<slideTotals[aula])showSlide(aula,slideState[aula]+1)}
+function prevSlide(aula){if(slideState[aula]>1)showSlide(aula,slideState[aula]-1)}
+function updateCounter(aula){
+  var c=document.getElementById("aula"+aula+"-counter");
+  if(c)c.textContent="Slide "+slideState[aula]+" de "+slideTotals[aula];
+}
+var quizData={
+1:[
+{q:"O que e uma entidade em modelagem de dados?",options:["Uma tabela do banco","Um objeto do mundo real que sera armazenado","Um tipo de dado","Um comando SQL"],correct:1,explain:"Entidade e algo do mundo real que queremos armazenar (ALUNO, LIVRO, PEDIDO)."},
+{q:"O que e uma chave primaria (PK)?",options:["Um campo que pode ser nulo","Um campo que identifica unicamente cada registro","Um campo de texto longo","Um campo opcional"],correct:1,explain:"PK identifica unicamente cada registro. Nao pode ser nulo nem repetido."},
+{q:"O que e uma chave estrangeira (FK)?",options:["Uma chave de criptografia","Um campo que referencia a PK de outra tabela","Uma chave que nao e importante","A mesma coisa que PK"],correct:1,explain:"FK cria relacionamentos entre tabelas, referenciando a PK de outra tabela."},
+{q:"Qual a cardinalidade 1:N?",options:["Um para um","Um para muitos","Muitos para muitos","Nenhum para nenhum"],correct:1,explain:"1:N = um para muitos. Ex: uma turma tem muitos alunos (1:N)."},
+{q:"O que e um atributo?",options:["Uma tabela","Uma caracteristica de uma entidade","Um relacionamento","Um comando SQL"],correct:1,explain:"Atributo e uma propriedade da entidade (nome, idade, email). Vira coluna na tabela."}
+],
+2:[
+{q:"O que e um relacionamento N:M?",options:["Um para um","Um para muitos","Muitos para muitos","Nenhum"],correct:2,explain:"N:M = muitos para muitos. Ex: alunos cursam muitas disciplinas e cada disciplina tem muitos alunos."},
+{q:"Como resolver um relacionamento N:M?",options:["Nao tem solucao","Criar uma tabela intermediaria (associativa)","Deletar uma tabela","Usar apenas FK"],correct:1,explain:"Cria-se uma tabela associativa com as FKs das duas tabelas originais."},
+{q:"O que e uma entidade fraca?",options:["Uma entidade sem atributos","Uma entidade que depende de outra para existir","Uma entidade pequena","Uma entidade sem PK"],correct:1,explain:"Entidade fraca nao existe sem sua entidade forte. Ex: DEPENDENTE depende de FUNCIONARIO."},
+{q:"Um atributo multivalorado e:",options:["Um atributo que nao tem valor","Um atributo que pode ter varios valores","Um atributo obrigatorio","Um atributo numerico"],correct:1,explain:"Ex: telefones de um cliente (pode ter varios). Na pratica, vira uma tabela separada."},
+{q:"No diagrama ER, o losango representa:",options:["Entidade","Relacionamento","Atributo","Chave primaria"],correct:1,explain:"O losango representa o relacionamento entre entidades no diagrama ER (notacao Chen)."}
+],
+3:[
+{q:"O que e a 1a Forma Normal (1FN)?",options:["Elimina dados duplicados","Cada celula tem valor atomico (unico)","Cria chaves estrangeiras","Elimina tabelas"],correct:1,explain:"1FN: cada celula deve conter um unico valor. Nao pode ter listas dentro de uma celula."},
+{q:"A 2FN elimina que tipo de dependencia?",options:["Dependencia transitiva","Dependencia parcial","Dependencia total","Dependencia nula"],correct:1,explain:"2FN elimina dependencia parcial: atributos que dependem de apenas parte da chave composta."},
+{q:"A 3FN elimina que tipo de dependencia?",options:["Dependencia parcial","Dependencia transitiva","Dependencia primaria","Dependencia direta"],correct:1,explain:"3FN elimina dependencia transitiva: atributos que dependem de outro atributo nao-chave."},
+{q:"Uma anomalia de atualizacao ocorre quando:",options:["O banco cai","Dados repetidos sao atualizados em apenas um lugar","A tabela e muito grande","Falta PK"],correct:1,explain:"Se o mesmo dado esta repetido e voce atualiza so um, os outros ficam inconsistentes."},
+{q:"Desnormalizar e:",options:["Um erro grave","Intencionalmente juntar tabelas por performance","Deletar tabelas","Ignorar a 1FN"],correct:1,explain:"As vezes juntamos tabelas (desnormalizar) para melhorar performance de consultas, mesmo ferindo a normalizacao."}
+],
+4:[
+{q:"Qual comando cria uma tabela em SQL?",options:["MAKE TABLE","CREATE TABLE","NEW TABLE","ADD TABLE"],correct:1,explain:"CREATE TABLE nome (colunas e tipos). E o comando padrao para criar tabelas."},
+{q:"Qual tipo SQL para texto variavel?",options:["TEXT","STRING","VARCHAR","CHARFIELD"],correct:2,explain:"VARCHAR(n) armazena texto variavel com tamanho maximo n. Ex: VARCHAR(100)."},
+{q:"O que faz NOT NULL?",options:["Permite valor vazio","Proibe valor nulo","Define valor padrao","Cria chave"],correct:1,explain:"NOT NULL obriga o campo a ter sempre um valor. Nao pode ficar vazio."},
+{q:"Qual constraint garante unicidade?",options:["UNIQUE","SINGLE","ONLY","DISTINCT"],correct:0,explain:"UNIQUE garante que nenhum valor se repita na coluna. Ex: email UNIQUE."},
+{q:"O que faz FOREIGN KEY?",options:["Cria uma chave estrangeira","Apaga dados","Importa dados","Cria indice"],correct:0,explain:"FOREIGN KEY cria a referencia a outra tabela, estabelecendo o relacionamento fisico."}
+]
+};
+var quizAnswered={1:[],2:[],3:[],4:[]};
+var quizScore={1:0,2:0,3:0,4:0};
+function renderQuiz(aula){
+  var container=document.getElementById("aula"+aula+"-quiz-questions");
+  if(!container)return;
+  container.innerHTML="";
+  quizData[aula].forEach(function(q,qi){
+    var div=document.createElement("div");
+    div.className="quiz-question";
+    var html="<h3>"+(qi+1)+". "+q.q+"</h3>";
+    q.options.forEach(function(opt,oi){
+      html+="<div class=\"quiz-option\" onclick=\"answerQuiz("+aula+","+qi+","+oi+")\" id=\"q"+aula+"opt"+qi+"-"+oi+"\">"+String.fromCharCode(65+oi)+". "+opt+"</div>";
+    });
+    html+="<div class=\"quiz-feedback\" id=\"q"+aula+"fb"+qi+"\"></div>";
+    div.innerHTML=html;
+    container.appendChild(div);
+  });
+}
+function answerQuiz(aula,qi,oi){
+  if(quizAnswered[aula][qi])return;
+  quizAnswered[aula][qi]=true;
+  var q=quizData[aula][qi];
+  var fb=document.getElementById("q"+aula+"fb"+qi);
+  var sel=document.getElementById("q"+aula+"opt"+qi+"-"+oi);
+  var cor=document.getElementById("q"+aula+"opt"+qi+"-"+q.correct);
+  if(oi===q.correct){
+    sel.classList.add("correct");
+    fb.classList.add("show","correct");
+    fb.innerHTML="<strong>Correto!</strong> "+q.explain;
+    quizScore[aula]++;
+  }else{
+    sel.classList.add("wrong");
+    cor.classList.add("correct");
+    fb.classList.add("show","wrong");
+    fb.innerHTML="<strong>Resposta: "+String.fromCharCode(65+q.correct)+"</strong>. "+q.explain;
+  }
+  q.options.forEach(function(opt,oi2){
+    var el=document.getElementById("q"+aula+"opt"+qi+"-"+oi2);
+    if(el){el.style.pointerEvents="none";el.style.opacity="0.6"}
+  });
+  if(quizAnswered[aula].filter(function(a){return a}).length===quizData[aula].length)showScore(aula);
+}
+function showScore(aula){
+  var sc=document.getElementById("aula"+aula+"-quiz-score");
+  var sc2=quizScore[aula],tot=quizData[aula].length;
+  document.getElementById("aula"+aula+"-score-text").textContent="Voce acertou "+sc2+" de "+tot+"!";
+  var t=document.getElementById("aula"+aula+"-score-title"),m=document.getElementById("aula"+aula+"-score-msg");
+  if(sc2>=4){t.textContent="Perfeito!";m.textContent="Voce dominou esta aula!"}
+  else if(sc2>=3){t.textContent="Muito bem!";m.textContent="Bom trabalho! Revise o que errou."}
+  else{t.textContent="Continue!";m.textContent="Revise os slides e tente de novo!"}
+  sc.classList.add("show");
+}
+function resetQuiz(aula){
+  quizAnswered[aula]=[];quizScore[aula]=0;
+  renderQuiz(aula);
+  document.getElementById("aula"+aula+"-quiz-score").classList.remove("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function checkD1(showR){
+  var ans={a1d1:["aluno"],a1d2:["matricula","matr\u00edcula"],a1d3:["id"],a1d5:["1:n","1: n","1:n"]};
+  var c=0;
+  Object.keys(ans).forEach(function(k){
+    var el=document.getElementById(k);if(!el)return;
+    var v=el.value.trim().toLowerCase().replace(/\s/g,"");
+    if(ans[k].some(function(a){return a.toLowerCase().replace(/\s/g,"")===v})){el.style.borderColor="#2a9d2a";el.style.background="#e6ffe6";c++}
+    else if(el.value.trim()){el.style.borderColor="#cc0000";el.style.background="#ffe6e6"}
+    else{el.style.borderColor="#ccc";el.style.background="#fff"}
+  });
+  // a1d4 accepts turma
+  var el4=document.getElementById("a1d4");
+  if(el4){var v4=el4.value.trim().toLowerCase();if(v4==="turma"){el4.style.borderColor="#2a9d2a";el4.style.background="#e6ffe6";c++}else if(el4.value.trim()){el4.style.borderColor="#cc0000";el4.style.background="#ffe6e6"}else{el4.style.borderColor="#ccc";el4.style.background="#fff"}}
+  if(showR)showResult("a1d-result",c,5,"Modelagem da Escola");
+}
+function checkD2(showR){
+  var ans={a2d1:["nome"],a2d2:["leitor_id"],a2d3:["1:n","1:n"],a2d4:["1:n","1:n"]};
+  var c=0;
+  Object.keys(ans).forEach(function(k){
+    var el=document.getElementById(k);if(!el)return;
+    var v=el.value.trim().toLowerCase().replace(/\s/g,"");
+    if(ans[k].some(function(a){return a.toLowerCase().replace(/\s/g,"")===v})){el.style.borderColor="#2a9d2a";el.style.background="#e6ffe6";c++}
+    else if(el.value.trim()){el.style.borderColor="#cc0000";el4.style.background="#ffe6e6"}
+    else{el.style.borderColor="#ccc";el.style.background="#fff"}
+  });
+  if(showR)showResult("a2d-result",c,4,"Diagrama ER da Biblioteca");
+}
+function checkD3(showR){
+  var ans={a3d1:["atomico","at\u00f4mico","unico","\u00fanico"],a3d2:["parcial"],a3d3:["transitiva"],a3d4:["4","quatro"]};
+  var c=0;
+  Object.keys(ans).forEach(function(k){
+    var el=document.getElementById(k);if(!el)return;
+    var v=el.value.trim().toLowerCase().replace(/\s/g,"");
+    if(ans[k].some(function(a){return a.toLowerCase().replace(/\s/g,"")===v})){el.style.borderColor="#2a9d2a";el.style.background="#e6ffe6";c++}
+    else if(el.value.trim()){el.style.borderColor="#cc0000";el.style.background="#ffe6e6"}
+    else{el.style.borderColor="#ccc";el.style.background="#fff"}
+  });
+  if(showR)showResult("a3d-result",c,4,"Normalizacao");
+}
+function checkD4(showR){
+  var ans={a4d1:["alunos"],a4d2:["primary"],a4d3:["not null","notnull"],a4d4:["unique"],a4d5:["turmas"]};
+  var c=0;
+  Object.keys(ans).forEach(function(k){
+    var el=document.getElementById(k);if(!el)return;
+    var v=el.value.trim().toLowerCase().replace(/\s/g,"");
+    if(ans[k].some(function(a){return a.toLowerCase().replace(/\s/g,"")===v})){el.style.borderColor="#2a9d2a";el.style.background="#e6ffe6";c++}
+    else if(el.value.trim()){el.style.borderColor="#cc0000";el.style.background="#ffe6e6"}
+    else{el.style.borderColor="#ccc";el.style.background="#fff"}
+  });
+  if(showR)showResult("a4d-result",c,5,"CREATE TABLE");
+}
+function showResult(id,c,tot,name){
+  var r=document.getElementById(id);
+  r.className="desafio-result show";
+  if(c===tot){
+    r.style.cssText="background:#e6ffe6;border:2px solid #2a9d2a;color:#1a6b1a;padding:15px;border-radius:8px;font-weight:bold";
+    r.innerHTML="\u2705 "+name+": completo! Todos os "+tot+" campos corretos!";
+  }else{
+    r.style.cssText="background:#fff8f0;border:2px solid #cc6600;color:#cc6600;padding:15px;border-radius:8px;font-weight:bold";
+    r.innerHTML="Voce acertou "+c+" de "+tot+". Campos em vermelho precisam ajustar.";
+  }
+}
+</script>
+
+<script>
+var allSlides = {"1": ["<div class=\"slide-title\">🏛️ Aula 1: Fundamentos de Modelagem de Dados</div><div class=\"slide-subtitle\">Do mundo real ao banco de dados</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem\">1º e 2º Ano • Técnico Integral</p><div style=\"margin:20px 0;font-size:3rem\">🌍 ➡️ 📐 ➡️ 🗄️</div><p style=\"color:#0066cc\">Aprenda como organizar informações do mundo real em tabelas!</p></div><div class=\"slide-num\">1/15</div>", "<div class=\"slide-title\">O que é Modelagem de Dados? 🗄️</div><div class=\"slide-content\"><p><strong>Modelagem de dados</strong> é o processo de organizar informações do mundo real para armazenar em um banco de dados.</p><div class=\"analogy-box\"><span class=\"label\">💡 ANALOGIA</span><p>É como organizar uma biblioteca: você não joga os livros em qualquer lugar. Cada livro tem um lugar, uma categoria, um número.</p></div><p>Modelar dados é criar uma <strong>estrutura organizada</strong> para guardar informações de forma eficiente.</p></div><div class=\"teacher-note\"><span class=\"label\">🗣️ Professor</span><p>Pergunte: \"Se vocês fossem montar uma escola, como organizariam os dados dos alunos?\"</p></div><div class=\"slide-num\">2/15</div>", "<div class=\"slide-title\">Por que modelar dados? 🤔</div><div class=\"slide-content\"><ul><li><strong>Evita redundância:</strong> não repetir a mesma informação em vários lugares</li><li><strong>Garante consistência:</strong> se atualizar em um lugar, atualiza em todos</li><li><strong>Facilita consultas:</strong> encontra dados rapidamente</li><li><strong>Reduz erros:</strong> dados validados e organizados</li><li><strong>Economiza espaço:</strong> armazena só o necessário</li></ul><div class=\"analogy-box\"><span class=\"label\">💡 SEM MODELAGEM</span><p>Imagine uma planilha gigante com tudo misturado: alunos, notas, turmas, professores... impossível de manter!</p></div></div><div class=\"slide-num\">3/15</div>", "<div class=\"slide-title\">Os 3 Níveis de Modelagem 📐</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Nível</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Nome</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Foco</th></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>1. Conceitual</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Modelo ER</td><td style=\"padding:10px;border:1px solid #ddd\">Visão do mundo real (entidades)</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>2. Lógico</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Modelo Relacional</td><td style=\"padding:10px;border:1px solid #ddd\">Tabelas, colunas, chaves</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>3. Físico</strong></td><td style=\"padding:10px;border:1px solid #ddd\">SQL</td><td style=\"padding:10px;border:1px solid #ddd\">Tipos de dados, constraints</td></tr></table><p style=\"color:#cc6600\">Hoje começamos pelo nível conceitual!</p></div><div class=\"slide-num\">4/15</div>", "<div class=\"slide-title\">Entidades: o que são? 📦</div><div class=\"slide-content\"><p>Uma <strong>entidade</strong> é algo do mundo real que queremos armazenar:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span> &nbsp;&nbsp; <span class=\"ent\">TURMA</span> &nbsp;&nbsp; <span class=\"ent\">PROFESSOR</span> &nbsp;&nbsp; <span class=\"ent\">DISCIPLINA</span></div><div class=\"analogy-box\"><span class=\"label\">💡 REGRA</span><p>Entidade é sempre um <strong>substantivo</strong>: pessoa, objeto, conceito, evento.</p><p>É como se fosse uma \"tabela\" no banco de dados.</p></div></div><div class=\"slide-num\">5/15</div>", "<div class=\"slide-title\">Atributos: características das entidades 📝</div><div class=\"slide-content\"><p><strong>Atributos</strong> são as características de uma entidade:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span><br>• <span class=\"pk\">id</span> (chave primária)<br>• nome<br>• matricula<br>• email<br>• data_nascimento</div><div class=\"analogy-box\"><span class=\"label\">💡 ANALOGIA</span><p>Se ALUNO é a \"pessoa\", os atributos são: nome, idade, endereço, telefone...</p><p>Cada atributo vira uma <strong>coluna</strong> na tabela.</p></div></div><div class=\"slide-num\">6/15</div>", "<div class=\"slide-title\">Chave Primária (PK) 🔑</div><div class=\"slide-content\"><p>A <strong>chave primária</strong> identifica unicamente cada registro:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span><br>• <span class=\"pk\">id</span> (PK) - não repete, nunca é nulo<br>• nome<br>• email</div><div class=\"analogy-box\"><span class=\"label\">🔑 REGRAS DA PK</span><p>• <strong>Única:</strong> cada registro tem um valor diferente</p><p>• <strong>Não nula:</strong> sempre tem um valor</p><p>• <strong>Imutável:</strong> não muda com o tempo</p></div><p>Exemplos: CPF, RA (registro do aluno), ISBN (livro).</p></div><div class=\"slide-num\">7/15</div>", "<div class=\"slide-title\">Chave Estrangeira (FK) 🔗</div><div class=\"slide-content\"><p>A <strong>chave estrangeira</strong> cria relacionamentos entre tabelas:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome<br>• <span class=\"fk\">turma_id</span> (FK) → referencia TURMA<br><br><span class=\"ent\">TURMA</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome</div><div class=\"analogy-box\"><span class=\"label\">🔗 FK</span><p>A FK aponta para a PK de outra tabela. É assim que tabelas se \"conectam\".</p></div></div><div class=\"slide-num\">8/15</div>", "<div class=\"slide-title\">Tipos de dados 📋</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Exemplo</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Uso</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>INT</strong></td><td style=\"padding:8px;border:1px solid #ddd\">42</td><td style=\"padding:8px;border:1px solid #ddd\">Números inteiros (id, idade)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>VARCHAR</strong></td><td style=\"padding:8px;border:1px solid #ddd\">\"Maria\"</td><td style=\"padding:8px;border:1px solid #ddd\">Texto variável (nome, email)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>DATE</strong></td><td style=\"padding:8px;border:1px solid #ddd\">2010-05-15</td><td style=\"padding:8px;border:1px solid #ddd\">Datas (nascimento)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>DECIMAL</strong></td><td style=\"padding:8px;border:1px solid #ddd\">9.50</td><td style=\"padding:8px;border:1px solid #ddd\">Valores exatos (notas, preços)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>BOOLEAN</strong></td><td style=\"padding:8px;border:1px solid #ddd\">True/False</td><td style=\"padding:8px;border:1px solid #ddd\">Sim/Não (aprovado)</td></tr></table></div><div class=\"slide-num\">9/15</div>", "<div class=\"slide-title\">Cardinalidade: 1:1, 1:N, N:M 🔀</div><div class=\"slide-content\"><div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:15px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:15px;text-align:center\"><h3 style=\"color:#0066cc\">1:1</h3><p style=\"font-size:.9rem\">Um para um</p><p style=\"font-size:.8rem;color:#666;margin-top:5px\">1 pessoa → 1 CPF</p></div><div style=\"background:#f8f8f8;border:2px solid #cc6600;border-radius:12px;padding:15px;text-align:center\"><h3 style=\"color:#cc6600\">1:N</h3><p style=\"font-size:.9rem\">Um para muitos</p><p style=\"font-size:.8rem;color:#666;margin-top:5px\">1 turma → N alunos</p></div><div style=\"background:#f8f8f8;border:2px solid #6f42c1;border-radius:12px;padding:15px;text-align:center\"><h3 style=\"color:#6f42c1\">N:M</h3><p style=\"font-size:.9rem\">Muitos para muitos</p><p style=\"font-size:.8rem;color:#666;margin-top:5px\">N alunos ↔ M disciplinas</p></div></div><p>A cardinalidade define <strong>quantos</strong> registros de uma entidade se relacionam com a outra.</p></div><div class=\"slide-num\">10/15</div>", "<div class=\"slide-title\">Exemplo: Modelagem de uma Escola 🏫</div><div class=\"slide-content\"><div class=\"er-box\"><span class=\"ent\">ALUNO</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome, email<br>• <span class=\"fk\">turma_id</span> (FK)<br><br><span class=\"ent\">TURMA</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome, ano<br>• <span class=\"fk\">professor_id</span> (FK)<br><br><span class=\"ent\">PROFESSOR</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome, disciplina</div><p>Relacionamentos:</p><ul><li>TURMA <strong>1:N</strong> ALUNO (uma turma tem vários alunos)</li><li>PROFESSOR <strong>1:N</strong> TURMA (um professor dá aula em várias turmas)</li></ul></div><div class=\"slide-num\">11/15</div>", "<div class=\"slide-title\">Notação: símbolos do modelo ER 📐</div><div class=\"slide-content\"><p>No <strong>diagrama ER</strong> (Entidade-Relacionamento):</p><div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:15px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:8px;padding:15px;text-align:center\"><div style=\"font-size:1.5rem;border:2px solid #0066cc;border-radius:50%;padding:10px 20px;display:inline-block\">RETÂNGULO</div><p style=\"margin-top:8px;color:#0066cc\"><strong>Entidade</strong></p></div><div style=\"background:#fff8f0;border:2px solid #cc6600;border-radius:8px;padding:15px;text-align:center\"><div style=\"font-size:1.5px;border:2px solid #cc6600;border-radius:50%;padding:10px 20px;display:inline-block;transform:rotate(45deg)\">LOSANGO</div><p style=\"margin-top:8px;color:#cc6600\"><strong>Relacionamento</strong></p></div><div style=\"background:#f8f8f8;border:2px solid #6f42c1;border-radius:50%;padding:15px;text-align:center\"><div style=\"font-size:1.5rem;border:2px solid #6f42c1;border-radius:50%;padding:10px 20px;display:inline-block\">ELIPSE</div><p style=\"margin-top:8px;color:#6f42c1\"><strong>Atributo</strong></p></div></div><p>Conforme a notação de <strong>Peter Chen</strong> (1976).</p></div><div class=\"slide-num\">12/15</div>", "<div class=\"slide-title\">Prática guiada ✏️</div><div class=\"slide-content\"><p style=\"color:#cc6600\">📝 Identifique as entidades e atributos:</p><div class=\"analogy-box\"><span class=\"label\">CENÁRIO</span><p>\"Uma livraria vende livros para clientes. Cada livro tem título, autor e preço. Cada cliente tem nome e email.\"</p></div><p>Quais são as <strong>entidades</strong>?</p><p>Quais são os <strong>atributos</strong>?</p><p style=\"color:#2a9d2a\"><strong>Resposta: Entidades: LIVRO, CLIENTE. Atributos do LIVRO: título, autor, preço. Atributos do CLIENTE: nome, email.</strong></p></div><div class=\"slide-num\">13/15</div>", "<div class=\"slide-title\">Resumo da Aula 1 📝</div><div class=\"slide-content\"><ul style=\"font-size:1.05rem;line-height:2\"><li>✅ Modelagem organiza dados do mundo real</li><li>✅ <strong>Entidade</strong> = coisa que queremos armazenar (substantivo)</li><li>✅ <strong>Atributo</strong> = característica da entidade</li><li>✅ <strong>PK</strong> = chave primária (identifica unicamente)</li><li>✅ <strong>FK</strong> = chave estrangeira (liga tabelas)</li><li>✅ Cardinalidade: 1:1, 1:N, N:M</li><li>✅ Diagrama ER: retângulo=entidade, losango=relacionamento, elipse=atributo</li></ul></div><div class=\"slide-num\">14/15</div>", "<div class=\"slide-title\">Hora do Desafio e Quiz! 🎯</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem;color:#cc6600\">Agora é a sua vez!</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🎮</div><p style=\"color:#0066cc\"><strong>Quiz (5)</strong></p></div><div style=\"background:#f8f8f8;border:2px solid #cc6600;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🧩</div><p style=\"color:#cc6600\"><strong>Desafio</strong></p></div></div></div><div class=\"slide-num\">15/15</div>"], "2": ["<div class=\"slide-title\">🔗 Aula 2: Entidades e Relacionamentos</div><div class=\"slide-subtitle\">Aprofundando no modelo entidade-relacionamento</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem\">1º e 2º Ano • Técnico Integral</p><div style=\"margin:20px 0;font-size:3rem\">🔗 ➡️ 📊 ➡️ 🎯</div><p style=\"color:#0066cc\">Aprenda os tipos de entidades, atributos e relacionamentos!</p></div><div class=\"slide-num\">1/15</div>", "<div class=\"slide-title\">Entidades Fortes e Fracas 💪</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Característica</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Exemplo</th></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Forte</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Existe por si só, tem PK própria</td><td style=\"padding:10px;border:1px solid #ddd\">FUNCIONÁRIO</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Fraca</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Depende de outra para existir</td><td style=\"padding:10px;border:1px solid #ddd\">DEPENDENTE (de FUNCIONÁRIO)</td></tr></table><div class=\"analogy-box\"><span class=\"label\">💡 ANALOGIA</span><p>Um <strong>dependente</strong> só existe se houver um <strong>funcionário</strong>. Se o funcionário sai, o dependente some junto.</p></div></div><div class=\"slide-num\">2/15</div>", "<div class=\"slide-title\">Tipos de Atributos 📝</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Descrição</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Exemplo</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Simples</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Um valor atômico</td><td style=\"padding:8px;border:1px solid #ddd\">nome = \"Maria\"</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Composto</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Vários sub-atributos</td><td style=\"padding:8px;border:1px solid #ddd\">endereço (rua, número, cidade)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Multivalorado</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Vários valores</td><td style=\"padding:8px;border:1px solid #ddd\">telefones = [9999, 8888]</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Derivado</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Calculado de outro</td><td style=\"padding:8px;border:1px solid #ddd\">idade (de data_nascimento)</td></tr></table><p>Atributos multivalorados viram <strong>tabela separada</strong> na prática!</p></div><div class=\"slide-num\">3/15</div>", "<div class=\"slide-title\">Relacionamento 1:1 (Um para Um) ↔️</div><div class=\"slide-content\"><p>Cada registro de A se relaciona com <strong>apenas um</strong> de B:</p><div class=\"er-box\"><span class=\"ent\">PESSOA</span> &nbsp; <span class=\"rel\">──── 1:1 ────</span> &nbsp; <span class=\"ent\">CPF</span></div><p>Exemplos do mundo real:</p><ul><li><strong>PESSOA ↔ CPF:</strong> cada pessoa tem um CPF</li><li><strong>FUNCIONÁRIO ↔ CRACHÁ:</strong> cada funcionário tem um crachá</li><li><strong>ESCOLA ↔ DIRETOR:</strong> cada escola tem um diretor</li></ul><div class=\"analogy-box\"><span class=\"label\">💡 NA PRÁTICA</span><p>Muitas vezes 1:1 pode ser colocado na mesma tabela. Só separe se houver motivo (ex: muitos atributos).</p></div></div><div class=\"slide-num\">4/15</div>", "<div class=\"slide-title\">Relacionamento 1:N (Um para Muitos) ➡️</div><div class=\"slide-content\"><p>Um registro de A se relaciona com <strong>vários</strong> de B:</p><div class=\"er-box\"><span class=\"ent\">TURMA</span> &nbsp; <span class=\"rel\">──── 1:N ────</span> &nbsp; <span class=\"ent\">ALUNO</span></div><p>Exemplos:</p><ul><li><strong>TURMA → ALUNO:</strong> uma turma tem vários alunos</li><li><strong>PROFESSOR → DISCIPLINA:</strong> um professor dá aulas de várias disciplinas</li><li><strong>CLIENTE → PEDIDO:</strong> um cliente faz vários pedidos</li></ul><div class=\"analogy-box\"><span class=\"label\">💡 FK FICA NO \"N\"</span><p>A chave estrangeira sempre fica no lado \"muitos\" (N)! É o aluno que tem turma_id.</p></div></div><div class=\"slide-num\">5/15</div>", "<div class=\"slide-title\">Relacionamento N:M (Muitos para Muitos) 🔀</div><div class=\"slide-content\"><p>Vários de A se relacionam com vários de B:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span> &nbsp; <span class=\"rel\">──── N:M ────</span> &nbsp; <span class=\"ent\">DISCIPLINA</span></div><p>Um aluno cursa várias disciplinas e cada disciplina tem vários alunos.</p><div class=\"analogy-box\" style=\"border-color:#cc0000\"><span class=\"label\" style=\"background:#cc0000;color:#fff\">⚠️ PROBLEMA</span><p>N:M <strong>não pode</strong> ser implementado diretamente! Precisa de uma <strong>tabela intermediária</strong>.</p></div><div class=\"er-box\"><span class=\"ent\">ALUNO</span> ──→ <span class=\"ent\">MATRÍCULA</span> ←── <span class=\"ent\">DISCIPLINA</span><br>(tabela associativa)</div></div><div class=\"slide-num\">6/15</div>", "<div class=\"slide-title\">Tabela Associativa 🔄</div><div class=\"slide-content\"><p>A tabela intermediária resolve N:M. Ela tem as FKs das duas tabelas:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome<br><br><span class=\"ent\">MATRÍCULA</span> (associativa)<br>• <span class=\"fk\">aluno_id</span> (FK)<br>• <span class=\"fk\">disciplina_id</span> (FK)<br>• semestre<br>• nota<br><br><span class=\"ent\">DISCIPLINA</span><br>• <span class=\"pk\">id</span> (PK)<br>• nome</div><p>A tabela associativa pode ter <strong>atributos próprios</strong> (semestre, nota).</p></div><div class=\"slide-num\">7/15</div>", "<div class=\"slide-title\">Exemplo: Biblioteca 📚</div><div class=\"slide-content\"><div class=\"er-box\"><span class=\"ent\">LIVRO</span><br>• <span class=\"pk\">id</span> (PK), título, autor, ano<br><br><span class=\"ent\">LEITOR</span><br>• <span class=\"pk\">id</span> (PK), nome, email<br><br><span class=\"ent\">EMPRÉSTIMO</span><br>• <span class=\"pk\">id</span> (PK)<br>• <span class=\"fk\">livro_id</span> (FK)<br>• <span class=\"fk\">leitor_id</span> (FK)<br>• data_emprestimo<br>• data_devolucao</div><p>Relacionamentos:</p><ul><li>LIVRO <strong>1:N</strong> EMPRÉSTIMO (um livro é emprestado várias vezes)</li><li>LEITOR <strong>1:N</strong> EMPRÉSTIMO (um leitor faz vários empréstimos)</li></ul></div><div class=\"slide-num\">8/15</div>", "<div class=\"slide-title\">Generalização e Especialização ⬆️</div><div class=\"slide-content\"><p>Uma entidade pode ser <strong>especialização</strong> de outra:</p><div class=\"er-box\"><span class=\"ent\">PESSOA</span> (genérica)<br>├── <span class=\"ent\">ALUNO</span> (especialização)<br>├── <span class=\"ent\">PROFESSOR</span> (especialização)<br>└── <span class=\"ent\">FUNCIONÁRIO</span> (especialização)</div><p>Todos herdam os atributos de PESSOA (nome, CPF, endereço), mas cada um tem atributos próprios:</p><ul><li>ALUNO: matrícula, turma</li><li>PROFESSOR: disciplina, salário</li><li>FUNCIONÁRIO: cargo, setor</li></ul></div><div class=\"slide-num\">9/15</div>", "<div class=\"slide-title\">Atributos de Relacionamento 🏷️</div><div class=\"slide-content\"><p>Relacionamentos podem ter <strong>atributos próprios</strong>:</p><div class=\"er-box\"><span class=\"ent\">ALUNO</span> &nbsp; <span class=\"rel\">── MATRÍCULA ──</span> &nbsp; <span class=\"ent\">DISCIPLINA</span><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (semestre, nota, status)</div><p>O atributo <code>nota</code> não pertence ao aluno nem à disciplina — pertence ao <strong>relacionamento</strong> entre eles.</p><div class=\"analogy-box\"><span class=\"label\">💡 NA PRÁTICA</span><p>Atributos de relacionamento viram colunas na <strong>tabela associativa</strong>.</p></div></div><div class=\"slide-num\">10/15</div>", "<div class=\"slide-title\">Participação: Total vs Parcial 🎭</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Significado</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Exemplo</th></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Total</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Todo registro DEVE participar</td><td style=\"padding:10px;border:1px solid #ddd\">Todo ALUNO tem uma TURMA</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Parcial</strong></td><td style=\"padding:10px;border:1px solid #ddd\">PODE participar (opcional)</td><td style=\"padding:10px;border:1px solid #ddd\">Nem todo PROFESSOR dá aula de X</td></tr></table><div class=\"analogy-box\"><span class=\"label\">💡 NO DIAGRAMA</span><p>Total = linha dupla • Parcial = linha simples</p></div></div><div class=\"slide-num\">11/15</div>", "<div class=\"slide-title\">Exemplo completo: Sistema de Pedidos 🛒</div><div class=\"slide-content\"><div class=\"er-box\"><span class=\"ent\">CLIENTE</span> (id, nome, email, telefone)<br><br><span class=\"ent\">PEDIDO</span> (id, data, <span class=\"fk\">cliente_id</span> FK)<br><br><span class=\"ent\">ITEM_PEDIDO</span> (id, <span class=\"fk\">pedido_id</span> FK, <span class=\"fk\">produto_id</span> FK, qtd, preco)<br><br><span class=\"ent\">PRODUTO</span> (id, nome, preco, estoque)</div><p>Relacionamentos:</p><ul><li>CLIENTE <strong>1:N</strong> PEDIDO</li><li>PEDIDO <strong>1:N</strong> ITEM_PEDIDO</li><li>PRODUTO <strong>1:N</strong> ITEM_PEDIDO</li></ul><p style=\"color:#cc6600\">PEDIDO ↔ PRODUTO é N:M, resolvido por ITEM_PEDIDO!</p></div><div class=\"slide-num\">12/15</div>", "<div class=\"slide-title\">Prática guiada ✏️</div><div class=\"slide-content\"><p style=\"color:#cc6600\">📝 Qual a cardinalidade?</p><div class=\"analogy-box\"><span class=\"label\">CENÁRIO</span><p>1. Um médico atende vários pacientes. Cada paciente tem um médico. → ?</p><p>2. Um aluno cursa várias disciplinas. Cada disciplina tem vários alunos. → ?</p><p>3. Um país tem uma capital. Cada capital pertence a um país. → ?</p></div><p style=\"color:#2a9d2a\"><strong>Respostas: 1) 1:N • 2) N:M • 3) 1:1</strong></p></div><div class=\"slide-num\">13/15</div>", "<div class=\"slide-title\">Resumo da Aula 2 📝</div><div class=\"slide-content\"><ul style=\"font-size:1.05rem;line-height:2\"><li>✅ Entidades <strong>fortes</strong> (independentes) vs <strong>fracas</strong> (dependentes)</li><li>✅ Atributos: simples, composto, multivalorado, derivado</li><li>✅ Cardinalidade: <strong>1:1</strong>, <strong>1:N</strong>, <strong>N:M</strong></li><li>✅ N:M precisa de <strong>tabela associativa</strong></li><li>✅ FK fica sempre no lado \"N\" (muitos)</li><li>✅ Generalização: PESSOA → ALUNO, PROFESSOR, FUNCIONÁRIO</li><li>✅ Relacionamentos podem ter atributos próprios</li></ul></div><div class=\"slide-num\">14/15</div>", "<div class=\"slide-title\">Hora do Desafio e Quiz! 🎯</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem;color:#cc6600\">Pratique o que aprendeu!</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🎮</div><p style=\"color:#0066cc\"><strong>Quiz (5)</strong></p></div><div style=\"background:#f8f8f8;border:2px solid #cc6600;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🧩</div><p style=\"color:#cc6600\"><strong>Desafio</strong></p></div></div></div><div class=\"slide-num\">15/15</div>"], "3": ["<div class=\"slide-title\">📐 Aula 3: Normalização</div><div class=\"slide-subtitle\">Organize suas tabelas sem redundância</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem\">1º e 2º Ano • Técnico Integral</p><div style=\"margin:20px 0;font-size:3rem\">📐 ➡️ ✂️ ➡️ 🎯</div><p style=\"color:#0066cc\">Aprenda a eliminar dados duplicados e anomalias!</p></div><div class=\"slide-num\">1/15</div>", "<div class=\"slide-title\">O problema: Anomalias 🐛</div><div class=\"slide-content\"><p>Tabelas mal organizadas causam <strong>anomalias</strong>:</p><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Anomalia</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">O que acontece</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Inserção</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Não consegue inserir sem ter dados de outra coisa</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Atualização</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Dado repetido em vários lugares, atualiza só um</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Exclusão</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Apaga um registro e perde dados de outra entidade</td></tr></table><div class=\"analogy-box\"><span class=\"label\">🐛 EXEMPLO</span><p>Se o nome da cidade está em cada linha de aluno e a cidade muda de nome... você tem que atualizar em 100 lugares!</p></div></div><div class=\"slide-num\">2/15</div>", "<div class=\"slide-title\">1ª Forma Normal (1FN) ✌️</div><div class=\"slide-content\"><p><strong>Regra:</strong> Cada célula deve conter um <strong>valor atômico</strong> (único).</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0\"><div style=\"background:#ffe6e6;border:1px solid #cc0000;border-radius:8px;padding:15px\"><h3 style=\"color:#cc0000\">❌ Viola 1FN</h3><div class=\"code-box\" style=\"font-size:.85rem\">id | nome | telefones<br>1 | João | 9999, 8888<br>2 | Ana | 7777</div></div><div style=\"background:#e6ffe6;border:1px solid #2a9d2a;border-radius:8px;padding:15px\"><h3 style=\"color:#2a9d2a\">✅ 1FN OK</h3><div class=\"code-box\" style=\"font-size:.85rem\">id | nome | telefone<br>1 | João | 9999<br>1 | João | 8888<br>2 | Ana | 7777</div></div></div></div><div class=\"slide-num\">3/15</div>", "<div class=\"slide-title\">2ª Forma Normal (2FN) ✌️✌️</div><div class=\"slide-content\"><p><strong>Regra:</strong> Eliminar <strong>dependência parcial</strong> (atributos que dependem de parte da chave).</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0\"><div style=\"background:#ffe6e6;border:1px solid #cc0000;border-radius:8px;padding:15px\"><h3 style=\"color:#cc0000\">❌ Viola 2FN</h3><div class=\"code-box\" style=\"font-size:.85rem\">PK = (aluno_id, disc_id)<br>aluno_id | disc_id | nota | disc_nome<br>1 | 10 | 8.5 | Matemática<br>2 | 10 | 7.0 | Matemática<br><br>disc_nome depende só de disc_id!</div></div><div style=\"background:#e6ffe6;border:1px solid #2a9d2a;border-radius:8px;padding:15px\"><h3 style=\"color:#2a9d2a\">✅ 2FN OK</h3><div class=\"code-box\" style=\"font-size:.85rem\">MATRÍCULA<br>aluno_id | disc_id | nota<br>1 | 10 | 8.5<br>2 | 10 | 7.0<br><br>DISCIPLINA<br>id | nome<br>10 | Matemática</div></div></div></div><div class=\"slide-num\">4/15</div>", "<div class=\"slide-title\">3ª Forma Normal (3FN) ✌️✌️✌️</div><div class=\"slide-content\"><p><strong>Regra:</strong> Eliminar <strong>dependência transitiva</strong> (atributo que depende de outro não-chave).</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0\"><div style=\"background:#ffe6e6;border:1px solid #cc0000;border-radius:8px;padding:15px\"><h3 style=\"color:#cc0000\">❌ Viola 3FN</h3><div class=\"code-box\" style=\"font-size:.85rem\">ALUNO<br>id | nome | cep | cidade<br>1 | João | 57000 | Maceió<br>2 | Ana | 57000 | Maceió<br><br>cidade depende de cep, não de id!</div></div><div style=\"background:#e6ffe6;border:1px solid #2a9d2a;border-radius:8px;padding:15px\"><h3 style=\"color:#2a9d2a\">✅ 3FN OK</h3><div class=\"code-box\" style=\"font-size:.85rem\">ALUNO<br>id | nome | cep_id<br>1 | João | 57000<br>2 | Ana | 57000<br><br>CEP<br>cep | cidade<br>57000 | Maceió</div></div></div></div><div class=\"slide-num\">5/15</div>", "<div class=\"slide-title\">Resumo das Formas Normais 📋</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">FN</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Regra</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Elimina</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>1FN</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Valor atômico por célula</td><td style=\"padding:8px;border:1px solid #ddd\">Listas/grupos</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>2FN</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Dependência total da PK</td><td style=\"padding:8px;border:1px solid #ddd\">Dependência parcial</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>3FN</strong></td><td style=\"padding:8px;border:1px solid #ddd\">Sem dependência transitiva</td><td style=\"padding:8px;border:1px solid #ddd\">Dependência transitiva</td></tr></table><div class=\"analogy-box\"><span class=\"label\">💡 FRASE MÁGICA</span><p>\"Cada atributo deve depender da chave, de toda a chave e de nada além da chave.\"</p></div></div><div class=\"slide-num\">6/15</div>", "<div class=\"slide-title\">Exemplo: Normalização passo a passo 📊</div><div class=\"slide-content\"><p><strong>Tabela original (não normalizada):</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">PEDIDO (id, cliente, produtos, total)<br>1 | \"Maria\" | \"Caderno, Caneta, Borracha\" | 25.50</div><p style=\"color:#cc6600\">Problemas: lista de produtos, nome do cliente repetido...</p><p><strong>Após 1FN:</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">PEDIDO (id, cliente, produto, total)<br>1 | \"Maria\" | \"Caderno\" | 25.50<br>1 | \"Maria\" | \"Caneta\" | 25.50<br>1 | \"Maria\" | \"Borracha\" | 25.50</div><p style=\"color:#cc6600\">Ainda repetindo cliente e total!</p></div><div class=\"slide-num\">7/15</div>", "<div class=\"slide-title\">Exemplo: 2FN e 3FN ✂️</div><div class=\"slide-content\"><p><strong>Após 2FN (separar cliente e produto):</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">PEDIDO (id, cliente_id, total)<br>CLIENTE (id, nome)<br>ITEM (pedido_id, produto, preco)</div><p><strong>Após 3FN (separar produto de item):</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">PEDIDO (id, cliente_id, total)<br>CLIENTE (id, nome)<br>ITEM_PEDIDO (id, pedido_id, produto_id, qtd)<br>PRODUTO (id, nome, preco)</div><p style=\"color:#2a9d2a\">Agora cada coisa está no seu lugar! ✅</p></div><div class=\"slide-num\">8/15</div>", "<div class=\"slide-title\">Do Conceitual ao Lógico 🔄</div><div class=\"slide-content\"><p>Como transformar o <strong>diagrama ER</strong> em <strong>tabelas</strong>:</p><ul><li><strong>Entidade</strong> → vira uma tabela</li><li><strong>Atributo</strong> → vira uma coluna</li><li><strong>PK</strong> → vira chave primária</li><li><strong>1:1</strong> → FK em uma das tabelas</li><li><strong>1:N</strong> → FK no lado \"N\"</li><li><strong>N:M</strong> → criar tabela associativa com as 2 FKs</li></ul><div class=\"analogy-box\"><span class=\"label\">💡 RESUMO</span><p>ER é o \"desenho\" e o modelo lógico são as \"tabelas prontas\".</p></div></div><div class=\"slide-num\">9/15</div>", "<div class=\"slide-title\">Desnormalização: quando usar? ⚡</div><div class=\"slide-content\"><p>À vezes <strong>desnormalizar</strong> (juntar tabelas) melhora performance:</p><div class=\"analogy-box\"><span class=\"label\">⚡ QUANDO DESNORMALIZAR?</span><p>• Consultas muito frequentes e lentas</p><p>• Tabelas pequenas que são sempre lidas juntas</p><p>• Relatórios que precisam de dados de várias tabelas</p></div><div class=\"analogy-box\" style=\"border-color:#cc0000\"><span class=\"label\" style=\"background:#cc0000;color:#fff\">⚠️ CUIDADO</span><p>Desnormalizar traz de volta as anomalias! Use com moderação.</p></div><p>A regra é: <strong>normalize primeiro, desnormalize só se necessário.</strong></p></div><div class=\"slide-num\">10/15</div>", "<div class=\"slide-title\">Dependências: Parcial vs Transitiva 🔄</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">O que é</th><th style=\"padding:10px;color:#0066cc;border:1px solid #ddd\">Resolvido por</th></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Parcial</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Atributo depende de parte da PK</td><td style=\"padding:10px;border:1px solid #ddd\">2FN</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Transitiva</strong></td><td style=\"padding:10px;border:1px solid #ddd\">A depende de B, B depende de C</td><td style=\"padding:10px;border:1px solid #ddd\">3FN</td></tr><tr><td style=\"padding:10px;border:1px solid #ddd\"><strong>Total</strong></td><td style=\"padding:10px;border:1px solid #ddd\">Atributo depende de toda a PK</td><td style=\"padding:10px;border:1px solid #ddd\">Já está OK!</td></tr></table><div class=\"analogy-box\"><span class=\"label\">💡 EXEMPLO TRANSITIVA</span><p>nota → matricula_id → aluno_id → nome_aluno</p><p>nome_aluno depende transitivamente de nota (via matricula).</p></div></div><div class=\"slide-num\">11/15</div>", "<div class=\"slide-title\">Exemplo prático: Loja Online 🛒</div><div class=\"slide-content\"><p><strong>Não normalizado:</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">VENDAS (id, cliente_nome, cliente_email, cliente_cep, produto_nome, produto_preco, qtd, data)</div><p style=\"color:#cc6600\">Problemas: dados de cliente e produto repetidos em cada venda!</p><p><strong>Normalizado (3FN):</strong></p><div class=\"code-box\" style=\"font-size:.85rem\">CLIENTE (id, nome, email, cep)<br>PRODUTO (id, nome, preco)<br>VENDA (id, cliente_id, data)<br>ITEM_VENDA (id, venda_id, produto_id, qtd)</div><p style=\"color:#2a9d2a\">4 tabelas, sem repetição, sem anomalias! ✅</p></div><div class=\"slide-num\">12/15</div>", "<div class=\"slide-title\">Prática guiada ✏️</div><div class=\"slide-content\"><p style=\"color:#cc6600\">📝 Em qual Forma Normal está?</p><div class=\"analogy-box\"><span class=\"label\">TABELA</span><p>ALUNO (id, nome, disciplinas, nota, professor_nome)</p></div><p>1. Há listas (disciplinas)? → Viola a <strong>___FN</strong></p><p>2. nota depende só de parte da chave? → Viola a <strong>___FN</strong></p><p>3. professor_nome depende de outra coisa? → Viola a <strong>___FN</strong></p><p style=\"color:#2a9d2a\"><strong>Respostas: 1) 1FN • 2) 2FN • 3) 3FN — Viola todas as três!</strong></p></div><div class=\"slide-num\">13/15</div>", "<div class=\"slide-title\">Resumo da Aula 3 📝</div><div class=\"slide-content\"><ul style=\"font-size:1.05rem;line-height:2\"><li>✅ Anomalias: inserção, atualização, exclusão</li><li>✅ <strong>1FN:</strong> valor atômico (sem listas)</li><li>✅ <strong>2FN:</strong> sem dependência parcial</li><li>✅ <strong>3FN:</strong> sem dependência transitiva</li><li>✅ Frase: \"depender da chave, toda a chave, e nada além da chave\"</li><li>✅ Desnormalizar só quando necessário (performance)</li></ul></div><div class=\"slide-num\">14/15</div>", "<div class=\"slide-title\">Hora do Desafio e Quiz! 🎯</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem;color:#cc6600\">Pratique!</p><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🎮</div><p style=\"color:#0066cc\"><strong>Quiz (5)</strong></p></div><div style=\"background:#f8f8f8;border:2px solid #cc6600;border-radius:12px;padding:20px\"><div style=\"font-size:2rem\">🧩</div><p style=\"color:#cc6600\"><strong>Desafio</strong></p></div></div></div><div class=\"slide-num\">15/15</div>"], "4": ["<div class=\"slide-title\">💾 Aula 4: SQL e Modelo Físico</div><div class=\"slide-subtitle\">Transforme tabelas em código SQL</div><div class=\"slide-content\" style=\"text-align:center\"><p style=\"font-size:1.2rem\">1º e 2º Ano • Técnico Integral</p><div style=\"margin:20px 0;font-size:3rem\">📐 ➡️ 💾 ➡️ 🚀</div><p style=\"color:#0066cc\">Crie bancos de dados reais com comandos SQL!</p></div><div class=\"slide-num\">1/15</div>", "<div class=\"slide-title\">O que é SQL? 🗄️</div><div class=\"slide-content\"><p><strong>SQL</strong> (Structured Query Language) é a linguagem dos bancos de dados:</p><ul><li><strong>CREATE</strong> — criar tabelas e bancos</li><li><strong>INSERT</strong> — inserir dados</li><li><strong>SELECT</strong> — consultar dados</li><li><strong>UPDATE</strong> — atualizar dados</li><li><strong>DELETE</strong> — excluir dados</li></ul><div class=\"analogy-box\"><span class=\"label\">💡 ANALOGIA</span><p>SQL é como dar ordens a um bibliotecário super organizado: \"crie uma estante\", \"guarde este livro\", \"encontre todos os livros de 2024\".</p></div></div><div class=\"slide-num\">2/15</div>", "<div class=\"slide-title\">CREATE DATABASE e CREATE TABLE 🏗️</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"kw\">CREATE DATABASE</span> escola;<br><span class=\"kw\">USE</span> escola;<br><br><span class=\"kw\">CREATE TABLE</span> aluno (<br>&nbsp;&nbsp;id <span class=\"fn\">INT</span> <span class=\"kw\">PRIMARY KEY</span> <span class=\"kw\">AUTO_INCREMENT</span>,<br>&nbsp;&nbsp;nome <span class=\"fn\">VARCHAR</span>(100) <span class=\"kw\">NOT NULL</span>,<br>&nbsp;&nbsp;email <span class=\"fn\">VARCHAR</span>(100) <span class=\"kw\">UNIQUE</span>,<br>&nbsp;&nbsp;turma_id <span class=\"fn\">INT</span>,<br>&nbsp;&nbsp;<span class=\"kw\">FOREIGN KEY</span> (turma_id) <span class=\"kw\">REFERENCES</span> turma(id)<br>);</div><div class=\"analogy-box\"><span class=\"label\">💡 AUTO_INCREMENT</span><p>O banco gera o id automaticamente. Você não precisa informar!</p></div></div><div class=\"slide-num\">3/15</div>", "<div class=\"slide-title\">Tipos de dados em SQL 📋</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Tipo</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Descrição</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Exemplo</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>INT</code></td><td style=\"padding:8px;border:1px solid #ddd\">Inteiro</td><td style=\"padding:8px;border:1px solid #ddd\">42</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>VARCHAR(n)</code></td><td style=\"padding:8px;border:1px solid #ddd\">Texto variável (max n)</td><td style=\"padding:8px;border:1px solid #ddd\">\"Maria\"</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>TEXT</code></td><td style=\"padding:8px;border:1px solid #ddd\">Texto longo</td><td style=\"padding:8px;border:1px solid #ddd\">Descrição grande</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>DATE</code></td><td style=\"padding:8px;border:1px solid #ddd\">Data</td><td style=\"padding:8px;border:1px solid #ddd\">2010-05-15</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>DECIMAL(10,2)</code></td><td style=\"padding:8px;border:1px solid #ddd\">Decimal exato</td><td style=\"padding:8px;border:1px solid #ddd\">9.50</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>BOOLEAN</code></td><td style=\"padding:8px;border:1px solid #ddd\">Verdadeiro/Falso</td><td style=\"padding:8px;border:1px solid #ddd\">TRUE</td></tr></table></div><div class=\"slide-num\">4/15</div>", "<div class=\"slide-title\">Constraints: regras de validação 🛡️</div><div class=\"slide-content\"><table style=\"width:100%;border-collapse:collapse;margin:15px 0\"><tr style=\"background:#f0f0f0\"><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">Constraint</th><th style=\"padding:8px;color:#0066cc;border:1px solid #ddd\">O que faz</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>NOT NULL</code></td><td style=\"padding:8px;border:1px solid #ddd\">Obrigatório (não pode ser vazio)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>UNIQUE</code></td><td style=\"padding:8px;border:1px solid #ddd\">Não pode repetir (ex: email)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>PRIMARY KEY</code></td><td style=\"padding:8px;border:1px solid #ddd\">Identificador único (NOT NULL + UNIQUE)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>FOREIGN KEY</code></td><td style=\"padding:8px;border:1px solid #ddd\">Referencia outra tabela</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>CHECK</code></td><td style=\"padding:8px;border:1px solid #ddd\">Valida condição (ex: idade >= 0)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><code>DEFAULT</code></td><td style=\"padding:8px;border:1px solid #ddd\">Valor padrão</td></tr></table></div><div class=\"slide-num\">5/15</div>", "<div class=\"slide-title\">INSERT: inserindo dados 📥</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"kw\">INSERT INTO</span> aluno (nome, email, turma_id)<br><span class=\"kw\">VALUES</span> (<span class=\"str\">\"Maria\"</span>, <span class=\"str\">\"maria@email.com\"</span>, <span class=\"num\">1</span>);<br><br><span class=\"com\">-- Inserir vários de uma vez</span><br><span class=\"kw\">INSERT INTO</span> aluno (nome, email) <span class=\"kw\">VALUES</span><br>(<span class=\"str\">\"João\"</span>, <span class=\"str\">\"joao@email.com\"</span>),<br>(<span class=\"str\">\"Ana\"</span>, <span class=\"str\">\"ana@email.com\"</span>),<br>(<span class=\"str\">\"Léo\"</span>, <span class=\"str\">\"leo@email.com\"</span>);</div><div class=\"analogy-box\"><span class=\"label\">💡 DICA</span><p>Não precisa colocar o <code>id</code> se for <code>AUTO_INCREMENT</code>!</p></div></div><div class=\"slide-num\">6/15</div>", "<div class=\"slide-title\">SELECT: consultando dados 🔍</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"com\">-- Todos os alunos</span><br><span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> aluno;<br><br><span class=\"com\">-- Apenas nome e email</span><br><span class=\"kw\">SELECT</span> nome, email <span class=\"kw\">FROM</span> aluno;<br><br><span class=\"com\">-- Com condição</span><br><span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> aluno <span class=\"kw\">WHERE</span> turma_id = <span class=\"num\">1</span>;<br><br><span class=\"com\">-- Ordenado por nome</span><br><span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> aluno <span class=\"kw\">ORDER BY</span> nome;<br><br><span class=\"com\">-- Top 5 mais velhos</span><br><span class=\"kw\">SELECT</span> * <span class=\"kw\">FROM</span> aluno <span class=\"kw\">ORDER BY</span> data_nasc <span class=\"kw\">LIMIT</span> <span class=\"num\">5</span>;</div></div><div class=\"slide-num\">7/15</div>", "<div class=\"slide-title\">UPDATE e DELETE ✏️🗑️</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"com\">-- Atualizar email do aluno 1</span><br><span class=\"kw\">UPDATE</span> aluno <span class=\"kw\">SET</span> email = <span class=\"str\">\"novo@email.com\"</span><br><span class=\"kw\">WHERE</span> id = <span class=\"num\">1</span>;<br><br><span class=\"com\">-- Atualizar turma de todos</span><br><span class=\"kw\">UPDATE</span> aluno <span class=\"kw\">SET</span> turma_id = <span class=\"num\">2</span>;<br><br><span class=\"com\">-- Deletar um aluno</span><br><span class=\"kw\">DELETE FROM</span> aluno <span class=\"kw\">WHERE</span> id = <span class=\"num\">5</span>;</div><div class=\"analogy-box\" style=\"border-color:#cc0000\"><span class=\"label\" style=\"background:#cc0000;color:#fff\">⚠️ CUIDADO</span><p><strong>NUNCA</strong> esqueça o <code>WHERE</code> no DELETE/UPDATE! Sem WHERE, afeta TODOS os registros.</p></div></div><div class=\"slide-num\">8/15</div>", "<div class=\"slide-title\">JOIN: juntando tabelas 🔗</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"com\">-- Dados do aluno + nome da turma</span><br><span class=\"kw\">SELECT</span> a.nome, t.nome <span class=\"kw\">AS</span> turma<br><span class=\"kw\">FROM</span> aluno a<br><span class=\"kw\">JOIN</span> turma t <span class=\"kw\">ON</span> a.turma_id = t.id;<br><br><span class=\"com\">-- LEFT JOIN (mostra alunos sem turma)</span><br><span class=\"kw\">SELECT</span> a.nome, t.nome<br><span class=\"kw\">FROM</span> aluno a<br><span class=\"kw\">LEFT JOIN</span> turma t <span class=\"kw\">ON</span> a.turma_id = t.id;</div><div class=\"analogy-box\"><span class=\"label\">💡 JOIN</span><p><strong>JOIN</strong> junta dados de duas tabelas usando a FK como ponte.</p><p><strong>LEFT JOIN</strong> mostra todos, mesmo sem relacionamento.</p></div></div><div class=\"slide-num\">9/15</div>", "<div class=\"slide-title\">Exemplo completo: Sistema de Pedidos 🛒</div><div class=\"slide-content\"><div class=\"code-box\" style=\"font-size:.85rem\"><span class=\"kw\">CREATE TABLE</span> cliente (<br>&nbsp;&nbsp;id <span class=\"fn\">INT</span> <span class=\"kw\">PRIMARY KEY</span> AUTO_INCREMENT,<br>&nbsp;&nbsp;nome <span class=\"fn\">VARCHAR</span>(100) <span class=\"kw\">NOT NULL</span>,<br>&nbsp;&nbsp;email <span class=\"fn\">VARCHAR</span>(100) <span class=\"kw\">UNIQUE</span><br>);<br><br><span class=\"kw\">CREATE TABLE</span> pedido (<br>&nbsp;&nbsp;id <span class=\"fn\">INT</span> <span class=\"kw\">PRIMARY KEY</span> AUTO_INCREMENT,<br>&nbsp;&nbsp;cliente_id <span class=\"fn\">INT</span>,<br>&nbsp;&nbsp;data <span class=\"fn\">DATE</span> <span class=\"kw\">DEFAULT</span> <span class=\"fn\">CURRENT_DATE</span>,<br>&nbsp;&nbsp;<span class=\"kw\">FOREIGN KEY</span> (cliente_id) <span class=\"kw\">REFERENCES</span> cliente(id)<br>);</div><p style=\"color:#2a9d2a\">Modelo físico completo, pronto para o banco! ✅</p></div><div class=\"slide-num\">10/15</div>", "<div class=\"slide-title\">Consultas com JOIN e WHERE 🔍</div><div class=\"slide-content\"><div class=\"code-box\"><span class=\"com\">-- Pedidos com nome do cliente</span><br><span class=\"kw\">SELECT</span> p.id, c.nome, p.data<br><span class=\"kw\">FROM</span> pedido p<br><span class=\"kw\">JOIN</span> cliente c <span class=\"kw\">ON</span> p.cliente_id = c.id<br><span class=\"kw\">WHERE</span> p.data >= <span class=\"str\">\"2026-01-01\"</span>;<br><br><span class=\"com\">-- Contar pedidos por cliente</span><br><span class=\"kw\">SELECT</span> c.nome, <span class=\"fn\">COUNT</span>(p.id) <span class=\"kw\">AS</span> total<br><span class=\"kw\">FROM</span> cliente c<br><span class=\"kw\">LEFT JOIN</span> pedido p <span class=\"kw\">ON</span> c.id = p.cliente_id<br><span class=\"kw\">GROUP BY</span> c.nome;</div></div><div class=\"slide-num\">11/15</div>", "<div class=\"slide-title\">Do Modelo ao Banco: resumo 🔄</div><div class=\"slide-content\"><div style=\"display:grid;grid-template-columns:1fr;gap:12px;margin:15px 0\"><div style=\"background:#f8f8f8;border:2px solid #0066cc;border-radius:12px;padding:15px\"><h3 style=\"color:#0066cc\">📐 Conceitual (ER)</h3><p>Entidades (retângulos), relacionamentos (losangos), atributos (elipses)</p></div><div style=\"background:#fff8f0;border:2px solid #cc6600;border-radius:12px;padding:15px\"><h3 style=\"color:#cc6600\">📊 Lógico (Relacional)</h3><p>Tabelas, colunas, PK, FK, cardinalidade</p></div><div style=\"background:#f8f8f8;border:2px solid #6f42c1;border-radius:12px;padding:15px\"><h3 style=\"color:#6f42c1\">💾 Físico (SQL)</h3><p>CREATE TABLE, tipos, constraints, INSERT, SELECT, JOIN</p></div></div></div><div class=\"slide-num\">12/15</div>", "<div class=\"slide-title\">Prática guiada ✏️</div><div class=\"slide-content\"><p style=\"color:#cc6600\">📝 Complete o comando SQL:</p><div class=\"code-box\"><span class=\"kw\">SELECT</span> nome, email<br><span class=\"kw\">FROM</span> aluno<br><span class=\"kw\">WHERE</span> turma_id = ? <span class=\"com\">-- qual turma?</span><br><span class=\"kw\">ORDER BY</span> ? <span class=\"com\">-- por qual campo?</span></div><p>1. Quero alunos da turma 2 → turma_id = <strong>2</strong></p><p>2. Quero ordenar por nome → ORDER BY <strong>nome</strong></p><p>3. Quero só 10 resultados → LIMIT <strong>10</strong></p><p style=\"color:#2a9d2a\"><strong>SELECT nome, email FROM aluno WHERE turma_id = 2 ORDER BY nome LIMIT 10;</strong></p></div><div class=\"slide-num\">13/15</div>", "<div class=\"slide-title\">Resumo da Aula 4 e do Curso 📝</div><div class=\"slide-content\"><ul style=\"font-size:1.05rem;line-height:2\"><li>✅ SQL: linguagem dos bancos de dados</li><li>✅ <code>CREATE TABLE</code> com tipos e constraints</li><li>✅ <code>INSERT</code> para inserir, <code>SELECT</code> para consultar</li><li>✅ <code>UPDATE</code> e <code>DELETE</code> (sempre com WHERE!)</li><li>✅ <code>JOIN</code> junta tabelas pela FK</li><li>✅ Modelo: Conceitual → Lógico → Físico</li></ul><div class=\"analogy-box\" style=\"border-color:#2a9d2a\"><span class=\"label\" style=\"background:#2a9d2a\">🎯 PARABÉNS!</span><p>Você completou <strong>4 aulas de Modelagem de Dados</strong>! Do conceito à SQL!</p></div></div><div class=\"slide-num\">14/15</div>", "<div class=\"slide-title\">Fim do Curso! 🚀</div><div class=\"slide-content\" style=\"text-align:center\"><div style=\"margin:20px 0;font-size:3rem\">📐 ➡️ 📊 ➡️ 💾 ➡️ 🚀</div><p style=\"font-size:1.2rem\">Você percorreu toda a jornada:</p><div style=\"text-align:left;display:inline-block;margin:15px 0\"><p>🏛️ Aula 1: Fundamentos</p><p>🔗 Aula 2: Entidades e Relacionamentos</p><p>📐 Aula 3: Normalização</p><p>💾 Aula 4: SQL e Modelo Físico</p></div><div class=\"analogy-box\" style=\"border-color:#2a9d2a\"><span class=\"label\" style=\"background:#2a9d2a\">🏆 CONQUISTA</span><p>Do mundo real ao banco de dados! Continue modelando!</p></div><p style=\"color:#cc6600;margin-top:10px\">www.carneirosvirtual.online - Profº. Antônio</p></div><div class=\"slide-num\">15/15</div>"]};
+</script>
+
+<script>
+[1,2,3,4].forEach(function(a){
+  initSlides(a);
+  renderQuiz(a);
+});
+document.addEventListener("keydown",function(e){
+  for(var a=1;a<=4;a++){
+    if(document.getElementById("aula"+a).classList.contains("active")&&
+       document.getElementById("aula"+a+"-slides").classList.contains("active")){
+      if(e.key==="ArrowRight")nextSlide(a);
+      if(e.key==="ArrowLeft")prevSlide(a);
+      break;
+    }
+  }
+});
+</script>
+
+</body>
+</html>
