@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionario Tecnico Informatica - Quiz Interativo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#fff;color:#1a1a1a;line-height:1.8}
+#header{background:#0066cc;color:#fff;padding:20px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+#header h1{font-size:1.6rem;margin-bottom:5px}
+#header p{font-size:1.1rem;opacity:.9}
+#header button{margin-top:10px;padding:8px 20px;border:2px solid #fff;border-radius:8px;background:transparent;color:#fff;font-size:1rem;cursor:pointer;transition:.2s}
+#header button:hover{background:#fff;color:#0066cc}
+.container{max-width:900px;margin:0 auto;padding:30px 20px}
+.quiz-intro{text-align:center;margin-bottom:30px}
+.quiz-intro h2{font-size:1.8rem;color:#0066cc;margin-bottom:10px}
+.quiz-intro p{font-size:1.2rem;color:#666}
+.quiz-question{background:#f8f8f8;border:1px solid #ddd;border-radius:12px;padding:30px;margin:20px 0}
+.quiz-question h3{font-size:1.4rem;color:#1a1a1a;margin-bottom:18px}
+.quiz-option{display:block;background:#fff;border:2px solid #ccc;border-radius:10px;padding:18px 24px;margin:12px 0;cursor:pointer;transition:.2s;color:#1a1a1a;font-size:1.3rem}
+.quiz-option:hover{background:#f0f0f0;border-color:#0066cc}
+.quiz-option.correct{border-color:#2a9d2a;background:#e6ffe6;color:#1a6b1a}
+.quiz-option.wrong{border-color:#cc0000;background:#ffe6e6;color:#cc0000}
+.quiz-feedback{display:none;margin-top:16px;padding:20px;border-radius:10px;font-size:1.25rem;line-height:1.7}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:#e6ffe6;border:1px solid #2a9d2a;color:#1a6b1a}
+.quiz-feedback.wrong{background:#ffe6e6;border:1px solid #cc0000;color:#cc0000}
+.quiz-score{background:#f8f8f8;border:3px solid #0066cc;border-radius:16px;padding:40px;text-align:center;margin:30px 0;display:none}
+.quiz-score.show{display:block}
+.quiz-score h2{font-size:2.2rem;color:#0066cc;margin-bottom:15px}
+.quiz-score p{font-size:1.3rem;color:#666;margin:10px 0}
+.progress-bar{width:100%;height:8px;background:#e0e0e0;border-radius:4px;margin:15px 0;overflow:hidden}
+.progress-fill{height:100%;background:#0066cc;transition:width .3s;width:0}
+.q-number{display:inline-block;background:#0066cc;color:#fff;border-radius:50%;width:36px;height:36px;line-height:36px;text-align:center;font-weight:bold;margin-right:10px;font-size:1.1rem}
+footer{text-align:center;padding:20px;color:#999;font-size:1rem}
+@media print{@page{size:A4;margin:15mm}#header button{display:none}.quiz-option{border:1px solid #ccc}.quiz-feedback{display:none}.quiz-score{display:none}.quiz-question{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div id="header">
+<h1>Questionario Tecnico Informatica</h1>
+<p>Curso Tecnico em Informatica - 18 questoes com correcao automatica</p>
+<button onclick="resetQuiz()">Reiniciar Quiz</button>
+</div>
+<div class="container">
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div id="quiz-container"></div>
+<div class="quiz-score" id="quiz-score">
+<h2 id="score-title">Resultado</h2>
+<p id="score-text">0 de 0</p>
+<p id="score-msg" style="color:#cc6600;font-size:1.2rem"></p>
+<button onclick="resetQuiz()" style="margin-top:20px;padding:12px 30px;border:2px solid #0066cc;border-radius:10px;background:#fff;color:#0066cc;font-size:1.1rem;cursor:pointer">Tentar Novamente</button>
+</div>
+</div>
+<footer>www.carneirosvirtual.online - Prof. Antonio</footer>
+<script>
+var quizData = [{"q": "Qual comando SQL e utilizado para remover uma tabela inteira e sua estrutura do banco de dados?", "options": ["REMOVE TABLE", "ERASE TABLE", "DELETE TABLE", "DROP TABLE"], "correct": 3, "explain": "DROP TABLE remove a tabela inteira, incluindo sua estrutura e todos os dados. DELETE remove apenas os dados (linhas), mantendo a estrutura."}, {"q": "Qual das seguintes memorias e volatil e perde seus dados ao desligar o computador?", "options": ["SSD", "ROM", "HD", "RAM"], "correct": 3, "explain": "A RAM (Random Access Memory) e volatil: perde todo o conteudo quando a energia e desligada. ROM, SSD e HD sao nao volateis."}, {"q": "Qual protocolo da camada de aplicacao e responsavel pela atribuicao dinamica de enderecos IP?", "options": ["DHCP", "HTTP", "FTP", "DNS"], "correct": 0, "explain": "O DHCP (Dynamic Host Configuration Protocol) atribui enderecos IP automaticamente para dispositivos na rede. DNS resolve nomes, HTTP e web, FTP e transferencia de arquivos."}, {"q": "Em estrutura de dados, qual e a principal caracteristica de uma PILHA (Stack)?", "options": ["FIFO (First In, First Out)", "Priority Access", "Random Access", "LIFO (Last In, First Out)"], "correct": 3, "explain": "A pilha funciona como LIFO: o ultimo elemento inserido e o primeiro a ser removido. Como uma pilha de pratos - voce tira do topo."}, {"q": "Qual e a mascara de rede padrao em formato CIDR para uma rede de Classe C (/24)?", "options": ["255.0.0.0", "255.255.0.0", "255.255.255.255", "255.255.255.0"], "correct": 3, "explain": "A mascara /24 (Classe C) e 255.255.255.0, que permite 254 hosts na rede. /8 seria Classe A e /16 seria Classe B."}, {"q": "No sistema operacional Linux, qual comando altera as permissoes de acesso de arquivos?", "options": ["chgrp", "chown", "chmod", "ls -l"], "correct": 2, "explain": "chmod (change mode) altera permissoes de leitura, escrita e execucao. chown muda o dono, chgrp muda o grupo, ls -l apenas lista."}, {"q": "Qual porta padrao e utilizada pelo protocolo seguro HTTPS?", "options": ["22", "21", "80", "443"], "correct": 3, "explain": "HTTPS usa a porta 443. HTTP usa 80, FTP usa 21, SSH usa 22. HTTPS e a versao criptografada do HTTP."}, {"q": "Qual componente executa o ciclo de busca, decodificacao e execucao de instrucoes?", "options": ["Chipset Ponte Sul", "Placa-Mae", "Memoria Cache", "CPU (Processador)"], "correct": 3, "explain": "A CPU (Unidade Central de Processamento) executa o ciclo: busca a instrucao na memoria, decodifica e executa. E o cerebro do computador."}, {"q": "Na POO, a capacidade de um metodo ter diferentes formas de execucao chama-se:", "options": ["Polimorfismo", "Abstracao", "Encapsulamento", "Heranca"], "correct": 0, "explain": "Polimorfismo (do grego 'muitas formas') permite que um mesmo metodo tenha comportamentos diferentes dependendo do objeto. Encapsulamento esconde dados, heranca reutiliza codigo."}, {"q": "O que significa a sigla SSD no contexto de dispositivos de armazenamento de dados?", "options": ["Serial State Disk", "Solid State Drive", "Secure System Disk", "System Storage Device"], "correct": 1, "explain": "SSD = Solid State Drive. Usa memoria flash (sem partes moveis), muito mais rapido que HD tradicional. Nao tem discos girando."}, {"q": "Qual das alternativas representa um endereco IP publico valido na Internet?", "options": ["192.168.1.1", "172.16.0.1", "200.150.10.5", "10.0.0.1"], "correct": 2, "explain": "200.150.10.5 e publico. 10.x, 172.16-31.x e 192.168.x sao IPs privados (reservados para redes internas), nao roteaveis na Internet."}, {"q": "Em bancos de dados relacionais, o que define uma Chave Estrangeira (Foreign Key)?", "options": ["Um campo de preenchimento obrigatoriamente numerico", "Um indice automatico criado para acelerar buscas", "Um campo que estabelece vinculo com a PK de outra tabela", "Um identificador unico e exclusivo de uma linha"], "correct": 2, "explain": "A FK (Foreign Key) e um campo que referencia a Chave Primaria de outra tabela, criando o relacionamento entre elas. Ex: id_cliente na tabela PEDIDO referencia a PK da tabela CLIENTE."}, {"q": "Qual das alternativas abaixo NAO e um sistema operacional?", "options": ["Linux Ubuntu", "Apache Web Server", "macOS Sonoma", "Microsoft Windows 11"], "correct": 1, "explain": "Apache Web Server e um software de servidor web (para hospedar sites), nao um sistema operacional. Ubuntu, Windows 11 e macOS Sonoma sao sistemas operacionais."}, {"q": "Qual tag HTML5 e utilizada para definir a barra de navegacao principal de um site?", "options": ["<header>", "<section>", "<nav>", "<aside>"], "correct": 2, "explain": "A tag <nav> define a area de navegacao principal do site com os links de menu. <header> e o cabecalho, <section> e uma secao generica, <aside> e conteudo lateral."}, {"q": "Qual topologia de rede fisica utiliza um ponto central de conexao (como um Switch)?", "options": ["Estrela (Star)", "Anel (Ring)", "Malha (Mesh)", "Barramento (Bus)"], "correct": 0, "explain": "Na topologia Estrela, todos os dispositivos se conectam a um ponto central (switch/hub). Se um cabo quebra, so aquele PC cai. Barramento usa um cabo unico, Anel forma um circulo."}, {"q": "Na arquitetura de Von Neumann, qual unidade realiza operacoes aritmeticas e logicas?", "options": ["UC (Unidade de Controle)", "ULA (Unidade Logica e Aritmetica)", "Barramento de Dados", "Registradores"], "correct": 1, "explain": "A ULA (Unidade Logica e Aritmetica) executa somas, subtracoes, comparacoes (AND, OR, NOT). A UC apenas coordena, os Registradores armazenam dados temporarios."}, {"q": "No Linux, qual comando exibe o diretorio de trabalho atual do usuario no terminal?", "options": ["path", "pwd", "cd", "dir"], "correct": 1, "explain": "pwd (Print Working Directory) mostra o caminho completo do diretorio atual. dir lista arquivos, cd muda de diretorio, path nao e um comando Linux."}, {"q": "Qual protocolo da camada de transporte garante a entrega ordenada e confiavel de dados?", "options": ["IP", "ICMP", "TCP", "UDP"], "correct": 2, "explain": "TCP (Transmission Control Protocol) garante entrega confiavel, ordenada e sem perda. UDP e rapido mas nao garante entrega. IP e da camada de rede, ICMP e para diagnostico (ping)."}];
+var answered = [];
+var score = 0;
+
+function renderQuiz(){
+  var container = document.getElementById("quiz-container");
+  container.innerHTML = "";
+  answered = [];
+  score = 0;
+  document.getElementById("quiz-score").classList.remove("show");
+  document.getElementById("progress").style.width = "0%";
+  
+  quizData.forEach(function(q, qi){
+    var div = document.createElement("div");
+    div.className = "quiz-question";
+    var html = "<h3><span class='q-number'>" + (qi+1) + "</span>" + q.q + "</h3>";
+    q.options.forEach(function(opt, oi){
+      html += "<div class='quiz-option' onclick='answerQuiz(" + qi + "," + oi + ")' id='q" + qi + "opt" + oi + "'>" + String.fromCharCode(65+oi) + ") " + opt + "</div>";
+    });
+    html += "<div class='quiz-feedback' id='q" + qi + "fb'></div>";
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+}
+
+function answerQuiz(qi, oi){
+  if(answered[qi]) return;
+  answered[qi] = true;
+  var q = quizData[qi];
+  var fb = document.getElementById("q" + qi + "fb");
+  var sel = document.getElementById("q" + qi + "opt" + oi);
+  var cor = document.getElementById("q" + qi + "opt" + q.correct);
+  
+  if(oi === q.correct){
+    sel.classList.add("correct");
+    fb.classList.add("show", "correct");
+    fb.innerHTML = "<strong>Correto!</strong> " + q.explain;
+    score++;
+  } else {
+    sel.classList.add("wrong");
+    if(cor) cor.classList.add("correct");
+    fb.classList.add("show", "wrong");
+    fb.innerHTML = "<strong>Resposta: " + String.fromCharCode(65+q.correct) + "</strong>. " + q.explain;
+  }
+  
+  q.options.forEach(function(opt, oi2){
+    var el = document.getElementById("q" + qi + "opt" + oi2);
+    if(el){ el.style.pointerEvents = "none"; el.style.opacity = "0.7"; }
+  });
+  
+  var count = answered.filter(function(a){return a}).length;
+  document.getElementById("progress").style.width = (count / quizData.length * 100) + "%";
+  
+  if(count === quizData.length) showScore();
+}
+
+function showScore(){
+  var sc = document.getElementById("quiz-score");
+  var sc2 = score, tot = quizData.length;
+  document.getElementById("score-text").textContent = "Voce acertou " + sc2 + " de " + tot + "!";
+  var t = document.getElementById("score-title"), m = document.getElementById("score-msg");
+  var pct = Math.round(sc2 / tot * 100);
+  if(pct >= 80){ t.textContent = "Excelente!"; m.textContent = "Voce domina os conceitos de Informatica! (" + pct + "%)"; }
+  else if(pct >= 60){ t.textContent = "Muito bem!"; m.textContent = "Bom desempenho! Revise os topicos que errou. (" + pct + "%)"; }
+  else if(pct >= 40){ t.textContent = "Continue!"; m.textContent = "Voce acertou algumas. Estude mais e tente de novo! (" + pct + "%)"; }
+  else { t.textContent = "Nao desista!"; m.textContent = "Revise o material e tente novamente! (" + pct + "%)"; }
+  sc.classList.add("show");
+  setTimeout(function(){ sc.scrollIntoView({behavior:"smooth"}); }, 300);
+}
+
+function resetQuiz(){
+  renderQuiz();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
