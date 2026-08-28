@@ -222,6 +222,35 @@ body{background:var(--bg);color:var(--texto);font-family:'Inter',sans-serif;over
 .save-toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;z-index:9999;opacity:0;transition:opacity .3s;font-family:'Inter',sans-serif}
 .save-toast.show{opacity:1}
 
+
+/* === LIVROS EDITÁVEIS === */
+.livro-card{position:relative;display:flex;flex-direction:column;align-items:center;padding:1rem .5rem;border-radius:12px;transition:all .3s;cursor:pointer;text-decoration:none}
+.livro-card:hover{transform:translateY(-4px);background:rgba(212,165,116,.1)}
+.livro-emoji{font-size:2.5rem;margin-bottom:.5rem}
+.livro-nome{font-size:.82rem;text-align:center;color:var(--texto);font-weight:500;line-height:1.3}
+.livro-pdf-badge{position:absolute;top:4px;right:4px;background:#ef4444;color:#fff;font-size:.6rem;padding:2px 6px;border-radius:4px;font-weight:700;display:none}
+.livro-card.has-pdf .livro-pdf-badge{display:block}
+.livro-edit-btn{display:none;position:absolute;bottom:4px;right:4px;background:rgba(59,130,246,.95);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:700;cursor:pointer;z-index:100}
+.livro-del-btn{display:none;position:absolute;top:4px;left:4px;background:rgba(239,68,68,.95);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:700;cursor:pointer;z-index:100}
+.livro-upload-btn{display:none;position:absolute;bottom:4px;left:4px;background:rgba(16,185,129,.95);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:700;cursor:pointer;z-index:100}
+.edit-mode .livro-edit-btn,.edit-mode .livro-del-btn,.edit-mode .livro-upload-btn{display:block}
+.pdf-viewer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column}
+.pdf-viewer-overlay.show{display:flex}
+.pdf-viewer-frame{width:90%;max-width:900px;height:85vh;background:#fff;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pdf-viewer-frame iframe{width:100%;height:100%;border:none}
+.pdf-viewer-close{position:absolute;top:20px;right:20px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:1.2rem;cursor:pointer;z-index:10000;display:flex;align-items:center;justify-content:center}
+.password-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:center;justify-content:center}
+.password-modal.show{display:flex}
+.password-box{background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;text-align:center;max-width:380px;width:90%}
+.password-box h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem}
+.password-box input{width:100%;padding:12px;border-radius:8px;border:2px solid var(--border);background:var(--bg);color:var(--texto);font-size:1.1rem;text-align:center;letter-spacing:.3rem;margin-bottom:1rem}
+.password-box input:focus{outline:none;border-color:var(--gold)}
+.password-box button{padding:10px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-family:'Inter',sans-serif}
+.password-box .btn-confirm{background:linear-gradient(135deg,#d4a574,#c4956a);color:#1a1a2e}
+.password-box .btn-cancel-pw{background:var(--card2);color:var(--subtexto);margin-left:8px}
+.password-error{color:#ef4444;font-size:.85rem;margin-top:.5rem;display:none}
+.password-error.show{display:block}
+
 </style>
 </head>
 <body>
@@ -415,7 +444,9 @@ body{background:var(--bg);color:var(--texto);font-family:'Inter',sans-serif;over
       <p><span data-editable>Conheça e leia gratuitamente as obras publicadas pelos membros do clube</span></p>
     </div>
     <div class="livros-banner" id="livrosBanner"></div>
-    <a href="https://antoniodasilvasantosti-bot.github.io/dominio-educacional/livros.html" target="_blank" class="btn-gold" style="margin-top:1.5rem">📖 Acessar Acervo Completo</a>
+    <div id="livrosEditArea" style="display:none;margin-top:1.5rem">
+      <div class="add-member-btn" style="margin:1rem 0" onclick="addLivro()">➕ Adicionar Novo Livro</div>
+    </div>
   </div>
 </section>
 
@@ -528,25 +559,155 @@ document.querySelectorAll('.bio-btn').forEach(btn=>{
   btn.addEventListener('mouseleave',()=>{btn.style.background='transparent';btn.style.color='var(--gold)'});
 });
 
-// ===== LIVROS BANNER =====
-const livros=[
-  {emoji:'🦁',nome:'Leo e Faísca 1'},
-  {emoji:'⚡',nome:'Leo e Faísca 2'},
-  {emoji:'🧫',nome:'Pessoas e Segredos'},
-  {emoji:'🌈',nome:'Memórias da Infância'},
-  {emoji:'🏫',nome:'Dia a Dia na Educação'},
-  {emoji:'🌙',nome:'Sol, Lua e Estrelas'},
-  {emoji:'✍️',nome:'Versos e Prosas'}
+// ===== LIVROS EDITÁVEIS =====
+var EDIT_PASSWORD = '250981';
+var livros=[
+  {emoji:'🦁',nome:'Leo e Faísca 1',pdf:''},
+  {emoji:'⚡',nome:'Leo e Faísca 2',pdf:''},
+  {emoji:'🧫',nome:'Pessoas e Segredos',pdf:''},
+  {emoji:'🌈',nome:'Memórias da Infância',pdf:''},
+  {emoji:'🏫',nome:'Dia a Dia na Educação',pdf:''},
+  {emoji:'🌙',nome:'Sol, Lua e Estrelas',pdf:''},
+  {emoji:'✍️',nome:'Versos e Prosas',pdf:''}
 ];
-const livrosBanner=document.getElementById('livrosBanner');
-livros.forEach(l=>{
-  const a=document.createElement('a');
-  a.className='livro-mini';
-  a.href='https://antoniodasilvasantosti-bot.github.io/dominio-educacional/livros.html';
-  a.target='_blank';
-  a.innerHTML=`<span class="emoji">${l.emoji}</span><span class="nome">${l.nome}</span>`;
-  livrosBanner.appendChild(a);
-});
+
+function renderLivros(){
+  var banner=document.getElementById('livrosBanner');
+  if(!banner) return;
+  banner.innerHTML='';
+  livros.forEach(function(l, idx){
+    var card=document.createElement('div');
+    card.className='livro-card'+(l.pdf?' has-pdf':'');
+    card.style.position='relative';
+    card.onclick=function(e){
+      if(e.target.closest('.livro-edit-btn,.livro-del-btn,.livro-upload-btn'))return;
+      if(l.pdf){
+        openPDF(l.pdf);
+      } else if(!isEditMode){
+        alert('PDF não cadastrado. Entre em modo de edição para adicionar.');
+      }
+    };
+    card.innerHTML='<span class="livro-pdf-badge">PDF</span>'+
+      '<span class="livro-emoji">'+l.emoji+'</span>'+
+      '<span class="livro-nome">'+l.nome+'</span>'+
+      '<button class="livro-edit-btn" onclick="event.stopPropagation();editLivro('+idx+')">✏️</button>'+
+      '<button class="livro-upload-btn" onclick="event.stopPropagation();uploadLivroPDF('+idx+')">📄</button>'+
+      '<button class="livro-del-btn" onclick="event.stopPropagation();delLivro('+idx+')">🗑️</button>';
+    banner.appendChild(card);
+  });
+}
+
+function openPDF(pdfData){
+  var overlay=document.getElementById('pdfViewerOverlay');
+  var frame=document.getElementById('pdfFrame');
+  frame.src=pdfData;
+  overlay.classList.add('show');
+}
+
+function closePDF(){
+  var overlay=document.getElementById('pdfViewerOverlay');
+  overlay.classList.remove('show');
+  document.getElementById('pdfFrame').src='';
+}
+
+function editLivro(idx){
+  var nome=prompt('Nome do livro:', livros[idx].nome);
+  if(nome!==null) livros[idx].nome=nome;
+  var emoji=prompt('Emoji do livro (deixe vazio para manter):', livros[idx].emoji);
+  if(emoji!==null && emoji!=='') livros[idx].emoji=emoji;
+  renderLivros();
+}
+
+function uploadLivroPDF(idx){
+  var input=document.createElement('input');
+  input.type='file';
+  input.accept='application/pdf';
+  input.onchange=function(){
+    var file=input.files[0];
+    if(!file)return;
+    if(file.size>10*1024*1024){
+      if(!confirm('Arquivo grande ('+Math.round(file.size/1024/1024)+'MB). Pode demorar. Continuar?'))return;
+    }
+    var reader=new FileReader();
+    reader.onload=function(){
+      livros[idx].pdf=reader.result;
+      renderLivros();
+      showSaveToast();
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function delLivro(idx){
+  if(confirm('Remover "'+livros[idx].nome+'"?')){
+    livros.splice(idx,1);
+    renderLivros();
+  }
+}
+
+function addLivro(){
+  var nome=prompt('Nome do novo livro:');
+  if(!nome)return;
+  var emojis=['📖','📚','✍️','📝','📕','📗','📘','📙','🦁','⚡','🌈','🌙','🏫','🧫','🎨','🎭'];
+  var emoji=emojis[Math.floor(Math.random()*emojis.length)];
+  livros.push({emoji:emoji, nome:nome, pdf:''});
+  renderLivros();
+}
+
+function exportLivroPDF(idx){
+  if(!livros[idx].pdf){
+    alert('Nenhum PDF cadastrado para este livro.');
+    return;
+  }
+  var a=document.createElement('a');
+  a.href=livros[idx].pdf;
+  a.download=livros[idx].nome+'.pdf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+renderLivros();
+
+// ===== PASSWORD PROTECTION =====
+function showPasswordModal(){
+  document.getElementById('passwordModal').classList.add('show');
+  document.getElementById('editPassword').value='';
+  document.getElementById('passwordError').classList.remove('show');
+  setTimeout(function(){document.getElementById('editPassword').focus();},100);
+}
+
+function closePasswordModal(){
+  document.getElementById('passwordModal').classList.remove('show');
+}
+
+function checkPassword(){
+  var pw=document.getElementById('editPassword').value;
+  if(pw===EDIT_PASSWORD){
+    closePasswordModal();
+    enterEditMode();
+  } else {
+    document.getElementById('passwordError').classList.add('show');
+    document.getElementById('editPassword').value='';
+    document.getElementById('editPassword').focus();
+  }
+}
+
+function enterEditMode(){
+  isEditMode=true;
+  document.body.classList.add('edit-mode');
+  document.getElementById('btnEditMode').style.display='none';
+  document.getElementById('btnSave').style.display='flex';
+  document.getElementById('btnExport').style.display='flex';
+  document.getElementById('btnCancel').style.display='flex';
+  document.getElementById('livrosEditArea').style.display='block';
+  savedState=captureState();
+  addMemberEditButtons();
+  addPhotoEditButtons();
+  addAddMemberButton();
+  renderLivros();
+}
 
 // ===== NEWSLETTER =====
 function cadastrarClube(){
@@ -692,24 +853,7 @@ var isEditMode = false;
 var savedState = {};
 
 function toggleEditMode() {
-  isEditMode = true;
-  document.body.classList.add('edit-mode');
-  document.getElementById('btnEditMode').style.display = 'none';
-  document.getElementById('btnSave').style.display = 'flex';
-  document.getElementById('btnExport').style.display = 'flex';
-  document.getElementById('btnCancel').style.display = 'flex';
-  
-  // Save current state for cancel
-  savedState = captureState();
-  
-  // Add edit buttons to member cards
-  addMemberEditButtons();
-  
-  // Add photo edit buttons
-  addPhotoEditButtons();
-  
-  // Add "Add Member" button
-  addAddMemberButton();
+  showPasswordModal();
 }
 
 function cancelEdit() {
@@ -719,14 +863,14 @@ function cancelEdit() {
   document.getElementById('btnSave').style.display = 'none';
   document.getElementById('btnExport').style.display = 'none';
   document.getElementById('btnCancel').style.display = 'none';
-  
+  document.getElementById('livrosEditArea').style.display='none';
   // Restore saved state
   if (Object.keys(savedState).length > 0) {
     restoreState(savedState);
   }
-  
   // Remove edit buttons
   document.querySelectorAll('.foto-edit-btn, .member-edit-btn, .delete-member-btn, .add-member-btn').forEach(b => b.remove());
+  renderLivros();
 }
 
 function captureState() {
@@ -761,15 +905,18 @@ function restoreState(state) {
 
 function saveChanges() {
   var data = captureState();
+  data.livros = livros;
   try {
     localStorage.setItem('clube_literario_edit', JSON.stringify(data));
     showSaveToast();
   } catch(e) {
-    // If localStorage is full (large photos), try to save just text
+    // If localStorage is full (large photos), try to save just text and books without PDFs
     var lightData = {editables: data.editables, memberNames: data.memberNames, memberCargos: data.memberCargos, memberBios: data.memberBios};
+    lightData.livros = livros.map(function(l){return {emoji:l.emoji, nome:l.nome, pdf:l.pdf?l.pdf.substring(0,50):''}});
     try {
       localStorage.setItem('clube_literario_edit', JSON.stringify(lightData));
       showSaveToast();
+      alert('Atenção: Os textos foram salvos, mas os PDFs são muito grandes para o navegador. Use Exportar HTML para salvar o arquivo completo com tudo.');
     } catch(e2) {
       alert('Erro ao salvar: armazenamento cheio. Use Exportar HTML para salvar o arquivo completo.');
     }
@@ -805,6 +952,11 @@ function loadSavedChanges() {
         if (cargo) cargo.innerHTML = data.memberCargos[i];
       }
     });
+    // Restore livros
+    if (data.livros && data.livros.length > 0) {
+      livros = data.livros;
+      renderLivros();
+    }
   } catch(e) {
     console.error('Erro ao carregar:', e);
   }
@@ -974,6 +1126,29 @@ document.addEventListener('DOMContentLoaded', function() {
   loadSavedChanges();
 });
 </script>
+
+
+<!-- PDF Viewer Modal -->
+<div class="pdf-viewer-overlay" id="pdfViewerOverlay">
+  <button class="pdf-viewer-close" onclick="closePDF()">✕</button>
+  <div class="pdf-viewer-frame">
+    <iframe id="pdfFrame" src=""></iframe>
+  </div>
+</div>
+
+<!-- Password Modal -->
+<div class="password-modal" id="passwordModal">
+  <div class="password-box">
+    <h3>🔒 Área de Edição</h3>
+    <p style="color:var(--subtexto);font-size:.9rem;margin-bottom:1rem">Digite a senha para editar:</p>
+    <input type="password" id="editPassword" placeholder="••••••" onkeypress="if(event.key==='Enter')checkPassword()">
+    <div class="password-error" id="passwordError">Senha incorreta. Tente novamente.</div>
+    <div style="margin-top:1rem">
+      <button class="btn-confirm" onclick="checkPassword()">✅ Confirmar</button>
+      <button class="btn-cancel-pw" onclick="closePasswordModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
