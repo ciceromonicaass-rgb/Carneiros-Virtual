@@ -251,6 +251,21 @@ body{background:var(--bg);color:var(--texto);font-family:'Inter',sans-serif;over
 .password-error{color:#ef4444;font-size:.85rem;margin-top:.5rem;display:none}
 .password-error.show{display:block}
 
+
+/* === GALERIA EDIT === */
+.galeria-cat-edit{display:none;align-items:center;gap:8px;margin-left:1rem}
+.edit-mode .galeria-cat-edit{display:inline-flex}
+.galeria-add-foto-btn{display:none;grid-column:1/-1;justify-content:center;align-items:center;background:rgba(16,185,129,.12);border:2px dashed #10b981;border-radius:12px;padding:1rem;cursor:pointer;color:#10b981;font-weight:700;font-size:.85rem;transition:all .3s}
+.edit-mode .galeria-add-foto-btn{display:flex}
+.galeria-add-foto-btn:hover{background:rgba(16,185,129,.2)}
+.galeria-add-evento-btn{display:none;grid-column:1/-1;justify-content:center;align-items:center;background:rgba(212,165,116,.12);border:2px dashed #d4a574;border-radius:12px;padding:1rem;cursor:pointer;color:#d4a574;font-weight:700;font-size:.9rem;transition:all .3s;margin-top:1rem}
+.edit-mode .galeria-add-evento-btn{display:flex}
+.galeria-add-evento-btn:hover{background:rgba(212,165,116,.2)}
+.galeria-foto-del{display:none;position:absolute;top:6px;left:6px;background:rgba(239,68,68,.95);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:700;cursor:pointer;z-index:100}
+.edit-mode .galeria-foto-del{display:block}
+.galeria-cat-del{background:rgba(239,68,68,.9);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:.72rem;font-weight:700;cursor:pointer}
+.galeria-cat-edit-btn{background:rgba(59,130,246,.9);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:.72rem;font-weight:700;cursor:pointer}
+
 </style>
 </head>
 <body>
@@ -616,6 +631,7 @@ function editLivro(idx){
   var emoji=prompt('Emoji do livro (deixe vazio para manter):', livros[idx].emoji);
   if(emoji!==null && emoji!=='') livros[idx].emoji=emoji;
   renderLivros();
+  renderGaleria();
 }
 
 function uploadLivroPDF(idx){
@@ -707,6 +723,7 @@ function enterEditMode(){
   addPhotoEditButtons();
   addAddMemberButton();
   renderLivros();
+  renderGaleria();
 }
 
 // ===== NEWSLETTER =====
@@ -733,11 +750,8 @@ window.addEventListener('scroll',()=>{
   else{nav.style.boxShadow='none';nav.style.padding='.8rem 2rem'}
 });
 
-// ===== GALERIA DO CLUBE =====
-(function() {
-  const BASE = 'https://antoniodasilvasantosti-bot.github.io/dominio-educacional/galeria';
-  
-  const categorias = [
+// ===== GALERIA DO CLUBE (EDITÁVEL) =====
+var galeriaCategorias = [
     {
       titulo: '📋 Reuniões do Conselho de Escritores',
       fotos: [
@@ -774,68 +788,176 @@ window.addEventListener('scroll',()=>{
       ]
     },
   ];
-  
-  // Flatten para o lightbox global
-  const fotos = categorias.flatMap(c => c.fotos);
+var fotoAtual = 0;
 
-  let fotoAtual = 0;
-  const galeriaGrid = document.getElementById('galeriaGrid');
-  const fotoModal = document.getElementById('fotoModal');
-  const fotoAmpliada = document.getElementById('fotoAmpliada');
-  const fotoLegenda = document.getElementById('fotoLegenda');
-  const fotoContador = document.getElementById('fotoContador');
-
+function renderGaleria() {
+  var galeriaGrid = document.getElementById('galeriaGrid');
   if (!galeriaGrid) return;
-
-  categorias.forEach(cat => {
-    // Título da categoria
-    const titulo = document.createElement('h3');
+  galeriaGrid.innerHTML = '';
+  
+  var fotos = [];
+  galeriaCategorias.forEach(function(cat) { fotos = fotos.concat(cat.fotos); });
+  
+  galeriaCategorias.forEach(function(cat, catIdx) {
+    // Título da categoria + botões de edição
+    var tituloContainer = document.createElement('div');
+    tituloContainer.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin:1.5rem 0 .5rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)';
+    
+    var titulo = document.createElement('h3');
     titulo.textContent = cat.titulo;
-    titulo.style.cssText = 'grid-column:1/-1;color:var(--gold);font-family:"Playfair Display",serif;font-size:1.2rem;margin:1.5rem 0 .5rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)';
-    galeriaGrid.appendChild(titulo);
-
-    cat.fotos.forEach((foto) => {
-      const globalIdx = fotos.indexOf(foto);
-      const item = document.createElement('div');
+    titulo.style.cssText = 'color:var(--gold);font-family:"Playfair Display",serif;font-size:1.2rem;margin:0';
+    tituloContainer.appendChild(titulo);
+    
+    var editDiv = document.createElement('div');
+    editDiv.className = 'galeria-cat-edit';
+    editDiv.innerHTML = 
+      '<button class="galeria-cat-edit-btn" onclick="editGaleriaEvento('+catIdx+')">✏️ Editar</button>'+
+      '<button class="galeria-cat-del" onclick="delGaleriaEvento('+catIdx+')">🗑️ Excluir</button>';
+    tituloContainer.appendChild(editDiv);
+    
+    galeriaGrid.appendChild(tituloContainer);
+    
+    cat.fotos.forEach(function(foto, fotoIdx) {
+      var item = document.createElement('div');
       item.style.cssText = 'position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--border);cursor:pointer;background:var(--card)';
-      const img = document.createElement('img');
+      var img = document.createElement('img');
       img.src = foto.src;
       img.alt = foto.legenda;
       img.loading = 'lazy';
       img.style.cssText = 'width:100%;height:220px;object-fit:cover;display:block;transition:transform .4s ease';
-      const overlay = document.createElement('div');
+      var overlay = document.createElement('div');
       overlay.style.cssText = 'position:absolute;inset:0;background:linear-gradient(to top,rgba(20,20,40,.85) 0%,transparent 55%);opacity:0;transition:opacity .35s;display:flex;align-items:flex-end;padding:1rem';
-      const legenda = document.createElement('p');
+      var legenda = document.createElement('p');
       legenda.style.cssText = 'color:#fff;font-size:.82rem;font-style:italic;line-height:1.4;margin:0';
       legenda.textContent = foto.legenda;
       overlay.appendChild(legenda);
       item.appendChild(img);
       item.appendChild(overlay);
-      item.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; overlay.style.opacity = '1'; });
-      item.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; overlay.style.opacity = '0'; });
-      item.addEventListener('click', () => { fotoAtual = globalIdx; abrirFoto(globalIdx); });
+      
+      // Delete photo button (edit mode)
+      var delBtn = document.createElement('button');
+      delBtn.className = 'galeria-foto-del';
+      delBtn.innerHTML = '🗑️';
+      delBtn.onclick = function(e) {
+        e.stopPropagation();
+        delGaleriaFoto(catIdx, fotoIdx);
+      };
+      item.appendChild(delBtn);
+      
+      item.addEventListener('mouseenter', function() { img.style.transform = 'scale(1.06)'; overlay.style.opacity = '1'; });
+      item.addEventListener('mouseleave', function() { img.style.transform = 'scale(1)'; overlay.style.opacity = '0'; });
+      var globalIdx = fotos.indexOf(foto);
+      item.addEventListener('click', function() { fotoAtual = globalIdx; abrirFotoGaleria(globalIdx, fotos); });
       galeriaGrid.appendChild(item);
     });
+    
+    // Add photo button (edit mode)
+    var addFotoBtn = document.createElement('div');
+    addFotoBtn.className = 'galeria-add-foto-btn';
+    addFotoBtn.innerHTML = '➕ Adicionar Foto a esta Categoria';
+    addFotoBtn.onclick = function() { addGaleriaFoto(catIdx); };
+    galeriaGrid.appendChild(addFotoBtn);
   });
+  
+  // Add new event/category button (edit mode)
+  var addEventoBtn = document.createElement('div');
+  addEventoBtn.className = 'galeria-add-evento-btn';
+  addEventoBtn.innerHTML = '📅 Adicionar Novo Evento';
+  addEventoBtn.onclick = function() { addGaleriaEvento(); };
+  galeriaGrid.appendChild(addEventoBtn);
+}
 
-  function abrirFoto(i) {
-    fotoAmpliada.src = fotos[i].src;
-    fotoLegenda.textContent = fotos[i].legenda;
-    fotoContador.textContent = (i + 1) + ' / ' + fotos.length;
-    fotoModal.style.display = 'flex';
+function abrirFotoGaleria(i, fotos) {
+  var fotoModal = document.getElementById('fotoModal');
+  var fotoAmpliada = document.getElementById('fotoAmpliada');
+  var fotoLegenda = document.getElementById('fotoLegenda');
+  var fotoContador = document.getElementById('fotoContador');
+  fotoAmpliada.src = fotos[i].src;
+  fotoLegenda.textContent = fotos[i].legenda;
+  fotoContador.textContent = (i + 1) + ' / ' + fotos.length;
+  fotoModal.style.display = 'flex';
+  
+  // Update navigation
+  document.getElementById('prevFoto').onclick = function() {
+    fotoAtual = (fotoAtual - 1 + fotos.length) % fotos.length;
+    abrirFotoGaleria(fotoAtual, fotos);
+  };
+  document.getElementById('nextFoto').onclick = function() {
+    fotoAtual = (fotoAtual + 1) % fotos.length;
+    abrirFotoGaleria(fotoAtual, fotos);
+  };
+}
+
+function addGaleriaFoto(catIdx) {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = function() {
+    var file = input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function() {
+      var legenda = prompt('Legenda da foto:', '');
+      if (legenda === null) legenda = 'Foto do evento';
+      galeriaCategorias[catIdx].fotos.push({
+        src: reader.result,
+        legenda: legenda
+      });
+      renderGaleria();
+      showSaveToast();
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function delGaleriaFoto(catIdx, fotoIdx) {
+  if (confirm('Excluir esta foto?')) {
+    galeriaCategorias[catIdx].fotos.splice(fotoIdx, 1);
+    renderGaleria();
   }
+}
 
-  document.getElementById('closeFoto').addEventListener('click', () => { fotoModal.style.display = 'none'; });
-  fotoModal.addEventListener('click', (e) => { if (e.target === fotoModal) fotoModal.style.display = 'none'; });
-  document.getElementById('prevFoto').addEventListener('click', () => { fotoAtual = (fotoAtual - 1 + fotos.length) % fotos.length; abrirFoto(fotoAtual); });
-  document.getElementById('nextFoto').addEventListener('click', () => { fotoAtual = (fotoAtual + 1) % fotos.length; abrirFoto(fotoAtual); });
-  document.addEventListener('keydown', (e) => {
-    if (fotoModal.style.display !== 'flex') return;
-    if (e.key === 'Escape') fotoModal.style.display = 'none';
-    if (e.key === 'ArrowLeft') { fotoAtual = (fotoAtual - 1 + fotos.length) % fotos.length; abrirFoto(fotoAtual); }
-    if (e.key === 'ArrowRight') { fotoAtual = (fotoAtual + 1) % fotos.length; abrirFoto(fotoAtual); }
-  });
-})();
+function addGaleriaEvento() {
+  var titulo = prompt('Nome do novo evento:', '');
+  if (!titulo) return;
+  galeriaCategorias.push({ titulo: titulo, fotos: [] });
+  renderGaleria();
+  showSaveToast();
+}
+
+function editGaleriaEvento(catIdx) {
+  var novoTitulo = prompt('Nome do evento:', galeriaCategorias[catIdx].titulo);
+  if (novoTitulo !== null) {
+    galeriaCategorias[catIdx].titulo = novoTitulo;
+    renderGaleria();
+  }
+}
+
+function delGaleriaEvento(catIdx) {
+  if (confirm('Excluir o evento "' + galeriaCategorias[catIdx].titulo + '" e todas as suas fotos?')) {
+    galeriaCategorias.splice(catIdx, 1);
+    renderGaleria();
+  }
+}
+
+// Initial render
+renderGaleria();
+
+// Foto modal controls
+document.getElementById('closeFoto').addEventListener('click', function() {
+  document.getElementById('fotoModal').style.display = 'none';
+});
+document.getElementById('fotoModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('fotoModal')) {
+    document.getElementById('fotoModal').style.display = 'none';
+  }
+});
+document.addEventListener('keydown', function(e) {
+  var fotoModal = document.getElementById('fotoModal');
+  if (fotoModal.style.display !== 'flex') return;
+  if (e.key === 'Escape') fotoModal.style.display = 'none';
+});
 
 </script>
 
@@ -906,6 +1028,10 @@ function restoreState(state) {
 function saveChanges() {
   var data = captureState();
   data.livros = livros;
+  // Save galeria (categorias without large base64 in localStorage, but keep in export)
+  try {
+    data.galeriaCategorias = galeriaCategorias;
+  } catch(e2) {}
   try {
     localStorage.setItem('clube_literario_edit', JSON.stringify(data));
     showSaveToast();
@@ -956,6 +1082,11 @@ function loadSavedChanges() {
     if (data.livros && data.livros.length > 0) {
       livros = data.livros;
       renderLivros();
+    }
+    // Restore galeria
+    if (data.galeriaCategorias && data.galeriaCategorias.length > 0) {
+      galeriaCategorias = data.galeriaCategorias;
+      renderGaleria();
     }
   } catch(e) {
     console.error('Erro ao carregar:', e);
