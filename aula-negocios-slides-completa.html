@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negocios em Informatica - Aula Completa | carneirosvirtual.com</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+body{background:#fff;color:#000;overflow:hidden;height:100vh}
+#header{position:fixed;top:0;left:0;right:0;height:90px;background:#fff;border-bottom:3px solid #000;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+#header-left{display:flex;flex-direction:column;justify-content:center}
+.school-name{font-size:1.1rem;font-weight:700;color:#000}
+.class-name{font-size:0.85rem;color:#333;margin-top:2px}
+.teacher-name{font-size:0.85rem;color:#333}
+#header-center{text-align:center}
+#header-center h1{font-size:1.2rem;color:#000;font-weight:700}
+#header-center .subtitle{font-size:0.8rem;color:#333}
+#header-right{display:flex;align-items:center;gap:20px}
+#slide-counter{font-size:1rem;font-weight:700;color:#000;background:#f0f0f0;padding:8px 16px;border-radius:8px}
+#footer{position:fixed;bottom:0;left:0;right:0;height:35px;background:#fff;border-top:2px solid #000;z-index:100;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#333}
+#slide-container{position:fixed;top:90px;bottom:35px;left:0;right:0;display:flex;align-items:center;justify-content:center;padding:20px 40px;overflow:hidden}
+.slide{max-width:1100px;width:100%;text-align:center;display:none;animation:fadeIn 0.4s ease}
+.slide.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+@keyframes fadeIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.slide-title{font-size:2.2rem;font-weight:700;color:#000;margin-bottom:20px;padding-bottom:10px;border-bottom:4px solid #000;display:inline-block}
+.section-tag{font-size:0.9rem;color:#666;background:#f0f0f0;padding:4px 14px;border-radius:20px;margin-bottom:10px;display:inline-block}
+.big-emoji{font-size:4rem;margin-bottom:15px}
+.slide-text{font-size:1.5rem;line-height:1.6;color:#000;margin:8px 0;text-align:left}
+.slide-list{font-size:1.4rem;line-height:2;color:#000;list-style:none;text-align:left;margin:10px auto;max-width:900px}
+.slide-list li{padding:6px 0;border-bottom:1px solid #eee}
+.example-box{background:#fffde7;border:3px solid #000;border-radius:12px;padding:20px 25px;margin:20px auto;max-width:850px;text-align:left}
+.example-box p{font-size:1.35rem;line-height:1.5;color:#000}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;max-width:900px;margin:0 auto}
+.card-emoji{background:#f8f8f8;border:2px solid #000;border-radius:10px;padding:15px;font-size:1.2rem;color:#000;line-height:1.4}
+.card-emoji h3{font-size:1.3rem;color:#000;margin-bottom:8px}
+.card-emoji ul{font-size:1.1rem;text-align:left;margin:8px 0;padding-left:20px;line-height:1.6}
+.green-border{border-color:#2e7d32}
+.blue-border{border-color:#1565c0}
+.red-border{border-color:#c62828}
+.orange-border{border-color:#e65100}
+.purple-border{border-color:#6a1b9a}
+.data-table{border-collapse:collapse;margin:15px auto;font-size:1.2rem;width:90%;max-width:800px}
+.data-table th{background:#000;color:#fff;padding:12px;border:2px solid #000}
+.data-table td{border:2px solid #000;padding:10px;text-align:center;color:#000}
+.data-table tr:nth-child(even){background:#f5f5f5}
+.timeline{display:flex;flex-direction:column;align-items:center;gap:10px;margin:15px auto}
+.timeline-item{font-size:1.3rem;color:#000;background:#f8f8f8;border:2px solid #000;border-radius:10px;padding:10px 25px;width:80%;max-width:500px}
+.flow-chart{display:flex;flex-direction:column;align-items:center;gap:5px;margin:15px auto}
+.flow-step{font-size:1.3rem;color:#000;background:#e3f2fd;border:2px solid #000;border-radius:8px;padding:10px 25px}
+.flow-arrow{font-size:1.5rem;color:#000}
+#nav-hint{position:fixed;bottom:40px;right:20px;font-size:0.8rem;color:#999;z-index:50}
+#progress-bar{position:fixed;top:87px;left:0;height:4px;background:#000;z-index:101;transition:width 0.3s}
+#controls{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:50}
+#controls button{background:#fff;border:2px solid #000;color:#000;padding:8px 16px;border-radius:8px;font-size:0.9rem;cursor:pointer;font-weight:600}
+#controls button:hover{background:#000;color:#fff}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <div class="school-name">Escola Estadual Dr. Emilio de Maia</div>
+    <div class="class-name">Turma do 1º Ano Medio Tecnico Integrado</div>
+    <div class="teacher-name">Profº. Antonio</div>
+  </div>
+  <div id="header-center">
+    <h1>Negocios em Informatica</h1>
+    <div class="subtitle">Aula Completa - Slides</div>
+  </div>
+  <div id="header-right">
+    <div id="slide-counter">1 / 102</div>
+  </div>
+</div>
+
+<div id="progress-bar"></div>
+
+<div id="slide-container">
+<div class="slide" data-index="0">
+<div class="section-tag">Abertura</div>
+<h2 class="slide-title">💼 Bem-vindos a Negocios em Informatica</h2>
+<div class="big-emoji">💼</div><p class="slide-text">Disciplina: <b>Negocios em Informatica</b></p><p class="slide-text">Esta aula vai mostrar como a tecnologia cria <b>negocios reais</b> e como voce pode fazer parte desse mundo!</p><p class="slide-text">Vamos ver exemplos praticos que voce usa todos os dias sem perceber.</p>
+</div>
+<div class="slide" data-index="1">
+<div class="section-tag">Abertura</div>
+<h2 class="slide-title">📋 Apresentacao da Disciplina</h2>
+<div class="big-emoji">📋</div><p class="slide-text"><b>Objetivo:</b> Entender como os negocios funcionam no mundo da tecnologia.</p><p class="slide-text"><b>O que vamos aprender:</b></p><ul class="slide-list"><li>Tipos de negocios em TI</li><li>E-commerce e Marketing Digital</li><li>Startups e Empreendedorismo</li><li>Meios de pagamento digital</li><li>Etica, Seguranca e LGPD</li><li>Gestao de projetos e Suporte tecnico</li><li>Sustentabilidade em TI</li></ul>
+</div>
+<div class="slide" data-index="2">
+<div class="section-tag">Abertura</div>
+<h2 class="slide-title">🎯 Como Vamos Trabalhar</h2>
+<div class="big-emoji">🎯</div><p class="slide-text"><b>Metodologia:</b> Aula expositiva com slides interativos.</p><p class="slide-text"><b>Recursos:</b> Projetor, exemplos praticos e discussao em sala.</p><p class="slide-text"><b>Avaliacao:</b> Participacao e fixacao do conteudo.</p><p class="slide-text"><b>Dica:</b> Anote os exemplos praticos! Eles cairao na avaliacao.</p>
+</div>
+<div class="slide" data-index="3">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">💡 Definicao de Negocio em Informatica</h2>
+<div class="big-emoji">💡</div><p class="slide-text"><b>Negocio em Informatica</b> e usar a tecnologia (computadores, internet, software) para <b>criar, vender ou gerenciar</b> produtos e servicos que geram dinheiro.</p><div class="example-box"><p><b>💡 Em outras palavras:</b> E quando voce usa computadores e internet para ganhar dinheiro de forma organizada e profissional.</p></div><p class="slide-text">Toda vez que voce compra algo online, usa um app ou paga com PIX, esta participando de um negocio em informatica!</p>
+</div>
+<div class="slide" data-index="4">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">📱 Exemplos do Dia a Dia</h2>
+<div class="big-emoji">📱</div><p class="slide-text">Voce ja usa negocios em informatica todos os dias:</p><div class="grid-3"><div class="card-emoji">🍔 <b>iFood</b><br>Comida pela internet</div><div class="card-emoji">🎬 <b>Netflix</b><br>Streaming de filmes</div><div class="card-emoji">🛒 <b>Mercado Livre</b><br>Compras online</div><div class="card-emoji">💳 <b>PIX</b><br>Pagamento digital</div><div class="card-emoji">🚗 <b>Uber</b><br>Transporte por app</div><div class="card-emoji">🎵 <b>Spotify</b><br>Musica online</div></div><p class="slide-text">Todos esses sao <b>negocios que usam tecnologia</b> para gerar dinheiro!</p>
+</div>
+<div class="slide" data-index="5">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">📦 Produto vs Servico em TI</h2>
+<div class="big-emoji">📦</div><p class="slide-text">Em TI existem <b>dois tipos principais</b> de negocio:</p><div class="grid-2"><div class="card-emoji green-border"><h3>📦 PRODUTO</h3><p>Algo que voce cria e vende</p><ul><li>Um aplicativo</li><li>Um jogo</li><li>Um software</li><li>Um computador</li></ul><p><b>Ex:</b> Minecraft, Windows</p></div><div class="card-emoji blue-border"><h3>🔧 SERVICO</h3><p>Algo que voce faz para alguem</p><ul><li>Consertar computador</li><li>Criar um site</li><li>Dar suporte tecnico</li><li>Manutencao de rede</li></ul><p><b>Ex:</b> Assistencia tecnica</p></div></div>
+</div>
+<div class="slide" data-index="6">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">🌐 Areas de Atuacao em TI</h2>
+<div class="big-emoji">🌐</div><p class="slide-text">Existem <b>muitas areas</b> onde a informatica cria negocios:</p><div class="grid-3"><div class="card-emoji">🛒 <b>E-commerce</b><br>Vender pela internet</div><div class="card-emoji">📱 <b>Marketing Digital</b><br>Divulgar nas redes</div><div class="card-emoji">🚀 <b>Startups</b><br>Empresas inovadoras</div><div class="card-emoji">💼 <b>Consultoria</b><br>Ajudar outras empresas</div><div class="card-emoji">💳 <b>Fintechs</b><br>Pagamentos e financas</div><div class="card-emoji">🎮 <b>Games</b><br>Criar e vender jogos</div></div><p class="slide-text">O mundo da TI e <b>gigante</b> e cheio de oportunidades!</p>
+</div>
+<div class="slide" data-index="7">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">💰 Por que Estudar Negocios em TI?</h2>
+<div class="big-emoji">💰</div><p class="slide-text">Entender como os negocios funcionam te da uma <b>vantagem enorme</b>:</p><ul class="slide-list"><li>💡 Voce pode criar <b>sua propria empresa</b> ou app</li><li>💰 Entende como empresas <b>ganham dinheiro</b></li><li>🤝 Sabe conversar com <b>clientes e parceiros</b></li><li>🚀 Pode trabalhar como <b>freelancer</b> ou empreendedor</li><li>📈 Entende o <b>mercado de trabalho</b> em TI</li></ul><div class="example-box"><p><b>🎯 Objetivo:</b> Ao final desta aula voce vai entender os principais tipos de negocios em TI e como eles funcionam!</p></div>
+</div>
+<div class="slide" data-index="8">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">👨‍💻 O Profissional de TI no Mercado</h2>
+<div class="big-emoji">👨‍💻</div><p class="slide-text">Como <b>tecnico em informatica</b>, voce pode atuar em:</p><ul class="slide-list"><li>🏢 <b>Empresas privadas</b> - suporte, infraestrutura, sistemas</li><li>🏛️ <b>Orgaos publicos</b> - prefeituras, escolas, hospitais</li><li>🏠 <b>Trabalho autonomo</b> - consultoria, manutencao, freelancer</li><li>🚀 <b>Propria startup</b> - criar solucoes e vender</li></ul><p class="slide-text">O profissional que entende de <b>negocios</b> ganha mais e tem mais oportunidades!</p>
+</div>
+<div class="slide" data-index="9">
+<div class="section-tag">O que e Negocio em Informatica</div>
+<h2 class="slide-title">🏆 Vantagens de Entender Negocios</h2>
+<div class="big-emoji">🏆</div><p class="slide-text"><b>Quem entende de negocios em TI:</b></p><ul class="slide-list"><li>💰 Sabe <b>precificar</b> seu trabalho (nao cobrar barato demais)</li><li>🤝 Sabe <b>negociar</b> com clientes</li><li>📈 Identifica <b>oportunidades</b> de mercado</li><li>🛡️ Evita <b>prejuizos</b> e golpes</li><li>🚀 Pode <b>crescer</b> e se tornar empreendedor</li></ul><div class="example-box"><p><b>💡 Dica:</b> O tecnico que so conserta PC ganha pouco. O que entende de negocios pode <b>abrir a propria empresa</b>!</p></div>
+</div>
+<div class="slide" data-index="10">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">🛒 O que e E-commerce?</h2>
+<div class="big-emoji">🛒</div><p class="slide-text"><b>E-commerce</b> (Comercio Eletronico) e a compra e venda de produtos e servicos pela <b>internet</b>.</p><div class="example-box"><p><b>📈 Curiosidade:</b> Em 2025, o e-commerce no Brasil faturou mais de <b>R$ 200 bilhoes</b>!</p></div><p class="slide-text">E como uma loja fisica, mas <b>virtual</b> - aberta 24 horas, sem fila e para clientes do mundo todo.</p>
+</div>
+<div class="slide" data-index="11">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">🔀 Tipos de E-commerce</h2>
+<div class="big-emoji">🔀</div><p class="slide-text">Existem <b>4 tipos principais</b> de e-commerce:</p><div class="grid-2"><div class="card-emoji green-border"><h3>🏪 B2C - Business to Consumer</h3><p>Empresa vende para o consumidor</p><p><b>Ex:</b> Amazon, Mercado Livre</p></div><div class="card-emoji blue-border"><h3>🏢 B2B - Business to Business</h3><p>Empresa vende para empresa</p><p><b>Ex:</b> NFe.io, Alibaba</p></div><div class="card-emoji orange-border"><h3>👥 C2C - Consumer to Consumer</h3><p>Consumidor vende para consumidor</p><p><b>Ex:</b> OLX, Enjoei</p></div><div class="card-emoji purple-border"><h3>🛍️ D2C - Direct to Consumer</h3><p>Fabricante vende direto</p><p><b>Ex:</b> Natura, Apple Store</p></div></div>
+</div>
+<div class="slide" data-index="12">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">⚙️ Como Funciona uma Loja Virtual</h2>
+<div class="big-emoji">⚙️</div><p class="slide-text">Uma loja virtual precisa de <b>4 partes essenciais</b>:</p><ul class="slide-list"><li>🌐 <b>Site/Catalogo</b> - onde o cliente ve os produtos</li><li>🛒 <b>Carrinho de compras</b> - onde escolhe e junta os produtos</li><li>💳 <b>Gateway de pagamento</b> - onde paga (cartao, PIX, boleto)</li><li>📦 <b>Logistica</b> - como o produto chega na casa do cliente</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Voce entra no Mercado Livre -> busca um fone -> coloca no carrinho -> paga com PIX -> recebe em casa!</p></div>
+</div>
+<div class="slide" data-index="13">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">🔐 Pagamentos Online e Seguranca</h2>
+<div class="big-emoji">🔐</div><p class="slide-text">No e-commerce, o pagamento precisa ser <b>seguro</b> para o cliente e para o lojista.</p><ul class="slide-list"><li>🔒 <b>Criptografia</b> - os dados do cartao sao codificados (HTTPS)</li><li>✅ <b>Gateway de pagamento</b> - processa o pagamento com seguranca</li><li>🛡️ <b>Antifraude</b> - detecta compras suspeitas</li><li>💯 <b>Reputacao</b> - lojas bem avaliadas vendem mais</li></ul><div class="example-box"><p><b>⚠️ Cuidado:</b> Nunca compre em sites sem cadeado (HTTPS) no navegador. Seus dados podem ser roubados!</p></div>
+</div>
+<div class="slide" data-index="14">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">📦 Logistica e Entrega</h2>
+<div class="big-emoji">📦</div><p class="slide-text">Depois da compra, o produto precisa chegar:</p><ul class="slide-list"><li>🏭 <b>Estoque</b> - onde o produto fica guardado</li><li>🏷️ <b>Picking</b> - separar o produto no estoque</li><li>📦 <b>Embalagem</b> - empacotar com seguranca</li><li>🚚 <b>Transporte</b> - Correios, transportadora, motoboy</li><li>📍 <b>Rastreamento</b> - cliente acompanha pelo codigo</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> A Amazon tem robos que pegam o produto em segundos e entregam em ate 24h!</p></div>
+</div>
+<div class="slide" data-index="15">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">⚖️ Vantagens e Desvantagens</h2>
+<div class="big-emoji">⚖️</div><div class="grid-2"><div class="card-emoji green-border"><h3>✅ VANTAGENS</h3><ul><li>Aberto 24h, 7 dias por semana</li><li>Alcance mundial</li><li>Sem custo de loja fisica</li><li>Facilidade de comparar precos</li></ul></div><div class="card-emoji red-border"><h3>❌ DESVANTAGENS</h3><ul><li>Nao da para tocar o produto</li><li>Risco de fraude</li><li>Dependencia de entrega</li><li>Concorrencia muito grande</li></ul></div></div>
+</div>
+<div class="slide" data-index="16">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">🏷️ Exemplos Praticos de E-commerce</h2>
+<div class="big-emoji">🏷️</div><div class="grid-3"><div class="card-emoji">🛒 <b>Mercado Livre</b><br>Maior da America Latina</div><div class="card-emoji">📚 <b>Amazon</b><br>Maior do mundo. Entrega em 1 dia</div><div class="card-emoji">🛍️ <b>Shopee</b><br>Produtos baratos da Asia</div><div class="card-emoji">🍔 <b>iFood</b><br>E-commerce de comida</div><div class="card-emoji">🚗 <b>OLX</b><br>C2C - venda de pessoa para pessoa</div><div class="card-emoji">👕 <b>Shein</b><br>Fast fashion. Roupas baratas</div></div><p class="slide-text">Cada um tem um <b>modelo de negocio</b> diferente, mas todos vendem pela internet!</p>
+</div>
+<div class="slide" data-index="17">
+<div class="section-tag">E-commerce</div>
+<h2 class="slide-title">🚀 Como Criar uma Loja Virtual</h2>
+<div class="big-emoji">🚀</div><p class="slide-text">Passos para criar uma loja virtual:</p><ul class="slide-list"><li>1️⃣ <b>Escolher o produto</b> - o que vender?</li><li>2️⃣ <b>Plataforma</b> - Shopify, Nuvemshop, WooCommerce</li><li>3️⃣ <b>Dominio</b> - o endereco da sua loja</li><li>4️⃣ <b>Cadastrar produtos</b> - fotos, precos, descricao</li><li>5️⃣ <b>Pagamento</b> - configurar PIX, cartao, boleto</li><li>6️⃣ <b>Entrega</b> - combinar com Correios</li><li>7️⃣ <b>Divulgar</b> - redes sociais, Google, anuncios</li></ul><div class="example-box"><p><b>💡 Dica:</b> Hoje da para criar uma loja virtual <b>gratuitamente</b> com Nuvemshop ou WooCommerce!</p></div>
+</div>
+<div class="slide" data-index="18">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">📱 O que e Marketing Digital?</h2>
+<div class="big-emoji">📱</div><p class="slide-text"><b>Marketing Digital</b> e usar a internet para <b>divulgar e vender</b> produtos e servicos.</p><p class="slide-text">Em vez de panfletos e outdoors, usa-se:</p><ul class="slide-list"><li>📱 <b>Redes sociais</b> - Instagram, TikTok, Facebook</li><li>🔍 <b>Google</b> - aparece quando alguem busca</li><li>📧 <b>E-mail</b> - mandar ofertas diretas</li><li>🎥 <b>Videos</b> - YouTube, reels, shorts</li></ul><div class="example-box"><p><b>📊 Dado:</b> Mais de <b>5 bilhoes</b> de pessoas usam a internet no mundo. E o maior canal de vendas que existe!</p></div>
+</div>
+<div class="slide" data-index="19">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">💬 Redes Sociais como Ferramenta</h2>
+<div class="big-emoji">💬</div><p class="slide-text">Cada rede social tem um <b>tipo de publico</b>:</p><div class="grid-3"><div class="card-emoji">📸 <b>Instagram</b><br>Fotos, reels. Jovens e adultos</div><div class="card-emoji">🎵 <b>TikTok</b><br>Videos curtos. Muito jovem</div><div class="card-emoji">💼 <b>LinkedIn</b><br>Profissional. B2B</div><div class="card-emoji">📘 <b>Facebook</b><br>Adultos, comunidades</div><div class="card-emoji">▶️ <b>YouTube</b><br>Videos longos, tutoriais</div><div class="card-emoji">🐦 <b>X/Twitter</b><br>Noticias, textos curtos</div></div><p class="slide-text">O bom marketing escolhe <b>onde o cliente esta</b>!</p>
+</div>
+<div class="slide" data-index="20">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">🚦 Trafego Organico vs Pago</h2>
+<div class="big-emoji">🚦</div><div class="grid-2"><div class="card-emoji green-border"><h3>🟢 TRAFEGO ORGANICO</h3><p><b>Gratuito</b> - aparece naturalmente</p><ul><li>Postar conteudo bom</li><li>Seguidores compartilham</li><li>Demora mais para crescer</li><li>Mas dura mais tempo</li></ul><p><b>Ex:</b> Post que viraliza</p></div><div class="card-emoji blue-border"><h3>🔵 TRAFEGO PAGO</h3><p><b>Pago</b> - aparece como anuncio</p><ul><li>Google Ads, Facebook Ads</li><li>Aparece imediatamente</li><li>Para quando para de pagar</li><li>Mais rapido e direcionado</li></ul><p><b>Ex:</b> Anuncio patrocinado</p></div></div>
+</div>
+<div class="slide" data-index="21">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">🔍 SEO - Otimizacao para Buscadores</h2>
+<div class="big-emoji">🔍</div><p class="slide-text"><b>SEO</b> (Search Engine Optimization) e fazer seu site <b>aparecer no Google</b> quando alguem busca.</p><ul class="slide-list"><li>🔑 <b>Palavras-chave</b> - usar os termos que as pessoas buscam</li><li>📝 <b>Conteudo de qualidade</b> - textos uteis e relevantes</li><li>⚡ <b>Site rapido</b> - Google prefere sites que carregam rapido</li><li>📱 <b>Site mobile</b> - funciona bem no celular</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Se voce busca "melhor notebook 2026", quem aparece primeiro fez SEO bem feito!</p></div>
+</div>
+<div class="slide" data-index="22">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">⭐ Influenciadores Digitais</h2>
+<div class="big-emoji">⭐</div><p class="slide-text"><b>Influenciadores digitais</b> sao pessoas com muitos seguidores que <b>divulgam produtos</b>.</p><ul class="slide-list"><li>📸 <b>Micro-influenciador</b> - 5 mil a 50 mil seguidores</li><li>🌟 <b>Medio</b> - 50 mil a 500 mil seguidores</li><li>🏆 <b>Top</b> - mais de 500 mil seguidores</li><li>💰 <b>Monetizacao</b> - cobram por post, parceria, ou comissao</li></ul><div class="example-box"><p><b>📊 Dado:</b> Empresas ganham em media <b>R$ 5,20</b> para cada R$ 1 investido em influenciadores!</p></div>
+</div>
+<div class="slide" data-index="23">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">📧 E-mail Marketing</h2>
+<div class="big-emoji">📧</div><p class="slide-text"><b>E-mail marketing</b> e enviar mensagens para uma lista de clientes:</p><ul class="slide-list"><li>🎯 <b>Newsletter</b> - noticias e novidades</li><li>🎁 <b>Promocoes</b> - descontos exclusivos</li><li>📚 <b>Conteudo</b> - dicas e tutoriais</li><li>🛒 <b>Recuperacao</b> - "voce esqueceu algo no carrinho!"</li></ul><div class="example-box"><p><b>💡 Dica:</b> O e-mail ainda e o canal com <b>maior retorno</b> - cerca de <b>R$ 42</b> para cada R$ 1 investido!</p></div>
+</div>
+<div class="slide" data-index="24">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">📊 Metricas Importantes</h2>
+<div class="big-emoji">📊</div><p class="slide-text">No marketing digital, tudo e <b>medido</b>:</p><ul class="slide-list"><li>👁️ <b>Impressoes</b> - quantas vezes o anuncio apareceu</li><li>👆 <b>Cliques</b> - quantas pessoas clicaram</li><li>🔄 <b>Conversao</b> - quantas compraram</li><li>❤️ <b>Engajamento</b> - curtidas, comentarios, compartilhar</li><li>💰 <b>ROAS</b> - retorno sobre o investimento em anuncios</li><li>👥 <b>Seguidores</b> - tamanho da audiencia</li></ul><p class="slide-text">Sem medir, nao da para saber se o marketing <b>esta funcionando</b>!</p>
+</div>
+<div class="slide" data-index="25">
+<div class="section-tag">Marketing Digital</div>
+<h2 class="slide-title">🎬 Exemplos Praticos de Campanhas</h2>
+<div class="big-emoji">🎬</div><div class="grid-2"><div class="card-emoji"><h3>🍔 iFood - "Chefe, ta com fome?"</h3><p>Campanha com memes e humor no Twitter. Aumentou pedidos em 30%.</p></div><div class="card-emoji"><h3>🏦 Nubanco - "Voce e unico"</h3><p>Marketing de conteudo no Instagram. Virou a marca mais amada do Brasil.</p></div><div class="card-emoji"><h3>🛒 Magazine Luiza - "Magalu"</h3><p>Personagem virtual com milhoes de seguidores. Inovou no marketing.</p></div><div class="card-emoji"><h3>👟 Nike - "Just Do It"</h3><p>Videos inspiradores no YouTube. Gera emocao e vende sem parecer venda.</p></div></div>
+</div>
+<div class="slide" data-index="26">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">🚀 O que e uma Startup?</h2>
+<div class="big-emoji">🚀</div><p class="slide-text"><b>Startup</b> e uma empresa jovem que usa tecnologia para criar algo <b>novo e inovador</b>, com potencial de crescer muito rapido.</p><div class="example-box"><p><b>🔑 Caracteristicas:</b> Inovacao + Tecnologia + Crescimento rapido + Risco alto</p></div><p class="slide-text">Nao e apenas uma empresa pequena. E uma empresa que <b>resolve um problema de um jeito novo</b>.</p>
+</div>
+<div class="slide" data-index="27">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">⚖️ Startup vs Empresa Tradicional</h2>
+<div class="big-emoji">⚖️</div><div class="grid-2"><div class="card-emoji blue-border"><h3>🚀 STARTUP</h3><ul><li>Inovacao e tecnologia</li><li>Cresce muito rapido</li><li>Busca investimento externo</li><li>Risco alto, retorno alto</li><li>Pode nao ter lucro no inicio</li></ul></div><div class="card-emoji green-border"><h3>🏢 EMPRESA TRADICIONAL</h3><ul><li>Modelo conhecido</li><li>Cresce devagar e estavel</li><li>Usa dinheiro proprio</li><li>Risco baixo, retorno estavel</li><li>Lucro desde o inicio</li></ul></div></div><p class="slide-text"><b>Ex:</b> Padaria = empresa tradicional. iFood = startup!</p>
+</div>
+<div class="slide" data-index="28">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">💼 O que e Empreendedorismo?</h2>
+<div class="big-emoji">💼</div><p class="slide-text"><b>Empreendedorismo</b> e identificar um problema e criar uma <b>solucao que gera valor</b> (e dinheiro).</p><ul class="slide-list"><li>👀 <b>Identificar</b> - ver um problema que as pessoas tem</li><li>💡 <b>Idealizar</b> - pensar em uma solucao</li><li>🛠️ <b>Construir</b> - criar o produto ou servico</li><li>🚀 <b>Vender</b> - colocar no mercado</li><li>📈 <b>Crescer</b> - melhorar e expandir</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> "Ta dificil pedir taxi" -> criou o Uber. "Ta caro viajar" -> criou o Airbnb.</p></div>
+</div>
+<div class="slide" data-index="29">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">🧠 Caracteristicas do Empreendedor</h2>
+<div class="big-emoji">🧠</div><p class="slide-text">Um bom empreendedor precisa ter:</p><div class="grid-3"><div class="card-emoji">💪 <b>Coragem</b><br>Assumir riscos</div><div class="card-emoji">🎯 <b>Foco</b><br>Saber aonde quer chegar</div><div class="card-emoji">🔄 <b>Resiliencia</b><br>Nao desistir</div><div class="card-emoji">🤝 <b>Relacionamento</b><br>Saber fazer parcerias</div><div class="card-emoji">📚 <b>Aprendizado</b><br>Aprender com erros</div><div class="card-emoji">⚡ <b>Iniciativa</b><br>Fazer acontecer</div></div>
+</div>
+<div class="slide" data-index="30">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">📋 Etapas para Criar uma Startup</h2>
+<div class="big-emoji">📋</div><p class="slide-text">Passos para criar uma startup:</p><ul class="slide-list"><li>1️⃣ <b>Ideacao</b> - pensar no problema e na solucao</li><li>2️⃣ <b>Validacao</b> - falar com clientes potenciais</li><li>3️⃣ <b>MVP</b> - criar versao minima do produto</li><li>4️⃣ <b>Teste</b> - lancar e ouvir feedback</li><li>5️⃣ <b>Investimento</b> - captar dinheiro para crescer</li><li>6️⃣ <b>Escala</b> - crescer e atender milhares</li></ul><div class="example-box"><p><b>💡 MVP = Minimum Viable Product</b> - a versao mais simples que resolve o problema. Nao precisa ser perfeita!</p></div>
+</div>
+<div class="slide" data-index="31">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">💰 Investidores e Financiamento</h2>
+<div class="big-emoji">💰</div><p class="slide-text">Startups precisam de <b>dinheiro para crescer</b>. De onde vem?</p><ul class="slide-list"><li>👤 <b>Familia e Amigos</b> - os primeiros a investir (seed)</li><li>👼 <b>Anjo (Angel)</b> - investidor pessoa que aposta na ideia</li><li>🏦 <b>VC (Venture Capital)</b> - fundos que investem em startups</li><li>众筹 <b>Crowdfunding</b> - muitas pessoas dao pouco (Catarse)</li><li>🏆 <b>Incubadoras/Aceleradoras</b> - apoio + investimento + mentoria</li></ul><div class="example-box"><p><b>📊 Dado:</b> O Nubank comecou com R$ 2 milhoes de investimento anjo e hoje vale <b>mais de R$ 100 bilhoes</b>!</p></div>
+</div>
+<div class="slide" data-index="32">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">🏆 Exemplos de Startups de Sucesso</h2>
+<div class="big-emoji">🏆</div><div class="grid-3"><div class="card-emoji">🚗 <b>Uber</b><br>Transporte sem ter carro</div><div class="card-emoji">🏠 <b>Airbnb</b><br>Hospedagem sem ter hotel</div><div class="card-emoji">🏦 <b>Nubanco</b><br>Banco sem agencia fisica</div><div class="card-emoji">🍔 <b>iFood</b><br>Entrega sem restaurante</div><div class="card-emoji">🚗 <b>99</b><br>Taxi pelo app no Brasil</div><div class="card-emoji">🎮 <b>Twitch</b><br>Transmissao de jogos</div></div><p class="slide-text">Todas comecaram <b>pequenas</b> com uma ideia e cresceram para <b>bilhoes</b>!</p>
+</div>
+<div class="slide" data-index="33">
+<div class="section-tag">Startups e Empreendedorismo</div>
+<h2 class="slide-title">🎤 Pitch: Como Apresentar sua Ideia</h2>
+<div class="big-emoji">🎤</div><p class="slide-text"><b>Pitch</b> e a apresentacao da sua startup para investidores. Dura de <b>3 a 5 minutos</b>.</p><ul class="slide-list"><li>1️⃣ <b>Problema</b> - qual problema existe?</li><li>2️⃣ <b>Solucao</b> - como voce resolve?</li><li>3️⃣ <b>Mercado</b> - quantas pessoas tem esse problema?</li><li>4️⃣ <b>Produto</b> - como funciona (demo)?</li><li>5️⃣ <b>Modelo</b> - como ganha dinheiro?</li><li>6️⃣ <b>Equipe</b> - quem sao voces?</li><li>7️⃣ <b>Pedido</b> - quanto precisa e para que?</li></ul><div class="example-box"><p><b>💡 Dica:</b> Um bom pitch conta uma <b>historia</b>, nao apenas mostra numeros!</p></div>
+</div>
+<div class="slide" data-index="34">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">🏗️ O que e um Modelo de Negocio?</h2>
+<div class="big-emoji">🏗️</div><p class="slide-text"><b>Modelo de negocio</b> e a forma como uma empresa <b>ganha dinheiro</b>.</p><ul class="slide-list"><li>📦 <b>O que</b> vende?</li><li>👥 <b>Para quem</b> vende?</li><li>💰 <b>Como</b> cobra?</li><li>🛠️ <b>Como</b> entrega?</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> A Netflix cobra assinatura mensal para dar acesso a filmes. Esse e o <b>modelo de assinatura</b>.</p></div>
+</div>
+<div class="slide" data-index="35">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">☁️ Modelo SaaS</h2>
+<div class="big-emoji">☁️</div><p class="slide-text"><b>SaaS</b> (Software as a Service) - software que voce <b>aluga</b> pela internet, nao compra.</p><ul class="slide-list"><li>💳 Paga mensalmente</li><li>🌐 Acessa pelo navegador</li><li>🔄 Atualiza sozinho</li><li>💾 Dados na nuvem</li></ul><div class="grid-3"><div class="card-emoji">📧 <b>Gmail</b></div><div class="card-emoji">📊 <b>Google Sheets</b></div><div class="card-emoji">🎬 <b>Netflix</b></div><div class="card-emoji">🎵 <b>Spotify</b></div><div class="card-emoji">💼 <b>Slack</b></div><div class="card-emoji">🎨 <b>Canva</b></div></div>
+</div>
+<div class="slide" data-index="36">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">🆓 Modelo Freemium</h2>
+<div class="big-emoji">🆓</div><p class="slide-text"><b>Freemium</b> = <b>Free</b> + <b>Premium</b>. Basico gratis, avancado pago.</p><ul class="slide-list"><li>🆓 <b>Gratuito</b> - funcao basica para atrair usuarios</li><li>💰 <b>Premium</b> - recursos avancados pagos</li><li>📈 <b>Conversao</b> - cerca de 5% pagam</li></ul><div class="grid-3"><div class="card-emoji">🎵 <b>Spotify</b><br>Free com anuncios / Premium sem anuncios</div><div class="card-emoji">🎮 <b>Fortnite</b><br>Jogar de gratis / Skin paga</div><div class="card-emoji">📱 <b>WhatsApp</b><br>Gratuito / Business pago</div></div>
+</div>
+<div class="slide" data-index="37">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">🏪 Modelo Marketplace</h2>
+<div class="big-emoji">🏪</div><p class="slide-text"><b>Marketplace</b> - uma plataforma que <b>conecta vendedores e compradores</b>. Ganha comissao.</p><ul class="slide-list"><li>🛒 <b>Mercado Livre</b> - cobra 10-16% por venda</li><li>🍔 <b>iFood</b> - cobra taxa do restaurante + entrega</li><li>🚗 <b>Uber</b> - cobra 25% da corrida</li><li>🏠 <b>Airbnb</b> - cobra 3% do anfitriao + 12% do hospede</li></ul><div class="example-box"><p><b>💡 A genialidade:</b> O marketplace nao precisa ter estoque! So conecta as duas partes e ganha na comissao!</p></div>
+</div>
+<div class="slide" data-index="38">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">🔄 Modelo Assinatura/Recorrente</h2>
+<div class="big-emoji">🔄</div><p class="slide-text"><b>Assinatura</b> - o cliente paga <b>todo mes</b> para ter acesso.</p><ul class="slide-list"><li>📈 <b>Receita previsivel</b> - sabe quanto vai entrar</li><li>🤝 <b>Retencao</b> - cliente fica por mais tempo</li><li>💎 <b>Valor vitalicio</b> - ganha mais que venda unica</li></ul><div class="grid-3"><div class="card-emoji">🎬 <b>Netflix</b><br>R$ 25-55/mes</div><div class="card-emoji">🎮 <b>Game Pass</b><br>R$ 45/mes</div><div class="card-emoji">📊 <b>Microsoft 365</b><br>R$ 30/mes</div><div class="card-emoji">📚 <b>Amazon Prime</b><br>R$ 19/mes</div><div class="card-emoji">📱 <b>Claro/Telecom</b><br>Plano mensal</div><div class="card-emoji">🏋️ <b>Academia</b><br>Mensalidade</div></div>
+</div>
+<div class="slide" data-index="39">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">💼 Modelo Consultoria</h2>
+<div class="big-emoji">💼</div><p class="slide-text"><b>Consultoria</b> - voce <b>vende seu conhecimento</b> para ajudar outras empresas.</p><ul class="slide-list"><li>🕐 <b>Por hora</b> - cobra pelo tempo trabalhado</li><li>📦 <b>Por projeto</b> - cobra pelo resultado entregue</li><li>🔄 <b>Retainer</b> - valor mensal fixo</li><li>📊 <b>Por resultado</b> - percentual do que melhorou</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Um tecnico que implanta sistema de PDV em padaria e cobra R$ 2.000 pelo projeto + R$ 200/mes de suporte.</p></div>
+</div>
+<div class="slide" data-index="40">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">📋 Canvas: O Modelo em 1 Pagina</h2>
+<div class="big-emoji">📋</div><p class="slide-text"><b>Business Model Canvas</b> - um quadro com <b>9 blocos</b> que resume todo o negocio:</p><ul class="slide-list"><li>👥 <b>Segmentos</b> - para quem vende?</li><li>💡 <b>Proposta de valor</b> - qual o diferencial?</li><li>📢 <b>Canais</b> - como entrega?</li><li>🤝 <b>Relacionamento</b> - como atende?</li><li>💰 <b>Receitas</b> - como ganha?</li><li>🛠️ <b>Recursos</b> - o que precisa?</li><li>⚙️ <b>Atividades</b> - o que faz?</li><li>🔗 <b>Parcerias</b> - quem ajuda?</li><li>💸 <b>Custos</b> - quanto gasta?</li></ul><div class="example-box"><p><b>💡 Dica:</b> O Canvas e usado por startups em todo o mundo para planejar o negocio!</p></div>
+</div>
+<div class="slide" data-index="41">
+<div class="section-tag">Modelos de Negocio em TI</div>
+<h2 class="slide-title">🎯 Exemplos Praticos dos Modelos</h2>
+<div class="big-emoji">🎯</div><div class="grid-2"><div class="card-emoji"><h3>🎬 Netflix</h3><p><b>Modelo:</b> SaaS + Assinatura</p><p>Cliente paga mensalidade -> acessa filmes -> receita previsivel</p></div><div class="card-emoji"><h3>🛒 Mercado Livre</h3><p><b>Modelo:</b> Marketplace</p><p>Conecta vendedores e compradores -> cobra comissao -> nao tem estoque</p></div><div class="card-emoji"><h3>🎵 Spotify</h3><p><b>Modelo:</b> Freemium + Assinatura</p><p>Gratuito com anuncios / Premium sem anuncios -> receita dupla</p></div><div class="card-emoji"><h3>🚗 Uber</h3><p><b>Modelo:</b> Marketplace + Comissao</p><p>Conecta motoristas e passageiros -> cobra 25% -> escalavel</p></div></div>
+</div>
+<div class="slide" data-index="42">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">📜 Evolucao dos Pagamentos</h2>
+<div class="big-emoji">📜</div><p class="slide-text">Como pagamos evoluiu muito:</p><div class="timeline"><div class="timeline-item">🐂 <b>Troca</b> - produtos por produtos</div><div class="timeline-item">🪙 <b>Moedas</b> - metal com valor</div><div class="timeline-item">💵 <b>Cedulas</b> - papel-moeda</div><div class="timeline-item">💳 <b>Cartao</b> - credito e debito</div><div class="timeline-item">📱 <b>Digital</b> - PIX, carteiras</div></div><div class="example-box"><p><b>💡 Cada passo</b> tornou o pagamento <b>mais rapido e seguro</b>!</p></div>
+</div>
+<div class="slide" data-index="43">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">💳 Cartoes de Credito e Debito</h2>
+<div class="big-emoji">💳</div><div class="grid-2"><div class="card-emoji blue-border"><h3>💳 CREDITO</h3><ul><li>Paga depois (fatura)</li><li>Pode parcelar</li><li>Taxa para o lojista: ~4%</li><li>Anuidade pode existir</li></ul><p><b>Ex:</b> Mastercard, Visa, Elo</p></div><div class="card-emoji green-border"><h3>🟢 DEBITO</h3><ul><li>Sai da conta na hora</li><li>Nao parcela</li><li>Taxa menor: ~2%</li><li>Sem anuidade</li></ul><p><b>Ex:</b> Mesma bandeira</p></div></div><p class="slide-text"><b>Maquininhas</b>: Cielo, Stone, PagSeguro, Mercado Pago - cobram taxa por transacao.</p>
+</div>
+<div class="slide" data-index="44">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">⚡ PIX - O Pagamento Instantaneo</h2>
+<div class="big-emoji">⚡</div><p class="slide-text"><b>PIX</b> foi lancado pelo Banco Central em <b>2020</b>. Pagamento <b>instantaneo e gratuito</b>.</p><ul class="slide-list"><li>⚡ <b>Instantaneo</b> - em segundos, 24h por dia</li><li>🆓 <b>Gratuito</b> - para pessoa fisica</li><li>📱 <b>Chave</b> - CPF, celular, e-mail ou aleatoria</li><li>📊 <b>QR Code</b> - escaneia e paga</li><li>🔄 <b>Receber e pagar</b> - tudo pelo app</li></ul><div class="example-box"><p><b>📊 Impacto:</b> Mais de <b>150 milhoes</b> de brasileiros usam PIX! E o maior sistema de pagamento instantaneo do mundo!</p></div>
+</div>
+<div class="slide" data-index="45">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">📱 Carteiras Digitais</h2>
+<div class="big-emoji">📱</div><p class="slide-text"><b>Carteiras digitais</b> (e-wallets) guardam seu dinheiro no celular:</p><div class="grid-3"><div class="card-emoji">💚 <b>PicPay</b><br>Transferencia + pagamentos</div><div class="card-emoji">🔵 <b>PayPal</b><br>Internacional</div><div class="card-emoji">🟠 <b>Mercado Pago</b><br>Integrado ao ML</div><div class="card-emoji">🍎 <b>Apple Pay</b><br>Aproxima o celular</div><div class="card-emoji">🤖 <b>Google Pay</b><br>No Android</div><div class="card-emoji">💜 <b>Nubank</b><br>Banco digital</div></div><p class="slide-text"><b>Como funciona:</b> Coloca dinheiro -> paga com QR Code -> sem precisar de cartao!</p>
+</div>
+<div class="slide" data-index="46">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">🧾 Boleto e Transferencias</h2>
+<div class="big-emoji">🧾</div><div class="grid-2"><div class="card-emoji"><h3>🧾 BOLETO BANCARIO</h3><ul><li>Documento para pagar em qualquer lugar</li><li>Demora ate 3 dias para compensar</li><li>Taxa de R$ 2 a R$ 3</li><li>Muito usado para contas e impostos</li><li>Sendo substituido pelo PIX</li></ul></div><div class="card-emoji"><h3>🔄 TRANSFERENCIA BANCARIA</h3><ul><li>DOC: ate R$ 30.000 (demora 1 dia)</li><li>TED: qualquer valor (mesmo dia)</li><li>PIX: qualquer valor (instantaneo)</li><li>Taxa varia por banco</li><li>Precisa de dados do destinatario</li></ul></div></div>
+</div>
+<div class="slide" data-index="47">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">🔒 Seguranca nas Transacoes</h2>
+<div class="big-emoji">🔒</div><p class="slide-text">Como garantir que uma transacao e <b>segura</b>:</p><ul class="slide-list"><li>🔐 <b>HTTPS</b> - site com cadeado (criptografia)</li><li>✅ <b>Token/3D Secure</b> - confirmacao do banco</li><li>📱 <b>Biometria</b> - digital ou facial no app</li><li>🛡️ <b>Antifraude</b> - IA detecta compras suspeitas</li><li>📩 <b>Notificacao</b> - banco avisa cada transacao</li><li>🔄 <b>Chargeback</b> - pode estornar se for fraude</li></ul><div class="example-box"><p><b>⚠️ Cuidado:</b> Nunca passe o codigo do SMS para ninguem. E golpe! O banco nunca liga pedindo codigo.</p></div>
+</div>
+<div class="slide" data-index="48">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">📊 Taxas e Custos para o Lojista</h2>
+<div class="big-emoji">📊</div><p class="slide-text">O lojista <b>paga taxas</b> em cada pagamento que recebe:</p><table class="data-table"><tr><th>Meio de pagamento</th><th>Taxa media</th><th>Tempo de recebimento</th></tr><tr><td>⚡ PIX</td><td>0-1%</td><td>Instantaneo</td></tr><tr><td>🟢 Debito</td><td>~2%</td><td>1-2 dias</td></tr><tr><td>💳 Credito a vista</td><td>~4%</td><td>30 dias</td></tr><tr><td>💳 Credito parcelado</td><td>4-6%</td><td>30 dias por parcela</td></tr><tr><td>🧾 Boleto</td><td>R$ 2-3</td><td>1-3 dias</td></tr></table><p class="slide-text"><b>💡 Por isso</b> muitas lojas oferecem desconto no PIX - a taxa e menor!</p>
+</div>
+<div class="slide" data-index="49">
+<div class="section-tag">Meios de Pagamento Digital</div>
+<h2 class="slide-title">🤔 Como Escolher o Melhor Meio</h2>
+<div class="big-emoji">🤔</div><p class="slide-text"><b>Para o consumidor:</b></p><ul class="slide-list"><li>⚡ <b>PIX</b> - mais rapido e gratuito</li><li>💳 <b>Credito</b> - para parcelar e ter protecao</li><li>📱 <b>Carteira digital</b> - conveniencia do celular</li></ul><p class="slide-text"><b>Para o lojista:</b></p><ul class="slide-list"><li>⚡ <b>PIX</b> - taxa menor e recebe na hora</li><li>🟢 <b>Debito</b> - taxa baixa</li><li>⚠️ <b>Credito</b> - taxa alta e demora a receber</li><li>🧾 <b>Boleto</b> - para quem nao tem cartao</li></ul><div class="example-box"><p><b>💡 Dica:</b> Aceitar <b>varios meios</b> de pagamento aumenta as vendas!</p></div>
+</div>
+<div class="slide" data-index="50">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">⚖️ O que e Etica em TI</h2>
+<div class="big-emoji">⚖️</div><p class="slide-text"><b>Etica em TI</b> e fazer a coisa certa com tecnologia, mesmo quando ninguem esta olhando.</p><ul class="slide-list"><li>🔒 <b>Respeitar a privacidade</b> dos dados dos outros</li><li>✅ <b>Nao usar tecnologia para prejudicar</b></li><li>📚 <b>Citar fontes</b> e respeitar direitos autorais</li><li>🤝 <b>Ser honesto</b> sobre o que o software faz</li><li>👥 <b>Pensar no impacto</b> das suas acoes</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Se voce acha uma senha no computador da escola, o etico e <b>NAO usar</b> e avisar!</p></div>
+</div>
+<div class="slide" data-index="51">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">🔐 Privacidade de Dados</h2>
+<div class="big-emoji">🔐</div><p class="slide-text"><b>Privacidade</b> e o direito de cada pessoa <b>controlar seus dados</b>.</p><ul class="slide-list"><li>👁️ <b>Quem pode ver</b> meus dados?</li><li>🤔 <b>Para que</b> estao usando?</li><li>🗑️ <b>Posso apagar</b> meus dados?</li><li>📤 <b>Com quem</b> foram compartilhados?</li></ul><div class="example-box"><p><b>⚠️ Cuidado:</b> Tudo que voce coloca na internet (fotos, mensagens, senhas) pode ser <b>permanentemente acessivel</b>. Pense antes de postar!</p></div>
+</div>
+<div class="slide" data-index="52">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">📖 O que e a LGPD?</h2>
+<div class="big-emoji">📖</div><p class="slide-text"><b>LGPD</b> (Lei Geral de Protecao de Dados) - Lei n 13.709/2018.</p><p class="slide-text">E a lei brasileira que <b>protege os dados pessoais</b> de todos os cidadaos.</p><ul class="slide-list"><li>📅 <b>Entrou em vigor</b> em 2020</li><li>🇧🇷 <b>Inspirada</b> na GDPR europeia</li><li>💰 <b>Multa</b>: ate 2% do faturamento (R$ 50 milhoes por infracao)</li><li>🏛️ <b>Fiscalizada</b> pela ANPD</li></ul><div class="example-box"><p><b>📌 Importante:</b> A LGPD se aplica a <b>toda empresa</b> que coleta dados de brasileiros!</p></div>
+</div>
+<div class="slide" data-index="53">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">📋 Dados Pessoais: O que sao?</h2>
+<div class="big-emoji">📋</div><p class="slide-text"><b>Dados pessoais</b> sao informacoes que <b>identificam uma pessoa</b>:</p><div class="grid-2"><div class="card-emoji"><h3>🟢 COMUNS</h3><ul><li>Nome completo</li><li>CPF, RG</li><li>Data de nascimento</li><li>Endereco</li><li>Telefone, e-mail</li><li>Foto</li></ul></div><div class="card-emoji red-border"><h3>🔴 SENSIVEIS</h3><ul><li>Biometria (digital, facial)</li><li>Origem racial</li><li>Conviccao religiosa</li><li>Saude</li><li>Orientacao sexual</li><li>Filiacao politica/sindical</li></ul></div></div><p class="slide-text"><b>Dados sensiveis</b> tem <b>protecao ainda maior</b> na LGPD!</p>
+</div>
+<div class="slide" data-index="54">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">🧑 Direitos do Titular dos Dados</h2>
+<div class="big-emoji">🧑</div><p class="slide-text">A LGPD garante <b>9 direitos</b> para quem tem seus dados coletados:</p><ul class="slide-list"><li>✅ <b>Confirmacao</b> - saber se a empresa tem seus dados</li><li>👁️ <b>Acesso</b> - ver quais dados sao</li><li>🔄 <b>Correcao</b> - corrigir dados errados</li><li>🗑️ <b>Eliminacao</b> - pedir para apagar</li><li>📤 <b>Portabilidade</b> - levar para outra empresa</li><li>❌ <b>Revogacao de consentimento</b></li><li>📊 <b>Informacao</b> - saber com quem compartilhou</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Voce pode pedir para o Facebook <b>apagar todos</b> os seus dados. E a lei!</p></div>
+</div>
+<div class="slide" data-index="55">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">🏢 Obrigacoes das Empresas</h2>
+<div class="big-emoji">🏢</div><p class="slide-text">As empresas que coletam dados <b>devem</b>:</p><ul class="slide-list"><li>📋 <b>Pedir consentimento</b> - explicar para que vai usar</li><li>🎯 <b>Ter proposito</b> - so coletar o necessario</li><li>🔐 <b>Proteger os dados</b> - usar seguranca tecnica</li><li>👤 <b>Ter um DPO</b> - pessoa responsavel pelos dados</li><li>📢 <b>Reportar incidentes</b> - avisar em caso de vazamento</li><li>📅 <b>Limitar retencao</b> - nao guardar para sempre</li></ul><div class="example-box"><p><b>📌 DPO</b> = Encarregado de Protecao de Dados. E a pessoa que cuida do cumprimento da LGPD.</p></div>
+</div>
+<div class="slide" data-index="56">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">⚠️ Consequencias do Vazamento</h2>
+<div class="big-emoji">⚠️</div><p class="slide-text">Quando dados vazam, as consequencias sao <b>serias</b>:</p><ul class="slide-list"><li>💰 <b>Multa</b> - ate R$ 50 milhoes por infracao</li><li>⚖️ <b>Processos</b> - clientes podem processar</li><li>📉 <b>Reputacao</b> - empresa perde confianca</li><li>💸 <b>Prejuizo</b> - clientes saem, receita cai</li><li>🔒 <b>Bloqueio</b> - ANPD pode bloquear operacao</li></ul><div class="example-box"><p><b>📊 Dado real:</b> Em 2023, mais de <b>10 bilhoes</b> de registros de dados vazaram no mundo todo!</p></div>
+</div>
+<div class="slide" data-index="57">
+<div class="section-tag">Etica e LGPD</div>
+<h2 class="slide-title">📰 Exemplos Reais de Vazamentos</h2>
+<div class="big-emoji">📰</div><div class="grid-2"><div class="card-emoji"><h3>🏥 Hospital - 2021</h3><p>Dados de <b>milhoes de pacientes</b> vazaram. Senhas e prontuarios expostos.</p></div><div class="card-emoji"><h3>📚 Facebook - 2021</h3><p>Dados de <b>533 milhoes</b> de usuarios vazaram, incluindo brasileiros.</p></div><div class="card-emoji"><h3>🛒 Magazine Luiza - 2021</h3><p>Dados de clientes ficaram visiveis para outros usuarios por erro de sistema.</p></div><div class="card-emoji"><h3>🏦 Banco - 2020</h3><p>Clientes tiveram contas acessadas por fraude no app. Prejuizo de milhoes.</p></div></div><p class="slide-text"><b>💡 Licao:</b> Proteger dados e <b>responsabilidade de todos</b> na empresa!</p>
+</div>
+<div class="slide" data-index="58">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🔒 Por que a Seguranca Importa</h2>
+<div class="big-emoji">🔒</div><p class="slide-text">Na internet, voce precisa se <b>proteger</b> assim como tranca a porta de casa.</p><ul class="slide-list"><li>🦹 <b>Hackers</b> roubam dados, senhas e dinheiro</li><li>🦠 <b>Virus</b> destroem arquivos e sistemas</li><li>🕵️ <b>Golpes</b> enganam pessoas para roubar</li><li>💸 <b>Prejuizos</b> podem ser bilionarios</li></ul><div class="example-box"><p><b>📊 Dado:</b> Em 2023, mais de <b>10 bilhoes</b> de dados vazaram no mundo. A cada <b>11 segundos</b> uma empresa sofre ataque!</p></div>
+</div>
+<div class="slide" data-index="59">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🛡️ Triade da Seguranca: CID</h2>
+<div class="big-emoji">🛡️</div><p class="slide-text">A seguranca da informacao tem <b>3 pilares</b>:</p><div class="grid-3"><div class="card-emoji green-border"><h3>🔐 CONFIDENCIALIDADE</h3><p><b>So quem tem permissao</b> ve os dados</p><p><b>Ex:</b> Senha do Wi-Fi</p></div><div class="card-emoji blue-border"><h3>✅ INTEGRIDADE</h3><p><b>Dados nao podem ser alterados</b> por estranhos</p><p><b>Ex:</b> Boleto nao pode ser modificado</p></div><div class="card-emoji orange-border"><h3>📈 DISPONIBILIDADE</h3><p><b>Dados disponiveis</b> quando precisar</p><p><b>Ex:</b> Site do banco nao pode cair</p></div></div>
+</div>
+<div class="slide" data-index="60">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🔑 Senhas: Como Criar Senhas Seguras</h2>
+<div class="big-emoji">🔑</div><div class="grid-2"><div class="card-emoji red-border"><h3>❌ RUIM</h3><ul><li>123456</li><li>senha123</li><li>Seu nome</li><li>Data de nascimento</li><li>"password"</li></ul><p><b>Descoberta:</b> menos de 1 segundo!</p></div><div class="card-emoji green-border"><h3>✅ BOA</h3><ul><li>Maiusculas e minusculas</li><li>Numeros</li><li>Simbolos (!@#$)</li><li>Minimo 12 caracteres</li><li>Nao repetir entre sites</li></ul><p><b>Ex:</b> MeuGato@2026#Azul</p></div></div><div class="example-box"><p><b>💡 Dica:</b> Use uma <b>frase</b> como senha! Ex: "EuAmoAula@2026!" - facil de lembrar e dificil de adivinhar.</p></div>
+</div>
+<div class="slide" data-index="61">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🎣 Phishing e Golpes Digitais</h2>
+<div class="big-emoji">🎣</div><p class="slide-text"><b>Phishing</b> e quando alguem <b>finge ser uma empresa real</b> para roubar seus dados.</p><div class="example-box"><p><b>📧 Exemplo classico:</b><br>Voce recebe um e-mail: "Sua conta do banco foi bloqueada! Clique aqui para desbloquear."<br><br>⚠️ Mas e <b>FALSO</b>! O link vai para um site falso que rouba sua senha.</p></div><p class="slide-text"><b>Como se proteger:</b></p><ul class="slide-list"><li>🔍 <b>Verifique</b> o endereco do site (URL)</li><li>⚠️ <b>Desconfie</b> de urgencia ("ultimas horas!")</li><li>❌ <b>Nao clique</b> em links suspeitos</li><li>📞 <b>Ligue</b> para a empresa para confirmar</li></ul>
+</div>
+<div class="slide" data-index="62">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🦠 Malwares: Virus, Ransomware, Spyware</h2>
+<div class="big-emoji">🦠</div><p class="slide-text"><b>Malware</b> e qualquer software <b>malicioso</b>. Tipos principais:</p><div class="grid-3"><div class="card-emoji red-border"><h3>🦠 VIRUS</h3><p>Se anexa a arquivos e se espalha. Corrompe o sistema.</p></div><div class="card-emoji"><h3>🔒 RANSOMWARE</h3><p>Trava seus arquivos e pede <b>resgate</b> em criptomoeda.</p></div><div class="card-emoji"><h3>🕵️ SPYWARE</h3><p>Espiando o que voce faz. Rouba senhas e dados.</p></div><div class="card-emoji"><h3>🐴 TROJAN</h3><p>Finge ser programa bom, mas rouba dados por dentro.</p></div><div class="card-emoji"><h3>🪱 WORM</h3><p>Se espalha sozinho pela rede. Infecta computadores.</p></div><div class="card-emoji"><h3>📢 ADWARE</h3><p>Enche o computador de propagandas. Muito chato.</p></div></div>
+</div>
+<div class="slide" data-index="63">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">💾 Backup e Recuperacao</h2>
+<div class="big-emoji">💾</div><p class="slide-text"><b>Backup</b> e a <b>copia de seguranca</b> dos seus arquivos. Se perder o original, tem a copia!</p><ul class="slide-list"><li>💾 <b>Local</b> - copiar para HD externo ou pendrive</li><li>☁️ <b>Nuvem</b> - Google Drive, OneDrive, Dropbox</li><li>🔄 <b>Automatico</b> - configura para fazer sozinho</li><li>📅 <b>Periodico</b> - fazer toda semana ou todo dia</li></ul><div class="example-box"><p><b>💡 Exemplo real:</b> Se o computador da escola queimar hoje, quantos arquivos se perdem? <b>Com backup, nenhum!</b></p></div>
+</div>
+<div class="slide" data-index="64">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">🛡️ Antivirus e Firewall</h2>
+<div class="big-emoji">🛡️</div><div class="grid-2"><div class="card-emoji blue-border"><h3>🛡️ ANTIVIRUS</h3><p>Programa que <b>detecta e remove</b> virus e malwares.</p><ul><li>Analise em tempo real</li><li>Verificacao de arquivos</li><li>Atualizacoes frequentes</li><li>Ex: Windows Defender, Avast</li></ul></div><div class="card-emoji green-border"><h3>🔥 FIREWALL</h3><p><b>Bloqueia</b> acessos nao autorizados a rede.</p><ul><li>Filtra o que entra e sai</li><li>Impede ataques externos</li><li>De hardware ou software</li><li>Ex: Firewall do Windows</li></ul></div></div><p class="slide-text">Juntos, antivirus + firewall + backup = <b>protecao completa</b>!</p>
+</div>
+<div class="slide" data-index="65">
+<div class="section-tag">Seguranca da Informacao</div>
+<h2 class="slide-title">📐 Regra 3-2-1 do Backup</h2>
+<div class="big-emoji">📐</div><p class="slide-text">A <b>regra de ouro</b> do backup e 3-2-1:</p><div class="grid-3"><div class="card-emoji"><h3>3️⃣ TRES</h3><p>Manter <b>3 copias</b> dos seus dados</p></div><div class="card-emoji"><h3>2️⃣ DUAS</h3><p>Em <b>2 tipos diferentes</b> de midia (HD + nuvem)</p></div><div class="card-emoji"><h3>1️⃣ UMA</h3><p><b>1 copia fora</b> do computador (outra casa/nuvem)</p></div></div><div class="example-box"><p><b>💡 Exemplo pratico:</b><br>1a copia: no computador<br>2a copia: no HD externo<br>3a copia: no Google Drive<br>= Dados <b>sempre seguros</b>!</p></div>
+</div>
+<div class="slide" data-index="66">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">💡 O que e Transformacao Digital?</h2>
+<div class="big-emoji">💡</div><p class="slide-text"><b>Transformacao Digital</b> e quando uma empresa usa a tecnologia para <b>mudar totalmente</b> como trabalha.</p><p class="slide-text">Nao e apenas comprar computador. E <b>repensar o negocio inteiro</b> usando tecnologia!</p><div class="example-box"><p><b>💡 Exemplo real:</b> A Cabify nao apenas criou um site - ela criou um app que <b>mudou o negocio de transporte</b>!</p></div>
+</div>
+<div class="slide" data-index="67">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">🔄 Antes vs Depois da Transformacao</h2>
+<div class="big-emoji">🔄</div><p class="slide-text">Veja como empresas <b>mudaram</b>:</p><table class="data-table"><tr><th>Setor</th><th>Antes</th><th>Depois</th></tr><tr><td>📚 Livrarias</td><td>Loja fisica</td><td>Amazon Kindle (digital)</td></tr><tr><td>🎵 Musica</td><td>CDs nas lojas</td><td>Spotify (streaming)</td></tr><tr><td>🏦 Banco</td><td>Filas no caixa</td><td>App do banco (online)</td></tr><tr><td>🛒 Compras</td><td>Feira na rua</td><td>iFood/mercado online</td></tr><tr><td>📺 TV</td><td>Hora marcada</td><td>Netflix (na hora que quiser)</td></tr><tr><td>🚗 Transporte</td><td>Ponto de taxi</td><td>Uber/99 (app)</td></tr></table><p class="slide-text"><b>Quem nao se transforma</b>, fica para tras!</p>
+</div>
+<div class="slide" data-index="68">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">📱 Exemplos Reais de Transformacao</h2>
+<div class="big-emoji">📱</div><div class="grid-2"><div class="card-emoji"><h3>🛒 Amazon</h3><p>Comecou como livraria online -> hoje vende <b>tudo</b> e tem computacao em nuvem (AWS).</p></div><div class="card-emoji"><h3>🏦 Nubanco</h3><p>Comecou sem agencias -> hoje tem <b>100 milhoes</b> de clientes sem papelada.</p></div><div class="card-emoji"><h3>🍔 McDonalds</h3><p>Totem de autoatendimento + app -> <b>reduziu filas</b> e aumentou vendas.</p></div><div class="card-emoji"><h3>🏪 Padaria local</h3><p>Aceita PIX + entrega no WhatsApp -> <b>ja e transformacao digital</b>!</p></div></div><p class="slide-text"><b>Toda empresa</b> pode se transformar, da maior a menor!</p>
+</div>
+<div class="slide" data-index="69">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">📈 Beneficios para as Empresas</h2>
+<div class="big-emoji">📈</div><p class="slide-text">Para que serve a transformacao digital?</p><ul class="slide-list"><li>⚡ <b>Velocidade</b> - tudo acontece mais rapido</li><li>💰 <b>Economia</b> - menos papel, menos deslocamento</li><li>📊 <b>Dados</b> - saber o que o cliente quer</li><li>🌍 <b>Alcance</b> - vender para o mundo todo</li><li>🤖 <b>Automacao</b> - tarefas repetitivas feitas sozinhas</li><li>😊 <b>Experiencia</b> - cliente mais satisfeito</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Uma padaria que aceita PIX e tem entrega pelo WhatsApp <b>ja esta em transformacao digital</b>!</p></div>
+</div>
+<div class="slide" data-index="70">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">🤖 Automacao de Processos</h2>
+<div class="big-emoji">🤖</div><p class="slide-text"><b>Automacao</b> e fazer com que <b>maquinas e software facam o trabalho repetitivo</b>.</p><ul class="slide-list"><li>📧 <b>E-mail automatico</b> - manda sozinho</li><li>📝 <b>Nota fiscal eletronica</b> - emite sozinha</li><li>🤖 <b>Chatbot</b> - responde perguntas sozinho</li><li>📊 <b>Relatorio automatico</b> - gera sozinho</li><li>🔄 <b>Integracao</b> - sistemas se comunicam</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Quando voce paga no cartao, o sistema <b>automaticamente</b> baixa o estoque, emite nota e manda o pedido para entrega. Tudo sozinho!</p></div>
+</div>
+<div class="slide" data-index="71">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">🔧 O Papel do Tecnico em Informatica</h2>
+<div class="big-emoji">🔧</div><p class="slide-text">Como tecnico, voce sera <b>o profissional</b> que ajuda as empresas a se transformarem:</p><ul class="slide-list"><li>🔧 <b>Implantar</b> sistemas novos na empresa</li><li>👨‍🏫 <b>Ensinar</b> as pessoas a usar</li><li>🛠️ <b>Manter</b> tudo funcionando</li><li>💡 <b>Sugerir</b> melhorias com tecnologia</li><li>🛡️ <b>Proteger</b> os dados da empresa</li></ul><div class="example-box"><p><b>🎯 Voce nao so conserta PC.</b> Voce <b>ajuda empresas a crescer com tecnologia</b>!</p></div>
+</div>
+<div class="slide" data-index="72">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">🧩 Desafios da Transformacao</h2>
+<div class="big-emoji">🧩</div><p class="slide-text">Nem tudo e facil. Existem <b>desafios</b>:</p><ul class="slide-list"><li>💰 <b>Custo</b> - investir em tecnologia e caro</li><li>👥 <b>Resistencia</b> - pessoas nao querem mudar</li><li>📚 <b>Treinamento</b> - todos precisam aprender</li><li>🔒 <b>Seguranca</b> - mais tecnologia = mais riscos</li><li>🔄 <b>Mudanca continua</b> - a tecnologia muda sempre</li></ul><div class="example-box"><p><b>💡 Dica:</b> A transformacao digital <b>nao acontece de um dia para o outro</b>. E um processo gradual!</p></div>
+</div>
+<div class="slide" data-index="73">
+<div class="section-tag">Transformacao Digital</div>
+<h2 class="slide-title">🔮 O Futuro do Trabalho em TI</h2>
+<div class="big-emoji">🔮</div><p class="slide-text">O futuro do trabalho em TI inclui:</p><div class="grid-3"><div class="card-emoji">🤖 <b>IA Generativa</b><br>ChatGPT, Gemini, IA no trabalho</div><div class="card-emoji">☁️ <b>Computacao em Nuvem</b><br>Tudo na internet</div><div class="card-emoji">🏠 <b>Trabalho Remoto</b><br>Home office</div><div class="card-emoji">🔒 <b>Ciberseguranca</b><br>Protecao de dados</div><div class="card-emoji">📊 <b>Big Data</b><br>Analise de dados</div><div class="card-emoji">🌐 <b>IoT</b><br>Casa conectada</div></div><p class="slide-text">O tecnico que <b>se mantem atualizado</b> sempre tera trabalho!</p>
+</div>
+<div class="slide" data-index="74">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">📋 O que e um Projeto?</h2>
+<div class="big-emoji">📋</div><p class="slide-text">Um <b>projeto</b> e um trabalho com <b>inicio, meio e fim</b> para alcancar um objetivo.</p><div class="example-box"><p><b>📋 Exemplos de projetos em TI:</b><br>Criar um site para uma loja • Montar uma rede na escola • Desenvolver um aplicativo • Instalar computadores num laboratorio</p></div><p class="slide-text">Todo projeto tem <b>3 limites</b>:</p><ul class="slide-list"><li>📅 <b>Prazo</b> - quando precisa estar pronto</li><li>💰 <b>Custo</b> - quanto pode gastar</li><li>✅ <b>Qualidade</b> - como precisa ficar</li></ul><p class="slide-text">Se passar do prazo ou do orcamento, o projeto <b>da errado</b>!</p>
+</div>
+<div class="slide" data-index="75">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">🔢 As 4 Fases de um Projeto</h2>
+<div class="big-emoji">🔢</div><p class="slide-text">Todo projeto passa por <b>4 fases</b>:</p><div class="grid-2"><div class="card-emoji blue-border"><h3>1️⃣ PLANEJAMENTO</h3><ul><li>O que fazer?</li><li>Quanto custa?</li><li>Quanto tempo?</li><li>Quem faz o que?</li></ul></div><div class="card-emoji green-border"><h3>2️⃣ EXECUCAO</h3><ul><li>Fazer o trabalho</li><li>Seguir o plano</li><li>Trabalhar em equipe</li><li>Registrar progresso</li></ul></div><div class="card-emoji orange-border"><h3>3️⃣ MONITORAMENTO</h3><ul><li>Acompanhar se esta dando certo</li><li>Comparar com o plano</li><li>Ajustar se preciso</li><li>Resolver problemas</li></ul></div><div class="card-emoji purple-border"><h3>4️⃣ ENCERRAMENTO</h3><ul><li>Entregar o resultado</li><li>Avaliar o que funcionou</li><li>Documentar licoes</li><li>Encerrar a equipe</li></ul></div></div>
+</div>
+<div class="slide" data-index="76">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">🎯 Planejamento: Prazo, Custo, Qualidade</h2>
+<div class="big-emoji">🎯</div><p class="slide-text"><b>O planejamento e a fase mais importante!</b> Um bom plano evita problemas.</p><ul class="slide-list"><li>📅 <b>Cronograma</b> - quando cada parte fica pronta</li><li>💰 <b>Orcamento</b> - quanto vai custar (materiais + mao de obra)</li><li>👥 <b>Equipe</b> - quem faz cada parte</li><li>📋 <b>Escopo</b> - o que esta incluido e o que NAO esta</li><li>⚠️ <b>Riscos</b> - o que pode dar errado e como evitar</li></ul><div class="example-box"><p><b>🏠 Analogia:</b> E como construir uma casa! Primeiro a <b>planta</b> (planejamento), depois a <b>obra</b> (execucao), <b>acompanhando</b> (monitoramento) e a <b>entrega das chaves</b> (encerramento).</p></div>
+</div>
+<div class="slide" data-index="77">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">🌊 Metodologia Cascata</h2>
+<div class="big-emoji">🌊</div><p class="slide-text"><b>Cascata (Waterfall)</b> - faz tudo <b>em ordem</b>, uma fase depois da outra, como uma cascata de agua.</p><div class="flow-chart"><div class="flow-step">📋 Requisitos</div><div class="flow-arrow">⬇️</div><div class="flow-step">🎨 Design</div><div class="flow-arrow">⬇️</div><div class="flow-step">💻 Desenvolvimento</div><div class="flow-arrow">⬇️</div><div class="flow-step">🧪 Testes</div><div class="flow-arrow">⬇️</div><div class="flow-step">🚀 Entrega</div></div><div class="example-box"><p><b>✅ Vantagem:</b> Organizado e documentado.<br><b>❌ Desvantagem:</b> Se errar no inicio, so descobre no final. <b>Lento</b> para mudar.</p></div>
+</div>
+<div class="slide" data-index="78">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">🔄 Metodologia Agil (Scrum)</h2>
+<div class="big-emoji">🔄</div><p class="slide-text"><b>Agil (Scrum)</b> - faz <b>pouco de cada vez</b> e entrega rapido, melhorando aos poucos.</p><div class="flow-chart"><div class="flow-step">📋 Backlog (lista de tudo)</div><div class="flow-arrow">⬇️</div><div class="flow-step">⚡ Sprint (2 semanas)</div><div class="flow-arrow">⬇️</div><div class="flow-step">🚀 Entrega versao 1</div><div class="flow-arrow">⬇️</div><div class="flow-step">🔄 Feedback + Melhoria</div><div class="flow-arrow">⬇️</div><div class="flow-step">🚀 Versao 2, 3, 4...</div></div><div class="example-box"><p><b>📱 Exemplo:</b> Para criar um app: <b>Cascata</b> faria tudo e so entregaria no final. <b>Agil</b> entrega a versao 1 em 2 semanas, depois melhora!</p></div>
+</div>
+<div class="slide" data-index="79">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">👥 Papeis da Equipe de Projeto</h2>
+<div class="big-emoji">👥</div><p class="slide-text">Em um projeto de TI, <b>varias pessoas</b> trabalham juntas:</p><div class="grid-3"><div class="card-emoji">👑 <b>Gerente de Projeto</b><br>Organiza e coordena tudo</div><div class="card-emoji">💻 <b>Desenvolvedor</b><br>Escreve o codigo</div><div class="card-emoji">🎨 <b>Designer</b><br>Cria as telas e visual</div><div class="card-emoji">🧪 <b>Testador (QA)</b><br>Encontra erros</div><div class="card-emoji">👤 <b>Cliente</b><br>Diz o que precisa</div><div class="card-emoji">🔧 <b>Suporte/Infra</b><br>Mantem os sistemas</div></div><div class="example-box"><p><b>🤝 Importante:</b> Ninguem faz um projeto sozinho! <b>Trabalho em equipe</b> e essencial em TI.</p></div>
+</div>
+<div class="slide" data-index="80">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">🛠️ Ferramentas de Gestao</h2>
+<div class="big-emoji">🛠️</div><p class="slide-text">Ferramentas que ajudam a <b>organizar projetos</b>:</p><div class="grid-3"><div class="card-emoji">📋 <b>Trello</b><br>Quadros e cartoes. Gratis e simples</div><div class="card-emoji">📊 <b>Jira</b><br>Mais completo. Usado em Scrum</div><div class="card-emoji">💬 <b>Slack</b><br>Comunicacao da equipe</div><div class="card-emoji">📅 <b>Asana</b><br>Tarefas e prazos</div><div class="card-emoji">🗂️ <b>Notion</b><br>Documentos e tarefas</div><div class="card-emoji">📈 <b>MS Project</b><br>Projetos grandes</div></div><p class="slide-text"><b>💡 Dica:</b> O <b>Trello</b> e gratuito e excelente para comecar a gerenciar projetos!</p>
+</div>
+<div class="slide" data-index="81">
+<div class="section-tag">Gestao de Projetos em TI</div>
+<h2 class="slide-title">📝 Exemplo Pratico de Planejamento</h2>
+<div class="big-emoji">📝</div><div class="example-box"><p><b>📋 Projeto: Criar um site para a padaria do bairro</b></p></div><ul class="slide-list"><li>🎯 <b>Objetivo:</b> Site com cardapio e pedidos pelo WhatsApp</li><li>📅 <b>Prazo:</b> 2 semanas</li><li>💰 <b>Orcamento:</b> R$ 500 (dominio + hospedagem)</li><li>👥 <b>Equipe:</b> Voce (tecnico) + dono da padaria</li><li>📋 <b>Escopo:</b> 5 paginas (Inicio, Cardapio, Sobre, Contato, Pedido)</li><li>⚠️ <b>Risco:</b> Dono pode mudar de ideia -> usar metodologia Agil</li></ul><p class="slide-text"><b>Entrega:</b> Site no ar + treinamento do dono + manual = <b>Projeto concluido!</b></p>
+</div>
+<div class="slide" data-index="82">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">🛠️ O que e Suporte Tecnico?</h2>
+<div class="big-emoji">🛠️</div><p class="slide-text"><b>Suporte tecnico</b> e ajudar as pessoas a resolverem <b>problemas com tecnologia</b>.</p><div class="example-box"><p><b>📞 Exemplos do dia a dia:</b><br>"Meu computador nao liga" • "O sistema travou" • "Nao consigo imprimir" • "A internet caiu"</p></div><p class="slide-text">O bom suporte nao so resolve o problema, mas <b>explica o que aconteceu</b> para que nao se repita.</p>
+</div>
+<div class="slide" data-index="83">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">📊 Niveis de Suporte: N1, N2, N3</h2>
+<div class="big-emoji">📊</div><p class="slide-text">O suporte e dividido em <b>niveis</b>:</p><div class="grid-3"><div class="card-emoji green-border"><h3>🟢 N1 - Nivel 1</h3><p><b>Problemas simples:</b></p><ul><li>Senha esquecida</li><li>Cabo desconectado</li><li>Reiniciar o PC</li><li>Orientar o usuario</li></ul></div><div class="card-emoji orange-border"><h3>🟡 N2 - Nivel 2</h3><p><b>Problemas medios:</b></p><ul><li>Instalar software</li><li>Configurar rede</li><li>Remover virus</li><li>Configurar impressora</li></ul></div><div class="card-emoji red-border"><h3>🔴 N3 - Nivel 3</h3><p><b>Problemas complexos:</b></p><ul><li>Erro no servidor</li><li>Banco de dados</li><li>Programacao</li><li>Infraestrutura critica</li></ul></div></div><div class="example-box"><p><b>🏠 Analogia:</b> N1 e trocar uma lampada queimada. N2 e arrumar a fiacao. N3 e refazer toda a instalacao eletrica!</p></div>
+</div>
+<div class="slide" data-index="84">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">😊 Como Atender Bem o Cliente</h2>
+<div class="big-emoji">😊</div><p class="slide-text">Atender bem e <b>mais importante</b> do que saber tudo de tecnologia!</p><ul class="slide-list"><li>👂 <b>Ouvir</b> primeiro, sem interromper</li><li>😊 <b>Ser educado</b> e paciente</li><li>💬 <b>Explicar</b> sem usar palavras dificeis</li><li>✅ <b>Resolver</b> ou dizer a verdade: "Vou pesquisar e volto"</li><li>📝 <b>Anotar</b> o problema para nao esquecer</li><li>⏰ <b>Cumprir</b> o prazo que prometeu</li></ul><div class="example-box"><p><b>🎯 Dica de ouro:</b> O cliente nao entende de tecnologia. Se ele esta nervoso, <b>nao e com voce - e com o problema</b>!</p></div>
+</div>
+<div class="slide" data-index="85">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">🎫 Sistema de Chamados (Tickets)</h2>
+<div class="big-emoji">🎫</div><p class="slide-text">Um <b>sistema de chamados</b> registra cada pedido de ajuda para <b>organizar e nao esquecer</b>.</p><ul class="slide-list"><li>📝 <b>Abertura</b> - cliente descreve o problema</li><li>👤 <b>Atribuicao</b> - chamado vai para um tecnico</li><li>🔄 <b>Status</b> - aberto -> em analise -> resolvido</li><li>⏰ <b>SLA</b> - tempo maximo para resolver</li><li>📊 <b>Relatorio</b> - quantos chamados, tempo medio</li><li>📚 <b>Historico</b> - fica registrado para o futuro</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Toda vez que voce liga para o suporte da CLARO, abre-se um <b>chamado</b>. Voce recebe um numero e pode acompanhar!</p></div>
+</div>
+<div class="slide" data-index="86">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">🖥️ Ferramentas de Suporte Remoto</h2>
+<div class="big-emoji">🖥️</div><p class="slide-text">O tecnico pode resolver problemas <b>sem estar no local</b>:</p><div class="grid-3"><div class="card-emoji">🖥️ <b>TeamViewer</b><br>Acesso remoto ao PC</div><div class="card-emoji">🔗 <b>AnyDesk</b><br>Acesso rapido e leve</div><div class="card-emoji">💬 <b>Slack/Teams</b><br>Chat e videochamada</div><div class="card-emoji">🎫 <b>Jira Service</b><br>Chamados integrados</div><div class="card-emoji">📞 <b>Zendesk</b><br>Atendimento multicanal</div><div class="card-emoji">🤖 <b>Chatbot</b><br>Responde automatico</div></div><p class="slide-text"><b>💡 Vantagem:</b> Suporte remoto e <b>mais rapido e barato</b> - nao precisa se deslocar!</p>
+</div>
+<div class="slide" data-index="87">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">📚 Base de Conhecimento</h2>
+<div class="big-emoji">📚</div><p class="slide-text"><b>Base de conhecimento</b> e um manual com <b>solucoes documentadas</b> para problemas comuns.</p><ul class="slide-list"><li>📖 <b>Como fazer</b> - passo a passo de solucoes</li><li>❓ <b>FAQ</b> - perguntas frequentes</li><li>🎥 <b>Tutoriais</b> - videos de como resolver</li><li>🔄 <b>Atualizada</b> - sempre que descobre algo novo</li><li>🔍 <b>Buscavel</b> - da para pesquisar</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Quando voce busca no Google "como configurar Wi-Fi" e acha um passo a passo - isso e uma <b>base de conhecimento</b>!</p></div>
+</div>
+<div class="slide" data-index="88">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">🤝 Soft Skills: Comunicacao e Paciencia</h2>
+<div class="big-emoji">🤝</div><p class="slide-text"><b>Soft skills</b> sao habilidades <b>comportamentais</b>. Em suporte, sao <b>tao importantes</b> quanto o conhecimento tecnico:</p><div class="grid-3"><div class="card-emoji">💬 <b>Comunicacao</b><br>Falar de forma clara</div><div class="card-emoji">🧘 <b>Paciencia</b><br>Manter a calma</div><div class="card-emoji">🤔 <b>Empatia</b><br>Se colocar no lugar</div><div class="card-emoji">🧩 <b>Resolucao</b><br>Pensar em solucoes</div><div class="card-emoji">⏰ <b>Organizacao</b><br>Cumprir prazos</div><div class="card-emoji">🔄 <b>Adaptabilidade</b><br>Lidar com mudancas</div></div><div class="example-box"><p><b>💡 Verdade:</b> O tecnico mais inteligente que <b>nao sabe se comunicar</b> perde para o tecnico medio que <b>atende bem</b>!</p></div>
+</div>
+<div class="slide" data-index="89">
+<div class="section-tag">Atendimento e Suporte Tecnico</div>
+<h2 class="slide-title">📞 Exemplo Pratico de Atendimento</h2>
+<div class="big-emoji">📞</div><div class="example-box"><p><b>📞 Cenario:</b> Uma secretaria liga dizendo que a impressora nao funciona.</p></div><p class="slide-text"><b>Como atender:</b></p><ul class="slide-list"><li>1️⃣ <b>Ouvir:</b> "Pode me explicar o que esta acontecendo?"</li><li>2️⃣ <b>Anotar:</b> "Entendi. Impressora nao liga. Qual o modelo?"</li><li>3️⃣ <b>Perguntar:</b> "Tem luz na tomada? O cabo esta conectado?"</li><li>4️⃣ <b>Diagnosticar:</b> "Parece que e o cabo de energia. Vou verificar."</li><li>5️⃣ <b>Resolver:</b> "Era o cabo. Troquei e testei. Esta imprimindo!"</li><li>6️⃣ <b>Documentar:</b> Abre chamado com a solucao para o futuro</li></ul><p class="slide-text"><b>Resultado:</b> Cliente satisfeito, problema resolvido e documentado!</p>
+</div>
+<div class="slide" data-index="90">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">🌱 O que e TI Verde?</h2>
+<div class="big-emoji">🌱</div><p class="slide-text"><b>TI Verde</b> (Green IT) e usar a tecnologia de forma que <b>nao prejudique o meio ambiente</b>.</p><div class="example-box"><p><b>🌍 Sabia que a tecnologia tambem polui?</b><br>• Fabricar computadores gasta agua e metais raros<br>• Jogar fora contamina o solo<br>• Gastar energia aumenta a emissao de CO2</p></div><p class="slide-text">A TI Verde busca <b>reduzir, reutilizar e reciclar</b> tudo na area de tecnologia.</p>
+</div>
+<div class="slide" data-index="91">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">🌍 Impacto Ambiental da Tecnologia</h2>
+<div class="big-emoji">🌍</div><p class="slide-text">A tecnologia tem <b>impactos no meio ambiente</b>:</p><ul class="slide-list"><li>💧 <b>Agua</b> - fabricar 1 smartphone gasta <b>13.000 litros</b> de agua!</li><li>⚡ <b>Energia</b> - data centers gastam <b>1%</b> de toda energia do mundo</li><li>🏭 <b>CO2</b> - internet emite mais CO2 que a aviacao mundial</li><li>⛏️ <b>Metais raros</b> - ouro, cobre, litio - mineracao danosa</li><li>🗑️ <b>Lixo eletronico</b> - 50 milhoes de toneladas por ano no mundo</li></ul><div class="example-box"><p><b>📊 Dado alarmante:</b> Apenas <b>20%</b> do lixo eletronico e reciclado no mundo. O resto vai para aterros!</p></div>
+</div>
+<div class="slide" data-index="92">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">🗑️ Lixo Eletronico (E-lixo)</h2>
+<div class="big-emoji">🗑️</div><p class="slide-text"><b>Lixo eletronico (e-lixo)</b> e todo equipamento que nao funciona mais:</p><div class="grid-3"><div class="card-emoji">💻 Computadores antigos</div><div class="card-emoji">📱 Celulares e tablets</div><div class="card-emoji">🖥️ Monitores e TVs</div><div class="card-emoji">🖨️ Impressoras</div><div class="card-emoji">🔋 Pilhas e baterias</div><div class="card-emoji">🔌 Cabos e fios</div></div><div class="example-box"><p><b>⚠️ PERIGO:</b> Jogar eletronicos no lixo comum <b>contamina o solo e a agua</b> com metais pesados como <b>chumbo e mercurio</b>. Sempre leve a pontos de coleta!</p></div>
+</div>
+<div class="slide" data-index="93">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">♻️ Como Descartar Corretamente</h2>
+<div class="big-emoji">♻️</div><p class="slide-text"><b>Onde descartar</b> eletronicos velhos:</p><ul class="slide-list"><li>🏪 <b>Pontos de coleta</b> - operadoras (Vivo, Claro), lojas de eletronicos</li><li>♻️ <b>Cooperativas</b> - recicladores aceitam eletronicos</li><li>🏢 <b>Descarte correto da empresa</b> - empresas devem ter processo</li><li>🔄 <b>Programas de troca</b> - devolva o velho ao comprar novo</li><li>📡 <b>Ecoeletronico</b> - pontos de coleta em supermercados</li></ul><div class="example-box"><p><b>💡 Dica:</b> O <b>Apple Trade</b> aceita seu iPhone velho e da desconto no novo. A Apple <b>recicla os metais</b> para fazer novos aparelhos!</p></div>
+</div>
+<div class="slide" data-index="94">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">💡 Economia de Energia em TI</h2>
+<div class="big-emoji">💡</div><p class="slide-text">Como <b>economizar energia</b> no dia a dia:</p><ul class="slide-list"><li>💤 <b>Modo de espera</b> - configurar para dormir apos 10 min</li><li>🖥️ <b>Monitor</b> - desligar quando nao usar</li><li>🔄 <b>Hibernar</b> - melhor que suspender (desliga mais)</li><li>🔆 <b>Brilho</b> - diminuir o brilho da tela</li><li>❌ <b>Desligar</b> - computador desligado gasta ZERO</li><li>⚡ <b>Fonte eficiente</b> - fonte 80 Plus gasta menos</li></ul><div class="example-box"><p><b>📊 Impacto:</b> Um laboratorio com 30 computadores desligados a noite economiza <b>R$ 200/mes</b> na conta de luz!</p></div>
+</div>
+<div class="slide" data-index="95">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">☁️ Cloud Computing e Sustentabilidade</h2>
+<div class="big-emoji">☁️</div><p class="slide-text"><b>Cloud Computing</b> (Nuvem) ajuda o meio ambiente:</p><ul class="slide-list"><li>🏢 <b>Menos computadores</b> - empresas nao precisam de servidores proprios</li><li>⚡ <b>Eficiencia</b> - data centers sao otimizados para gastar menos</li><li>🔄 <b>Compartilhamento</b> - milhares de empresas usam o mesmo servidor</li><li>🌳 <b>Energia verde</b> - Google, Amazon e Microsoft usam energia renovavel</li><li>📉 <b>Menos residuos</b> - menos maquinas sendo trocadas</li></ul><div class="example-box"><p><b>💡 Exemplo:</b> Ao inves de cada empresa ter 10 servidores, todas usam a nuvem. <b>Menos maquinas = menos lixo = menos energia!</b></p></div>
+</div>
+<div class="slide" data-index="96">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">🏢 Praticas de TI Verde nas Empresas</h2>
+<div class="big-emoji">🏢</div><p class="slide-text">As empresas de TI tambem precisam fazer sua parte:</p><ul class="slide-list"><li>🌱 <b>Energia renovavel</b> - usar solar ou eolica nos data centers</li><li>📦 <b>Embalagens reciclaveis</b> - menos plastico nos produtos</li><li>🔄 <b>Programas de troca</b> - devolva o velho ao comprar novo</li><li>📈 <b>Relatorios</b> - medir e publicar impacto ambiental</li><li>🤖 <b>Robos de reciclagem</b> - desmontam aparelhos e recuperam metais</li><li>🌳 <b>Compensacao</b> - plantar arvores para compensar CO2</li></ul><div class="example-box"><p><b>🍎 Exemplo real:</b> A Apple tem robos (Daisy) que desmontam <b>200 iPhones por hora</b> e recuperam metais. Isso e TI Verde na pratica!</p></div>
+</div>
+<div class="slide" data-index="97">
+<div class="section-tag">TI Verde e Sustentabilidade</div>
+<h2 class="slide-title">🌳 O Futuro Sustentavel da Tecnologia</h2>
+<div class="big-emoji">🌳</div><p class="slide-text">O futuro da tecnologia <b>precisa ser verde</b>:</p><div class="grid-3"><div class="card-emoji">🌞 <b>Energia solar</b><br>Data centers com energia do sol</div><div class="card-emoji">♻️ <b>Economia circular</b><br>Reaproveitar tudo</div><div class="card-emoji">🌱 <b>BI para TI</b><br>Software que mede impacto</div><div class="card-emoji">🤖 <b>IA verde</b><br>Algoritmos que gastam menos</div><div class="card-emoji">📦 <b>Modular</b><br>Trocar pecas, nao o aparelho</div><div class="card-emoji">🌍 <b>Meta net-zero</b><br>Empresas sem emissao</div></div><div class="example-box"><p><b>🎯 Reflexao:</b> Como tecnico em informatica, <b>voce tem o poder</b> de ajudar a tornar a tecnologia mais sustentavel. Comece <b>hoje</b>!</p></div>
+</div>
+<div class="slide" data-index="98">
+<div class="section-tag">Encerramento</div>
+<h2 class="slide-title">✅ Recapitulando a Aula</h2>
+<div class="big-emoji">✅</div><p class="slide-text"><b>Hoje vimos tudo sobre Negocios em Informatica:</b></p><ul class="slide-list"><li>💼 O que e negocio em TI e areas de atuacao</li><li>🛒 E-commerce e como funciona</li><li>📱 Marketing Digital e suas ferramentas</li><li>🚀 Startups e empreendedorismo</li><li>🏗️ Modelos de negocio (SaaS, Freemium, Marketplace)</li><li>💳 Meios de pagamento digital (PIX, cartoes)</li><li>⚖️ Etica, LGPD e protecao de dados</li><li>🛡️ Seguranca da informacao</li><li>💡 Transformacao digital</li><li>📊 Gestao de projetos</li><li>🛠️ Atendimento e suporte tecnico</li><li>🌱 TI Verde e sustentabilidade</li></ul>
+</div>
+<div class="slide" data-index="99">
+<div class="section-tag">Encerramento</div>
+<h2 class="slide-title">🔑 Principais Conceitos</h2>
+<div class="big-emoji">🔑</div><p class="slide-text"><b>Os 10 conceitos mais importantes:</b></p><ul class="slide-list"><li>1️⃣ TI e <b>produto + servico</b> para gerar valor</li><li>2️⃣ E-commerce: <b>vender pela internet</b></li><li>3️⃣ Marketing: <b>divulgar e vender online</b></li><li>4️⃣ Startup: <b>inovar com tecnologia</b></li><li>5️⃣ Modelo de negocio: <b>como ganhar dinheiro</b></li><li>6️⃣ PIX: <b>pagamento instantaneo</b></li><li>7️⃣ LGPD: <b>proteger dados e lei</b></li><li>8️⃣ Seguranca: <b>triade CID</b></li><li>9️⃣ Projeto: <b>planejar -> executar -> monitorar -> entregar</b></li><li>🔟 TI Verde: <b>reduzir, reutilizar, reciclar</b></li></ul>
+</div>
+<div class="slide" data-index="100">
+<div class="section-tag">Encerramento</div>
+<h2 class="slide-title">🚀 Como Aplicar no Dia a Dia</h2>
+<div class="big-emoji">🚀</div><p class="slide-text"><b>O que voce pode fazer a partir de hoje:</b></p><ul class="slide-list"><li>🔍 <b>Observar</b> os negocios de TI ao seu redor</li><li>🛡️ <b>Proteger</b> seus dados e senhas</li><li>🛒 <b>Entender</b> como as compras online funcionam</li><li>💡 <b>Pensar</b> em solucoes para problemas do dia a dia</li><li>🌱 <b>Descartar</b> eletronicos corretamente</li><li>📚 <b>Continuar estudando</b> - a tecnologia muda sempre!</li></ul><div class="example-box"><p><b>🎯 Lembre-se:</b> O tecnico que entende de <b>negocios</b> vale mais, ganha mais e tem mais oportunidades!</p></div>
+</div>
+<div class="slide" data-index="101">
+<div class="section-tag">Encerramento</div>
+<h2 class="slide-title">❓ Duvidas e Perguntas</h2>
+<div class="big-emoji">❓</div><p class="slide-text" style="font-size: 2rem;"><b>Agora e a hora de perguntar!</b></p><p class="slide-text">Qualquer duvida sobre:</p><ul class="slide-list"><li>🛒 E-commerce e lojas virtuais</li><li>📱 Marketing Digital</li><li>🚀 Startups e empreendedorismo</li><li>💳 Pagamentos e PIX</li><li>⚖️ LGPD e privacidade</li><li>🛡️ Seguranca e senhas</li><li>📋 Gestao de projetos</li><li>🌱 Sustentabilidade</li></ul><div class="example-box"><p><b>💬 Nao tenha vergonha de perguntar!</b> Quem pergunta aprende. Quem cala fica com a duvida!</p></div><p class="slide-text" style="text-align: center; font-size: 1.8rem; margin-top: 20px;"><b>Obrigado pela atencao!</b> 👋</p>
+</div>
+</div>
+
+<div id="controls">
+  <button onclick="prevSlide()">&#9664; Anterior</button>
+  <button onclick="nextSlide()">Proximo &#9654;</button>
+</div>
+
+<div id="nav-hint">Use ← → para navegar</div>
+
+<div id="footer">www.carneirosvirtual.online - Profº. Antonio</div>
+
+<script>
+var currentSlide=0;
+var totalSlides=102;
+
+function showSlide(n){
+  if(n<0)n=0;
+  if(n>=totalSlides)n=totalSlides-1;
+  document.querySelectorAll('.slide').forEach(function(s,i){
+    if(i===n){s.classList.add('active');}else{s.classList.remove('active');}
+  });
+  currentSlide=n;
+  document.getElementById('slide-counter').textContent=(n+1)+' / '+totalSlides;
+  document.getElementById('progress-bar').style.width=((n+1)/totalSlides*100)+'%';
+}
+
+function nextSlide(){if(currentSlide<totalSlides-1)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>0)showSlide(currentSlide-1);}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='Home'){showSlide(0);}
+  if(e.key==='End'){showSlide(totalSlides-1);}
+});
+
+showSlide(0);
+</script>
+</body>
+</html>
