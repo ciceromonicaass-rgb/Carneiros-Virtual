@@ -1,0 +1,3 @@
+MENU LATERAL ESQUERDO
+A rolagem foi aplicada diretamente ao elemento #nav, que contém os botões do menu.
+A barra é independente do conteúdo principal e tem 18px de largura.
