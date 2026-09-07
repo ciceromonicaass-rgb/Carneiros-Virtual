@@ -1,0 +1,134 @@
+[
+  {
+    "id": "intro",
+    "title": "Fundamentos da Computação na Educação Básica",
+    "hours": 4,
+    "audience": "Educação Infantil ao 9º ano",
+    "modules": [
+      {
+        "title": "1. Por que Computação na escola?",
+        "content": "Conceitos de Computação, papel pedagógico, integração curricular e formação docente.",
+        "activity": "Mapa conceitual: o que é Computação e o que não é.",
+        "quiz": [
+          [
+            "Computação se resume a usar aplicativos?",
+            false,
+            "O ensino de Computação envolve conhecimentos e práticas computacionais, não apenas operação de ferramentas."
+          ]
+        ]
+      },
+      {
+        "title": "2. Os três eixos",
+        "content": "Pensamento Computacional, Mundo Digital e Cultura Digital e suas relações.",
+        "activity": "Classifique situações pedagógicas nos três eixos.",
+        "quiz": [
+          [
+            "Pensamento Computacional é um dos eixos?",
+            true,
+            "Sim. É um dos três eixos estruturantes do complemento de Computação."
+          ]
+        ]
+      },
+      {
+        "title": "3. Planejamento",
+        "content": "Alinhamento entre habilidade, objetivo, atividade, mediação, evidência e avaliação.",
+        "activity": "Produza um plano de aula usando o gerador do portal.",
+        "quiz": [
+          [
+            "Uma avaliação deve produzir evidências da aprendizagem?",
+            true,
+            "Sim. A avaliação deve estar alinhada ao que se pretende que o estudante aprenda."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pc",
+    "title": "Pensamento Computacional na prática",
+    "hours": 6,
+    "audience": "Professores do Ensino Fundamental",
+    "modules": [
+      {
+        "title": "1. Decomposição e padrões",
+        "content": "Divisão de problemas, identificação de regularidades e generalização.",
+        "activity": "Oficina com cartões: decompor um problema real da escola.",
+        "quiz": [
+          [
+            "Decomposição significa dividir um problema em partes menores?",
+            true,
+            "Sim. A decomposição torna problemas complexos mais tratáveis."
+          ]
+        ]
+      },
+      {
+        "title": "2. Algoritmos",
+        "content": "Sequência, seleção, repetição, representação e simulação.",
+        "activity": "Professor robô: executar apenas instruções claras e ordenadas.",
+        "quiz": [
+          [
+            "Um algoritmo precisa ser uma sequência organizada de passos?",
+            true,
+            "Em contexto pedagógico, algoritmos são procedimentos organizados para resolver problemas."
+          ]
+        ]
+      },
+      {
+        "title": "3. Teste e depuração",
+        "content": "Hipóteses, casos de teste, localização de erros, correção e reteste.",
+        "activity": "Caça aos bugs em pseudocódigos.",
+        "quiz": [
+          [
+            "Depuração termina quando o primeiro erro é encontrado?",
+            false,
+            "Não. É necessário corrigir e testar novamente para verificar a solução."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "culture",
+    "title": "Cultura Digital, segurança e cidadania",
+    "hours": 4,
+    "audience": "Educação Básica",
+    "modules": [
+      {
+        "title": "1. Segurança e privacidade",
+        "content": "Dados pessoais, senhas, golpes, exposição e práticas de proteção.",
+        "activity": "Análise de mensagens fictícias e sinais de phishing.",
+        "quiz": [
+          [
+            "Uma senha deve ser compartilhada com colegas?",
+            false,
+            "Compartilhar credenciais aumenta o risco de acesso indevido."
+          ]
+        ]
+      },
+      {
+        "title": "2. Autoria e informação",
+        "content": "Direitos autorais, fontes, credibilidade, desinformação e uso ético.",
+        "activity": "Comparação crítica de fontes.",
+        "quiz": [
+          [
+            "Uma informação digital deve ser aceita só porque está em um site?",
+            false,
+            "Fonte, autoria, evidências, data, contexto e finalidade precisam ser analisados."
+          ]
+        ]
+      },
+      {
+        "title": "3. Impactos sociais",
+        "content": "Tecnologia, trabalho, ambiente, desigualdade e participação social.",
+        "activity": "Debate estruturado sobre um problema tecnológico local.",
+        "quiz": [
+          [
+            "Tecnologia pode gerar impactos sociais e ambientais?",
+            true,
+            "Sim. Os efeitos dependem de contexto, escolhas de projeto, acesso, uso e descarte."
+          ]
+        ]
+      }
+    ]
+  }
+]

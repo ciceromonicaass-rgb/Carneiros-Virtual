@@ -1,0 +1,288 @@
+{
+  "educacao_infantil": {
+    "label": "Educação Infantil",
+    "focus": [
+      "Sequências e rotinas",
+      "Padrões",
+      "Classificação",
+      "Comandos e instruções",
+      "Algoritmos concretos",
+      "Uso seguro de tecnologia"
+    ],
+    "plans": [
+      {
+        "title": "Robô de brinquedo",
+        "axis": "Pensamento Computacional",
+        "objective": "Organizar instruções para levar um personagem até um destino.",
+        "activity": "Em duplas, uma criança é o robô e outra fornece comandos com cartões de movimento. O grupo testa e corrige a sequência.",
+        "assessment": "Observar clareza, ordem e capacidade de corrigir a sequência."
+      },
+      {
+        "title": "Padrões com movimentos",
+        "axis": "Pensamento Computacional",
+        "objective": "Reconhecer e criar padrões.",
+        "activity": "Criar sequências com palmas, passos e gestos. Outra criança identifica a regra e continua o padrão.",
+        "assessment": "Identificação e explicação da regra."
+      },
+      {
+        "title": "Classificar para organizar",
+        "axis": "Pensamento Computacional",
+        "objective": "Criar critérios de classificação e explicar escolhas.",
+        "activity": "Separar objetos por cor, forma ou tamanho; depois propor um novo critério.",
+        "assessment": "Capacidade de definir e comunicar critérios."
+      }
+    ]
+  },
+  "1": {
+    "label": "1º ano",
+    "focus": [
+      "Organização",
+      "Algoritmos cotidianos",
+      "Representação",
+      "Dispositivos",
+      "Segurança"
+    ],
+    "plans": [
+      {
+        "title": "Algoritmo da rotina",
+        "axis": "Pensamento Computacional",
+        "objective": "Representar uma rotina como sequência de passos.",
+        "activity": "Construir cartões com as etapas de uma tarefa e reorganizá-los quando necessário.",
+        "assessment": "Sequência coerente e identificação de erros."
+      },
+      {
+        "title": "Pixel art desplugado",
+        "axis": "Mundo Digital",
+        "objective": "Representar uma imagem em uma grade por meio de códigos.",
+        "activity": "Usar legenda simples para preencher células e reconstruir uma figura.",
+        "assessment": "Correspondência entre código e representação."
+      }
+    ]
+  },
+  "2": {
+    "label": "2º ano",
+    "focus": [
+      "Modelos",
+      "Sequências",
+      "Hardware e software",
+      "Segurança"
+    ],
+    "plans": [
+      {
+        "title": "Máquina de instruções",
+        "axis": "Mundo Digital",
+        "objective": "Perceber que sistemas computacionais executam instruções.",
+        "activity": "Comparar uma tarefa humana com uma sequência de instruções que uma máquina poderia executar.",
+        "assessment": "Explicação sobre instruções e componentes."
+      },
+      {
+        "title": "Algoritmo com desenhos",
+        "axis": "Pensamento Computacional",
+        "objective": "Criar algoritmo pictográfico para um problema simples.",
+        "activity": "Representar instruções com símbolos e testar com um colega.",
+        "assessment": "Clareza, ordem e teste da solução."
+      }
+    ]
+  },
+  "3": {
+    "label": "3º ano",
+    "focus": [
+      "Lógica",
+      "Algoritmos",
+      "Decomposição",
+      "Dados",
+      "Pesquisa"
+    ],
+    "plans": [
+      {
+        "title": "Verdadeiro ou falso",
+        "axis": "Pensamento Computacional",
+        "objective": "Relacionar situações a proposições verdadeiras ou falsas.",
+        "activity": "Criar cartões de afirmações e justificar a classificação.",
+        "assessment": "Justificativa coerente."
+      },
+      {
+        "title": "Dados da turma",
+        "axis": "Mundo Digital",
+        "objective": "Diferenciar dado de informação e organizar uma pequena coleta.",
+        "activity": "Coletar uma característica da turma, registrar em tabela e interpretar.",
+        "assessment": "Organização e interpretação dos dados."
+      }
+    ]
+  },
+  "4": {
+    "label": "4º ano",
+    "focus": [
+      "Matrizes",
+      "Registros",
+      "Codificação",
+      "Produção digital",
+      "Confiabilidade"
+    ],
+    "plans": [
+      {
+        "title": "Imagem em matriz",
+        "axis": "Mundo Digital",
+        "objective": "Representar informação por uma matriz.",
+        "activity": "Converter desenho simples em uma grade de células codificadas.",
+        "assessment": "Correção da representação."
+      },
+      {
+        "title": "Fonte confiável?",
+        "axis": "Cultura Digital",
+        "objective": "Aplicar critérios básicos para verificar informação online.",
+        "activity": "Comparar duas páginas fictícias e identificar autoria, data, evidências e finalidade.",
+        "assessment": "Uso de critérios para justificar confiança."
+      }
+    ]
+  },
+  "5": {
+    "label": "5º ano",
+    "focus": [
+      "Listas",
+      "Grafos",
+      "Lógica",
+      "Hardware",
+      "Sistema operacional",
+      "Autoria"
+    ],
+    "plans": [
+      {
+        "title": "Mapa de conexões",
+        "axis": "Pensamento Computacional",
+        "objective": "Representar relações por meio de grafos simples.",
+        "activity": "Modelar conexões entre pessoas, lugares ou páginas usando nós e ligações.",
+        "assessment": "Correspondência entre relações reais e modelo."
+      },
+      {
+        "title": "Quem criou?",
+        "axis": "Cultura Digital",
+        "objective": "Compreender autoria e limites de uso de conteúdo digital.",
+        "activity": "Analisar situações de cópia, remix, citação e publicação.",
+        "assessment": "Justificativa ética para cada situação."
+      }
+    ]
+  },
+  "6": {
+    "label": "6º ano",
+    "focus": [
+      "Tipos de dados",
+      "Algoritmos",
+      "Decomposição",
+      "Pacotes",
+      "Arquivos",
+      "Comunicação"
+    ],
+    "plans": [
+      {
+        "title": "Algoritmo em três estruturas",
+        "axis": "Pensamento Computacional",
+        "objective": "Usar sequência, repetição e seleção em uma solução.",
+        "activity": "Construir fluxogramas de uma tarefa com pelo menos uma decisão e uma repetição.",
+        "assessment": "Coerência do algoritmo e justificativa."
+      },
+      {
+        "title": "A mensagem em pacotes",
+        "axis": "Mundo Digital",
+        "objective": "Compreender a ideia de divisão e recomposição de dados.",
+        "activity": "Dividir uma mensagem em cartões, misturar, encaminhar e reconstruir.",
+        "assessment": "Explicação do processo de transmissão."
+      }
+    ]
+  },
+  "7": {
+    "label": "7º ano",
+    "focus": [
+      "Depuração",
+      "Grafos",
+      "Protocolos",
+      "Cibersegurança",
+      "Cyberbullying",
+      "Publicação"
+    ],
+    "plans": [
+      {
+        "title": "Laboratório de bugs",
+        "axis": "Pensamento Computacional",
+        "objective": "Localizar e corrigir erros em uma solução.",
+        "activity": "Analisar pseudocódigo com erros, formular hipóteses, corrigir e testar casos.",
+        "assessment": "Qualidade da identificação, correção e teste."
+      },
+      {
+        "title": "Detetives da segurança",
+        "axis": "Mundo Digital",
+        "objective": "Reconhecer riscos e formas de proteção digital.",
+        "activity": "Analisar mensagens fictícias e identificar sinais de golpe, exposição ou engenharia social.",
+        "assessment": "Identificação dos riscos e propostas de proteção."
+      },
+      {
+        "title": "Convivência na rede",
+        "axis": "Cultura Digital",
+        "objective": "Analisar situações de cyberbullying e construir respostas responsáveis.",
+        "activity": "Estudo de casos, debate e elaboração de protocolo de ajuda.",
+        "assessment": "Argumentação, empatia e proposta de ação."
+      }
+    ]
+  },
+  "8": {
+    "label": "8º ano",
+    "focus": [
+      "Recursão",
+      "Listas",
+      "Internet",
+      "Privacidade",
+      "Termos de uso",
+      "Vieses"
+    ],
+    "plans": [
+      {
+        "title": "Como a Internet funciona?",
+        "axis": "Mundo Digital",
+        "objective": "Modelar elementos básicos da comunicação na Internet.",
+        "activity": "Representar dispositivos, roteadores, servidores, endereçamento e mensagens em uma simulação.",
+        "assessment": "Precisão do modelo e explicação."
+      },
+      {
+        "title": "Termos que ninguém lê",
+        "axis": "Cultura Digital",
+        "objective": "Identificar implicações de privacidade em termos de uso.",
+        "activity": "Analisar trechos fictícios de uma plataforma e marcar coleta, compartilhamento e retenção de dados.",
+        "assessment": "Identificação de riscos e direitos."
+      }
+    ]
+  },
+  "9": {
+    "label": "9º ano",
+    "focus": [
+      "Árvores e grafos",
+      "Autômatos",
+      "Malware",
+      "Criptografia",
+      "Impactos sociais",
+      "Credibilidade"
+    ],
+    "plans": [
+      {
+        "title": "Criptografia de papel",
+        "axis": "Mundo Digital",
+        "objective": "Compreender a ideia de transformação de uma mensagem para protegê-la.",
+        "activity": "Usar uma cifra didática com chave combinada, testar e discutir limites.",
+        "assessment": "Explicação de chave, transformação e segurança."
+      },
+      {
+        "title": "Informação em investigação",
+        "axis": "Cultura Digital",
+        "objective": "Avaliar credibilidade e relevância de informações digitais.",
+        "activity": "Comparar fontes fictícias, rastrear evidências e produzir uma conclusão fundamentada.",
+        "assessment": "Qualidade das evidências e justificativas."
+      },
+      {
+        "title": "Problema local, solução digital",
+        "axis": "Cultura Digital",
+        "objective": "Analisar um problema da comunidade e propor uma solução computacional.",
+        "activity": "Pesquisa, definição do problema, requisitos, protótipo e apresentação.",
+        "assessment": "Relevância, viabilidade, evidências e comunicação."
+      }
+    ]
+  }
+}

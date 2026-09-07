@@ -1,0 +1,265 @@
+{
+  "sequencias": [
+    {
+      "titulo": "Algoritmos do cotidiano",
+      "etapa": "1º ao 3º ano",
+      "disciplinas": [
+        "Português",
+        "Matemática"
+      ],
+      "duracao": "3 aulas",
+      "objetivo": "Perceber que tarefas podem ser descritas por passos ordenados e revisados.",
+      "etapas": [
+        "Problematização de uma rotina",
+        "Ordenação de cartões",
+        "Teste com colega",
+        "Correção e registro"
+      ],
+      "produto": "Fluxograma ou sequência ilustrada",
+      "avaliacao": "Ordem dos passos, clareza e capacidade de corrigir erros."
+    },
+    {
+      "titulo": "Dados da escola",
+      "etapa": "4º e 5º ano",
+      "disciplinas": [
+        "Matemática",
+        "Ciências",
+        "Geografia"
+      ],
+      "duracao": "4 aulas",
+      "objetivo": "Coletar, organizar, representar e interpretar dados.",
+      "etapas": [
+        "Definir pergunta",
+        "Coletar dados",
+        "Organizar tabela",
+        "Construir gráfico",
+        "Interpretar resultados"
+      ],
+      "produto": "Painel de dados da turma",
+      "avaliacao": "Qualidade da coleta, representação e interpretação."
+    },
+    {
+      "titulo": "Internet por dentro",
+      "etapa": "6º e 7º ano",
+      "disciplinas": [
+        "Ciências",
+        "Geografia",
+        "Tecnologia/Informática"
+      ],
+      "duracao": "4 aulas",
+      "objetivo": "Modelar a circulação de dados em redes.",
+      "etapas": [
+        "Mapear dispositivos",
+        "Simular pacotes",
+        "Discutir endereçamento",
+        "Investigar protocolos",
+        "Apresentar modelo"
+      ],
+      "produto": "Mapa/modelo de rede",
+      "avaliacao": "Precisão conceitual e comunicação."
+    },
+    {
+      "titulo": "Informação em investigação",
+      "etapa": "8º e 9º ano",
+      "disciplinas": [
+        "Português",
+        "História",
+        "Geografia"
+      ],
+      "duracao": "5 aulas",
+      "objetivo": "Avaliar credibilidade, evidências, contexto e vieses de fontes digitais.",
+      "etapas": [
+        "Selecionar questão",
+        "Comparar fontes",
+        "Rastrear evidências",
+        "Identificar vieses",
+        "Produzir conclusão"
+      ],
+      "produto": "Relatório de verificação",
+      "avaliacao": "Uso de evidências e justificativas."
+    }
+  ],
+  "workshops": [
+    {
+      "titulo": "Oficina Desplugada",
+      "publico": "Educação Infantil ao 5º ano",
+      "duracao": "3 horas",
+      "roteiro": [
+        "Acolhida e diagnóstico",
+        "Padrões e classificação",
+        "Robô humano",
+        "Algoritmos com cartões",
+        "Desafio em grupos",
+        "Socialização"
+      ],
+      "materiais": [
+        "Cartões",
+        "Folhas",
+        "Fita adesiva",
+        "Objetos da sala"
+      ],
+      "resultado": "Professores saem com atividades sem necessidade de laboratório."
+    },
+    {
+      "titulo": "Oficina de Programação e Depuração",
+      "publico": "6º ao 9º ano",
+      "duracao": "4 horas",
+      "roteiro": [
+        "Pseudocódigo",
+        "Sequência",
+        "Condição",
+        "Repetição",
+        "Bugs intencionais",
+        "Teste e depuração",
+        "Desafio final"
+      ],
+      "materiais": [
+        "Computadores quando disponíveis",
+        "Projetor",
+        "Folhas de exercícios"
+      ],
+      "resultado": "Professor produz e testa uma solução computacional."
+    },
+    {
+      "titulo": "Oficina de Cidadania Digital",
+      "publico": "Todos os segmentos",
+      "duracao": "3 horas",
+      "roteiro": [
+        "Dados pessoais",
+        "Senhas",
+        "Golpes e phishing",
+        "Cyberbullying",
+        "Autoria",
+        "Fontes confiáveis",
+        "Plano de ação"
+      ],
+      "materiais": [
+        "Casos impressos",
+        "Projetor",
+        "Cartazes"
+      ],
+      "resultado": "Plano de ação de cidadania e segurança digital."
+    }
+  ],
+  "seminarios": [
+    {
+      "titulo": "Seminário: Computação como componente curricular",
+      "publico": "Gestores, coordenadores e professores",
+      "duracao": "4 horas",
+      "blocos": [
+        "Fundamentos e legislação",
+        "Três eixos",
+        "Currículo e planejamento",
+        "Infraestrutura e equidade",
+        "Formação docente",
+        "Plano de implementação"
+      ],
+      "produto": "Plano de implementação da rede"
+    },
+    {
+      "titulo": "Seminário: Escola, tecnologia e sociedade",
+      "publico": "Comunidade escolar",
+      "duracao": "3 horas",
+      "blocos": [
+        "Cultura digital",
+        "Privacidade",
+        "Desinformação",
+        "Impactos ambientais",
+        "Trabalho e tecnologia",
+        "Ética"
+      ],
+      "produto": "Carta de compromissos digitais da escola"
+    }
+  ],
+  "projetos": [
+    {
+      "titulo": "Mapa digital da comunidade",
+      "etapa": "4º ao 6º ano",
+      "disciplinas": [
+        "Geografia",
+        "Matemática",
+        "História"
+      ],
+      "problema": "Como representar lugares e necessidades da comunidade?",
+      "produto": "Mapa temático digital ou físico",
+      "competencias": [
+        "Coleta de dados",
+        "Representação",
+        "Análise espacial",
+        "Comunicação"
+      ]
+    },
+    {
+      "titulo": "Museu digital da memória",
+      "etapa": "6º ao 9º ano",
+      "disciplinas": [
+        "História",
+        "Português",
+        "Arte"
+      ],
+      "problema": "Como preservar e contar memórias locais com responsabilidade?",
+      "produto": "Acervo digital ou exposição multimídia",
+      "competencias": [
+        "Pesquisa",
+        "Curadoria",
+        "Autoria",
+        "Direitos de uso"
+      ]
+    },
+    {
+      "titulo": "Tecnologia para um problema local",
+      "etapa": "7º ao 9º ano",
+      "disciplinas": [
+        "Ciências",
+        "Matemática",
+        "Português",
+        "Tecnologia/Informática"
+      ],
+      "problema": "Qual problema da comunidade pode ser melhor compreendido ou enfrentado com uma solução computacional?",
+      "produto": "Protótipo e apresentação",
+      "competencias": [
+        "Decomposição",
+        "Algoritmos",
+        "Dados",
+        "Projeto",
+        "Colaboração"
+      ]
+    }
+  ],
+  "avaliacoes": [
+    {
+      "titulo": "Diagnóstico de conhecimentos prévios",
+      "tipo": "Diagnóstica",
+      "itens": [
+        "O que você entende por Computação?",
+        "Quais atividades de Computação já realiza?",
+        "Que recursos sua escola possui?",
+        "Qual sua maior dificuldade para ensinar Computação?"
+      ]
+    },
+    {
+      "titulo": "Rubrica de projeto computacional",
+      "tipo": "Formativa/Somativa",
+      "criterios": [
+        "Definição do problema",
+        "Decomposição",
+        "Solução/algoritmo",
+        "Teste e melhoria",
+        "Uso responsável da tecnologia",
+        "Comunicação e colaboração"
+      ],
+      "escala": "1 Inicial • 2 Em desenvolvimento • 3 Adequado • 4 Avançado"
+    },
+    {
+      "titulo": "Autoavaliação do professor",
+      "tipo": "Formativa",
+      "itens": [
+        "Consigo relacionar Computação ao currículo.",
+        "Consigo planejar uma atividade desplugada.",
+        "Consigo selecionar evidências de aprendizagem.",
+        "Consigo orientar segurança e cidadania digital.",
+        "Consigo avaliar uma solução computacional."
+      ]
+    }
+  ]
+}

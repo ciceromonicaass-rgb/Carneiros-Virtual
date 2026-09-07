@@ -1,0 +1,23 @@
+{
+  "entidades": [
+    "usuarios",
+    "escolas",
+    "professores",
+    "turmas",
+    "alunos",
+    "cursos",
+    "modulos",
+    "aulas",
+    "habilidades_bncc",
+    "planos_aula",
+    "atividades",
+    "avaliacoes",
+    "participantes_formacao",
+    "presencas",
+    "certificados",
+    "projetos",
+    "materiais",
+    "diagnosticos"
+  ],
+  "nota": "Estrutura inicial para futura migração para banco SQL/API. A versão atual continua offline."
+}
