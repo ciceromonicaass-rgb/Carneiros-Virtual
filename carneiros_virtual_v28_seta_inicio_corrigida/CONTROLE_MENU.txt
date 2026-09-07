@@ -1,0 +1,5 @@
+Controle do menu lateral:
+- Botão no topo: Recolher menu / Expandir menu.
+- O estado fica salvo no navegador.
+- Quando recolhido, a área de conteúdo ganha espaço.
+- A lista de menus continua com sua rolagem independente.

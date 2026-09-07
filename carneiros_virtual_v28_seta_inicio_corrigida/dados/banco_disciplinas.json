@@ -1,0 +1,1144 @@
+{
+  "1": {
+    "ano": "1º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "produção textual",
+          "leitura crítica",
+          "gêneros digitais"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'produção textual' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "sequências",
+          "padrões",
+          "lógica"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'sequências' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "dados de experimentos",
+          "modelagem",
+          "simulação"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'dados de experimentos' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "linha do tempo",
+          "fontes digitais",
+          "memória"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'linha do tempo' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "mapas digitais",
+          "território",
+          "dados geográficos"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'mapas digitais' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "pixel art",
+          "arte generativa",
+          "animação"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'pixel art' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "regras e algoritmos",
+          "dados de desempenho",
+          "saúde digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'regras e algoritmos' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "ética digital",
+          "respeito",
+          "convivência"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'ética digital' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "comandos",
+          "vocabulário tecnológico",
+          "pesquisa digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'comandos' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "hardware",
+          "software",
+          "sistemas"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'hardware' usando estratégias de Computação adequadas ao 1º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "2": {
+    "ano": "2º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "leitura crítica",
+          "gêneros digitais",
+          "oralidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'leitura crítica' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "padrões",
+          "lógica",
+          "tabelas"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'padrões' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "modelagem",
+          "simulação",
+          "tecnologia e ambiente"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'modelagem' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "fontes digitais",
+          "memória",
+          "patrimônio"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'fontes digitais' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "território",
+          "dados geográficos",
+          "mobilidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'território' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "arte generativa",
+          "animação",
+          "narrativa digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'arte generativa' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "dados de desempenho",
+          "saúde digital",
+          "jogos e estratégias"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'dados de desempenho' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "respeito",
+          "convivência",
+          "diversidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'respeito' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "vocabulário tecnológico",
+          "pesquisa digital",
+          "produção multimídia"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'vocabulário tecnológico' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "software",
+          "sistemas",
+          "internet"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'software' usando estratégias de Computação adequadas ao 2º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "3": {
+    "ano": "3º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "gêneros digitais",
+          "oralidade",
+          "podcasts"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'gêneros digitais' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "lógica",
+          "tabelas",
+          "gráficos"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'lógica' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "simulação",
+          "tecnologia e ambiente",
+          "energia"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'simulação' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "memória",
+          "patrimônio",
+          "mudanças tecnológicas"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'memória' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "dados geográficos",
+          "mobilidade",
+          "ambiente"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'dados geográficos' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "animação",
+          "narrativa digital",
+          "design"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'animação' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "saúde digital",
+          "jogos e estratégias",
+          "tecnologia no esporte"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'saúde digital' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "convivência",
+          "diversidade",
+          "responsabilidade no ambiente digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'convivência' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "pesquisa digital",
+          "produção multimídia",
+          "comunicação online"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'pesquisa digital' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "sistemas",
+          "internet",
+          "programação"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'sistemas' usando estratégias de Computação adequadas ao 3º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "4": {
+    "ano": "4º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "oralidade",
+          "podcasts",
+          "hipertexto"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'oralidade' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "tabelas",
+          "gráficos",
+          "dados"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'tabelas' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "tecnologia e ambiente",
+          "energia",
+          "sistemas"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'tecnologia e ambiente' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "patrimônio",
+          "mudanças tecnológicas",
+          "pesquisa histórica"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'patrimônio' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "mobilidade",
+          "ambiente",
+          "geotecnologias"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'mobilidade' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "narrativa digital",
+          "design",
+          "som e imagem"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'narrativa digital' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "jogos e estratégias",
+          "tecnologia no esporte",
+          "regras e algoritmos"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'jogos e estratégias' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "diversidade",
+          "responsabilidade no ambiente digital",
+          "ética digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'diversidade' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "produção multimídia",
+          "comunicação online",
+          "comandos"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'produção multimídia' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "internet",
+          "programação",
+          "segurança"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'internet' usando estratégias de Computação adequadas ao 4º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "5": {
+    "ano": "5º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "podcasts",
+          "hipertexto",
+          "autoria digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'podcasts' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "gráficos",
+          "dados",
+          "algoritmos"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'gráficos' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "energia",
+          "sistemas",
+          "investigação"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'energia' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "mudanças tecnológicas",
+          "pesquisa histórica",
+          "linha do tempo"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'mudanças tecnológicas' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "ambiente",
+          "geotecnologias",
+          "mapas digitais"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'ambiente' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "design",
+          "som e imagem",
+          "pixel art"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'design' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "tecnologia no esporte",
+          "regras e algoritmos",
+          "dados de desempenho"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'tecnologia no esporte' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "responsabilidade no ambiente digital",
+          "ética digital",
+          "respeito"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'responsabilidade no ambiente digital' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "comunicação online",
+          "comandos",
+          "vocabulário tecnológico"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'comunicação online' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "programação",
+          "segurança",
+          "cidadania digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'programação' usando estratégias de Computação adequadas ao 5º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "6": {
+    "ano": "6º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "hipertexto",
+          "autoria digital",
+          "produção textual"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'hipertexto' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "dados",
+          "algoritmos",
+          "geometria e programação"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'dados' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "sistemas",
+          "investigação",
+          "dados de experimentos"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'sistemas' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "pesquisa histórica",
+          "linha do tempo",
+          "fontes digitais"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'pesquisa histórica' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "geotecnologias",
+          "mapas digitais",
+          "território"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'geotecnologias' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "som e imagem",
+          "pixel art",
+          "arte generativa"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'som e imagem' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "regras e algoritmos",
+          "dados de desempenho",
+          "saúde digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'regras e algoritmos' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "ética digital",
+          "respeito",
+          "convivência"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'ética digital' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "comandos",
+          "vocabulário tecnológico",
+          "pesquisa digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'comandos' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "segurança",
+          "cidadania digital",
+          "hardware"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'segurança' usando estratégias de Computação adequadas ao 6º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "7": {
+    "ano": "7º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "autoria digital",
+          "produção textual",
+          "leitura crítica"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'autoria digital' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "algoritmos",
+          "geometria e programação",
+          "sequências"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'algoritmos' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "investigação",
+          "dados de experimentos",
+          "modelagem"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'investigação' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "linha do tempo",
+          "fontes digitais",
+          "memória"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'linha do tempo' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "mapas digitais",
+          "território",
+          "dados geográficos"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'mapas digitais' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "pixel art",
+          "arte generativa",
+          "animação"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'pixel art' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "dados de desempenho",
+          "saúde digital",
+          "jogos e estratégias"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'dados de desempenho' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "respeito",
+          "convivência",
+          "diversidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'respeito' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "vocabulário tecnológico",
+          "pesquisa digital",
+          "produção multimídia"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'vocabulário tecnológico' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "cidadania digital",
+          "hardware",
+          "software"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'cidadania digital' usando estratégias de Computação adequadas ao 7º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "8": {
+    "ano": "8º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "produção textual",
+          "leitura crítica",
+          "gêneros digitais"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'produção textual' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "geometria e programação",
+          "sequências",
+          "padrões"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'geometria e programação' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "dados de experimentos",
+          "modelagem",
+          "simulação"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'dados de experimentos' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "fontes digitais",
+          "memória",
+          "patrimônio"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'fontes digitais' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "território",
+          "dados geográficos",
+          "mobilidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'território' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "arte generativa",
+          "animação",
+          "narrativa digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'arte generativa' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "saúde digital",
+          "jogos e estratégias",
+          "tecnologia no esporte"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'saúde digital' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "convivência",
+          "diversidade",
+          "responsabilidade no ambiente digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'convivência' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "pesquisa digital",
+          "produção multimídia",
+          "comunicação online"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'pesquisa digital' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "hardware",
+          "software",
+          "sistemas"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'hardware' usando estratégias de Computação adequadas ao 8º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "9": {
+    "ano": "9º ano",
+    "disciplinas": [
+      {
+        "disciplina": "Português",
+        "temas": [
+          "leitura crítica",
+          "gêneros digitais",
+          "oralidade"
+        ],
+        "atividade": "Oficina interdisciplinar de Português: investigar o tema 'leitura crítica' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Português ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Matemática",
+        "temas": [
+          "sequências",
+          "padrões",
+          "lógica"
+        ],
+        "atividade": "Oficina interdisciplinar de Matemática: investigar o tema 'sequências' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Matemática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ciências",
+        "temas": [
+          "modelagem",
+          "simulação",
+          "tecnologia e ambiente"
+        ],
+        "atividade": "Oficina interdisciplinar de Ciências: investigar o tema 'modelagem' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Ciências ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "História",
+        "temas": [
+          "memória",
+          "patrimônio",
+          "mudanças tecnológicas"
+        ],
+        "atividade": "Oficina interdisciplinar de História: investigar o tema 'memória' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de História ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Geografia",
+        "temas": [
+          "dados geográficos",
+          "mobilidade",
+          "ambiente"
+        ],
+        "atividade": "Oficina interdisciplinar de Geografia: investigar o tema 'dados geográficos' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Geografia ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Arte",
+        "temas": [
+          "animação",
+          "narrativa digital",
+          "design"
+        ],
+        "atividade": "Oficina interdisciplinar de Arte: investigar o tema 'animação' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Arte ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Educação Física",
+        "temas": [
+          "jogos e estratégias",
+          "tecnologia no esporte",
+          "regras e algoritmos"
+        ],
+        "atividade": "Oficina interdisciplinar de Educação Física: investigar o tema 'jogos e estratégias' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Educação Física ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Ensino Religioso",
+        "temas": [
+          "diversidade",
+          "responsabilidade no ambiente digital",
+          "ética digital"
+        ],
+        "atividade": "Oficina interdisciplinar de Ensino Religioso: investigar o tema 'diversidade' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Ensino Religioso ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Inglês",
+        "temas": [
+          "produção multimídia",
+          "comunicação online",
+          "comandos"
+        ],
+        "atividade": "Oficina interdisciplinar de Inglês: investigar o tema 'produção multimídia' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Inglês ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      },
+      {
+        "disciplina": "Tecnologia/Informática",
+        "temas": [
+          "software",
+          "sistemas",
+          "internet"
+        ],
+        "atividade": "Oficina interdisciplinar de Tecnologia/Informática: investigar o tema 'software' usando estratégias de Computação adequadas ao 9º ano.",
+        "objetivo": "Relacionar conhecimentos de Tecnologia/Informática ao desenvolvimento de pensamento computacional, uso crítico de dados e resolução de problemas.",
+        "produto": "Registro, produção digital ou apresentação coletiva.",
+        "avaliacao": "Clareza da solução, aplicação dos conceitos da disciplina, colaboração e justificativa das escolhas."
+      }
+    ]
+  },
+  "EI": {
+    "ano": "Educação Infantil",
+    "disciplinas": [
+      {
+        "disciplina": "Campos de experiências",
+        "temas": [
+          "corpo, gestos e movimentos",
+          "traços, sons, cores e formas",
+          "escuta, fala, pensamento e imaginação"
+        ],
+        "atividade": "Brincadeiras de sequência, classificação, padrões, comandos e narrativas com cartões.",
+        "objetivo": "Desenvolver noções iniciais de sequência, padrão, classificação, representação e uso responsável de tecnologias.",
+        "produto": "Sequência ilustrada, jogo ou narrativa.",
+        "avaliacao": "Participação, explicação das escolhas, reconhecimento de padrões e capacidade de seguir/criar instruções."
+      }
+    ]
+  }
+}

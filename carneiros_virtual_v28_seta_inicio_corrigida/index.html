@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carneiros Virtual | Formação em BNCC Computação</title>
+<meta name="description" content="Carneiros Virtual — portal offline de formação docente em Computação na Educação Básica.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><div class="head">
+  <div class="brand"><h1>CARNEIROS VIRTUAL</h1><p>Portal de Formação em BNCC Computação • Professor Antônio</p></div>
+  <div class="tools"><button class="btn" onclick="window.print()">🖨 Imprimir</button><button class="btn green" onclick="openModal('refs')">📚 Referências</button><button class="btn gold" onclick="openModal('about')">ℹ Sobre</button></div>
+</div></header>
+
+<div class="layout">
+<aside class="side" id="sidebarMenu">
+<div class="side-brand"><span>⚡</span><div><strong>Carneiros Virtual</strong><small>carneirosvirtual.com</small><em>Educação para Todos</em></div></div><div class="side-search"><input id="menuSearch" placeholder="🔎 Buscar conteúdo..." oninput="filterMenu()"></div>
+<div class="side-controls">
+<button id="toggleSidebar" class="btn" type="button" onclick="toggleSidebar()" title="Recolher ou expandir menu">◀ Recolher menu</button>
+</div>
+<div class="nav" id="nav">
+<button class="active" onclick="go('inicio',this)">🏠 Início</button>
+<button onclick="go('dashboard',this)">📊 Painel do Formador</button>
+<button onclick="go('fundamentos',this)">01 • Fundamentos</button>
+<button onclick="go('eixos',this)">02 • 3 Eixos</button>
+<button onclick="go('etapas',this)">03 • Etapas</button>
+<button onclick="go('curriculo',this)">04 • Currículo</button>
+<button onclick="go('gestao',this)">05 • Gestão da Formação</button>
+<button onclick="go('planos',this)">06 • Planos de Aula</button>
+<button onclick="go('sequencias',this)">🧭 • Sequências Didáticas</button>
+<button onclick="go('avaliacoes',this)">📝 • Avaliações</button>
+<button onclick="go('bancoquestoes',this)">🏦 • Banco de Questões</button>
+<button onclick="go('analisequestoes',this)">🔎 • Análise Pedagógica</button>
+<button onclick="go('banco',this)">07 • Banco de Atividades</button>
+<button onclick="go('cursos',this)">🎓 Cursos de Formação</button>
+<button onclick="go('bimestral',this)">🗓️ Planejamento Bimestral</button>
+<button onclick="go('recursos',this)">📚 Biblioteca de Recursos</button>
+<button onclick="go('disciplinas',this)">📚 Ano + Disciplina</button>
+<button onclick="go('gestaopedagogica',this)">🏫 Gestão Pedagógica</button>
+<button onclick="go('relatorios',this)">📊 Relatórios</button>
+<button onclick="go('avaliacaocurso',this)">🏅 Avaliação/Certificação</button>
+<button onclick="go('bancopedagogico',this)">📚 Banco Pedagógico</button>
+<button onclick="go('diagnostico',this)">🧭 Diagnóstico Inicial</button>
+<button onclick="go('formacao',this)">08 • Formação Docente</button>
+<button onclick="go('workshops',this)">09 • Workshops</button>
+<button onclick="go('seminarios',this)">10 • Seminários</button>
+<button onclick="go('projetos',this)">11 • Projetos</button>
+<button onclick="go('avaliacao',this)">12 • Avaliação</button>
+<button onclick="go('quiz',this)">13 • Quiz</button>
+<button onclick="go('glossario',this)">14 • Glossário</button>
+<button onclick="go('checklist',this)">15 • Checklist</button>
+<button onclick="go('dados',this)">16 • Meus Dados Locais</button>
+</div></aside>
+
+<main>
+
+<section id="dashboard">
+<h2 class="title">Painel do Formador</h2>
+<div class="grid">
+<div class="card"><h3>📚 Conteúdos</h3><div style="font-size:34px;font-weight:800;color:#123b68">Formação</div><p>Trilhas, oficinas, planos, projetos e avaliações.</p></div>
+<div class="card"><h3>👥 Participantes</h3><div id="dashParticipants" style="font-size:34px;font-weight:800;color:#087443">0</div><p>participantes cadastrados.</p></div>
+<div class="card"><h3>📝 Planos salvos</h3><div id="dashPlans" style="font-size:34px;font-weight:800;color:#123b68">0</div><p>planos no computador.</p></div>
+<div class="card"><h3>✅ Presenças</h3><div id="dashPresence" style="font-size:34px;font-weight:800;color:#087443">0%</div><p>presença registrada.</p></div>
+</div>
+<div class="card"><h3>🎯 Fluxo recomendado para uma formação</h3>
+<div class="table"><table><tr><th>Etapa</th><th>O que fazer</th><th>Produto</th></tr>
+<tr><td>1. Diagnóstico</td><td>Levantar conhecimentos prévios, infraestrutura e necessidades.</td><td>Mapa de necessidades</td></tr>
+<tr><td>2. Fundamentação</td><td>Estudar Computação, BNCC e currículo da rede.</td><td>Mapa conceitual</td></tr>
+<tr><td>3. Oficina</td><td>Experimentar atividades desplugadas e/ou digitais.</td><td>Atividade testada</td></tr>
+<tr><td>4. Planejamento</td><td>Selecionar habilidade, objetivo, metodologia e avaliação.</td><td>Plano de aula</td></tr>
+<tr><td>5. Aplicação</td><td>Aplicar, observar evidências e registrar dificuldades.</td><td>Registro pedagógico</td></tr>
+<tr><td>6. Replanejamento</td><td>Revisar a prática e compartilhar resultados.</td><td>Plano de ação</td></tr></table></div></div>
+</section>
+
+<section id="inicio" class="home-screen">
+  <div class="home-watermark" aria-hidden="true">CV</div>
+  <div class="home-brand">CARNEIROS VIRTUAL</div>
+  <div class="home-url">CARNEIROSVIRTUAL.COM</div>
+
+  <div class="home-hero">
+    <div class="home-kicker">PORTAL DE FORMAÇÃO • PROFESSOR ANTÔNIO</div>
+    <h2>Educação, Tecnologia<br><span>e Inovação</span></h2>
+    <p>Conteúdos que conectam Computação, currículo, formação docente e prática pedagógica.</p>
+    <button class="home-cta" onclick="go('bancopedagogico')">EXPLORAR CONTEÚDOS</button>
+  </div>
+
+  <div class="home-stats">
+    <div><strong>10+</strong><span>DISCIPLINAS</span></div>
+    <div><strong>9</strong><span>ANOS + INFANTIL</span></div>
+    <div><strong>4</strong><span>BIMESTRES</span></div>
+    <div><strong>100%</strong><span>OFFLINE</span></div>
+  </div>
+
+  <div class="home-quickbar">
+  <button onclick="go('planos')">📝 Criar plano</button>
+  <button onclick="go('bimestral')">🗓️ Planejamento bimestral</button>
+  <button onclick="go('cursos')">🎓 Formação</button>
+  <button onclick="go('quiz')">🧠 Quiz</button>
+</div>
+
+<div class="home-cards">
+<button class="home-card" onclick="go('bancoquestoes')"><span class="home-icon">🏦</span><b>Banco de Questões</b><small>Monte versões A, B e C</small></button>
+<button class="home-card" onclick="go('avaliacoes')"><span class="home-icon">📝</span><b>Avaliações</b><small>Monte e imprima avaliações</small></button>
+<button class="home-card" onclick="go('sequencias')"><span class="home-icon">🧭</span><b>Sequência Didática</b><small>Crie uma sequência em minutos</small></button>
+    <button class="home-card" onclick="go('fundamentos')"><span class="home-icon">🧩</span><b>Fundamentos</b><small>Computação na Educação</small></button>
+    <button class="home-card" onclick="go('etapas')"><span class="home-icon">👶</span><b>Etapas de Ensino</b><small>Infantil ao 9º ano</small></button>
+    <button class="home-card" onclick="go('disciplinas')"><span class="home-icon">📚</span><b>Ano + Disciplina</b><small>Integração curricular</small></button>
+    <button class="home-card" onclick="go('bimestral')"><span class="home-icon">🗓️</span><b>Planejamento</b><small>Organização bimestral</small></button>
+    <button class="home-card" onclick="go('cursos')"><span class="home-icon">🎓</span><b>Cursos</b><small>Trilhas de formação</small></button>
+    <button class="home-card" onclick="go('recursos')"><span class="home-icon">🧰</span><b>Recursos</b><small>Oficinas e sequências</small></button>
+    <button class="home-card" onclick="go('projetos')"><span class="home-icon">🚀</span><b>Projetos</b><small>Práticas interdisciplinares</small></button>
+    <button class="home-card" onclick="go('avaliacaocurso')"><span class="home-icon">🏅</span><b>Avaliação</b><small>Conclusão e certificados</small></button>
+  </div>
+
+  <div class="home-footer-note">
+    <strong>CARNEIROS VIRTUAL</strong> • Formação docente, Computação e inovação pedagógica
+    <span>• Projeto offline • Professor Antônio</span>
+  </div>
+</section>
+
+<section id="fundamentos"><h2 class="title">01 • Fundamentos</h2>
+<div class="card"><h3>O que é ensinar Computação?</h3><p>Ensinar Computação não se reduz a ensinar a operar aplicativos. O trabalho pedagógico pode desenvolver formas de pensar e conhecimentos sobre problemas, algoritmos, dados, sistemas digitais e impactos da tecnologia.</p>
+<div class="grid">
+<div><h4>Professor precisa dominar</h4><ul><li>problema e solução;</li><li>algoritmo e sequência;</li><li>decomposição e abstração;</li><li>padrões e generalização;</li><li>dados e representação;</li><li>hardware e software;</li><li>redes e internet;</li><li>segurança, privacidade e autoria;</li><li>ética e impactos sociais;</li><li>programação e depuração.</li></ul></div>
+<div><h4>Perguntas para formação</h4><ul><li>Qual é a aprendizagem computacional?</li><li>O aluno está criando ou apenas consumindo?</li><li>Qual problema está sendo resolvido?</li><li>Que estratégia o aluno utilizou?</li><li>Como ele testa e melhora a solução?</li><li>Que evidência comprova a aprendizagem?</li></ul></div>
+</div></div>
+</section>
+
+<section id="eixos"><h2 class="title">02 • Os três eixos</h2>
+<div class="grid">
+<div class="card"><h3>🧩 Pensamento Computacional</h3><p>Estratégias para formular problemas e construir soluções.</p><ul><li>decomposição;</li><li>reconhecimento de padrões;</li><li>abstração;</li><li>algoritmos;</li><li>modelagem;</li><li>automação;</li><li>teste e depuração.</li></ul></div>
+<div class="card"><h3>🌐 Mundo Digital</h3><p>Conhecimento sobre sistemas e representação/processamento de informação.</p><ul><li>dados;</li><li>informação;</li><li>hardware;</li><li>software;</li><li>sistemas;</li><li>redes;</li><li>internet;</li><li>segurança.</li></ul></div>
+<div class="card"><h3>👥 Cultura Digital</h3><p>Uso crítico, ético, seguro, responsável e criativo das tecnologias.</p><ul><li>identidade e cidadania;</li><li>privacidade;</li><li>autoria e direitos;</li><li>comunicação;</li><li>colaboração;</li><li>desinformação;</li><li>impactos sociais.</li></ul></div>
+</div></section>
+
+<section id="etapas"><h2 class="title">03 • Progressão por etapa</h2>
+<div class="card"><h3>Educação Infantil</h3><p>Priorize experiências concretas, lúdicas, corporais e narrativas.</p><ul><li>sequências e rotinas;</li><li>classificação;</li><li>padrões;</li><li>comandos;</li><li>regras;</li><li>organização de informações;</li><li>exploração segura de tecnologias.</li></ul></div>
+<div class="card"><h3>Anos Iniciais</h3><p>Avance de situações concretas para representações e algoritmos mais estruturados.</p><ul><li>algoritmos;</li><li>codificação simples;</li><li>dados e tabelas;</li><li>representação;</li><li>redes;</li><li>segurança digital;</li><li>programação visual;</li><li>projetos.</li></ul></div>
+<div class="card"><h3>Anos Finais</h3><p>Aprofunde abstração, programação, dados, redes e análise crítica.</p><ul><li>variáveis e estruturas de controle;</li><li>decomposição de problemas;</li><li>testes e depuração;</li><li>dados e informação;</li><li>redes e internet;</li><li>segurança e privacidade;</li><li>IA e seus limites;</li><li>projetos interdisciplinares.</li></ul></div>
+<div class="warn"><strong>Atenção:</strong> as habilidades/códigos oficiais devem ser transcritos do anexo normativo vigente e do currículo da rede. Não invente códigos para preencher planejamento.</div>
+</section>
+
+<section id="curriculo"><h2 class="title">04 • Currículo e planejamento trimestral</h2>
+<div class="card"><h3>Modelo de organização anual</h3><div class="table"><table><tr><th>Período</th><th>Foco</th><th>Produto</th></tr>
+<tr><td>1º trimestre</td><td>Fundamentos, problemas, padrões, algoritmos e cidadania digital.</td><td>Sequência didática + atividade desplugada.</td></tr>
+<tr><td>2º trimestre</td><td>Dados, representação, sistemas, redes e programação.</td><td>Projeto prático.</td></tr>
+<tr><td>3º trimestre</td><td>Integração, projetos, segurança, ética, avaliação e apresentação.</td><td>Projeto final + mostra.</td></tr></table></div></div>
+<div class="card"><h3>Checklist de alinhamento</h3><ol><li>Identifique a etapa/ano.</li><li>Consulte a habilidade oficial correspondente.</li><li>Defina o conceito de Computação.</li><li>Formule objetivo observável.</li><li>Escolha problema/desafio.</li><li>Planeje atividade e mediação.</li><li>Defina evidências e avaliação.</li><li>Registre inclusão e acessibilidade.</li><li>Faça devolutiva e replanejamento.</li></ol></div>
+</section>
+
+
+<section id="gestao">
+<h2 class="title">05 • Gestão da Formação</h2>
+
+<div class="grid">
+<div class="card">
+<h3>🏫 Escola / instituição</h3>
+<label>Nome da escola ou secretaria<br><input id="gEscola" placeholder="Ex.: Secretaria Municipal de Educação"></label>
+</div>
+<div class="card">
+<h3>🎓 Formação</h3>
+<label>Nome da formação<br><input id="gFormacao" placeholder="Ex.: Formação em BNCC Computação"></label>
+</div>
+<div class="card">
+<h3>👨‍🏫 Formador</h3>
+<label>Nome do formador<br><input id="gFormador" value="Professor Antônio"></label>
+</div>
+<div class="card">
+<h3>📅 Data</h3>
+<label>Data do encontro<br><input id="gData" type="date"></label>
+</div>
+</div>
+
+<div class="card">
+<h3>👥 Participantes</h3>
+<div class="formgrid">
+<div><label>Nome completo<br><input id="partNome" placeholder="Nome do professor"></label></div>
+<div><label>Escola<br><input id="partEscola" placeholder="Escola/rede"></label></div>
+<div><label>Função<br><input id="partFuncao" placeholder="Professor(a), coordenador(a), gestor(a)..."></label></div>
+<div><label>E-mail (opcional)<br><input id="partEmail" placeholder="email@exemplo.com"></label></div>
+</div>
+<div class="actions">
+<button class="primary" onclick="addParticipant()">➕ Adicionar participante</button>
+<button class="secondary" onclick="clearParticipants()">🧹 Limpar lista</button>
+</div>
+<div class="table" style="margin-top:18px">
+<table><thead><tr><th>#</th><th>Nome</th><th>Escola</th><th>Função</th><th>Presença</th><th>Ação</th></tr></thead>
+<tbody id="participants"></tbody></table>
+</div>
+</div>
+
+<div class="card">
+<h3>📜 Gerador de certificado</h3>
+<p>Selecione um participante na lista e gere uma página pronta para impressão.</p>
+<div class="formgrid">
+<div><label>Carga horária<br><input id="certHoras" value="20"></label></div>
+<div><label>Local<br><input id="certLocal" placeholder="Município / UF"></label></div>
+<div class="full"><label>Texto complementar<br><textarea id="certTexto">participou da formação continuada em Computação na Educação Básica, com estudos, oficinas, planejamento pedagógico e atividades práticas.</textarea></label></div>
+</div>
+<button class="primary" onclick="generateCertificate()">📜 Gerar certificado do selecionado</button>
+</div>
+</section>
+
+<section id="planos"><h2 class="title">05 • Gerador de Plano de Aula</h2>
+<div class="card">
+<div class="formgrid">
+<div><label>Etapa<br><select id="pEtapa"><option>Educação Infantil</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>5º ano</option><option>6º ano</option><option>7º ano</option><option>8º ano</option><option>9º ano</option></select></label></div>
+<div><label>Bimestre<br><select id="pTri"><option>1º bimestre</option><option>2º bimestre</option><option>3º bimestre</option><option>4º bimestre</option></select></label></div>
+<div><label>Eixo<br><select id="pEixo"><option>Pensamento Computacional</option><option>Mundo Digital</option><option>Cultura Digital</option></select></label></div>
+<div><label>Tema/conceito<br><input id="pTema" placeholder="Ex.: algoritmos, dados, segurança..."></label></div>
+<div class="full"><label>Habilidade oficial / referência curricular da rede<br><input id="pHab" placeholder="Cole aqui o código e a redação oficial, se aplicável"></label></div>
+<div class="full"><label>Objetivos de aprendizagem<br><textarea id="pObj" placeholder="Ao final, espera-se que os estudantes..."></textarea></label></div>
+<div class="full"><label>Problema/desafio<br><textarea id="pProblema"></textarea></label></div>
+<div class="full"><label>Metodologia / desenvolvimento<br><textarea id="pMet" placeholder="Acolhida → problematização → exploração → criação → teste → socialização"></textarea></label></div>
+<div><label>Recursos<br><textarea id="pRec"></textarea></label></div>
+<div><label>Inclusão/acessibilidade<br><textarea id="pInc"></textarea></label></div>
+<div class="full"><label>Avaliação e evidências<br><textarea id="pAval"></textarea></label></div>
+<div class="full"><label>Referências<br><textarea id="pRef">BNCC; Complemento à BNCC — Computação; currículo da rede; documentos oficiais vigentes.</textarea></label></div>
+</div>
+<div class="actions"><button class="primary" onclick="savePlan()">💾 Salvar plano</button><button class="secondary" onclick="printPlan()">🖨 Imprimir plano</button><button class="secondary" onclick="clearPlan()">🧹 Limpar</button></div>
+</div>
+<div class="card"><h3>Planos salvos neste computador</h3><div id="savedPlans">Nenhum plano salvo.</div></div>
+</section>
+
+<section id="banco"><h2 class="title">07 • Banco de Atividades</h2>
+<div class="card"><div class="searchrow"><input id="searchAct" placeholder="🔎 Buscar atividade, conceito ou etapa..." oninput="filterActs()"><select id="filterAct" onchange="filterActs()"><option value="">Todas</option><option>Educação Infantil</option><option>Anos Iniciais</option><option>Anos Finais</option></select></div></div>
+<div id="acts"></div></section>
+
+
+
+
+
+
+
+
+<section id="bimestral">
+<h2 class="title">Planejamento Bimestral por Ano e Disciplina</h2>
+<div class="info"><strong>Organização em 4 bimestres:</strong> cada bimestre reúne propostas por disciplina e pode ser usado como base para planejamento, formação e adaptação ao currículo da rede.</div>
+<div class="card">
+<div class="searchrow">
+<select id="biStage" onchange="renderBimestral()"><option value="EI">Educação Infantil</option>
+<option value="1">1º ano</option><option value="2">2º ano</option><option value="3">3º ano</option><option value="4">4º ano</option><option value="5">5º ano</option><option value="6">6º ano</option><option value="7">7º ano</option><option value="8">8º ano</option><option value="9">9º ano</option></select>
+<select id="biNumber" onchange="renderBimestral()"><option value="1">1º Bimestre</option><option value="2">2º Bimestre</option><option value="3">3º Bimestre</option><option value="4">4º Bimestre</option></select>
+<select id="biDisc" onchange="renderBimestral()"><option value="">Todas as disciplinas</option><option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</option></select>
+<input id="biSearch" placeholder="🔎 Buscar tema ou conteúdo..." oninput="renderBimestral()">
+</div></div>
+<div id="bimestralBank"></div>
+</section>
+
+<section id="recursos">
+<h2 class="title">Biblioteca de Recursos para Formação</h2>
+<div class="card">
+<div class="searchrow">
+<select id="resourceType" onchange="renderResources()"><option value="sequencias">Sequências Didáticas</option><option value="workshops">Workshops</option><option value="seminarios">Seminários</option><option value="projetos">Projetos Interdisciplinares</option><option value="avaliacoes">Modelos de Avaliação</option></select>
+<input id="resourceSearch" placeholder="🔎 Buscar recurso..." oninput="renderResources()">
+</div>
+</div>
+<div id="resourceBank"></div>
+</section>
+
+<section id="disciplinas">
+<h2 class="title">Banco por Ano + Disciplina</h2>
+<div class="info"><strong>Integração curricular:</strong> filtre o ano e a disciplina para encontrar propostas que conectam Computação ao currículo escolar.</div>
+<div class="card">
+<div class="searchrow">
+<select id="discStage" onchange="renderDisciplineBank()">
+<option value="EI">Educação Infantil</option>
+<option value="1">1º ano</option><option value="2">2º ano</option><option value="3">3º ano</option>
+<option value="4">4º ano</option><option value="5">5º ano</option><option value="6">6º ano</option>
+<option value="7">7º ano</option><option value="8">8º ano</option><option value="9">9º ano</option>
+</select>
+<select id="discName" onchange="renderDisciplineBank()"><option value="">Todas as disciplinas</option>
+<option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</option>
+</select>
+<input id="discSearch" placeholder="🔎 Buscar tema, atividade ou palavra..." oninput="renderDisciplineBank()">
+</div>
+</div>
+<div id="disciplineBank"></div>
+</section>
+
+<section id="gestaopedagogica">
+<h2 class="title">Gestão Pedagógica</h2>
+<div class="grid">
+<div class="card"><h3>🏫 Escolas</h3><label>Nome da escola<br><input id="schoolName"></label><label style="display:block;margin-top:8px">Município/UF<br><input id="schoolCity"></label><button class="primary" style="margin-top:10px" onclick="addSchool()">Adicionar</button></div>
+<div class="card"><h3>👨‍🏫 Professores</h3><label>Nome<br><input id="teacherName"></label><label style="display:block;margin-top:8px">Área/etapa<br><input id="teacherArea"></label><button class="primary" style="margin-top:10px" onclick="addTeacher()">Adicionar</button></div>
+<div class="card"><h3>🎒 Turmas</h3><label>Turma<br><input id="className"></label><label style="display:block;margin-top:8px">Ano/etapa<br><input id="classStage"></label><button class="primary" style="margin-top:10px" onclick="addClassroom()">Adicionar</button></div>
+</div>
+<div class="grid">
+<div class="card"><h3>Escolas cadastradas</h3><div id="schoolsList"></div></div>
+<div class="card"><h3>Professores cadastrados</h3><div id="teachersList"></div></div>
+<div class="card"><h3>Turmas cadastradas</h3><div id="classesList"></div></div>
+</div>
+</section>
+
+<section id="relatorios">
+<h2 class="title">Relatórios da Formação</h2>
+<div class="card">
+<p>Resumo automático dos dados salvos localmente.</p>
+<div id="reportArea"></div>
+<button class="primary" onclick="printReport()">🖨 Imprimir relatório</button>
+</div>
+</section>
+
+<section id="avaliacaocurso">
+<h2 class="title">Avaliação Final e Certificação</h2>
+<div class="card">
+<h3>Critérios de conclusão</h3>
+<ul>
+<li>Conclusão dos módulos da trilha escolhida;</li>
+<li>Participação registrada na formação;</li>
+<li>Aproveitamento nas atividades/quiz;</li>
+<li>Registro do participante;</li>
+<li>Emissão do certificado somente após conferência do formador.</li>
+</ul>
+<div class="formgrid">
+<div><label>Curso/trilha<br><select id="certCourse"></select></label></div>
+<div><label>Participante<br><select id="certParticipant"></select></label></div>
+<div><label>Aproveitamento mínimo (%)<br><input id="certMin" type="number" value="70" min="0" max="100"></label></div>
+<div><label>Observação<br><input id="certObs" placeholder="Ex.: formação concluída"></label></div>
+</div>
+<div class="actions"><button class="primary" onclick="checkCompletion()">🔎 Verificar conclusão</button><button class="primary" onclick="issueCertificate()">📜 Emitir certificado</button></div>
+<div id="certResult" class="info hidden"></div>
+</div>
+</section>
+
+<section id="cursos">
+<h2 class="title">Cursos e Trilhas de Formação</h2>
+<div class="info"><strong>Modo curso:</strong> selecione uma formação, avance pelos módulos, conclua atividades e responda aos quizzes. O progresso é salvo neste navegador.</div>
+<div class="grid" id="courseCards"></div>
+<div id="courseView" class="card hidden"></div>
+</section>
+
+<section id="bancopedagogico">
+<h2 class="title">Banco Pedagógico por Etapa</h2>
+<div class="card">
+<div class="searchrow">
+<select id="stageSelect" onchange="renderStageBank()">
+<option value="educacao_infantil">Educação Infantil</option><option value="1">1º ano</option><option value="2">2º ano</option><option value="3">3º ano</option><option value="4">4º ano</option><option value="5">5º ano</option><option value="6">6º ano</option><option value="7">7º ano</option><option value="8">8º ano</option><option value="9">9º ano</option>
+</select>
+<input id="stageSearch" placeholder="🔎 Buscar tema ou plano..." oninput="renderStageBank()">
+</div>
+</div>
+<div id="stageBank"></div>
+</section>
+
+<section id="diagnostico">
+<h2 class="title">Diagnóstico Inicial da Formação</h2>
+<div class="card"><p>Use antes do primeiro encontro para identificar o ponto de partida dos professores. Os resultados ficam somente neste navegador.</p>
+<div class="formgrid">
+<div><label>Participantes com experiência em Computação<br><select id="dExp"><option>Nenhuma</option><option>Inicial</option><option>Intermediária</option><option>Avançada</option></select></label></div>
+<div><label>Infraestrutura predominante<br><select id="dInfra"><option>Sem computadores</option><option>Laboratório compartilhado</option><option>Computadores em sala</option><option>Dispositivos móveis</option><option>Mista</option></select></label></div>
+<div><label>Maior necessidade<br><select id="dNeed"><option>Compreender a BNCC Computação</option><option>Planejar aulas</option><option>Atividades desplugadas</option><option>Programação</option><option>Cultura e segurança digital</option><option>Avaliação</option></select></label></div>
+<div><label>Tempo disponível por encontro<br><select id="dTime"><option>1 hora</option><option>2 horas</option><option>3 horas</option><option>4 horas</option><option>8 horas ou mais</option></select></label></div>
+<div class="full"><label>Observações da rede<br><textarea id="dObs" placeholder="Descreva desafios, currículo, equipamentos, formação anterior etc."></textarea></label></div>
+</div>
+<button class="primary" onclick="saveDiagnostic()">💾 Salvar diagnóstico</button>
+<button class="secondary" onclick="showDiagnostic()">📋 Ver diagnóstico</button>
+<div id="diagnosticResult" class="info hidden"></div></div>
+</section>
+
+<section id="formacao"><h2 class="title">07 • Formação Continuada</h2>
+<div class="card"><h3>Trilha sugerida — 20 horas</h3><div class="table"><table><tr><th>Módulo</th><th>Horas</th><th>Conteúdo</th><th>Produto</th></tr>
+<tr><td>1. Fundamentos</td><td>2h</td><td>Computação, BNCC, conceitos e papel do professor.</td><td>Mapa conceitual</td></tr>
+<tr><td>2. Pensamento Computacional</td><td>3h</td><td>Problemas, padrões, abstração, algoritmos e depuração.</td><td>Oficina desplugada</td></tr>
+<tr><td>3. Mundo Digital</td><td>3h</td><td>Dados, sistemas, hardware, software e redes.</td><td>Sequência didática</td></tr>
+<tr><td>4. Cultura Digital</td><td>3h</td><td>Ética, cidadania, privacidade, autoria e impactos.</td><td>Estudo de caso</td></tr>
+<tr><td>5. Por etapa</td><td>3h</td><td>Infantil, anos iniciais e anos finais.</td><td>Plano de aula</td></tr>
+<tr><td>6. Metodologias</td><td>2h</td><td>Projetos, jogos, desafios e aprendizagem baseada em problemas.</td><td>Roteiro</td></tr>
+<tr><td>7. Avaliação</td><td>2h</td><td>Evidências, rubricas, feedback e replanejamento.</td><td>Rubrica</td></tr>
+<tr><td>8. Mostra final</td><td>2h</td><td>Apresentação e plano de ação.</td><td>Projeto</td></tr></table></div></div>
+<div class="grid"><div class="card"><h3>Dinâmica: mapa de conceitos</h3><p>Em grupos, professores organizam cartões com conceitos de Computação e justificam as relações.</p></div><div class="card"><h3>Dinâmica: professor robô</h3><p>Um participante executa somente instruções dadas pelo grupo. Depois discutem precisão, ordem e ambiguidades.</p></div><div class="card"><h3>Dinâmica: caça ao erro</h3><p>Entregue uma sequência de instruções com erros. O grupo identifica, explica, corrige e testa.</p></div><div class="card"><h3>Dinâmica: redes na sala</h3><p>Professores representam dispositivos, enlaces e mensagens para discutir comunicação e confiabilidade.</p></div></div>
+</section>
+
+<section id="workshops"><h2 class="title">09 • Workshops</h2><div class="grid">
+<div class="card"><h3>Workshop 1 — Computação sem computador</h3><p>Algoritmos, padrões, codificação e depuração com papel, cartões, objetos e movimento.</p></div>
+<div class="card"><h3>Workshop 2 — Primeiros passos em programação</h3><p>Sequência, eventos, condições, repetição, variáveis, teste e depuração.</p></div>
+<div class="card"><h3>Workshop 3 — Segurança e cidadania digital</h3><p>Senhas, phishing, privacidade, autoria, comunicação e comportamento responsável.</p></div>
+<div class="card"><h3>Workshop 4 — Dados na escola</h3><p>Coleta, organização, representação, leitura e comunicação de dados.</p></div>
+<div class="card"><h3>Workshop 5 — IA crítica</h3><p>Verificação, limites, vieses, autoria, privacidade e uso pedagógico responsável.</p></div>
+<div class="card"><h3>Workshop 6 — Projeto de Computação</h3><p>Problema → ideação → protótipo → teste → melhoria → apresentação.</p></div>
+</div></section>
+
+<section id="seminarios"><h2 class="title">10 • Seminários</h2><div class="card"><h3>Roteiro de seminário — 4 horas</h3><ol><li>Acolhida e diagnóstico.</li><li>Por que Computação na Educação Básica?</li><li>Base normativa e currículo.</li><li>Os três eixos.</li><li>Atividade prática desplugada.</li><li>Oficinas por etapa.</li><li>Planejamento e avaliação.</li><li>Construção de plano de ação da escola.</li><li>Socialização.</li><li>Avaliação do encontro.</li></ol></div></section>
+
+<section id="projetos"><h2 class="title">11 • Projetos interdisciplinares</h2><div class="grid">
+<div class="card"><h3>🏫 Escola Inteligente</h3><p>Identificar um problema da escola, coletar dados, propor solução, prototipar e apresentar.</p><p><strong>Integra:</strong> Matemática, Ciências, Língua Portuguesa e Computação.</p></div>
+<div class="card"><h3>📊 Dados do território</h3><p>Investigar uma questão local, organizar dados e comunicar conclusões.</p></div>
+<div class="card"><h3>🎮 Jogo educativo</h3><p>Definir problema, regras, objetivo, personagens, mecânicas, testes e melhorias.</p></div>
+<div class="card"><h3>🔐 Campanha de segurança</h3><p>Pesquisar riscos digitais e produzir materiais educativos para a comunidade.</p></div>
+<div class="card"><h3>🤖 IA sob investigação</h3><p>Comparar respostas de sistemas de IA com fontes confiáveis e identificar limitações.</p></div>
+<div class="card"><h3>🌱 Tecnologia e sustentabilidade</h3><p>Investigar consumo, descarte, equipamentos e soluções sustentáveis.</p></div>
+</div></section>
+
+<section id="avaliacao"><h2 class="title">12 • Avaliação</h2><div class="card"><h3>Rubrica de projeto</h3><div class="table"><table><tr><th>Critério</th><th>Inicial</th><th>Em desenvolvimento</th><th>Consolidado</th></tr>
+<tr><td>Formulação do problema</td><td>Problema pouco definido.</td><td>Problema definido com apoio.</td><td>Problema claro e relevante.</td></tr>
+<tr><td>Estratégia computacional</td><td>Usa estratégia sem justificativa.</td><td>Usa estratégia adequada com apoio.</td><td>Escolhe e justifica estratégias.</td></tr>
+<tr><td>Teste e depuração</td><td>Pouco testa.</td><td>Testa com orientação.</td><td>Testa, analisa e melhora autonomamente.</td></tr>
+<tr><td>Colaboração</td><td>Participação irregular.</td><td>Colabora com orientação.</td><td>Colabora e contribui para o grupo.</td></tr>
+<tr><td>Comunicação</td><td>Explicação incompleta.</td><td>Explica a solução.</td><td>Explica decisões, evidências e limitações.</td></tr></table></div></div></section>
+
+<section id="quiz"><h2 class="title">13 • Quiz para formação</h2><div class="score">Acertos: <span id="hits">0</span> • Respondidas: <span id="done">0</span><div class="bar"><div id="fill" class="fill"></div></div></div><div id="quizbox"></div></section>
+
+<section id="glossario"><h2 class="title">14 • Glossário</h2><div class="card" id="terms"></div></section>
+
+<section id="checklist"><h2 class="title">15 • Checklist do formador</h2><div class="card"><h3>Antes</h3><div id="checks"></div></div><div class="card"><h3>Durante</h3><div id="checks2"></div></div><div class="card"><h3>Depois</h3><div id="checks3"></div></div></section>
+
+
+<section id="sequencias">
+<h2 class="title">17 • Criador de Sequência Didática</h2>
+<div class="info"><strong>Planejamento rápido:</strong> monte uma sequência de 3 a 5 aulas, organize objetivos, atividades, recursos e evidências. Use como rascunho e adapte ao currículo da rede e às habilidades oficiais.</div>
+
+<div class="card">
+<div class="formgrid">
+<div><label>Etapa<br><select id="seqEtapa"><option>Educação Infantil</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>5º ano</option><option>6º ano</option><option>7º ano</option><option>8º ano</option><option>9º ano</option></select></label></div>
+<div><label>Bimestre<br><select id="seqBi"><option>1º bimestre</option><option>2º bimestre</option><option>3º bimestre</option><option>4º bimestre</option></select></label></div>
+<div><label>Disciplina<br><select id="seqDisc"><option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</option></select></label></div>
+<div><label>Duração<br><select id="seqDur"><option value="3">3 aulas</option><option value="4">4 aulas</option><option value="5">5 aulas</option></select></label></div>
+<div class="full"><label>Tema da sequência<br><input id="seqTema" placeholder="Ex.: Segurança na internet, leitura de gráficos, produção de texto..."></label></div>
+<div class="full"><label>Objetivo geral<br><textarea id="seqObj" placeholder="Descreva o que os estudantes deverão compreender, fazer ou produzir."></textarea></label></div>
+<div class="full"><label>Habilidade / referência curricular<br><input id="seqHab" placeholder="Informe o código e a redação oficial adotada pela rede, quando aplicável."></label></div>
+</div>
+<div class="actions"><button class="primary" onclick="generateSequence()">✨ Gerar sequência</button><button class="secondary" onclick="saveSequence()">💾 Salvar</button><button class="secondary" onclick="printSequence()">🖨 Imprimir</button><button class="secondary" onclick="clearSequence()">🧹 Limpar</button></div>
+</div>
+
+<div id="sequenceOutput" class="card">
+<h3>Prévia da sequência</h3>
+<p class="muted">Preencha o tema e clique em <strong>Gerar sequência</strong>.</p>
+</div>
+
+<div class="card">
+<h3>Sequências salvas neste computador</h3>
+<div id="savedSequences"><span class="muted">Nenhuma sequência salva.</span></div>
+</div>
+</section>
+
+
+<section id="avaliacoes">
+<h2 class="title">18 • Gerador de Avaliações</h2>
+<div class="info"><strong>Banco de questões:</strong> monte avaliações por etapa, bimestre e disciplina. As alternativas são embaralhadas para evitar que a resposta correta fique sempre na mesma letra. O gabarito é gerado separadamente e a avaliação pode ser impressa.</div>
+
+<div class="card">
+<div class="formgrid">
+<div><label>Etapa<br><select id="avEtapa"><option>Educação Infantil</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>5º ano</option><option>6º ano</option><option>7º ano</option><option>8º ano</option><option>9º ano</select></label></div>
+<div><label>Bimestre<br><select id="avBi"><option>1º bimestre</option><option>2º bimestre</option><option>3º bimestre</option><option>4º bimestre</option></select></label></div>
+<div><label>Disciplina<br><select id="avDisc"><option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</select></label></div>
+<div><label>Quantidade<br><select id="avQtd"><option value="5">5 questões</option><option value="10" selected>10 questões</option><option value="15">15 questões</option></select></label></div>
+<div class="full"><label>Tema / conteúdo<br><input id="avTema" placeholder="Ex.: frações, leitura, segurança digital, meio ambiente..."></label></div>
+<div><label>Nome da escola<br><input id="avEscola" placeholder="Nome da escola"></label></div>
+<div><label>Turma<br><input id="avTurma" placeholder="Ex.: 5º Ano A"></label></div>
+</div>
+<div class="actions"><button class="primary" onclick="generateAssessment()">✨ Gerar avaliação</button><button class="secondary" onclick="saveAssessment()">💾 Salvar</button><button class="secondary" onclick="printAssessment()">🖨 Imprimir avaliação</button><button class="secondary" onclick="printAnswerKey()">📋 Imprimir gabarito</button><button class="secondary" onclick="clearAssessment()">🧹 Limpar</button></div>
+</div>
+
+<div id="assessmentOutput" class="card">
+<h3>Prévia da avaliação</h3>
+<p class="muted">Escolha os campos e clique em <strong>Gerar avaliação</strong>.</p>
+</div>
+
+<div class="card">
+<h3>Gabarito separado</h3>
+<div id="answerKeyOutput"><p class="muted">O gabarito aparecerá aqui após gerar a avaliação.</p></div>
+</div>
+
+<div class="card">
+<h3>Avaliações salvas neste computador</h3>
+<div id="savedAssessments"><span class="muted">Nenhuma avaliação salva.</span></div>
+</div>
+</section>
+
+
+<section id="bancoquestoes">
+<h2 class="title">19 • Banco de Questões e Versões de Avaliação</h2>
+<div class="info"><strong>Banco bimestral:</strong> há 50 questões para cada combinação de etapa + disciplina + bimestre. O banco é local e funciona diretamente pelo arquivo <strong>index.html</strong>, sem servidor. Selecione as questões e gere três versões da mesma avaliação. A versão A, B e C preserva o conteúdo, mas altera a ordem das questões e das alternativas.</div>
+
+<div class="card">
+<div class="formgrid">
+<div><label>Etapa<br><select id="bqEtapa"><option>Educação Infantil</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>5º ano</option><option>6º ano</option><option>7º ano</option><option>8º ano</option><option>9º ano</option></select></label></div>
+<div><label>Bimestre<br><select id="bqBi"><option>1º bimestre</option><option>2º bimestre</option><option>3º bimestre</option><option>4º bimestre</option></select></label></div>
+<div><label>Disciplina<br><select id="bqDisc" onchange="renderQuestionPicker()"><option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</option></select></label></div>
+<div><label>Quantidade<br><select id="bqQtd" onchange="renderQuestionPicker()"><option value="5">5 questões</option><option value="10" selected>10 questões</option></select></label></div>
+<div class="full"><label>Tema / conteúdo<br><input id="bqTema" placeholder="Ex.: leitura, frações, cidadania digital..."></label></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Selecione as questões</h3>
+<div id="questionPicker"></div>
+<div class="actions">
+<button class="primary" onclick="generateVersions()">✨ Gerar versões A, B e C</button>
+<button class="secondary" onclick="printVersion('A')">🖨 Versão A</button>
+<button class="secondary" onclick="printVersion('B')">🖨 Versão B</button>
+<button class="secondary" onclick="printVersion('C')">🖨 Versão C</button>
+<button class="secondary" onclick="printVersion('G')">📋 Gabaritos</button>
+</div>
+</div>
+
+<div id="versionsOutput" class="card">
+<h3>Prévia das versões</h3>
+<p class="muted">Selecione as questões e gere as versões.</p>
+</div>
+</section>
+
+
+<section id="analisequestoes">
+<h2 class="title">20 • Análise Pedagógica das Questões</h2>
+<div class="info"><strong>Banco profissional:</strong> filtre as questões por dificuldade, tema e etapa. Cada item possui objetivo pedagógico, habilidade sugerida, gabarito e justificativa. O campo “habilidade sugerida” é apoio pedagógico e não substitui a conferência dos códigos oficiais. Esses campos servem como apoio ao planejamento e devem ser conferidos pelo professor em relação ao currículo oficial adotado pela rede.</div>
+<div class="card">
+<div class="formgrid">
+<div><label>Etapa<br><select id="anEtapa"><option>Educação Infantil</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>5º ano</option><option>6º ano</option><option>7º ano</option><option>8º ano</option><option>9º ano</option></select></label></div>
+<div><label>Disciplina<br><select id="anDisc"><option>Português</option><option>Matemática</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Arte</option><option>Educação Física</option><option>Ensino Religioso</option><option>Inglês</option><option>Tecnologia/Informática</option></select></label></div>
+<div><label>Bimestre<br><select id="anBi"><option>Todos</option><option>1º bimestre</option><option>2º bimestre</option><option>3º bimestre</option><option>4º bimestre</option></select></label></div>
+<div><label>Dificuldade<br><select id="anDif"><option>Todas</option><option>Fácil</option><option>Médio</option><option>Difícil</option></select></label></div>
+<div><label>Tema / palavra-chave<br><input id="anBusca" placeholder="Digite para filtrar"></label></div>
+</div>
+<div class="actions"><button class="primary" onclick="analyzeQuestions()">🔎 Filtrar questões</button><button class="secondary" onclick="exportAnalysis()">🖨 Imprimir relatório</button></div>
+</div>
+<div id="analysisOutput" class="card"><p class="muted">Escolha os filtros e clique em <strong>Filtrar questões</strong>.</p></div>
+</section>
+
+<section id="dados"><h2 class="title">16 • Meus Dados Locais</h2>
+<div class="card"><h3>Backup e restauração</h3><p>Planos de aula e preferências ficam no armazenamento local deste navegador. Exporte um arquivo JSON para guardar uma cópia.</p><div class="actions"><button class="primary" onclick="exportData()">⬇ Exportar dados</button><label class="secondary">⬆ Importar dados <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display:none"></label><button class="secondary" onclick="resetData()">🗑 Limpar dados locais</button></div></div>
+<div class="card"><h3>Estrutura para futura versão online</h3><p>Esta versão é deliberadamente offline. Em uma próxima etapa, o mesmo modelo pode ser conectado a banco SQL, autenticação, perfis de acesso, escola, professor, turma, aluno, diário, relatórios e API.</p></div>
+</section>
+</main></div>
+
+<footer><div class="foot"><h2>CARNEIROS VIRTUAL</h2><p>Portal de Formação em BNCC Computação • Professor Antônio</p><p><a href="https://carneirosvirtual.com" target="_blank">carneirosvirtual.com</a></p><p>© 2026 Carneiros Virtual — Material de apoio à formação docente.</p></div></footer>
+<button class="top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div id="about" class="modal"><div class="modalbox"><button class="close" onclick="closeModal('about')">✕</button><h2 class="title">Sobre</h2><p><strong>Carneiros Virtual</strong> é o portal de formação em Computação na Educação Básica do Professor Antônio, pensado para projeção, oficinas, seminários, planejamento e estudo.</p><p>Esta edição funciona sem internet e sem servidor de banco de dados: os registros criados pelo usuário ficam no navegador.</p></div></div>
+<div id="refs" class="modal"><div class="modalbox"><button class="close" onclick="closeModal('refs')">✕</button><h2 class="title">Referências normativas</h2><ul><li>BNCC — Base Nacional Comum Curricular.</li><li>Parecer CNE/CEB nº 2/2022 — Normas sobre Computação na Educação Básica.</li><li>Resolução CNE/CEB nº 1, de 4 de outubro de 2022 — Normas sobre Computação na Educação Básica — Complemento à BNCC.</li></ul><div class="warn"><strong>Uso responsável:</strong> para planejamento oficial, confirme a redação e os códigos de habilidades no documento normativo e no currículo adotado pela rede.</div></div></div>
+
+<script src="dados/banco_questoes_20k_bimestral.js"></script>
+<script src="js/app.js"></script>
+</body></html>
